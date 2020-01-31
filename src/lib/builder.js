@@ -33,4 +33,20 @@ module.exports = {
     md2html: markdown => marked(markdown),
 
     compileTemplate: (templateName, layoutDir) => pug.compileFile(`${layoutDir}/${templateName}.pug`),
+
+    saveHtml: (destDir, path, content) => {
+        if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir);
+        }
+
+        const dirList = path.split('/').slice(0, -1);
+        for (let i=0; i<dirList.length; i++) {
+            const dir = `${destDir}/${dirList.slice(0, i+1).join('/')}`;
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+        }
+
+        fs.writeFileSync(`${destDir}/${path}`, content);
+    },
 };

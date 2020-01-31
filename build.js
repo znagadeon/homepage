@@ -1,10 +1,11 @@
 const path = require('path');
-const { getContentFileInfos, loadPage, md2html, compileTemplate } = require('./src/lib/builder');
+const { getContentFileInfos, loadPage, md2html, compileTemplate, saveHtml } = require('./src/lib/builder');
 
-const config = getConfig();
+const config = require('./config');
 
 const CONTENT_DIR = './contents';
 const LAYOUT_DIR = './layouts';
+const DEST_DIR = './dist';
 
 const fileInfos = getContentFileInfos(CONTENT_DIR);
 
@@ -15,9 +16,9 @@ function convert(fileInfo) {
     html = md2html(markdown);
 
     const template = compileTemplate(frontMatter.layout, LAYOUT_DIR);
-    const content = template(html, { _config: config, ...frontMatter });
+    const content = template({ _body: html, _config: config, ...frontMatter });
 
-    saveHtml(content);
+    saveHtml(DEST_DIR, fileInfo.path.replace(/(.+)\.md$/, '$1.html'), content);
 
     if (!info.isSimplePage) {
         copyAttachment();
