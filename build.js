@@ -9,7 +9,7 @@ const DEST_DIR = './dist';
 
 const fileInfos = getContentFileInfos(CONTENT_DIR);
 
-let meta = [];
+// let meta = [];
 
 function convert(fileInfo) {
     const { frontMatter, markdown } = loadPage(path.resolve(CONTENT_DIR, fileInfo.path));
@@ -20,17 +20,17 @@ function convert(fileInfo) {
 
     saveHtml(DEST_DIR, fileInfo.path.replace(/(.+)\.md$/, '$1.html'), content);
 
-    if (!info.isSimplePage) {
-        copyAttachment();
-        meta.push(frontMatter);
-    }
+    // if (!info.isSimplePage) {
+    //     copyAttachment();
+    //     meta.push(frontMatter);
+    // }
 }
 
 for (info of fileInfos) {
     convert(info);
 }
 
-createCategoryList(meta);
-createTagList(meta);
+// createCategoryList(meta);
+// createTagList(meta);
 
-copyAsset();
+// copyAsset();
