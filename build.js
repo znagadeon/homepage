@@ -1,12 +1,13 @@
+const { getContentFileInfos } = require('./src/lib/builder');
+
 const config = getConfig();
 
-const postPathList = getPostList();
-const pagePathList = getPageList();
+const fileInfos = getContentFileInfos('./contents');
 
 let meta = [];
 
-function convert(path, isPost) {
-    const { frontMatter, markdown } = isPost ? loadPost(path) : loadPage(path);
+function convert(fileInfo) {
+    const { frontMatter, markdown } = isSimplePage ? loadPost(fileInfo.path) : loadPage(fileInfo.path);
     html = md2html(markdown);
 
     const template = compile(frontMatter.layout);
@@ -14,18 +15,14 @@ function convert(path, isPost) {
 
     saveHtml(content);
 
-    if (isPost) {
+    if (!info.isSimplePage) {
         copyAttachment();
         meta.push(frontMatter);
     }
 }
 
-for (path of postPathList) {
-    convert(path, true);
-}
-
-for (path of pagePathList) {
-    convert(path, false);
+for (info of fileInfos) {
+    convert(info);
 }
 
 createCategoryList(meta);
