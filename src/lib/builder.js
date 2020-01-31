@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fm = require('front-matter');
 
 module.exports = {
     getContentFileInfos: contentDir => {
@@ -11,5 +12,14 @@ module.exports = {
                     isSimplePage,
                 };
             });
+    },
+
+    loadPage: path => {
+        const str = fs.readFileSync(path).toString();
+        const parsed = fm(str);
+        return {
+            markdown: parsed.body,
+            frontMatter: parsed.attributes,
+        };
     },
 };

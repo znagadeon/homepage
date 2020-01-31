@@ -1,13 +1,15 @@
-const { getContentFileInfos } = require('./src/lib/builder');
+const path = require('path');
+const { getContentFileInfos, loadPage } = require('./src/lib/builder');
 
 const config = getConfig();
 
-const fileInfos = getContentFileInfos('./contents');
+const CONTENT_PATH = './contents';
+const fileInfos = getContentFileInfos(CONTENT_PATH);
 
 let meta = [];
 
 function convert(fileInfo) {
-    const { frontMatter, markdown } = isSimplePage ? loadPost(fileInfo.path) : loadPage(fileInfo.path);
+    const { frontMatter, markdown } = loadPage(path.resolve(CONTENT_PATH, fileInfo.path));
     html = md2html(markdown);
 
     const template = compile(frontMatter.layout);
