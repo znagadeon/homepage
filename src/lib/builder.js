@@ -19,8 +19,7 @@ const _getContentFileInfos = contentDir => {
 }
 
 module.exports = {
-    getContentFileInfos: contentDir => _getContentFileInfos(contentDir)
-        .map(path => `.${path.slice(contentDir.length)}`),
+    getContentFileInfos: contentDir => _getContentFileInfos(contentDir),
 
     loadPage: path => {
         const str = fs.readFileSync(path).toString();
@@ -32,7 +31,10 @@ module.exports = {
 
         return {
             markdown: parsed.body,
-            frontMatter: parsed.attributes,
+            frontMatter: {
+                ...parsed.attributes,
+                path,
+            },
         };
     },
 

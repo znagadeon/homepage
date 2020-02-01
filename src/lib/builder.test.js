@@ -46,6 +46,7 @@ describe('loadPage', () => {
             markdown: '# content',
             frontMatter: {
                 layout: 'test',
+                path: './page.md',
             },
         });
     });
@@ -59,6 +60,7 @@ describe('loadPage', () => {
             markdown: '',
             frontMatter: {
                 layout: 'test',
+                path: './page.md',
             },
         });
     });
