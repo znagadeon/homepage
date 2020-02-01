@@ -39,7 +39,7 @@ describe('sample test', () => {
                 },
             },
             'file2.txt': '', // 빈 파일 생성
-            empty: {} // 빈 디렉토리 생성
+            empty: {}, // 빈 디렉토리 생성
             'path/to/file.txt': '', // full path를 써줄 수도 있다
         });
 
