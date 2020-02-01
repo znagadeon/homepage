@@ -12,13 +12,13 @@ const fileInfos = getContentFileInfos(CONTENT_DIR);
 // let meta = [];
 
 function convert(fileInfo) {
-    const { frontMatter, markdown } = loadPage(path.resolve(CONTENT_DIR, fileInfo.path));
+    const { frontMatter, markdown } = loadPage(path.resolve(CONTENT_DIR, fileInfo));
     html = md2html(markdown);
 
     const template = compileTemplate(frontMatter.layout, LAYOUT_DIR);
     const content = template({ _body: html, _config: config, ...frontMatter });
 
-    saveHtml(DEST_DIR, fileInfo.path.replace(/(.+)\.md$/, '$1.html'), content);
+    saveHtml(DEST_DIR, fileInfo.replace(/(.+)\.md$/, '$1.html'), content);
 
     // if (!info.isSimplePage) {
     //     copyAttachment();

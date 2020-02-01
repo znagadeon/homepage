@@ -3,18 +3,24 @@ const fm = require('front-matter');
 const marked = require('marked');
 const pug = require('pug');
 
+const _getContentFileInfos = contentDir => {
+    const root = fs.readdirSync(contentDir, { withFileTypes: true });
+    let results = [];
+
+    root.forEach(dirent => {
+        if (dirent.isFile())
+            results.push(`${contentDir}/${dirent.name}`);
+        else {
+            results = [...results, ..._getContentFileInfos(`${contentDir}/${dirent.name}`)];
+        }
+    });
+
+    return results;
+}
+
 module.exports = {
-    getContentFileInfos: contentDir => {
-        return fs.readdirSync(contentDir)
-            .map(path => {
-                const isSimplePage = /\.md$/.test(path);
-                return {
-                    title: isSimplePage ? path.replace(/(.+)\.md$/, '$1') : path,
-                    path: isSimplePage ? path : `${path}/index.md`,
-                    isSimplePage,
-                };
-            });
-    },
+    getContentFileInfos: contentDir => _getContentFileInfos(contentDir)
+        .map(path => `.${path.slice(contentDir.length)}`),
 
     loadPage: path => {
         const str = fs.readFileSync(path).toString();
