@@ -13,6 +13,9 @@ const fileInfos = getContentFileInfos(CONTENT_DIR);
 
 function convert(fileInfo) {
     const { frontMatter, markdown } = loadPage(path.resolve(CONTENT_DIR, fileInfo));
+
+    if (frontMatter.draft) return;
+
     html = md2html(markdown);
 
     const template = compileTemplate(frontMatter.layout, LAYOUT_DIR);
