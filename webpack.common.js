@@ -20,7 +20,7 @@ const posts = pages
         },
     }));
 
-const generatePlugin = (templateName, meta) => {
+const generatePlugin = (templateName, meta, chunks) => {
     return new HtmlWebpackPlugin({
         filename: meta.frontMatter.path.replace(/contents\/(.+)\.md$/, '$1.html'),
         template: `./layouts/${templateName}.pug`,
@@ -31,6 +31,7 @@ const generatePlugin = (templateName, meta) => {
                 ...meta.frontMatter,
             };
         },
+        chunks,
     });
 };
 
@@ -44,10 +45,12 @@ const generatePlugin = (templateName, meta) => {
  */
 module.exports = {
     context: __dirname,
-    entry: './src/index.js',
+    entry: {
+        bundle: './src/index.js',
+    },
     output: {
         path: `${__dirname}/dist`,
-        filename: 'bundle-[chunkhash:10].js',
+        filename: '[name]-[chunkhash:10].js',
     },
 
     module: {
@@ -58,8 +61,8 @@ module.exports = {
     },
 
     plugins: [
-        generatePlugin('home', pages.find(v => v.frontMatter.layout === 'home')),
-        ...posts.map(post => generatePlugin('post', post)),
+        generatePlugin('home', pages.find(v => v.frontMatter.layout === 'home'), []),
+        ...posts.map(post => generatePlugin('post', post), []),
         new CleanWebpackPlugin(),
     ],
 }
