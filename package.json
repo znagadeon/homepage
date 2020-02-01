@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "node build.js",
+    "start": "http-server ./dist -p 8000",
+    "prestart": "npm run build",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "http-server": "^0.12.1",
     "jest": "^25.1.0",
     "mock-fs": "^4.10.4"
   },
