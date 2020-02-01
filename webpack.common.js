@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const marked = require('marked');
 const formatISO = require('date-fns/formatISO');
@@ -46,7 +47,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: `${__dirname}/dist`,
-        filename: 'bundle.js',
+        filename: 'bundle-[chunkhash:10].js',
     },
 
     module: {
@@ -59,5 +60,6 @@ module.exports = {
     plugins: [
         generatePlugin('home', pages.find(v => v.frontMatter.layout === 'home')),
         ...posts.map(post => generatePlugin('post', post)),
+        new CleanWebpackPlugin(),
     ],
 }
