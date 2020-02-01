@@ -5,17 +5,19 @@
   "main": "index.js",
   "scripts": {
     "build": "node build.js",
-    "start": "http-server ./dist -p 8000",
-    "prestart": "npm run build",
+    "start": "webpack-dev-server --port 1337 --content-base ./dist --open --config webpack.common.js",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "http-server": "^0.12.1",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^25.1.0",
-    "mock-fs": "^4.10.4"
+    "mock-fs": "^4.10.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
   },
   "dependencies": {
     "date-fns": "^2.9.0",
