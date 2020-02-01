@@ -5,11 +5,9 @@ const formatISO = require('date-fns/formatISO');
 
 const config = require('./config');
 
-const CONTENT_DIR = './contents';
-
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
 
-const fileInfos = getContentFileInfos(CONTENT_DIR);
+const fileInfos = getContentFileInfos('./contents');
 const pages = fileInfos.map(fileInfo => loadPage(fileInfo));
 const posts = pages
     .filter(page => page.frontMatter.layout === 'post' && !page.frontMatter.draft)
@@ -23,7 +21,7 @@ const posts = pages
 
 const generatePlugin = (templateName, meta) => {
     return new HtmlWebpackPlugin({
-        filename: meta.frontMatter.path.replace(/(.+)\.md$/, '$1.html'),
+        filename: meta.frontMatter.path.replace(/contents\/(.+)\.md$/, '$1.html'),
         template: `./layouts/${templateName}.pug`,
         templateParameters() {
             return {
