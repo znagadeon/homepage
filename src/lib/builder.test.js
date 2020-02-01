@@ -79,24 +79,3 @@ describe('loadPage', () => {
         mock.restore();
     });
 });
-
-describe('saveHtml', () => {
-    fs.writeFileSync = jest.fn();
-    const write = jest.spyOn(fs, 'writeFileSync');
-
-    fs.mkdirSync = jest.fn();
-    const mkdir = jest.spyOn(fs, 'mkdirSync');
-
-    it('saves page into destination directory', () => {
-        saveHtml('./dist', 'test.html', '');
-        expect(write).toHaveBeenCalledWith('./dist/test.html', '');
-    });
-
-    it('creates directories recursively if path is not a single filename', () => {
-        saveHtml('./dist', 'parent/dir/test.html', '');
-        expect(mkdir).toHaveBeenCalledWith('./dist/parent');
-        expect(mkdir).toHaveBeenCalledWith('./dist/parent/dir');
-        expect(mkdir).not.toHaveBeenCalledWith('./dist/parent/dir/test.html', '');
-        expect(write).toHaveBeenCalledWith('./dist/parent/dir/test.html', '');
-    })
-});

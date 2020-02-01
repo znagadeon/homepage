@@ -35,6 +35,14 @@ const generatePlugin = (templateName, meta) => {
     });
 };
 
+/**
+ * TODO:
+ *  - copy attachment
+ *  - sitemap
+ *  - rss
+ *  - search/category/tag page
+ *  - url replace
+ */
 module.exports = {
     context: __dirname,
     entry: './src/index.js',
