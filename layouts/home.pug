@@ -8,21 +8,23 @@ html(lang="ko")
         title #{_config.blogName}
     body
         include _header.pug
-        section
-            h2 Recent Posts
-            ol
-                each post in _options.recentPosts
-                    li
-                        a(href=post.url)
-                            h3 #{post.title}
-                            dl
-                                dt category
-                                dd #{post.category}
-                                dt tags
-                                dd
-                                    ul
-                                        each tag in post.tags
-                                            li #{tag}
-                                dt published
-                                dd #{post.published}
+        main
+            section.recent-posts
+                h2 Recent Posts
+                ol.posts
+                    each post in _options.recentPosts
+                        li.post
+                            a(href=post.url)
+                                h3 #{post.title}
+                                dl.meta
+                                    dt.sr-only category
+                                    dd.category /#{post.category}
+                                    dt.sr-only tags
+                                    dd
+                                        ul.tags
+                                            each tag in post.tags
+                                                li.tag ##{tag}
+                                    dt.sr-only published
+                                    dd.published
+                                        time #{post.published}
         include _footer.pug

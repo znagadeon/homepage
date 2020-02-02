@@ -11,7 +11,7 @@ html(lang="ko")
         main
             div
                 span.sr-only category
-                span #{category}
+                span /#{category}
             h1 #{title}
             div
                 span.sr-only published
@@ -21,5 +21,5 @@ html(lang="ko")
                 span.sr-only tags
                 ul
                     each tag in tags
-                        li #{tag}
+                        li ##{tag}
         include _footer.pug
