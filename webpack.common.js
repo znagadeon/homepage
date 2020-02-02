@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const formatISO = require('date-fns/formatISO');
@@ -43,14 +44,20 @@ module.exports = {
         }, {
             test: /\.s?css$/,
             use: [
-                'style-loader',
+                MiniCssExtractPlugin.loader,
                 'css-loader',
+                'postcss-loader',
                 'sass-loader',
             ],
         }],
     },
 
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name]-[contenthash:10].css',
+        }),
+        new CleanWebpackPlugin(),
+
         renderHome(
             pages.find(v => v.frontMatter.layout === 'home'),
             posts.slice().sort((a, b) => {
@@ -60,6 +67,5 @@ module.exports = {
             }).slice(0, 5),
         ),
         ...posts.map(post => renderPost(post)),
-        new CleanWebpackPlugin(),
     ],
 }
