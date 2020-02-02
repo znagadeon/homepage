@@ -26,11 +26,11 @@ module.exports = {
         const recentPosts = _recentPosts.map(post => post.frontMatter)
             .map(v => ({
                 ...v,
-                url: new URL(v.path.replace(urlReplaceRegEx, '$1.html'), config.host),
+                url: v.path.replace(urlReplaceRegEx, '$1.html'),
             }));
-        return renderPage('home', meta, [], { recentPosts });
+        return renderPage('home', meta, ['bundle'], { recentPosts });
     },
     renderPost: meta => {
-        return renderPage('post', meta, []);
+        return renderPage('post', meta, ['bundle']);
     },
 };

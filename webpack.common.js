@@ -40,6 +40,13 @@ module.exports = {
         rules: [{
             test: /\.pug$/,
             loader: 'pug-loader',
+        }, {
+            test: /\.s?css$/,
+            use: [
+                'style-loader',
+                'css-loader',
+                'sass-loader',
+            ],
         }],
     },
 
