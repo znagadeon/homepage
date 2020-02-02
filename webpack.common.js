@@ -1,12 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const marked = require('marked');
 const formatISO = require('date-fns/formatISO');
 
-const config = require('./config');
-
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
+const { renderPage } = require('./src/lib/renderer');
 
 const fileInfos = getContentFileInfos('./contents');
 const pages = fileInfos.map(fileInfo => loadPage(fileInfo));
@@ -20,21 +17,6 @@ const posts = pages
         },
     }));
 
-const generatePlugin = (templateName, meta, chunks) => {
-    return new HtmlWebpackPlugin({
-        filename: meta.frontMatter.path.replace(/contents\/(.+)\.md$/, '$1.html'),
-        template: `./layouts/${templateName}.pug`,
-        templateParameters() {
-            return {
-                _config: config,
-                _body: marked(meta.markdown),
-                ...meta.frontMatter,
-            };
-        },
-        chunks,
-    });
-};
-
 /**
  * TODO:
  *  - copy attachment
@@ -42,6 +24,7 @@ const generatePlugin = (templateName, meta, chunks) => {
  *  - rss
  *  - search/category/tag page
  *  - url replace
+ *  - opengraph
  */
 module.exports = {
     context: __dirname,
@@ -61,8 +44,8 @@ module.exports = {
     },
 
     plugins: [
-        generatePlugin('home', pages.find(v => v.frontMatter.layout === 'home'), []),
-        ...posts.map(post => generatePlugin('post', post), []),
+        renderPage('home', pages.find(v => v.frontMatter.layout === 'home'), []),
+        ...posts.map(post => renderPage('post', post), []),
         new CleanWebpackPlugin(),
     ],
 }
