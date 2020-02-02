@@ -1,0 +1,57 @@
+header {
+    @apply pb-6 mb-3 border-gray-300 border-b;
+
+    .top {
+        @apply fixed w-full h-20 p-6 z-10 bg-white opacity-75 shadow-lg leading-tight align-middle;
+
+        .title {
+            @apply text-2xl font-bold;
+        }
+    
+        .search {
+            @apply absolute top-0 right-0 h-20 p-6;
+        }
+    }
+
+    .profile {
+        @apply relative w-full pt-20;
+
+        img {
+            @apply mt-10 rounded-full mx-auto;
+        }
+
+        h2 {
+            @apply mt-5 text-2xl text-center;
+        }
+
+        p {
+            @apply w-2/3 mx-auto text-center;
+        }
+
+        .links {
+            @apply flex flex-row justify-center mt-3;
+
+            li {
+                @apply mr-6;
+
+                &:last-child {
+                    @apply mr-0;
+                }
+            }
+        }
+    }
+
+    nav {
+        .menu {
+            @apply flex flex-row justify-center mt-3;
+    
+            li {
+                @apply mr-6 text-xl;
+
+                &:last-child {
+                    @apply mr-0;
+                }
+            }
+        }
+    }
+}

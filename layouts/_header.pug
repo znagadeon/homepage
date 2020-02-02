@@ -1,24 +1,26 @@
 header
-    h1
-        a(href="/") #{_config.blogName}
-    img(src=`https://www.gravatar.com/avatar/${_config.links.gravatar}?s=200`)
-    h2 #{_config.name}
-    p #{_config.description}
-    ul
-        li
-            a(target='_blank' href=`https://github.com/${_config.links.github}`) GitHub
-        li
-            a(target='_blank' href=`https://linkedin.com/in/${_config.links.linkedin}`) LinkedIn
-        li
-            a(target='_blank' href=`https://twitter.com/${_config.links.twitter}`) Twitter
-        li
-            a(target='_blank' href=`mailto:${_config.links.mail}`) Mail
+    div.top
+        h1.title
+            a(href="/") #{_config.blogName}
+        a.search(href='javascript:alert(\'준비중\')') Search
+    section.profile
+        img(src=`https://www.gravatar.com/avatar/${_config.links.gravatar}?s=150`)
+        h2 #{_config.name}
+        p #{_config.description}
+        ul.links
+            li
+                a(target='_blank' href=`https://github.com/${_config.links.github}`) GitHub
+            li
+                a(target='_blank' href=`https://linkedin.com/in/${_config.links.linkedin}`) LinkedIn
+            li
+                a(target='_blank' href=`https://twitter.com/${_config.links.twitter}`) Twitter
+            li
+                a(target='_blank' href=`mailto:${_config.links.mail}`) Mail
     nav
-        ul
+        ul.menu
             li
                 a(href='javascript:alert(\'준비중\')') Portfolio
             li
                 a(href='javascript:alert(\'준비중\')') Dev
             li
                 a(href='javascript:alert(\'준비중\')') Presentations
-        a(href='javascript:alert(\'준비중\')') Search
