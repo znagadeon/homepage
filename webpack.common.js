@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const formatISO = require('date-fns/formatISO');
 
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
-const { renderPage } = require('./src/lib/renderer');
+const { renderHome } = require('./src/lib/renderer');
 
 const fileInfos = getContentFileInfos('./contents');
 const pages = fileInfos.map(fileInfo => loadPage(fileInfo));
@@ -44,8 +44,15 @@ module.exports = {
     },
 
     plugins: [
-        renderPage('home', pages.find(v => v.frontMatter.layout === 'home'), []),
-        ...posts.map(post => renderPage('post', post), []),
+        renderHome(
+            pages.find(v => v.frontMatter.layout === 'home'),
+            posts.slice().sort((a, b) => {
+                if (a.published < b.published) return -1;
+                if (a.published > b.published) return 1;
+                return 0;
+            }).slice(0, 5),
+        ),
+        // ...posts.map(post => renderPage('post', post), []),
         new CleanWebpackPlugin(),
     ],
 }

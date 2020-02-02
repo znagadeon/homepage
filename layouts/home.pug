@@ -6,4 +6,21 @@ html(lang="ko")
         meta(name="viewport", content="width=device-width, initial-scale=1")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title #{_config.blogName}
-    body !{_body}
+    body
+        header !{_body}
+        section
+            ol
+                each post in _options.recentPosts
+                    li
+                        a(href=post.url)
+                            h2 #{post.title}
+                            dl
+                                dt category
+                                dd #{post.category}
+                                dt tags
+                                dd
+                                    ul
+                                        each tag in post.tags
+                                            li #{tag}
+                                dt published
+                                dd #{post.published}
