@@ -7,13 +7,14 @@ html(lang="ko")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title #{_config.blogName}
     body
-        header !{_body}
+        include _header.pug
         section
+            h2 Recent Posts
             ol
                 each post in _options.recentPosts
                     li
                         a(href=post.url)
-                            h2 #{post.title}
+                            h3 #{post.title}
                             dl
                                 dt category
                                 dd #{post.category}
@@ -24,3 +25,4 @@ html(lang="ko")
                                             li #{tag}
                                 dt published
                                 dd #{post.published}
+        include _footer.pug

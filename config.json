@@ -1,5 +1,14 @@
 {
     "blogName": "지나가던 개발자",
+    "name": "Kim Songhyun",
+    "description": "2018년 1월부터 카카오에서 다음카페 담당자로 근무하고 있습니다. 프론트엔드 개발자.",
     "host": "https://znagadeon.dev",
-    "googleUA": "UA-121480188-1"
+    "googleUA": "UA-121480188-1",
+    "links": {
+        "mail": "yeonmu4121@gmail.com",
+        "github": "znagadeon",
+        "linkedin": "kim-songhyun",
+        "twitter": "znagadeon",
+        "gravatar": "c1db11b57685a2fc71655a869cdac430"
+    }
 }

@@ -1,0 +1,24 @@
+header
+    h1
+        a(href="/") #{_config.blogName}
+    img(src=`https://www.gravatar.com/avatar/${_config.links.gravatar}?s=200`)
+    h2 #{_config.name}
+    p #{_config.description}
+    ul
+        li
+            a(target='_blank' href=`https://github.com/${_config.links.github}`) GitHub
+        li
+            a(target='_blank' href=`https://linkedin.com/in/${_config.links.linkedin}`) LinkedIn
+        li
+            a(target='_blank' href=`https://twitter.com/${_config.links.twitter}`) Twitter
+        li
+            a(target='_blank' href=`mailto:${_config.links.mail}`) Mail
+    nav
+        ul
+            li
+                a(href='javascript:alert(\'준비중\')') Portfolio
+            li
+                a(href='javascript:alert(\'준비중\')') Dev
+            li
+                a(href='javascript:alert(\'준비중\')') Presentations
+        a(href='javascript:alert(\'준비중\')') Search

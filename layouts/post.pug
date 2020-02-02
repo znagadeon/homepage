@@ -7,17 +7,19 @@ html(lang="ko")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title= `${title} - ${_config.blogName}`
     body
-        div
-            span category
-            span #{category}
-        h1 #{title}
-        div
-            span published
-            time #{published}
-        article
-            main !{_body}
-        div
-            span tags
-            ul
-                each tag in tags
-                    li #{tag}
+        include _header.pug
+        main
+            div
+                span category
+                span #{category}
+            h1 #{title}
+            div
+                span published
+                time #{published}
+            article !{_body}
+            div
+                span tags
+                ul
+                    each tag in tags
+                        li #{tag}
+        include _footer.pug
