@@ -2,7 +2,7 @@ header {
     @apply pb-6 mb-3 border-gray-300 border-b;
 
     .top {
-        @apply fixed w-full h-20 p-6 z-10 bg-white opacity-75 shadow-lg leading-tight align-middle;
+        @apply fixed w-screen h-20 p-6 z-10 bg-white opacity-75 shadow-lg leading-tight align-middle;
 
         .title {
             @apply text-2xl font-bold;

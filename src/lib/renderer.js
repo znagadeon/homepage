@@ -28,9 +28,9 @@ module.exports = {
                 ...v,
                 url: v.path.replace(urlReplaceRegEx, '$1.html'),
             }));
-        return renderPage('home', meta, ['bundle'], { recentPosts });
+        return renderPage('home', meta, ['home'], { recentPosts });
     },
     renderPost: meta => {
-        return renderPage('post', meta, ['bundle']);
+        return renderPage('post', meta, ['post']);
     },
 };

@@ -15,7 +15,7 @@ html(lang="ko")
             article !{_body}
             div
                 span.sr-only tags
-                ul
+                ul.tags
                     each tag in tags
-                        li ##{tag}
+                        li.tag ##{tag}
         include _footer.pug

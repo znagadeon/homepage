@@ -8,10 +8,16 @@ pre, code {
     font-family: 'Roboto Mono', monospace;
 }
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
+.tags {
+    @apply flex flex-row;
+
+    .tag {
+        @apply text-blue-700 mr-2;
+
+        &:last-child {
+            @apply mr-0;
+        }
+    }
+}
 
 @import './header.scss';
-@import './home.scss';
-
-@import "tailwindcss/utilities";

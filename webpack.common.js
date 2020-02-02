@@ -30,7 +30,8 @@ const posts = pages
 module.exports = {
     context: __dirname,
     entry: {
-        bundle: './src/index.js',
+        home: './src/home.js',
+        post: './src/post.js',
     },
     output: {
         path: `${__dirname}/dist`,
