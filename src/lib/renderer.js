@@ -30,4 +30,7 @@ module.exports = {
             }));
         return renderPage('home', meta, [], { recentPosts });
     },
+    renderPost: meta => {
+        return renderPage('post', meta, []);
+    },
 };
