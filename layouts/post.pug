@@ -10,15 +10,15 @@ html(lang="ko")
         include _header.pug
         main
             div
-                span category
+                span.sr-only category
                 span #{category}
             h1 #{title}
             div
-                span published
+                span.sr-only published
                 time #{published}
             article !{_body}
             div
-                span tags
+                span.sr-only tags
                 ul
                     each tag in tags
                         li #{tag}
