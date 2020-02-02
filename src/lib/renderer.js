@@ -17,6 +17,7 @@ const renderPage = (templateName, meta, chunks, options) => {
                 _options: options,
             };
         },
+        favicon: './favicon.ico',
         chunks,
     });
 };
