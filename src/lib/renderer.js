@@ -1,9 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const marked = require('marked');
+const hljs = require('highlight.js');
 
 const config = require('../../config');
 
 const urlReplaceRegEx = /contents\/(.+)\.md$/;
+
+const renderer = new marked.Renderer();
+renderer.code = (code, infostring) => {
+    return `<pre class="hljs">${hljs.highlight(infostring || 'plaintext', code).value}</pre>`;
+}
 
 const renderPage = (templateName, meta, chunks, options) => {
     return new HtmlWebpackPlugin({
@@ -12,7 +18,7 @@ const renderPage = (templateName, meta, chunks, options) => {
         templateParameters() {
             return {
                 _config: config,
-                _body: marked(meta.markdown),
+                _body: marked(meta.markdown, { renderer }),
                 ...meta.frontMatter,
                 _options: options,
             };
