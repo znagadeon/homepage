@@ -3,4 +3,23 @@
 
 @import './common.scss';
 
+main {
+    @apply p-6;
+
+    .category {
+        
+    }
+
+    article {
+        .hljs {
+            @apply w-full px-0 py-3 rounded-lg;
+
+            .highlighted {
+                // FIXME: overflowed line not highlighted
+                @apply inline-block min-w-full bg-gray-900;
+            }
+        }
+    }
+}
+
 @import "tailwindcss/utilities";
