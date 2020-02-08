@@ -50,4 +50,8 @@ main {
     }
 }
 
+.comments {
+    @apply p-6;
+}
+
 @import "tailwindcss/utilities";
