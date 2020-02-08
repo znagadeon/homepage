@@ -10,11 +10,11 @@ main {
         @apply max-w-6xl mx-auto mx-6;
 
         h2 {
-            @apply mt-8 text-3xl;
+            @apply mt-8 text-2xl;
         }
 
         .posts {
-            @apply flex flex-col mt-2;
+            @apply flex flex-col mt-1;
 
             .post {
                 @apply w-full py-3 border-b;

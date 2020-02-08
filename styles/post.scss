@@ -10,15 +10,43 @@ main {
         
     }
 
+    .title {
+        @apply text-4xl;
+    }
+
+    .published {
+        @apply border-b border-gray-300 pb-2 mb-6;
+    }
+
     article {
+        h1 {
+            @apply text-3xl mt-6;
+        }
+
+        h2 {
+            @apply text-2xl mt-4;
+        }
+
+        p {
+            @apply mt-2;
+        }
+
+        code {
+            @apply px-1 rounded bg-gray-300 text-blue-500;
+        }
+
         .hljs {
-            @apply w-full px-0 py-3 rounded-lg;
+            @apply w-full px-0 py-3 mt-2 rounded-lg;
 
             .highlighted {
                 // FIXME: overflowed line not highlighted
                 @apply inline-block min-w-full bg-gray-900;
             }
         }
+    }
+
+    .tags {
+        @apply mt-6;
     }
 }
 
