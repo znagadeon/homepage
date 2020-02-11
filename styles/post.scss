@@ -31,8 +31,16 @@ main {
             @apply mt-2;
         }
 
+        a {
+            @apply text-blue-400 underline;
+
+            &:active {
+                @apply text-blue-800;
+            }
+        }
+
         .short-code {
-            @apply px-1 rounded bg-gray-300 text-blue-500;
+            @apply px-1 rounded bg-gray-200 text-blue-400;
         }
 
         .hljs {
