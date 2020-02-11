@@ -24,9 +24,9 @@ const highlightCode = (code, highlightLines) => {
     
     return splittedCode.map((v, i) => {
         if (highlightLines.includes(i + 1)) {
-            return `<span class="highlighted"><code> ${padNumber(i+1)} | ${v}</code></span>`;
+            return `<div class="highlighted"><code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code></div>`;
         } else {
-            return ` ${padNumber(i+1)} | ${v}`;
+            return `<div><code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code></div>`;
         }
     }).join('\n');
 }
@@ -38,11 +38,12 @@ const convertCode = (code, infostring = 'plaintext') => {
 
     const convertedCode = hljs.highlight(lang || 'plaintext', code).value
 
-    return `<pre class="hljs">${highlightCode(convertedCode, highlightLines)}</pre>`;
+    return `<div class="hljs">${highlightCode(convertedCode, highlightLines)}</div>`;
 };
 
 const renderer = new marked.Renderer();
 renderer.code = convertCode;
+renderer.codespan = code => `<code class="short-code">${code}</code>`;
 
 module.exports = {
     md2html(markdown) {

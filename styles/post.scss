@@ -31,16 +31,35 @@ main {
             @apply mt-2;
         }
 
-        code {
+        .short-code {
             @apply px-1 rounded bg-gray-300 text-blue-500;
         }
 
         .hljs {
-            @apply w-full px-0 py-3 mt-2 rounded-lg;
+            @apply w-full px-0 py-3 mt-2 rounded-lg whitespace-no-wrap overflow-x-auto;
 
-            .highlighted {
-                // FIXME: overflowed line not highlighted
-                @apply inline-block min-w-full bg-gray-900;
+            div {
+                @apply flex;
+
+                &.highlighted {
+                    @apply bg-gray-900;
+                }
+
+                @mixin code {
+                    @apply inline-block whitespace-pre-wrap;
+                }
+
+                .line-number {
+                    @include code;
+                    @apply px-3 mr-3 border-r border-gray-700;
+
+                    min-width: 20px;
+                    user-select: none;
+                }
+                .code {
+                    @include code;
+                    @apply flex-1;
+                }
             }
         }
     }
