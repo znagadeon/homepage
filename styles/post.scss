@@ -44,7 +44,7 @@ main {
         }
 
         .hljs {
-            @apply w-full px-0 py-3 mt-2 rounded-lg whitespace-no-wrap overflow-x-auto;
+            @apply w-full px-0 py-3 mt-2 rounded-lg whitespace-no-wrap break-all;
 
             div {
                 @apply flex;
@@ -59,9 +59,8 @@ main {
 
                 .line-number {
                     @include code;
-                    @apply px-3 mr-3 border-r border-gray-700;
+                    @apply px-3 mr-3 border-r border-gray-700 text-right;
 
-                    min-width: 20px;
                     user-select: none;
                 }
                 .code {

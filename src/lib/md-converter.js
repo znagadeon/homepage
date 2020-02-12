@@ -21,7 +21,7 @@ const highlightCode = (code, highlightLines) => {
     
     const lineNumberPadding = splittedCode.length.toString().length;
     const padNumber = padder(lineNumberPadding);
-    
+
     return splittedCode.map((v, i) => {
         if (highlightLines.includes(i + 1)) {
             return `<div class="highlighted"><code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code></div>`;
@@ -36,9 +36,9 @@ const convertCode = (code, infostring) => {
 
     const highlightLines = highlightLineStr ? getHighlightLines(highlightLineStr) : [];
 
-    const convertedCode = hljs.highlight(lang || 'plaintext', code).value
+    const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
 
-    return `<div class="hljs">${highlightCode(convertedCode, highlightLines)}</div>`;
+    return `<pre class="hljs">${highlightCode(convertedCode, highlightLines)}</pre>`;
 };
 
 const renderer = new marked.Renderer();
