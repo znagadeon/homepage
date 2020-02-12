@@ -24,7 +24,6 @@ module.exports = merge(common, {
     mode: 'production',
 
     output: {
-        path: `${__dirname}/dist`,
         filename: '[name]-[chunkhash:10].js',
     },
 

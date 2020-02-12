@@ -16,6 +16,11 @@ module.exports = {
         post: './src/post.js',
     },
 
+    output: {
+        publicPath: '/',
+        path: `${__dirname}/dist`,
+    },
+
     module: {
         rules: [{
             test: /\.pug$/,

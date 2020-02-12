@@ -24,7 +24,6 @@ module.exports = merge(common, {
     mode: 'development',
 
     output: {
-        path: `${__dirname}/dist`,
         filename: '[name].js',
     },
 
