@@ -2,6 +2,11 @@ doctype html
 html(lang="ko")
     head
         include _head.pug
+        title #{_config.blogName}
+        meta(property="og:url", content=_config.host)
+        meta(property="og:title", content=_config.blogName)
+        meta(property="og:description", content=_config.description)
+        meta(property="og:image", content=`https://www.gravatar.com/avatar/${_config.links.gravatar}`)
     body
         include _header.pug
         main

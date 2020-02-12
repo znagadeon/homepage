@@ -25,7 +25,6 @@ const posts = pages
  *  - rss
  *  - search/category/tag page
  *  - url replace
- *  - opengraph
  */
 module.exports = {
     context: __dirname,

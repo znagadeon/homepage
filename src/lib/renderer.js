@@ -4,17 +4,22 @@ const config = require('../../config');
 
 const { md2html } = require('./md-converter');
 
-const urlReplaceRegEx = /contents\/(.+)\.md$/;
+const path2url = path => path.replace(/contents\/(.+)\.md$/, '$1.html')
 
 const renderPage = (templateName, meta, chunks, options) => {
+    const pagePath = path2url(meta.frontMatter.path);
+    const body = md2html(meta.markdown);
+
     return new HtmlWebpackPlugin({
-        filename: meta.frontMatter.path.replace(urlReplaceRegEx, '$1.html'),
+        filename: pagePath,
         template: `./layouts/${templateName}.pug`,
         templateParameters() {
             return {
                 _config: config,
-                _body: md2html(meta.markdown),
+                _body: body,
                 ...meta.frontMatter,
+                url: new URL(pagePath, config.host),
+                description: body.replace(/(<([^>]+)>)/ig,"").slice(0, 55),
                 _options: options,
             };
         },
@@ -28,7 +33,7 @@ module.exports = {
         const recentPosts = _recentPosts.map(post => post.frontMatter)
             .map(v => ({
                 ...v,
-                url: v.path.replace(urlReplaceRegEx, '$1.html'),
+                url: path2url(v.path),
             }));
         return renderPage('home', meta, ['home'], { recentPosts });
     },
