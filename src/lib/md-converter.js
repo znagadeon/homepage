@@ -31,7 +31,7 @@ const highlightCode = (code, highlightLines) => {
     }).join('\n');
 }
 
-const convertCode = (code, infostring = 'plaintext') => {
+const convertCode = (code, infostring) => {
     const [lang, highlightLineStr] = infostring.split(':');
 
     const highlightLines = highlightLineStr ? getHighlightLines(highlightLineStr) : [];
