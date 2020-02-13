@@ -3,7 +3,7 @@ const common = require('./webpack.common');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const formatISO = require('date-fns/formatISO');
+const format = require('date-fns/format');
 
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
 const { renderHome, renderPost } = require('./src/lib/renderer');
@@ -16,7 +16,7 @@ const posts = pages
         ...post,
         frontMatter: {
             ...post.frontMatter,
-            published: formatISO(new Date(), { representation: 'date' }),
+            published: format(new Date(), 'yyyy-MM-dd'),
         },
     }));
 
