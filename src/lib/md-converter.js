@@ -1,4 +1,4 @@
-const { Remarkable } = require('remarkable');
+const marked = require('marked');
 
 const hljs = require('highlight.js');
 
@@ -42,16 +42,13 @@ const convertCode = (code, infostring = 'plaintext') => {
     return `<pre class="hljs">${highlightCode(convertedCode, highlightLines)}</pre>`;
 };
 
-const md = new Remarkable({
-    highlight: convertCode,
-});
-md.renderer.rules.link_open = (tokens, idx) => `<a href="${tokens[idx].href}" class="fa fa-link" target="_blank">`;
-md.renderer.rules.code = (tokens, idx) => {
-    const code = tokens[idx].content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return `<code class="short-code">${code}</code>`;
-};
-md.renderer.rules.footnote_block_open = () => '<section class="footnotes">\n<ol class="footnotes-list">\n';
+const renderer = new marked.Renderer();
+renderer.code = convertCode;
+renderer.link = (href, title, text) => `<a href="${href}" class="fa fa-link" title="${title}" target="_blank">${text}</a>`;
+renderer.codespan = code => `<code class="short-code">${code}</code>`;
+
+marked.setOptions({ renderer });
 
 module.exports = {
-    md2html: markdown => md.render(markdown),
+    md2html: markdown => marked(markdown),
 };

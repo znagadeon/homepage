@@ -69,14 +69,6 @@ main {
                 }
             }
         }
-
-        .footnotes {
-            @apply pt-1 mt-10 border-t border-gray-300;
-
-            ol {
-                @apply pl-6 list-decimal;
-            }
-        }
     }
 
     .tags {
