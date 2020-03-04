@@ -4,7 +4,8 @@
 @import './common.scss';
 
 main {
-    @apply p-6;
+    @apply p-6 mx-auto;
+    max-width: 1000px;
 
     .category {
         
@@ -28,7 +29,29 @@ main {
         }
 
         p {
-            @apply mt-2;
+            @apply mt-4;
+        }
+
+        @mixin list {
+            @apply ml-6 mt-3;
+        }
+
+        ol {
+            @include list;
+            @apply list-decimal;
+        }
+
+        ul {
+            @include list;
+            @apply list-disc;
+        }
+
+        li {
+            @apply pt-2;
+
+            &:first-child {
+                @apply pt-0;
+            }
         }
 
         a {
@@ -37,6 +60,14 @@ main {
             &:active {
                 @apply text-blue-800;
             }
+        }
+
+        del {
+            @apply text-gray-500;
+        }
+
+        hr {
+            @apply mt-5;
         }
 
         figure {
