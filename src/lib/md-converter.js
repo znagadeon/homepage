@@ -46,6 +46,9 @@ const renderer = new marked.Renderer();
 renderer.code = convertCode;
 renderer.link = (href, title, text) => `<a href="${href}" class="fa fa-link" title="${title}" rel="noopener" target="_blank">${text}</a>`;
 renderer.codespan = code => `<code class="short-code">${code}</code>`;
+renderer.image = (href, title, text) => {
+    return `<figure><img src="${href}" alt="${text}"><figcaption aria-hidden="true">${text}</figcaption></figure>`;
+};
 
 marked.setOptions({ renderer });
 

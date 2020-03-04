@@ -39,6 +39,18 @@ main {
             }
         }
 
+        figure {
+            @apply text-center my-4;
+
+            img {
+                @apply mx-auto rounded-lg shadow;
+            }
+
+            figcaption {
+                @apply text-gray-700 pt-2 text-sm;
+            }
+        }
+
         .short-code {
             @apply px-1 rounded bg-gray-200 text-blue-400;
         }
