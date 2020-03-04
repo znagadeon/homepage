@@ -35,8 +35,8 @@ module.exports = merge(common, {
         renderHome(
             pages.find(v => v.frontMatter.layout === 'home'),
             posts.slice().sort((a, b) => {
-                if (a.published < b.published) return -1;
-                if (a.published > b.published) return 1;
+                if (a.frontMatter.published < b.frontMatter.published) return 1;
+                if (a.frontMatter.published > b.frontMatter.published) return -1;
                 return 0;
             }).slice(0, 5),
         ),
