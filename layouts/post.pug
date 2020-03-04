@@ -29,7 +29,7 @@ html(lang="ko")
                 ul.tags
                     each tag in tags
                         li.tag ##{tag}
-        #disqus_thread.comments
+            #disqus_thread.comments
         script.
             var disqus_config = function () {
                 this.page.url = '#{_config.host}' + location.pathname;
