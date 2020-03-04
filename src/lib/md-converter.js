@@ -44,7 +44,7 @@ const convertCode = (code, infostring = 'plaintext') => {
 
 const renderer = new marked.Renderer();
 renderer.code = convertCode;
-renderer.link = (href, title, text) => `<a href="${href}" class="fa fa-link" title="${title}" target="_blank">${text}</a>`;
+renderer.link = (href, title, text) => `<a href="${href}" class="fa fa-link" title="${title}" rel="noopener" target="_blank">${text}</a>`;
 renderer.codespan = code => `<code class="short-code">${code}</code>`;
 
 marked.setOptions({ renderer });
