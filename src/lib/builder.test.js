@@ -3,8 +3,7 @@ const mock = require('mock-fs');
 
 const { getContentFileInfos, loadPage, saveHtml } = require('./builder');
 
-// FIXME: mock-fs does not support { withFileTypes: true } yet
-xdescribe('getContentFileInfos', () => {
+describe('getContentFileInfos', () => {
     it('returns page info list', () => {
         mock({
             'simple-page.md': '',
