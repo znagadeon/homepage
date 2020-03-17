@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const fm = require('front-matter');
 
 const _getContentFileInfos = contentDir => {
@@ -7,9 +8,12 @@ const _getContentFileInfos = contentDir => {
 
     root.forEach(dirent => {
         if (dirent.isFile())
-            results.push(`${contentDir}/${dirent.name}`);
+            results.push(path.join(contentDir, dirent.name));
         else {
-            results = [...results, ..._getContentFileInfos(`${contentDir}/${dirent.name}`)];
+            results = [
+                ...results,
+                ..._getContentFileInfos(path.join(contentDir, dirent.name))
+            ];
         }
     });
 
@@ -17,7 +21,7 @@ const _getContentFileInfos = contentDir => {
 }
 
 module.exports = {
-    getContentFileInfos: contentDir => _getContentFileInfos(contentDir),
+    getContentFileInfos: contentDir => _getContentFileInfos(contentDir).map(v => `./${v}`),
 
     loadPage: path => {
         const str = fs.readFileSync(path).toString();
