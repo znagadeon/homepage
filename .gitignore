@@ -1,5 +1,10 @@
+# for dev
 node_modules
-
-dist
-
 coverage
+.tool-versions
+
+# commonly ignored files
+.DS_Store
+
+# output
+dist
