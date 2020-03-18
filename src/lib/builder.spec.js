@@ -1,33 +1,60 @@
 const fs = require('fs');
 const mock = require('mock-fs');
 
-const { getContentFileInfos, loadPage, saveHtml } = require('./builder');
+const { getContentFileInfos, loadPage } = require('./builder');
 
 describe('getContentFileInfos', () => {
-    it('returns page info list', () => {
+    it('returns page info list and assets', () => {
         mock({
             'simple-page.md': '',
             'complex-page': {
+                assets: {
+                    'asset-1.png': '',
+                    'asset-2.png': '',
+                },
                 'index.md': '',
             },
             category: {
                 'simple-page.md': '',
                 'complex-page': {
+                    assets: {
+                        'asset-1.png': '',
+                        'asset-2.png': '',
+                    },
                     'index.md': '',
                 },
             },
         });
 
-        const expected = [
+        const expectedPages = [
             './simple-page.md',
             './complex-page/index.md',
             './category/simple-page.md',
             './category/complex-page/index.md',
         ];
-        const results = getContentFileInfos('./');
+        const expectedAssets = [
+            './complex-page/assets/asset-1.png',
+            './complex-page/assets/asset-2.png',
+            './category/complex-page/assets/asset-1.png',
+            './category/complex-page/assets/asset-2.png',
+        ];
+        const { pages, assets } = getContentFileInfos('./');
 
-        expect(results).toEqual(expect.arrayContaining(expected));
-        expect(expected).toEqual(expect.arrayContaining(results));
+        expect(pages).toEqual(expect.arrayContaining(expectedPages));
+        expect(expectedPages).toEqual(expect.arrayContaining(pages));
+        
+        expect(assets).toEqual(expect.arrayContaining(expectedAssets));
+        expect(expectedAssets).toEqual(expect.arrayContaining(assets));
+    });
+
+    it('ignores unnecessary files', () => {
+        mock({
+            '.DS_Store': '',
+        });
+
+        const { pages, assets } = getContentFileInfos('./');
+        expect(pages).toHaveLength(0);
+        expect(assets).toHaveLength(0);
     });
 
     afterEach(() => {

@@ -7,12 +7,14 @@ const _getContentFileInfos = contentDir => {
     let results = [];
 
     root.forEach(dirent => {
-        if (dirent.isFile())
-            results.push(path.join(contentDir, dirent.name));
-        else {
+        if (dirent.isFile()) {
+            if (!['.DS_Store'].some(v => dirent.name.includes(v))) {
+                results.push(path.join(contentDir, dirent.name));
+            }
+        } else {
             results = [
                 ...results,
-                ..._getContentFileInfos(path.join(contentDir, dirent.name))
+                ..._getContentFileInfos(path.join(contentDir, dirent.name)),
             ];
         }
     });
@@ -20,8 +22,16 @@ const _getContentFileInfos = contentDir => {
     return results;
 }
 
+const _isPage = path => Boolean(path.match(/\.md$/));
+
 module.exports = {
-    getContentFileInfos: contentDir => _getContentFileInfos(contentDir).map(v => `./${v}`),
+    getContentFileInfos: contentDir => {
+        const results = _getContentFileInfos(contentDir);
+        return {
+            pages: results.filter(v => _isPage(v)).map(v => `./${v}`),
+            assets: results.filter(v => !_isPage(v)).map(v => `./${v}`),
+        };
+    },
 
     loadPage: path => {
         const str = fs.readFileSync(path).toString();
