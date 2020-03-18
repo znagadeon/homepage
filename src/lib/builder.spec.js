@@ -1,20 +1,12 @@
 const fs = require('fs');
 const mock = require('mock-fs');
 
-const { getContentFileInfos, loadPage } = require('./builder');
+const { getContentFileInfos, loadPage, copyAssets } = require('./builder');
 
 describe('getContentFileInfos', () => {
     it('returns page info list and assets', () => {
         mock({
-            'simple-page.md': '',
-            'complex-page': {
-                assets: {
-                    'asset-1.png': '',
-                    'asset-2.png': '',
-                },
-                'index.md': '',
-            },
-            category: {
+            contents: {
                 'simple-page.md': '',
                 'complex-page': {
                     assets: {
@@ -23,22 +15,32 @@ describe('getContentFileInfos', () => {
                     },
                     'index.md': '',
                 },
+                category: {
+                    'simple-page.md': '',
+                    'complex-page': {
+                        assets: {
+                            'asset-1.png': '',
+                            'asset-2.png': '',
+                        },
+                        'index.md': '',
+                    },
+                },
             },
         });
 
         const expectedPages = [
-            './simple-page.md',
-            './complex-page/index.md',
-            './category/simple-page.md',
-            './category/complex-page/index.md',
+            './contents/simple-page.md',
+            './contents/complex-page/index.md',
+            './contents/category/simple-page.md',
+            './contents/category/complex-page/index.md',
         ];
         const expectedAssets = [
-            './complex-page/assets/asset-1.png',
-            './complex-page/assets/asset-2.png',
-            './category/complex-page/assets/asset-1.png',
-            './category/complex-page/assets/asset-2.png',
+            './contents/complex-page/assets/asset-1.png',
+            './contents/complex-page/assets/asset-2.png',
+            './contents/category/complex-page/assets/asset-1.png',
+            './contents/category/complex-page/assets/asset-2.png',
         ];
-        const { pages, assets } = getContentFileInfos('./');
+        const { pages, assets } = getContentFileInfos('./contents');
 
         expect(pages).toEqual(expect.arrayContaining(expectedPages));
         expect(expectedPages).toEqual(expect.arrayContaining(pages));
@@ -103,5 +105,24 @@ describe('loadPage', () => {
 
     afterEach(() => {
         mock.restore();
+    });
+});
+
+describe('copyAssets', () => {
+    fs.mkdirSync = jest.fn();
+    const mkdir = jest.spyOn(fs, 'mkdirSync');
+
+    fs.copyFileSync = jest.fn();
+    const copy = jest.spyOn(fs, 'copyFileSync');
+
+    it('make asset directory recursively', () => {
+        copyAssets(['./src/path/to/assets/asset-1.png', './src/path/to/assets/asset-2.png'], './src', './dest');
+
+        expect(mkdir).toHaveBeenCalledWith('dest/path');
+        expect(mkdir).toHaveBeenCalledWith('dest/path/to');
+        expect(mkdir).toHaveBeenCalledWith('dest/path/to/assets');
+
+        expect(copy).toHaveBeenCalledWith('./src/path/to/assets/asset-1.png', 'dest/path/to/assets/asset-1.png');
+        expect(copy).toHaveBeenCalledWith('./src/path/to/assets/asset-2.png', 'dest/path/to/assets/asset-2.png');
     });
 });

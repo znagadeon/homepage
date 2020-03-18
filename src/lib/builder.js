@@ -49,4 +49,22 @@ module.exports = {
             },
         };
     },
+
+    copyAssets: (assets, src, dest) => {
+        assets.forEach(assetPath => {
+            const directories = assetPath.split('/')
+                .map((_, i, arr) => arr.slice(0, i).join('/'));
+            
+            directories.forEach(directory=> {
+                if (!directory || directory === '.' || directory === assetPath) return;
+
+                const mkdirPath = path.join(dest, path.relative(src, directory));
+                if (!fs.existsSync(mkdirPath)) {
+                    fs.mkdirSync(mkdirPath);
+                }
+            });
+
+            fs.copyFileSync(assetPath, path.join(dest, path.relative(src, assetPath)));
+        });
+    },
 };
