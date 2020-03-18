@@ -9,7 +9,7 @@ const { getContentFileInfos, loadPage } = require('./src/lib/builder');
 const { renderHome, renderPost } = require('./src/lib/renderer');
 
 const fileInfos = getContentFileInfos('./contents');
-const pages = fileInfos.map(fileInfo => loadPage(fileInfo));
+const pages = fileInfos.pages.map(fileInfo => loadPage(fileInfo));
 const posts = pages
     .filter(page => page.frontMatter.layout === 'post' && !page.frontMatter.draft)
     .map(post => ({
