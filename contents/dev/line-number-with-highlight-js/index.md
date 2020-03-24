@@ -67,7 +67,7 @@ const splittedCode = convertedCode.split('\n');
 const lineAttachedCode = splittedCode.map((code, i) => `${i+1} | ${code}`).join('\n');
 ```
 
-![기능적으론 완벽한데, 뭔가...](https://live.staticflickr.com/65535/49526642871_97f18e3967.jpg)
+![기능적으론 완벽한데, 뭔가...](./assets/code-with-line-number.png)
 
 잘 동작하긴 하지만 뭔가 불만족스럽다. 하나하나 수정해보자.
 
@@ -87,7 +87,7 @@ const padNumber = padder(splittedCode.length.toString().length);
 const lineAttachedCode = splittedCode.map((code, i) => `${padNumber(i+1)} | ${code}`).join('\n');
 ```
 
-![훨씬 깔끔해졌다](https://live.staticflickr.com/65535/49526131923_91436ddc2c.png)
+![훨씬 깔끔해졌다](./assets/padding-attached.png)
 
 물론 이 정도로도 개발 블로그를 운영하는 데는 무리가 없지만, 아직 좀 더 개선할 여지가 남아 있다.
 
@@ -121,7 +121,7 @@ const lineAttachedCode = splittedCode
 
 `user-select` 속성은 텍스트를 드래그하여 선택할 수 있는지 여부를 결정해 준다. 여기에 `none`을 주면 선택할 수 없는 상태가 된다.
 
-![이제 마음껏 코드를 복사할 수 있다](https://live.staticflickr.com/65535/49526867602_fbb66e0d62.jpg)
+![이제 마음껏 코드를 복사할 수 있다](./assets/user-select.png)
 
 # 정리
 
