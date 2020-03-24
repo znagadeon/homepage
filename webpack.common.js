@@ -1,8 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WebpackOnBuildPlugin = require('on-build-webpack');
+// const WebpackOnBuildPlugin = require('on-build-webpack');
 
-const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
+// const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
 
 /**
  * TODO:
@@ -40,10 +40,5 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(),
-        new WebpackOnBuildPlugin(_ => {
-            const SRC = './contents', DEST = './dist';
-            const { assets } = getContentFileInfos(SRC);
-            copyAssets(assets, SRC, DEST);
-        }),
     ],
 }

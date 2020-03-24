@@ -2,10 +2,11 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackOnBuildPlugin = require('on-build-webpack');
 
 const format = require('date-fns/format');
 
-const { getContentFileInfos, loadPage } = require('./src/lib/builder');
+const { getContentFileInfos, copyAssets, loadPage } = require('./src/lib/builder');
 const { renderHome, renderPost } = require('./src/lib/renderer');
 
 const fileInfos = getContentFileInfos('./contents');
@@ -46,5 +47,10 @@ module.exports = merge(common, {
             }).slice(0, 5),
         ),
         ...posts.map(post => renderPost(post)),
+        new WebpackOnBuildPlugin(_ => {
+            const SRC = './contents', DEST = './dist';
+            const { assets } = getContentFileInfos(SRC);
+            copyAssets(assets, SRC, DEST);
+        }),
     ],
 });
