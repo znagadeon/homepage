@@ -75,6 +75,7 @@ main {
 
             img {
                 @apply mx-auto rounded-lg shadow;
+                max-width: 800px;
             }
 
             figcaption {
