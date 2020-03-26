@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "start": "http-server ./dist -p 8000",
-    "watch": "webpack-dev-server --port 1337 --open --config webpack.dev.js",
+    "start": "concurrently --kill-others \"npm run start:server\" \"npm run watch\"",
+    "watch": "nodemon --exec \"webpack --config webpack.dev.js\"",
+    "start:server": "live-server ./dist --port=1337",
     "test": "jest --coverage"
   },
   "keywords": [],
@@ -15,15 +16,17 @@
   "devDependencies": {
     "autoprefixer": "^9.7.4",
     "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.1.0",
     "css-loader": "^3.4.2",
     "date-fns": "^2.9.0",
     "front-matter": "^3.1.0",
     "html-webpack-plugin": "^4.0.1",
-    "http-server": "^0.12.1",
     "jest": "^25.1.0",
+    "live-server": "^1.2.1",
     "marked": "^0.8.0",
     "mini-css-extract-plugin": "^0.9.0",
     "mock-fs": "^4.10.4",
+    "nodemon": "^2.0.2",
     "on-build-webpack": "^0.1.0",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",
@@ -32,7 +35,6 @@
     "sass-loader": "^8.0.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.2",
     "webpack-merge": "^4.2.2"
   },
   "engines": {

@@ -1,0 +1,5 @@
+{
+    "watch": ["./contents", "./src", "./layouts", "./styles", "./config.json"],
+    "ignore": ["*.spec.js"],
+    "ext": "md,js,pug,scss,json"
+}
