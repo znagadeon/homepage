@@ -4,6 +4,8 @@ const WebpackOnBuildPlugin = require('on-build-webpack');
 
 const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 /**
  * TODO:
  *  - sitemap
@@ -25,11 +27,19 @@ module.exports = {
 
     module: {
         rules: [{
+            test: /\.vue$/,
+            loader: 'vue-loader',
+        }, {
             test: /\.js$/,
             loader: 'babel-loader',
         }, {
             test: /\.pug$/,
-            loader: 'pug-loader',
+            oneOf: [{
+                resourceQuery: /^\?vue/,
+                use: ['pug-plain-loader']
+            }, {
+                use: ['pug-loader']
+            }],
         }, {
             test: /\.s?css$/,
             use: [
@@ -48,5 +58,6 @@ module.exports = {
             const { assets } = getContentFileInfos(SRC);
             copyAssets(assets, SRC, DEST);
         }),
+        new VueLoaderPlugin(),
     ],
 }
