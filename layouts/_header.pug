@@ -2,7 +2,7 @@ header
     div.top
         h1.title
             a(href="/") #{_config.blogName}
-        a.fa.fa-lg.fa-search.search#search(href='javascript:alert(\'준비중\')')
+        a.search#search(href='javascript:alert(\'준비중\')')
             span.sr-only Search
     section.profile
         img(src=`https://www.gravatar.com/avatar/${_config.links.gravatar}?s=150`)
@@ -10,16 +10,16 @@ header
         p #{_config.description}
         ul.links
             li
-                a.fa.fa-lg.fa-github(target='_blank' href=`https://github.com/${_config.links.github}`)
+                a.github-link(target='_blank' href=`https://github.com/${_config.links.github}`)
                     span.sr-only GitHub
             li
-                a.fa.fa-lg.fa-linkedin(target='_blank' href=`https://linkedin.com/in/${_config.links.linkedin}`)
+                a.linkedin-link(target='_blank' href=`https://linkedin.com/in/${_config.links.linkedin}`)
                     span.sr-only LinkedIn
             li
-                a.fa.fa-lg.fa-twitter(target='_blank' href=`https://twitter.com/${_config.links.twitter}`)
+                a.twitter-link(target='_blank' href=`https://twitter.com/${_config.links.twitter}`)
                     span.sr-only Twitter
             li
-                a.fa.fa-lg.fa-envelope-o(target='_blank' href=`mailto:${_config.links.mail}`)
+                a.mail-link(target='_blank' href=`mailto:${_config.links.mail}`)
                     span.sr-only Mail
     nav
         ul.menu

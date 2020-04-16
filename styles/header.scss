@@ -1,3 +1,9 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+
 header {
     @apply pb-6 mb-3 border-gray-300 border-b;
 
@@ -10,6 +16,13 @@ header {
     
         .search {
             @apply absolute top-0 right-0 h-20 pt-8 pr-6;
+            @extend %fa-icon;
+            @extend .fas;
+            @extend .fa-lg;
+
+            &:before {
+                content: fa-content($fa-var-search);
+            }
         }
     }
 
@@ -36,6 +49,46 @@ header {
 
                 &:last-child {
                     @apply mr-0;
+                }
+
+                .github-link {
+                    @extend %fa-icon;
+                    @extend .fab;
+                    @extend .fa-lg;
+
+                    &:before {
+                        content: fa-content($fa-var-github);
+                    }
+                }
+
+                .linkedin-link {
+                    @extend %fa-icon;
+                    @extend .fab;
+                    @extend .fa-lg;
+
+                    &:before {
+                        content: fa-content($fa-var-linkedin-in);
+                    }
+                }
+
+                .twitter-link {
+                    @extend %fa-icon;
+                    @extend .fab;
+                    @extend .fa-lg;
+
+                    &:before {
+                        content: fa-content($fa-var-twitter);
+                    }
+                }
+
+                .mail-link {
+                    @extend %fa-icon;
+                    @extend .fas;
+                    @extend .fa-lg;
+
+                    &:before {
+                        content: fa-content($fa-var-envelope);
+                    }
                 }
             }
         }
