@@ -16,8 +16,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     context: __dirname,
     entry: {
-        home: './src/home.js',
-        post: './src/post.js',
+        // home: './src/home.js',
+        // post: './src/post.js',
+        bundle: './src/main.js',
     },
 
     output: {
