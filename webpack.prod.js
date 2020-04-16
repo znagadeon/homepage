@@ -27,6 +27,17 @@ module.exports = merge(common, {
         filename: '[name]-[chunkhash:10].js',
     },
 
+    module: {
+        rules: [{
+            test: /\.(svg|ttf|woff|woff2|eot)$/,
+            loader: 'file-loader',
+            options: {
+                publicPath: './',
+                name: '[name]-[contenthash:10].[ext]',
+            },
+        }],
+    },
+
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name]-[contenthash:10].css',
