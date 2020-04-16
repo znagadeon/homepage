@@ -3,6 +3,9 @@ html(lang="ko")
     head
         include _head.pug
         title #{title} - #{_config.blogName}
+        meta(name="author" content=_config.name)
+        meta(name="description" content=description)
+        meta(name="keywords" content=tags)
         meta(property="og:type", content="article")
         meta(property="og:url", content=url)
         meta(property="og:title", content=title)
