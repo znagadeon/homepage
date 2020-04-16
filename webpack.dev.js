@@ -30,6 +30,8 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
+        port: 1337,
+        open: true,
     },
 
     plugins: [
