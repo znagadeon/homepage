@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const format = require('date-fns/format');
 
@@ -43,14 +44,19 @@ module.exports = merge(common, {
             filename: '[name]-[contenthash:10].css',
         }),
 
-        renderHome(
-            pages.find(v => v.frontMatter.layout === 'home'),
-            posts.slice().sort((a, b) => {
-                if (a.frontMatter.published < b.frontMatter.published) return 1;
-                if (a.frontMatter.published > b.frontMatter.published) return -1;
-                return 0;
-            }).slice(0, 5),
-        ),
-        ...posts.map(post => renderPost(post)),
+        // renderHome(
+        //     pages.find(v => v.frontMatter.layout === 'home'),
+        //     posts.slice().sort((a, b) => {
+        //         if (a.frontMatter.published < b.frontMatter.published) return 1;
+        //         if (a.frontMatter.published > b.frontMatter.published) return -1;
+        //         return 0;
+        //     }).slice(0, 5),
+        // ),
+        // ...posts.map(post => renderPost(post)),
+        new HtmlWebpackPlugin({
+            template: './layouts/index.pug',
+            filename: 'index.html',
+            chunks: ['bundle'],
+        }),
     ],
 });
