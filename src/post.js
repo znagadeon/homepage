@@ -1,2 +1,2 @@
-require('highlight.js/styles/atom-one-dark.css');
-require('../styles/post.scss');
+import 'highlight.js/styles/atom-one-dark.css';
+import '../styles/post.scss';
