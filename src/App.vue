@@ -16,7 +16,7 @@ export default {
     },
 
     mounted() {
-        document.dispatchEvent(new Event('ready to prerender'));
+        document.dispatchEvent(new Event('ready-to-prerender'));
     },
 }
 </script>
