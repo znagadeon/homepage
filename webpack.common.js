@@ -25,6 +25,12 @@ module.exports = {
         path: `${__dirname}/dist`,
     },
 
+    resolve: {
+        alias: {
+            '@root': __dirname,
+        },
+    },
+
     module: {
         rules: [{
             test: /\.md$/,

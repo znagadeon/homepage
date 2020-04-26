@@ -56,6 +56,8 @@
   "dependencies": {
     "highlight.js": "^9.18.1",
     "tailwindcss": "^1.1.4",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-fragment": "^1.5.1",
+    "vue-meta": "^2.3.3"
   }
 }
