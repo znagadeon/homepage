@@ -3,9 +3,12 @@ const common = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+
+const webpack = require('webpack');
 
 const format = require('date-fns/format');
+
+const path = require('path');
 
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
 const { renderPost } = require('./src/lib/renderer');
@@ -37,6 +40,14 @@ module.exports = merge(common, {
                 publicPath: './',
                 name: '[name]-[contenthash:10].[ext]',
             },
+        }, {
+            test: /\.(png|jpg)/,
+            loader: 'file-loader',
+            options: {
+                publicPath: './',
+                context: './contents',
+                name: '[path][name].[ext]',
+            }
         }],
     },
 
@@ -46,9 +57,12 @@ module.exports = merge(common, {
         }),
         ...posts.map(post => renderPost(post)),
 
+        new webpack.DefinePlugin({
+            IS_DEV: 'false',
+        }),
         new PrerenderSPAPlugin({
             staticDir: `${__dirname}/dist`,
-            routes: ['/'],
+            routes: getContentFileInfos('./contents').pages.map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
             postProcess (renderedRoute) {
                 renderedRoute.route = renderedRoute.originalRoute;
                 if (renderedRoute.route.endsWith('.html')) {
@@ -58,7 +72,7 @@ module.exports = merge(common, {
                 return renderedRoute;
             },
 
-            renderer: new Renderer({
+            renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
                 renderAfterDocumentEvent: 'ready-to-prerender',
             }),
         }),

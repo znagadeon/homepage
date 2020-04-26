@@ -58,13 +58,6 @@ module.exports = {
                 'postcss-loader',
                 'sass-loader',
             ],
-        }, {
-            test: /\.(png|jpg)/,
-            loader: 'file-loader',
-            options: {
-                publicPath: './',
-                name: '[folder]/[name].[ext]',
-            }
         }],
     },
 
