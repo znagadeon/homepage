@@ -2,7 +2,6 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const format = require('date-fns/format');
 
@@ -52,10 +51,5 @@ module.exports = merge(common, {
         }),
 
         ...posts.map(post => renderPost(post)),
-        new HtmlWebpackPlugin({
-            template: './layouts/index.pug',
-            filename: 'index.html',
-            chunks: ['bundle'],
-        }),
     ],
 });
