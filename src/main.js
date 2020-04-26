@@ -6,7 +6,7 @@ import App from './App.vue';
 import Home from './components/Home.vue';
 import Post from './components/Post.vue';
 
-import '../styles/home.scss';
+import '../styles/master.scss';
 
 Vue.use(VueMeta);
 Vue.use(VueRouter);

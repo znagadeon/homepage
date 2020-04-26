@@ -1,0 +1,196 @@
+@import "~highlight.js/styles/atom-one-dark.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@import './common.scss';
+
+.container {
+    max-width: none;
+
+    main {
+        max-width: 1000px;
+        min-height: 500px;
+        @apply px-6;
+        @apply mx-auto;
+
+        // home
+        .recent-posts {
+            @apply max-w-6xl;
+            @apply mx-auto;
+
+            h2 {
+                @apply mt-8;
+                @apply text-2xl;
+            }
+
+            .posts {
+                @apply flex;
+                @apply flex-col;
+                @apply mt-1;
+
+                .post {
+                    @apply w-full;
+                    @apply py-3;
+                    @apply border-b;
+
+                    &:last-child {
+                        @apply border-b-0;
+                    }
+
+                    h3 {
+                        @apply text-xl;
+                    }
+
+                    .meta {
+                        @apply flex;
+                        @apply flex-row;
+
+                        .category, .tags {
+                            @apply mr-3;
+                        }
+
+                        .tags {
+                            @apply flex;
+                            @apply flex-row;
+
+                            .tag {
+                                @apply text-blue-700;
+                                @apply mr-2;
+
+                                &:last-child {
+                                    @apply mr-0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // post
+        .article {
+            .category {
+
+            }
+
+            .title {
+                @apply text-4xl;
+            }
+
+            .published {
+                @apply border-b border-gray-300 pb-2 mb-6;
+            }
+
+            article {
+                h1 {
+                    @apply text-3xl mt-6;
+                }
+
+                h2 {
+                    @apply text-2xl mt-4;
+                }
+
+                p {
+                    @apply mt-4;
+                }
+
+                @mixin list {
+                    @apply ml-6 mt-3;
+                }
+
+                ol {
+                    @include list;
+                    @apply list-decimal;
+                }
+
+                ul {
+                    @include list;
+                    @apply list-disc;
+                }
+
+                li {
+                    @apply pt-2;
+
+                    &:first-child {
+                        @apply pt-0;
+                    }
+                }
+
+                a {
+                    @apply text-blue-400 underline;
+
+                    &:active {
+                        @apply text-blue-800;
+                    }
+                }
+
+                del {
+                    @apply text-gray-500;
+                }
+
+                hr {
+                    @apply mt-5;
+                }
+
+                figure {
+                    @apply text-center my-4;
+
+                    img {
+                        @apply mx-auto rounded-lg shadow;
+
+                        @media (max-width: 600px) {
+                            max-width: 350px;
+                        }
+                        max-width: 600px;
+                    }
+
+                    figcaption {
+                        @apply text-gray-700 pt-2 text-sm;
+                    }
+                }
+
+                .short-code {
+                    @apply px-1 rounded bg-gray-200 text-blue-400;
+                }
+
+                .hljs {
+                    @apply w-full px-0 py-3 mt-2 rounded-lg whitespace-no-wrap break-all;
+
+                    div {
+                        @apply flex;
+
+                        &.highlighted {
+                            @apply bg-gray-900;
+                        }
+
+                        @mixin code {
+                            @apply inline-block whitespace-pre-wrap;
+                        }
+
+                        .line-number {
+                            @include code;
+                            @apply px-3 mr-3 border-r border-gray-700 text-right;
+
+                            user-select: none;
+                        }
+                        .code {
+                            @include code;
+                            @apply flex-1;
+                        }
+                    }
+                }
+            }
+
+            .tags {
+                @apply mt-6;
+            }
+
+            .comments {
+                @apply p-6;
+            }
+        }
+    }
+}
+
+@import "tailwindcss/utilities";

@@ -1,5 +1,5 @@
 <template lang="pug">
-fragment
+.article
     div.category
         span.sr-only category
         span /{{category}}
