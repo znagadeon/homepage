@@ -13,9 +13,21 @@ module.exports = function (content) {
         }
     }
 
+    let images;
     if (this.resourceQuery.indexOf('with-html') > -1) {
         metaInfo.html = md2html(parsed.body);
+
+        images = parsed.body.split('\n')
+            .map(line => line.match(/!\[.*\]\(([^\s]+).*\)/))
+            .filter(match => match)
+            .map(match => match[1]);
     }
 
-    return `module.exports = ${JSON.stringify(metaInfo)};`;
+    let requireStr = '';
+    if (images && images.length) {
+        requireStr = images.map(image => `require('${image}');`)
+            .reduce((a, b) => a+b, '');
+    }
+
+    return `${requireStr}module.exports = ${JSON.stringify(metaInfo)};`;
 };
