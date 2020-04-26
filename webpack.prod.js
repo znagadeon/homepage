@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
 const format = require('date-fns/format');
 
@@ -42,7 +43,20 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: '[name]-[contenthash:10].css',
         }),
-
         ...posts.map(post => renderPost(post)),
+
+        new PrerenderSPAPlugin({
+            staticDir: `${__dirname}/dist`,
+            routes: ['/'],
+            postProcess (renderedRoute) {
+                renderedRoute.route = renderedRoute.originalRoute;
+                if (renderedRoute.route.endsWith('.html')) {
+                    renderedRoute.outputPath = path.join(__dirname, 'dist', renderedRoute.route);
+                }
+
+                return renderedRoute;
+            },
+            renderAfterDocumentEvent: 'ready-to-prerender',
+        }),
     ],
 });
