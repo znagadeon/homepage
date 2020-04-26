@@ -16,8 +16,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     context: __dirname,
     entry: {
-        // home: './src/home.js',
-        // post: './src/post.js',
+        post: './src/post.js',
         bundle: './src/main.js',
     },
 
@@ -28,6 +27,9 @@ module.exports = {
 
     module: {
         rules: [{
+            test: /\.md$/,
+            loader: './src/loaders/meta-loader.js',
+        }, {
             test: /\.vue$/,
             loader: 'vue-loader',
         }, {

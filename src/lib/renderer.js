@@ -29,14 +29,6 @@ const renderPage = (templateName, meta, chunks, options) => {
 };
 
 module.exports = {
-    renderHome: (meta, _recentPosts) => {
-        const recentPosts = _recentPosts.map(post => post.frontMatter)
-            .map(v => ({
-                ...v,
-                url: path2url(v.path),
-            }));
-        return renderPage('home', meta, ['home'], { recentPosts });
-    },
     renderPost: meta => {
         return renderPage('post', meta, ['post']);
     },
