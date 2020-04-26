@@ -1,4 +1,4 @@
-const { renderHome, renderPost } = require('./renderer');
+const { renderPost } = require('./renderer');
 
 describe('stub', () => {
     it('stub', () => {

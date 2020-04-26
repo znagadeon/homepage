@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const format = require('date-fns/format');
 
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
-const { renderHome, renderPost } = require('./src/lib/renderer');
+const { renderPost } = require('./src/lib/renderer');
 
 const fileInfos = getContentFileInfos('./contents');
 const pages = fileInfos.pages.map(fileInfo => loadPage(fileInfo));
@@ -44,15 +44,7 @@ module.exports = merge(common, {
             filename: '[name]-[contenthash:10].css',
         }),
 
-        // renderHome(
-        //     pages.find(v => v.frontMatter.layout === 'home'),
-        //     posts.slice().sort((a, b) => {
-        //         if (a.frontMatter.published < b.frontMatter.published) return 1;
-        //         if (a.frontMatter.published > b.frontMatter.published) return -1;
-        //         return 0;
-        //     }).slice(0, 5),
-        // ),
-        // ...posts.map(post => renderPost(post)),
+        ...posts.map(post => renderPost(post)),
         new HtmlWebpackPlugin({
             template: './layouts/index.pug',
             filename: 'index.html',
