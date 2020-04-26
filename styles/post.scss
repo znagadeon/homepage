@@ -75,6 +75,10 @@ main {
 
             img {
                 @apply mx-auto rounded-lg shadow;
+
+                @media (max-width: 600px) {
+                    max-width: 350px;
+                }
                 max-width: 600px;
             }
 
