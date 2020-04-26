@@ -2,7 +2,7 @@
 .container
     blog-header
     main
-        home
+        router-view
     footer
 </template>
 
