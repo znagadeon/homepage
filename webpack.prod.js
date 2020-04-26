@@ -3,6 +3,7 @@ const common = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 
 const format = require('date-fns/format');
 
@@ -56,7 +57,10 @@ module.exports = merge(common, {
 
                 return renderedRoute;
             },
-            renderAfterDocumentEvent: 'ready-to-prerender',
+
+            renderer: new Renderer({
+                renderAfterDocumentEvent: 'ready-to-prerender',
+            }),
         }),
     ],
 });
