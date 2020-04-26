@@ -2,11 +2,13 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
-
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const path = require('path');
+
+const config = require('./config.json');
 
 const { getContentFileInfos } = require('./src/lib/builder');
 
@@ -40,10 +42,20 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: '[name]-[contenthash:10].css',
         }),
-
         new webpack.DefinePlugin({
             IS_DEV: 'false',
         }),
+        new HtmlWebpackPlugin({
+            template: './layouts/index.pug',
+            filename: 'index.html',
+            templateParameters: {
+                _config: config,
+                IS_DEV: false,
+            },
+            chunks: ['bundle'],
+            favicon: './favicon.ico',
+        }),
+
         new PrerenderSPAPlugin({
             staticDir: `${__dirname}/dist`,
             routes: getContentFileInfos('./contents').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),

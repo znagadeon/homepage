@@ -83,7 +83,9 @@ export default {
 
         this.html = data.html;
 
-        this.loadComment();
+        if (!IS_DEV) {
+            this.loadComment();
+        }
     },
 }
 </script>
