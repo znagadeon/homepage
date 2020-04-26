@@ -4,9 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackOnBuildPlugin = require('on-build-webpack');
-
-const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
 
 const config = require('./config.json');
 
@@ -61,6 +58,13 @@ module.exports = {
                 'postcss-loader',
                 'sass-loader',
             ],
+        }, {
+            test: /\.(png|jpg)/,
+            loader: 'file-loader',
+            options: {
+                publicPath: './',
+                name: '[folder]/[name].[ext]',
+            }
         }],
     },
 
@@ -75,12 +79,6 @@ module.exports = {
                 _config: config,
             },
             chunks: ['bundle'],
-        }),
-
-        new WebpackOnBuildPlugin(_ => {
-            const SRC = './contents', DEST = './dist';
-            const { assets } = getContentFileInfos(SRC);
-            copyAssets(assets, SRC, DEST);
         }),
     ],
 }
