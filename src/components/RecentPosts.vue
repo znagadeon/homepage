@@ -3,7 +3,7 @@ article.recent-posts
     h2 Recent Posts
     ol.posts
         li.post(v-for="post in posts")
-            a(:href="post.url")
+            router-link(:to="post.url")
                 h3 {{ post.title }}
                 dl.meta
                     dt.sr-only category
