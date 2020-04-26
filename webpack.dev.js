@@ -3,6 +3,8 @@ const common = require('./webpack.common');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const webpack = require('webpack');
+
 const format = require('date-fns/format');
 
 const { getContentFileInfos, loadPage } = require('./src/lib/builder');
@@ -42,6 +44,13 @@ module.exports = merge(common, {
                 publicPath: './',
                 name: '[name].[ext]',
             },
+        }, {
+            test: /\.(png|jpg)/,
+            loader: 'file-loader',
+            options: {
+                publicPath: './',
+                name: '[folder]/[name].[ext]',
+            }
         }],
     },
 
@@ -51,5 +60,8 @@ module.exports = merge(common, {
         }),
 
         ...posts.map(post => renderPost(post)),
+        new webpack.DefinePlugin({
+            IS_DEV: 'true',
+        }),
     ],
 });
