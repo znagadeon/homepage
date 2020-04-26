@@ -30,21 +30,21 @@ export default {
     },
 
     created() {
-        const posts = context.keys().filter(path => path !== './index.md').map(path => {
+        const posts = context.keys().map(path => {
             const meta = context(path);
 
             return {
                 ...meta,
-                published: format(new Date(meta.published), 'yyyy-MM-dd'),
+                published: format(new Date(meta.published || null), 'yyyy-MM-dd'),
                 url: path.replace(/\.md$/, '.html'),
             };
-        });
+        }).filter(meta => meta.layout === 'post');
 
         this.posts = posts.sort((a, b) => {
             if (a.published < b.published) return 1;
             if (a.published > b.published) return -1;
             return 0;
-        });
+        }).slice(0, 5);
     },
 }
 </script>
