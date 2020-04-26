@@ -3,10 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const config = require('./config.json');
-
 /**
  * TODO:
  *  - sitemap
@@ -63,15 +59,5 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
-
-        new HtmlWebpackPlugin({
-            template: './layouts/index.pug',
-            filename: 'index.html',
-            templateParameters: {
-                _config: config,
-            },
-            chunks: ['bundle'],
-            favicon: './favicon.ico',
-        }),
     ],
 }
