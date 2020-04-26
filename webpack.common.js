@@ -17,7 +17,6 @@ const config = require('./config.json');
 module.exports = {
     context: __dirname,
     entry: {
-        post: './src/post.js',
         bundle: './src/main.js',
     },
 
@@ -72,6 +71,7 @@ module.exports = {
                 _config: config,
             },
             chunks: ['bundle'],
+            favicon: './favicon.ico',
         }),
     ],
 }

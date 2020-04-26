@@ -6,24 +6,9 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
 const webpack = require('webpack');
 
-const format = require('date-fns/format');
-
 const path = require('path');
 
-const { getContentFileInfos, loadPage } = require('./src/lib/builder');
-const { renderPost } = require('./src/lib/renderer');
-
-const fileInfos = getContentFileInfos('./contents');
-const pages = fileInfos.pages.map(fileInfo => loadPage(fileInfo));
-const posts = pages
-    .filter(page => page.frontMatter.layout === 'post' && !page.frontMatter.draft)
-    .map(post => ({
-        ...post,
-        frontMatter: {
-            ...post.frontMatter,
-            published: format(post.frontMatter.published, 'yyyy-MM-dd'),
-        },
-    }));
+const { getContentFileInfos } = require('./src/lib/builder');
 
 module.exports = merge(common, {
     mode: 'production',
@@ -55,14 +40,13 @@ module.exports = merge(common, {
         new MiniCssExtractPlugin({
             filename: '[name]-[contenthash:10].css',
         }),
-        ...posts.map(post => renderPost(post)),
 
         new webpack.DefinePlugin({
             IS_DEV: 'false',
         }),
         new PrerenderSPAPlugin({
             staticDir: `${__dirname}/dist`,
-            routes: getContentFileInfos('./contents').pages.map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
+            routes: getContentFileInfos('./contents').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
             postProcess (renderedRoute) {
                 renderedRoute.route = renderedRoute.originalRoute;
                 if (renderedRoute.route.endsWith('.html')) {

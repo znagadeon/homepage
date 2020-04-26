@@ -57,15 +57,15 @@ export default {
         };
     },
 
-    method: {
+    methods: {
         loadComment() {
             const disqus_config = function () {
-                this.page.url = `${config.host}location.pathname`;
+                this.page.url = `${config.host}${location.pathname}`;
                 this.page.identifier = location.pathname;
             };
             (function() {
                 const d = document, s = d.createElement('script');
-                s.src = 'https://znagadeon.disqus.com/embed.js';
+                s.src = config.links.disqus;
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
             })();
@@ -84,6 +84,6 @@ export default {
         this.html = data.html;
 
         this.loadComment();
-    }
+    },
 }
 </script>

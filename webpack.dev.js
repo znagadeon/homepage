@@ -5,23 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpack = require('webpack');
 
-const format = require('date-fns/format');
-
-const { getContentFileInfos, loadPage } = require('./src/lib/builder');
-const { renderPost } = require('./src/lib/renderer');
-
-const fileInfos = getContentFileInfos('./contents');
-const pages = fileInfos.pages.map(fileInfo => loadPage(fileInfo));
-const posts = pages
-    .filter(page => page.frontMatter.layout === 'post')
-    .map(post => ({
-        ...post,
-        frontMatter: {
-            ...post.frontMatter,
-            published: format(post.frontMatter.published || new Date(), 'yyyy-MM-dd'),
-        },
-    }));
-
 module.exports = merge(common, {
     mode: 'development',
 
@@ -59,7 +42,6 @@ module.exports = merge(common, {
             filename: '[name].css',
         }),
 
-        ...posts.map(post => renderPost(post)),
         new webpack.DefinePlugin({
             IS_DEV: 'true',
         }),
