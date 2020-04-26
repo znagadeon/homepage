@@ -8,6 +8,8 @@ const WebpackOnBuildPlugin = require('on-build-webpack');
 
 const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
 
+const config = require('./config.json');
+
 /**
  * TODO:
  *  - sitemap
@@ -69,6 +71,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './layouts/index.pug',
             filename: 'index.html',
+            templateParameters: {
+                _config: config,
+            },
             chunks: ['bundle'],
         }),
 
