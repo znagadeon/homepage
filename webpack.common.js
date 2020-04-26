@@ -1,10 +1,12 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackOnBuildPlugin = require('on-build-webpack');
 
 const { getContentFileInfos, copyAssets } = require('./src/lib/builder');
-
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 /**
  * TODO:
@@ -62,11 +64,18 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(),
+        new VueLoaderPlugin(),
+
+        new HtmlWebpackPlugin({
+            template: './layouts/index.pug',
+            filename: 'index.html',
+            chunks: ['bundle'],
+        }),
+
         new WebpackOnBuildPlugin(_ => {
             const SRC = './contents', DEST = './dist';
             const { assets } = getContentFileInfos(SRC);
             copyAssets(assets, SRC, DEST);
         }),
-        new VueLoaderPlugin(),
     ],
 }
