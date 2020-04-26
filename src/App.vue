@@ -1,9 +1,14 @@
 <template lang="pug">
 .container
+    blog-header
 </template>
 
 <script>
-export default {
+import BlogHeader from './components/BlogHeader.vue';
 
+export default {
+    components: {
+        BlogHeader,
+    },
 }
 </script>
