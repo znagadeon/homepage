@@ -2,17 +2,17 @@
 .container
     blog-header
     main
-        recent-posts
+        home
     footer
 </template>
 
 <script>
 import BlogHeader from './components/BlogHeader.vue';
-import RecentPosts from './components/RecentPosts.vue';
+import Home from './components/Home.vue';
 
 export default {
     components: {
-        BlogHeader, RecentPosts,
+        BlogHeader, Home,
     },
 }
 </script>

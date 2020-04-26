@@ -35,7 +35,7 @@ header
 </template>
 
 <script>
-const config = require('../../config.json');
+import config from '@root/config.json';
 
 export default {
     data() {
