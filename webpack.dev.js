@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const config = require('./config.json');
 
 module.exports = merge(common, {
@@ -56,5 +58,7 @@ module.exports = merge(common, {
             chunks: ['bundle'],
             favicon: './favicon.ico',
         }),
+
+        new BundleAnalyzerPlugin(),
     ],
 });
