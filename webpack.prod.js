@@ -6,11 +6,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const SitemapPlugin = require('sitemap-webpack-plugin').default;
+
 const path = require('path');
 
 const config = require('./config.json');
 
 const { getContentFileInfos } = require('./src/lib/builder');
+
+const routes = getContentFileInfos('./contents').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html'));
 
 module.exports = merge(common, {
     mode: 'production',
@@ -58,7 +62,7 @@ module.exports = merge(common, {
 
         new PrerenderSPAPlugin({
             staticDir: `${__dirname}/dist`,
-            routes: getContentFileInfos('./contents').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
+            routes,
             postProcess (renderedRoute) {
                 renderedRoute.route = renderedRoute.originalRoute;
                 if (renderedRoute.route.endsWith('.html')) {
@@ -72,5 +76,7 @@ module.exports = merge(common, {
                 renderAfterDocumentEvent: 'ready-to-prerender',
             }),
         }),
+
+        new SitemapPlugin(config.host, routes),
     ],
 });

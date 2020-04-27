@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const fm = require('front-matter');
 
 const _getContentFileInfos = contentDir => {
     const root = fs.readdirSync(contentDir, { withFileTypes: true });
