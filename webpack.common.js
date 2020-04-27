@@ -5,10 +5,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 /**
  * TODO:
- *  - sitemap
  *  - rss
  *  - search/category/tag page
- *  - url replace
  */
 module.exports = {
     context: __dirname,

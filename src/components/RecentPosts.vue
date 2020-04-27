@@ -18,7 +18,7 @@ article.recent-posts
 </template>
 
 <script>
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 
 const context = require.context('../../contents/', true, /\.md$/);
 

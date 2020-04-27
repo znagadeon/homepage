@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 
 import config from '@root/config.json';
 
