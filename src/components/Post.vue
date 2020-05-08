@@ -73,8 +73,8 @@ export default {
     },
 
     created() {
-        const context = require.context('../../contents?with-html', true, /\.md$/);
-        const data = context(`.${this.$route.path.replace(/\.html$/, '.md')}`);
+        const context = require.context('../../contents/posts?with-html', true, /\.md$/);
+        const data = context(`./${this.$route.params.path.replace(/\.html$/, '.md')}`);
 
         this.title = data.title;
         this.category = data.category;

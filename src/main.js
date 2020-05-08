@@ -18,7 +18,7 @@ new Vue({
         mode: IS_DEV ? undefined : 'history',
         routes: [
             { path: IS_DEV ? '/': '/index.html', component: Home },
-            { path: '/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
+            { path: '/post/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
         ],
     }),
 });
