@@ -60,17 +60,20 @@
 
     figure {
         @apply text-center;
+        @apply mx-auto;
         @apply my-4;
+
+        @media (max-width: 600px) {
+            max-width: 350px;
+        }
+        @media (min-width: 600px) {
+            max-width: 800px;
+        }
 
         img {
             @apply mx-auto;
             @apply rounded-lg;
             @apply shadow;
-
-            @media (max-width: 600px) {
-                max-width: 350px;
-            }
-            max-width: 600px;
         }
 
         figcaption {
