@@ -4,6 +4,7 @@
 @import "tailwindcss/components";
 
 @import './common.scss';
+@import './markdown.scss';
 
 .container {
     max-width: none;
@@ -83,103 +84,7 @@
             }
 
             article {
-                h1 {
-                    @apply text-3xl mt-6;
-                }
-
-                h2 {
-                    @apply text-2xl mt-4;
-                }
-
-                p {
-                    @apply mt-4;
-                }
-
-                @mixin list {
-                    @apply ml-6 mt-3;
-                }
-
-                ol {
-                    @include list;
-                    @apply list-decimal;
-                }
-
-                ul {
-                    @include list;
-                    @apply list-disc;
-                }
-
-                li {
-                    @apply pt-2;
-
-                    &:first-child {
-                        @apply pt-0;
-                    }
-                }
-
-                a {
-                    @apply text-blue-400 underline;
-
-                    &:active {
-                        @apply text-blue-800;
-                    }
-                }
-
-                del {
-                    @apply text-gray-500;
-                }
-
-                hr {
-                    @apply mt-5;
-                }
-
-                figure {
-                    @apply text-center my-4;
-
-                    img {
-                        @apply mx-auto rounded-lg shadow;
-
-                        @media (max-width: 600px) {
-                            max-width: 350px;
-                        }
-                        max-width: 600px;
-                    }
-
-                    figcaption {
-                        @apply text-gray-700 pt-2 text-sm;
-                    }
-                }
-
-                .short-code {
-                    @apply px-1 rounded bg-gray-200 text-blue-400;
-                }
-
-                .hljs {
-                    @apply w-full px-0 py-3 mt-2 rounded-lg whitespace-no-wrap break-all;
-
-                    div {
-                        @apply flex;
-
-                        &.highlighted {
-                            @apply bg-gray-900;
-                        }
-
-                        @mixin code {
-                            @apply inline-block whitespace-pre-wrap;
-                        }
-
-                        .line-number {
-                            @include code;
-                            @apply px-3 mr-3 border-r border-gray-700 text-right;
-
-                            user-select: none;
-                        }
-                        .code {
-                            @include code;
-                            @apply flex-1;
-                        }
-                    }
-                }
+                @include markdown;
             }
 
             .tags {
