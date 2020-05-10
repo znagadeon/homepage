@@ -2,7 +2,7 @@
 .article
     div.category
         span.sr-only category
-        span /{{category}}
+        router-link(:to="`/category/${category}`") /{{category}}
     h1.title {{title}}
     div.published
         span.sr-only published
