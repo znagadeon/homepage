@@ -9,7 +9,7 @@ module.exports = ({ file, options, env }) => ({
                 './layouts/**/*.pug',
                 './src/**/*.vue',
             ],
-            whitelistPatternsChildren: [/hljs/],
+            whitelistPatternsChildren: [/article/],
         }),
     ],
 });
