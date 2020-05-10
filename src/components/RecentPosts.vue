@@ -20,7 +20,7 @@ article.recent-posts
 <script>
 import format from 'date-fns/format';
 
-const context = require.context('../../contents/posts', true, /\.md$/);
+const context = require.context('@root/contents/posts', true, /\.md$/);
 
 export default {
     data() {
@@ -38,7 +38,7 @@ export default {
                 published: format(new Date(meta.published || null), 'yyyy-MM-dd'),
                 url: path.replace(/\.\/(.+)\.md$/, '/post/$1.html'),
             };
-        }).filter(meta => meta.layout === 'post');
+        });
 
         this.posts = posts.sort((a, b) => {
             if (a.published < b.published) return 1;

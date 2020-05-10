@@ -5,7 +5,6 @@ tags:
     - web
     - js
     - highlight.js
-layout: post
 published: 2020-02-13T04:10:40+09:00
 ---
 

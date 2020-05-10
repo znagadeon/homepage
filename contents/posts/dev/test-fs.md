@@ -6,7 +6,6 @@ tags:
     - fs
     - jest
     - mock-fs
-layout: post
 published: 2020-02-01T18:16:00+09:00
 ---
 
