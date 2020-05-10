@@ -41,7 +41,7 @@ const convertCode = (code, infostring = 'plaintext') => {
 };
 
 module.exports = {
-    link: (href, title, text) => `<a href="${href}" class="fa fa-link" title="${title}" rel="noopener" target="_blank">${text}</a>`,
+    link: (href, title, text) => `<a href="${href}" title="${title}" rel="noopener" target="_blank">${text}</a>`,
     image: (href, title, text) => `<figure><img src="${href}" alt="${text}"><figcaption aria-hidden="true">${text}</figcaption></figure>`,
     code: convertCode,
     codespan: code => `<code class="short-code">${code}</code>`,

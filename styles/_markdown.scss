@@ -45,6 +45,13 @@
         @apply text-blue-400;
         @apply underline;
 
+        @extend %fa-icon;
+        @extend .fas;
+
+        &:before {
+            content: fa-content($fa-var-link);
+        }
+
         &:active {
             @apply text-blue-800;
         }
