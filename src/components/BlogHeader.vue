@@ -25,13 +25,9 @@ header
     nav
         ul.menu
             li
-                a(href='javascript:alert(\'준비중\')') Portfolio
+                router-link(to="/category/dev") Dev
             li
-                a(href='javascript:alert(\'준비중\')') Dev
-            li
-                a(href='javascript:alert(\'준비중\')') Log
-            li
-                a(href='javascript:alert(\'준비중\')') Wiki
+                router-link(to="/category/log") Log
 </template>
 
 <script>

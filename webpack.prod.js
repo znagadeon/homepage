@@ -14,7 +14,12 @@ const config = require('./config.json');
 
 const { getContentFileInfos } = require('./src/lib/builder');
 
-const routes = getContentFileInfos('./contents').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html'));
+const routes = [
+    '/index.html',
+    '/category/dev',
+    '/category/log',
+    ...getContentFileInfos('./contents/posts').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
+];
 
 module.exports = merge(common, {
     mode: 'production',
