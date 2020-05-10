@@ -32,7 +32,7 @@ module.exports = merge(common, {
                 name: '[name]-[contenthash:10].[ext]',
             },
         }, {
-            test: /\.(png|jpg)/,
+            test: /\.(png|jpg)$/,
             loader: 'file-loader',
             options: {
                 publicPath: './',
