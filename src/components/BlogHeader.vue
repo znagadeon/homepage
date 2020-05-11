@@ -4,7 +4,7 @@ header
         h1.title
             router-link(to="/") {{ config.blogName }}
         .search
-            .gcse-search
+            .gcse-searchbox-only
     section.profile
         img(:src="links.profileImage" alt="Profile Image")
         h2 {{ config.name }}
