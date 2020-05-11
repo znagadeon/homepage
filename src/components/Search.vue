@@ -1,5 +1,5 @@
 <template lang="pug">
-.gcse-searchresults-only
+.gcse-search
 </template>
 
 <script>

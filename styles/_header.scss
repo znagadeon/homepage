@@ -15,14 +15,13 @@ header {
         }
     
         .search {
-            @apply absolute top-0 right-0 w-64 h-20 pt-6 pr-6;
+            @apply absolute top-0 right-0 h-20 pt-8 pr-6;
+            @extend %fa-icon;
+            @extend .fas;
+            @extend .fa-lg;
 
-            &>div {
-                display: inline-block;
-
-                .gsc-search-button-v2 {
-                    width: 32px;
-                }
+            &:before {
+                content: fa-content($fa-var-search);
             }
         }
     }

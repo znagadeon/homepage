@@ -3,8 +3,8 @@ header
     div.top
         h1.title
             router-link(to="/") {{ config.blogName }}
-        .search
-            .gcse-searchbox-only
+        router-link.search#search(to="/search")
+            span.sr-only Search
     section.profile
         img(:src="links.profileImage" alt="Profile Image")
         h2 {{ config.name }}
