@@ -18,7 +18,6 @@ const routes = [
     '/index.html',
     '/category/dev',
     '/category/log',
-    '/search',
     ...getContentFileInfos('./contents/posts').map(page => page.replace(/\.\/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
