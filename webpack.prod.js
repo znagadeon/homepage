@@ -18,7 +18,8 @@ const routes = [
     '/index.html',
     '/category/dev',
     '/category/log',
-    ...getContentFileInfos('./contents/posts').map(page => page.replace(/\.\/contents\/(.+)\.md$/, '/$1.html')),
+    '/search',
+    ...getContentFileInfos('./contents/posts').map(page => page.replace(/\.\/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
 module.exports = merge(common, {
@@ -41,8 +42,8 @@ module.exports = merge(common, {
             loader: 'file-loader',
             options: {
                 publicPath: './',
-                context: './contents',
-                name: '[path][name].[ext]',
+                context: './contents/posts',
+                name: 'post/[path][name].[ext]',
             }
         }],
     },

@@ -2,9 +2,9 @@
 header
     div.top
         h1.title
-            a(href="/") {{ config.blogName }}
-        a.search#search(href='javascript:alert(\'준비중\')')
-            span.sr-only Search
+            router-link(to="/") {{ config.blogName }}
+        .search
+            .gcse-searchbox-only
     section.profile
         img(:src="links.profileImage" alt="Profile Image")
         h2 {{ config.name }}

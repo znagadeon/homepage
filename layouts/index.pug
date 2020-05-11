@@ -4,3 +4,6 @@ html(lang="ko")
         include _head.pug
     body
         #app
+        script(async src=`https://cse.google.com/cse.js?cx=${_config.search}`)
+        if !IS_DEV
+            include _analytics.pug
