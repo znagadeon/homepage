@@ -13,15 +13,6 @@ header {
         .title {
             @apply text-2xl font-bold;
         }
-    
-        .search {
-            @apply absolute top-0 right-0 h-20 pt-3 pr-6;
-            @apply w-64;
-
-            &>div {
-                @apply inline;
-            }
-        }
     }
 
     .profile {
