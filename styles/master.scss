@@ -96,6 +96,17 @@
 
             .tags {
                 @apply mt-6;
+                @apply mb-3;
+                @apply flex;
+                @apply flex-row;
+
+                .tag {
+                    @apply text-blue-700 mr-2;
+
+                    &:last-child {
+                        @apply mr-0;
+                    }
+                }
             }
 
             .comments {
