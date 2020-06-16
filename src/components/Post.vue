@@ -11,7 +11,7 @@
     div
         span.sr-only tags
         ul.tags
-            li.tag(v-for="tag in tags") \#{{tag}}
+            tag(v-for="tag in tags" :name="tag")
         #disqus_thread.comment
 </template>
 
@@ -20,7 +20,13 @@ import format from 'date-fns/format';
 
 import config from '@root/config.json';
 
+import Tag from './Tag.vue';
+
 export default {
+    components: {
+        Tag,
+    },
+
     data() {
         return {
             title: '',

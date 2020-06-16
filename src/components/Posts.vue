@@ -12,14 +12,17 @@ article.recent-posts
                 dt.sr-only tags
                 dd
                     ul.tags
-                        li.tag(v-for="tag in post.tags") {{ `#${tag}` }}
+                        tag(v-for="tag in post.tags" :name="tag")
                 dt.sr-only published
                 dd.published
                     time {{ post.published }}
 </template>
 
 <script>
+import Tag from './Tag.vue';
+
 export default {
     props: ['posts'],
+    components: { Tag },
 }
 </script>
