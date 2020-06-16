@@ -5,33 +5,57 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '@fortawesome/fontawesome-free/scss/brands.scss';
 
 header {
-    @apply pb-6 mb-3 border-gray-300 border-b;
+    @apply pb-6;
+    @apply mb-3;
+    @apply border-gray-300;
+    @apply border-b;
 
     .top {
-        @apply fixed w-screen h-20 p-6 z-10 bg-white opacity-75 shadow-lg leading-tight align-middle;
+        @apply fixed;
+        @apply w-screen;
+        @apply h-20;
+        @apply p-6;
+        @apply z-10;
+        @apply bg-white;
+        @apply opacity-75;
+        @apply shadow-lg;
+        @apply leading-tight;
+        @apply align-middle;
 
         .title {
-            @apply text-2xl font-bold;
+            @apply text-2xl;
+            @apply font-bold;
         }
     }
 
     .profile {
-        @apply relative w-full pt-20;
+        @apply relative;
+        @apply w-full;
+        @apply pt-20;
 
         img {
-            @apply mt-10 rounded-full mx-auto;
+            @apply mt-10;
+            @apply rounded-full;
+            @apply mx-auto;
         }
 
         h2 {
-            @apply mt-5 text-2xl text-center;
+            @apply mt-5;
+            @apply text-2xl;
+            @apply text-center;
         }
 
         p {
-            @apply w-2/3 mx-auto text-center;
+            @apply w-2/3;
+            @apply mx-auto;
+            @apply text-center;
         }
 
         .links {
-            @apply flex flex-row justify-center mt-3;
+            @apply flex;
+            @apply flex-row;
+            @apply justify-center;
+            @apply mt-3;
 
             li {
                 @apply mr-6;
@@ -85,10 +109,14 @@ header {
 
     nav {
         .menu {
-            @apply flex flex-row justify-center mt-3;
+            @apply flex;
+            @apply flex-row;
+            @apply justify-center;
+            @apply mt-3;
     
             li {
-                @apply mr-6 text-xl;
+                @apply mr-6;
+                @apply text-xl;
 
                 &:last-child {
                     @apply mr-0;
