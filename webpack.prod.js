@@ -12,14 +12,16 @@ const path = require('path');
 
 const config = require('./config.json');
 
-const { getAllPosts } = require('./src/lib/builder');
+const { getAllPosts, getAllMetas } = require('./src/lib/builder');
 
 const posts = getAllPosts('./contents/posts');
+const metas = getAllMetas(posts);
+
+const categories = Array.from(new Set(metas.map(meta => meta.category)));
 
 const routes = [
     '/index.html',
-    '/category/dev',
-    '/category/log',
+    ...categories.map(category => `/category/${category}`),
     ...posts.map(page => page.replace(/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
