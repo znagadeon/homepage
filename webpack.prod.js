@@ -18,10 +18,12 @@ const posts = getAllPosts('./contents/posts');
 const metas = getAllMetas(posts);
 
 const categories = Array.from(new Set(metas.map(meta => meta.category)));
+const tags = Array.from(new Set(metas.map(meta => meta.tags).flat()));
 
 const routes = [
     '/index.html',
     ...categories.map(category => `/category/${category}`),
+    ...tags.map(tag => `/tag/${tag}`),
     ...posts.map(page => page.replace(/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
