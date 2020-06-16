@@ -1,8 +1,8 @@
 const mock = require('mock-fs');
 
-const { getContentFileInfos } = require('./builder');
+const { getAllPosts } = require('./builder');
 
-describe('getContentFileInfos', () => {
+describe('getAllPosts', () => {
     it('returns page info list and assets', () => {
         mock({
             contents: {
@@ -28,12 +28,12 @@ describe('getContentFileInfos', () => {
         });
 
         const expectedPages = [
-            './contents/simple-page.md',
-            './contents/complex-page/index.md',
-            './contents/category/simple-page.md',
-            './contents/category/complex-page/index.md',
+            'contents/simple-page.md',
+            'contents/complex-page/index.md',
+            'contents/category/simple-page.md',
+            'contents/category/complex-page/index.md',
         ];
-        const pages = getContentFileInfos('./contents');
+        const pages = getAllPosts('./contents');
 
         expect(pages).toEqual(expect.arrayContaining(expectedPages));
         expect(expectedPages).toEqual(expect.arrayContaining(pages));
@@ -44,7 +44,7 @@ describe('getContentFileInfos', () => {
             '.DS_Store': '',
         });
 
-        const pages = getContentFileInfos('./');
+        const pages = getAllPosts('./');
         expect(pages).toHaveLength(0);
     });
 

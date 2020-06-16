@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const _getContentFileInfos = contentDir => {
+const _getAllPosts = contentDir => {
     const root = fs.readdirSync(contentDir, { withFileTypes: true });
     let results = [];
 
@@ -13,7 +13,7 @@ const _getContentFileInfos = contentDir => {
         } else {
             results = [
                 ...results,
-                ..._getContentFileInfos(path.join(contentDir, dirent.name)),
+                ..._getAllPosts(path.join(contentDir, dirent.name)),
             ];
         }
     });
@@ -23,9 +23,11 @@ const _getContentFileInfos = contentDir => {
 
 const _isPage = path => Boolean(path.match(/\.md$/));
 
+const getAllPosts = contentDir => {
+    return _getAllPosts(contentDir)
+        .filter(v => _isPage(v));
+};
+
 module.exports = {
-    getContentFileInfos: contentDir => {
-        return _getContentFileInfos(contentDir)
-            .filter(v => _isPage(v)).map(v => `./${v}`);
-    },
+    getAllPosts,
 };
