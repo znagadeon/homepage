@@ -12,13 +12,15 @@ const path = require('path');
 
 const config = require('./config.json');
 
-const { getContentFileInfos } = require('./src/lib/builder');
+const { getAllPosts } = require('./src/lib/builder');
+
+const posts = getAllPosts('./contents/posts');
 
 const routes = [
     '/index.html',
     '/category/dev',
     '/category/log',
-    ...getContentFileInfos('./contents/posts').map(page => page.replace(/\.\/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
+    ...posts.map(page => page.replace(/contents\/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
 module.exports = merge(common, {
