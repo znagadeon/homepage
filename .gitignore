@@ -1,6 +1,5 @@
 # for dev
 node_modules
-coverage
 .tool-versions
 
 # commonly ignored files
