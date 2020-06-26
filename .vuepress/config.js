@@ -2,6 +2,11 @@ const format = require('date-fns/format');
 
 module.exports = {
     title: '지나가던 개발자',
+    head: [
+        ['meta', { charset: 'utf-8' }],
+        ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+        ['meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' }],
+    ],
 
     port: 1337,
 
