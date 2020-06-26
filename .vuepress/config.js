@@ -1,3 +1,5 @@
+const format = require('date-fns/format');
+
 module.exports = {
     title: '지나가던 개발자',
 
@@ -40,4 +42,12 @@ module.exports = {
         prevLinks: false,
         nextLinks: false,
     },
+
+    plugins: [
+        ['@vuepress/last-updated', {
+            transformer(timestamp, lang) {
+                return format(timestamp, 'yyyy-MM-dd HH:mm:ss');
+            },
+        }],
+    ],
 };

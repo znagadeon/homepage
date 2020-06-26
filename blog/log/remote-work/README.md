@@ -2,7 +2,6 @@
 category: log
 tags:
     - remote-work
-published: 2020-03-04T21:05:45+09:00
 ---
 
 # 재택근무 일기
