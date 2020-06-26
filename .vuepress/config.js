@@ -49,5 +49,8 @@ module.exports = {
                 return format(timestamp, 'yyyy-MM-dd HH:mm:ss');
             },
         }],
+        ['@vuepress/google-analytics', {
+            ga: 'UA-121480188-1',
+        }],
     ],
 };
