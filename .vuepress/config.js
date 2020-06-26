@@ -1,11 +1,21 @@
 const format = require('date-fns/format');
 
+const gravatar = 'https://www.gravatar.com/avartar/c1db11b57685a2fc71655a869cdac430'
+
 module.exports = {
     title: '지나가던 개발자',
     head: [
         ['meta', { charset: 'utf-8' }],
         ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
         ['meta', { 'http-equiv': 'X-UA-Compatible', content: 'ie=edge' }],
+
+        ['meta', { name: 'author', content: 'Kim Songhyun' }],
+
+        ['meta', { name: 'og:image', content: gravatar }],
+
+        ['meta', { name: 'twitter:card', content: 'summary' }],
+        ['meta', { name: 'twitter:site', content: '@znagadeon' }],
+        ['meta', { name: 'twitter:image', content: gravatar }],
     ],
 
     port: 1337,

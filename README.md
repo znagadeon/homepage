@@ -1,3 +1,21 @@
+---
+meta:
+  - name: description
+    content: 카카오 프론트엔드 개발자 from 2018. 01.
+  - property: og:type
+    content: website
+  - property: og:url
+    content: https://znagadeon.dev
+  - property: og:title
+    content: 지나가던 개발자
+  - property: og:description
+    content: 카카오 프론트엔드 개발자 from 2018. 01.
+  - name: twitter:title
+    content: 지나가던 개발자
+  - name: twitter:description
+    content: 카카오 프론트엔드 개발자 from 2018. 01.
+---
+
 # Home
 
 ## 소개
