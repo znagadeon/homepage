@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "build": "vuepress build",
+    "start": "vuepress dev",
     "test": "jest --coverage"
   },
   "keywords": [],
