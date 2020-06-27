@@ -21,6 +21,7 @@ module.exports = {
 
     resolve: {
         alias: {
+            '@src': `${__dirname}/src`,
             '@root': __dirname,
         },
     },

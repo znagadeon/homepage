@@ -15,14 +15,22 @@ article.recent-posts
                         tag(v-for="tag in post.tags" :name="tag")
                 dt.sr-only published
                 dd.published
-                    time {{ post.published }}
+                    time {{ formatPublished(post.published) }}
 </template>
 
 <script>
 import Tag from './Tag.vue';
 
+import format from 'date-fns/format';
+
 export default {
     props: ['posts'],
     components: { Tag },
+
+    methods: {
+        formatPublished(datetime) {
+            return format(datetime, 'yyyy-MM-dd');
+        },
+    },
 }
 </script>
