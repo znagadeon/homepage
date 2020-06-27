@@ -12,7 +12,7 @@
         span.sr-only tags
         ul.tags
             tag(v-for="tag in tags" :name="tag")
-        #disqus_thread.comment
+        disqus
 </template>
 
 <script>
@@ -21,10 +21,12 @@ import format from 'date-fns/format';
 import config from '@root/config.json';
 
 import Tag from './Tag.vue';
+import Disqus from './Disqus.vue';
 
 export default {
     components: {
         Tag,
+        Disqus,
     },
 
     data() {
@@ -63,21 +65,6 @@ export default {
         };
     },
 
-    methods: {
-        loadComment() {
-            const disqus_config = function () {
-                this.page.url = `${config.host}${location.pathname}`;
-                this.page.identifier = location.pathname;
-            };
-            (function() {
-                const d = document, s = d.createElement('script');
-                s.src = config.links.disqus;
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        },
-    },
-
     created() {
         const context = require.context('@root/contents/posts?with-html', true, /\.md$/);
         const data = context(`./${this.$route.params.path.replace(/\.html$/, '.md')}`);
@@ -88,10 +75,6 @@ export default {
         this.published = format(new Date(data.published || null), 'yyyy-MM-dd');
 
         this.html = data.html;
-
-        if (!IS_DEV) {
-            this.loadComment();
-        }
     },
 }
 </script>
