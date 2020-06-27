@@ -4,11 +4,9 @@ posts(:posts="posts")
 </template>
 
 <script>
-import format from 'date-fns/format';
-
 import Posts from './Posts.vue';
 
-const context = require.context('@root/contents/posts', true, /\.md$/);
+import { loadPosts } from '@src/post-manager.js';
 
 import config from '@root/config.json';
 
@@ -48,21 +46,13 @@ export default {
     },
 
     created() {
-        const posts = context.keys().map(path => {
-            const meta = context(path);
-
-            return {
-                ...meta,
-                published: format(new Date(meta.published || null), 'yyyy-MM-dd'),
-                url: path.replace(/\.\/(.+)\.md$/, '/post/$1.html'),
-            };
-        }).filter(post => post.category === this.$route.params.category);
-
-        this.posts = posts.sort((a, b) => {
-            if (a.published < b.published) return 1;
-            if (a.published > b.published) return -1;
-            return 0;
-        });
+        this.posts = loadPosts()
+            .filter(post => post.category === this.$route.params.category)
+            .sort((a, b) => {
+                if (a.published < b.published) return 1;
+                if (a.published > b.published) return -1;
+                return 0;
+            });
     },
 }
 </script>

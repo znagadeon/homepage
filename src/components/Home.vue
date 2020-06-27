@@ -7,11 +7,12 @@ fragment
 <script>
 import Vue from 'vue';
 import { Plugin } from 'vue-fragment';
-import format from 'date-fns/format';
 
 Vue.use(Plugin);
 
 import Posts from './Posts.vue';
+
+import { loadPosts } from '@src/post-manager.js';
 
 import config from '@root/config.json';
 
@@ -51,18 +52,7 @@ export default {
     },
 
     created() {
-        const context = require.context('@root/contents/posts', true, /\.md$/);
-        const posts = context.keys().map(path => {
-            const meta = context(path);
-
-            return {
-                ...meta,
-                published: format(new Date(meta.published || null), 'yyyy-MM-dd'),
-                url: path.replace(/\.\/(.+)\.md$/, '/post/$1.html'),
-            };
-        });
-
-        this.posts = posts.sort((a, b) => {
+        this.posts = loadPosts().sort((a, b) => {
             if (a.published < b.published) return 1;
             if (a.published > b.published) return -1;
             return 0;
