@@ -6,7 +6,7 @@ posts(:posts="posts")
 <script>
 import Posts from './Posts.vue';
 
-import { loadPosts } from '@src/post-manager.js';
+import { loadPosts, sortByPublished } from '@src/post-manager.js';
 
 import config from '@root/config.json';
 
@@ -48,11 +48,7 @@ export default {
     created() {
         this.posts = loadPosts()
             .filter(post => post.category === this.$route.params.category)
-            .sort((a, b) => {
-                if (a.published < b.published) return 1;
-                if (a.published > b.published) return -1;
-                return 0;
-            });
+            .sort(sortByPublished);
     },
 }
 </script>

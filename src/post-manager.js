@@ -1,5 +1,11 @@
 const context = require.context('@root/contents/posts', true, /\.md$/);
 
+export const sortByPublished = (a, b) => {
+    if (a.published < b.published) return 1;
+    if (a.published > b.published) return -1;
+    return 0;
+};
+
 export const loadPosts = () => {
     return context.keys().map(path => {
         const meta = context(path);

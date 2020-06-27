@@ -12,7 +12,7 @@ Vue.use(Plugin);
 
 import Posts from './Posts.vue';
 
-import { loadPosts } from '@src/post-manager.js';
+import { loadPosts, sortByPublished } from '@src/post-manager.js';
 
 import config from '@root/config.json';
 
@@ -52,11 +52,7 @@ export default {
     },
 
     created() {
-        this.posts = loadPosts().sort((a, b) => {
-            if (a.published < b.published) return 1;
-            if (a.published > b.published) return -1;
-            return 0;
-        }).slice(0, 5);
+        this.posts = loadPosts().sort(sortByPublished).slice(0, 5);
     },
 }
 </script>
