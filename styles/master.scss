@@ -1,0 +1,123 @@
+@import "~highlight.js/styles/atom-one-dark.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+@import './common.scss';
+@import './markdown.scss';
+
+.container {
+    max-width: none;
+
+    main {
+        max-width: 1000px;
+        min-height: 500px;
+        @apply px-6;
+        @apply mx-auto;
+
+        // home
+        .recent-posts {
+            @apply max-w-6xl;
+            @apply mx-auto;
+
+            h2 {
+                @apply mt-8;
+                @apply text-2xl;
+            }
+
+            .posts {
+                @apply flex;
+                @apply flex-col;
+                @apply mt-1;
+
+                .post {
+                    @apply w-full;
+                    @apply py-3;
+                    @apply border-b;
+
+                    &:last-child {
+                        @apply border-b-0;
+                    }
+
+                    h3 {
+                        @apply text-xl;
+                    }
+
+                    .meta {
+                        @apply flex;
+                        @apply flex-row;
+
+                        .category, .tags {
+                            @apply mr-3;
+                        }
+
+                        .tags {
+                            @apply flex;
+                            @apply flex-row;
+
+                            .tag {
+                                @apply text-blue-700;
+                                @apply mr-2;
+
+                                &:last-child {
+                                    @apply mr-0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // post
+        .article {
+            .category {
+                a {
+                    @apply text-blue-400;
+                    @apply underline;
+
+                    &:active {
+                        @apply text-blue-800;
+                    }
+                }
+            }
+
+            .title {
+                @apply text-4xl;
+            }
+
+            .published {
+                @apply border-b;
+                @apply border-gray-300;
+                @apply pb-2;
+                @apply mb-6;
+            }
+
+            article {
+                @include markdown;
+            }
+
+            .tags {
+                @apply mt-6;
+                @apply mb-3;
+                @apply flex;
+                @apply flex-row;
+
+                .tag {
+                    @apply text-blue-700;
+                    @apply mr-2;
+
+                    &:last-child {
+                        @apply mr-0;
+                    }
+                }
+            }
+
+            .comments {
+                @apply p-6;
+            }
+        }
+    }
+}
+
+@import "tailwindcss/utilities";

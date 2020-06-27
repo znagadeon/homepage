@@ -1,12 +1,12 @@
 ---
+title: highlight.js에 줄 번호를 넣어 보자
 category: dev
 tags:
     - web
     - js
     - highlight.js
+published: 2020-02-13T04:10:40+09:00
 ---
-
-# highlight.js에 줄 번호를 넣어 보자
 
 개발 블로그에 코드 블럭은 필수다. 열 줄의 설명보다 한 줄의 코드가 나을 때가 있다. 괜히 개발자는 코드로 말한다는 말이 있는 것이 아니다.
 
@@ -18,7 +18,7 @@ tags:
 
 나는 이 기능을 내 개발 블로그(여기)에서 쓸 생각으로 만들었는데, 이 사이트는 마크다운을 사전에 빌드하여 html 파일만 서빙하고 있다. 문서가 로드된 뒤에 로딩되는 건 Disqus로 충분하다고 생각하기 때문에 여기서는 `highlight.js`로 사전에 소스코드를 변환하고 서빙할 때는 css만으로 동작한다고 가정한다. 즉, [공식 문서에서 제공하는 방법](https://highlightjs.org/usage/)과는 좀 차이가 있다. 공식 문서에서는 문서가 로드된 뒤 동적으로 소스코드를 변환하기 때문이다.
 
-## 동작
+# 동작
 
 백엔드에서 `highlight.js`를 사용할 땐 이렇게 쓴다.
 
@@ -49,17 +49,17 @@ for (let i=0; i<10; i++) {
 
 재미있는 것은 변환이 끝난 후에도 문자열이 `\n`으로 줄바꿈을 한다는 것이다. 특별히 설정을 만지지 않는다면 `pre` 태그 안에 들어갈 것이라고 가정하기 때문이다(공식 문서를 뒤져보면 줄바꿈 문자를 `<br>`로 바꿔주는 옵션이 있긴 한데, 여기서 사용할 것은 아니므로 넘어가자.). 하여간 이런 특징으로 인해 라인 단위로 코드를 분리하기 아주 쉬워졌다. 그냥 split만 한 번 해 주면 되니까.
 
-```js{3}
+```js:3
 const hljs = require('highlight.js');
 const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
 const splittedCode = convertedCode.split('\n');
 ```
 
-## 줄 번호 넣기
+# 줄 번호 넣기
 
 이미 라인 단위로 코드를 전부 잘라냈기 때문에 줄번호 넣기는 아주 쉽다. 배열의 인덱스값을 적절히 활용하면 된다.
 
-```js{4}
+```js:4
 const hljs = require('highlight.js');
 const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
 const splittedCode = convertedCode.split('\n');
@@ -70,11 +70,11 @@ const lineAttachedCode = splittedCode.map((code, i) => `${i+1} | ${code}`).join(
 
 잘 동작하긴 하지만 뭔가 불만족스럽다. 하나하나 수정해보자.
 
-### 맞지 않는 줄번호
+## 맞지 않는 줄번호
 
 줄번호의 자릿수가 바뀔 때마다 코드가 점점 밀려난다. 줄번호 영역이 숫자의 자릿수가 늘어나도 일정한 크기를 유지하도록 작은 숫자에 패딩을 넣어 주자.
 
-```js{6-7,9}
+```js:6-7,9
 const hljs = require('highlight.js');
 
 const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
@@ -90,13 +90,13 @@ const lineAttachedCode = splittedCode.map((code, i) => `${padNumber(i+1)} | ${co
 
 물론 이 정도로도 개발 블로그를 운영하는 데는 무리가 없지만, 아직 좀 더 개선할 여지가 남아 있다.
 
-### 코드를 복사하려는데 줄번호도 같이 복사된다
+## 코드를 복사하려는데 줄번호도 같이 복사된다
 
 인터넷에서 내가 찾는 아주 멋진 솔루션 코드를 찾았다고 해 보자. 적당히 소스를 긁어다가 내 입맛대로 고쳐보고 싶은데, 내가 앞서 설명한 방법으로 만든 블로그라면 코드를 복사할 때 줄번호도 같이 복사된다. html 마크업 상으로는 줄번호와 코드를 구분하는 마땅한 기준이 없기 때문이다.
 
 따라서, 한 줄을 **줄번호 영역**과 **코드 영역**으로 나누어 줄 필요가 있다.
 
-```js{10}
+```js:10
 const hljs = require('highlight.js');
 
 const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
@@ -122,8 +122,6 @@ const lineAttachedCode = splittedCode
 
 ![이제 마음껏 코드를 복사할 수 있다](./assets/user-select.png)
 
-## 정리
+# 정리
 
 내가 실제로 사용하는 코드는 여기에 라인 강조 기능 같은 것을 추가한다든지 해서 좀 더 마개조한 것이다. 라이브러리 자체의 단순성 덕에 오히려 이것저것 시도해 보기 좋은 것 같다. 이미 다 만들어진 기능을 커스텀하는 것이 까다롭다면, 아예 단순한 라이브러리로 시작해 기능을 쌓아 가는 것도 좋은 경험일 듯하다. ~~그리고 잘 만든 건 공유해 주세요 만들기 귀찮아요~~
-
-<Disqus />

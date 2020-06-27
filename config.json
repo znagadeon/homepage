@@ -1,0 +1,15 @@
+{
+    "blogName": "지나가던 개발자",
+    "name": "Kim Songhyun",
+    "description": "카카오 프론트엔드 개발자 since 2018. 01.",
+    "host": "https://znagadeon.dev",
+    "googleUA": "UA-121480188-1",
+    "links": {
+        "mail": "yeonmu4121@gmail.com",
+        "github": "znagadeon",
+        "linkedin": "kim-songhyun",
+        "twitter": "znagadeon",
+        "gravatar": "c1db11b57685a2fc71655a869cdac430",
+        "disqus": "https://znagadeon.disqus.com/embed.js"
+    }
+}
