@@ -1,4 +1,4 @@
-const context = require.context('@root/contents/posts', true, /\.md$/);
+const context = require.context('@root/posts?with-html', true, /\.md$/);
 
 export const sortByPublished = (a, b) => {
     if (a.published < b.published) return 1;
