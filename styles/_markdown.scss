@@ -6,6 +6,12 @@
 @mixin code {
     @apply inline-block;
     @apply whitespace-pre-wrap;
+
+    font-family: "Roboto Mono", monospace;
+
+    span {
+        font-family: "Roboto Mono", monospace;
+    }
 }
 
 @mixin markdown {
@@ -94,7 +100,7 @@
         @apply px-1;
         @apply rounded;
         @apply bg-gray-200;
-        @apply text-blue-400;
+        @apply text-blue-500;
     }
 
     .hljs {
