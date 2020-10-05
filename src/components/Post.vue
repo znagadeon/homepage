@@ -4,15 +4,15 @@
         span.sr-only category
         router-link(:to="`/category/${category}`") /{{category}}
     h1.title {{title}}
-    div.published
-        span.sr-only published
-        time {{ published }}
-    article(v-html="html")
     div
         span.sr-only tags
         ul.tags
             tag(v-for="tag in tags" :name="tag")
         disqus
+    .published
+        span.sr-only published
+        time {{ published }}
+    article(v-html="html")
 </template>
 
 <script>
@@ -22,6 +22,8 @@ import config from '@root/config.json';
 
 import Tag from './Tag.vue';
 import Disqus from './Disqus.vue';
+
+import { loadPost } from '@src/post-manager';
 
 export default {
     components: {
@@ -66,13 +68,12 @@ export default {
     },
 
     created() {
-        const context = require.context('@root/contents/posts?with-html', true, /\.md$/);
-        const data = context(`./${this.$route.params.path.replace(/\.html$/, '.md')}`);
+        const data = loadPost(`./${this.$route.params.path.replace(/\.html$/, '.md')}`);
 
         this.title = data.title;
         this.category = data.category;
         this.tags = data.tags;
-        this.published = format(new Date(data.published || null), 'yyyy-MM-dd');
+        this.published = format(data.published, 'yyyy-MM-dd');
 
         this.html = data.html;
     },
