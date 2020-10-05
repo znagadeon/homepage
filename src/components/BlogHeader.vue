@@ -23,9 +23,9 @@ header
     nav
         ul.menu
             li
-                router-link(to="/category/dev") Dev
+                router-link(to="/tag/dev") Dev
             li
-                router-link(to="/category/log") Log
+                router-link(to="/tag/log") Log
 </template>
 
 <script>

@@ -17,12 +17,10 @@ const { getAllPosts, getAllMetas } = require('./src/lib/builder');
 const posts = getAllPosts('./posts');
 const metas = getAllMetas(posts);
 
-const categories = Array.from(new Set(metas.map(meta => meta.category)));
 const tags = Array.from(new Set(metas.map(meta => meta.tags).reduce((a, b) => [...a, ...b], [])));
 
 const routes = [
     '/index.html',
-    ...categories.map(category => `/category/${category}`),
     ...tags.map(tag => `/tag/${tag}`),
     ...posts.map(page => page.replace(/posts\/(.+)\.md$/, '/post/$1.html')),
 ];

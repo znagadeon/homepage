@@ -14,24 +14,12 @@ describe('getAllPosts', () => {
                     },
                     'index.md': '',
                 },
-                category: {
-                    'simple-page.md': '',
-                    'complex-page': {
-                        assets: {
-                            'asset-1.png': '',
-                            'asset-2.png': '',
-                        },
-                        'index.md': '',
-                    },
-                },
             },
         });
 
         const expectedPages = [
             'contents/simple-page.md',
             'contents/complex-page/index.md',
-            'contents/category/simple-page.md',
-            'contents/category/complex-page/index.md',
         ];
         const pages = getAllPosts('./contents');
 

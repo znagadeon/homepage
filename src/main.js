@@ -6,7 +6,6 @@ import App from './App.vue';
 
 import Home from './components/Home.vue';
 import Post from './components/Post.vue';
-import Category from './components/Category.vue';
 import Tag from './components/Tags.vue';
 
 import '../styles/master.scss';
@@ -22,7 +21,6 @@ new Vue({
         routes: [
             { path: IS_DEV ? '/': '/index.html', component: Home },
             { path: '/post/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
-            { path: '/category/:category', component: Category },
             { path: '/tag/:tag', component: Tag },
         ],
     }),

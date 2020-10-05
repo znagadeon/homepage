@@ -1,8 +1,5 @@
 <template lang="pug">
 .article
-    div.category
-        span.sr-only category
-        router-link(:to="`/category/${category}`") /{{category}}
     h1.title {{title}}
     div
         span.sr-only tags
@@ -34,7 +31,6 @@ export default {
     data() {
         return {
             title: '',
-            category: '',
             tags: [],
             published: null,
 
@@ -71,7 +67,6 @@ export default {
         const data = loadPost(`./${this.$route.params.path.replace(/\.html$/, '.md')}`);
 
         this.title = data.title;
-        this.category = data.category;
         this.tags = data.tags;
         this.published = format(data.published, 'yyyy-MM-dd');
 

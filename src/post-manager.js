@@ -23,7 +23,6 @@ export const loadPost = (path) => {
 
     return {
         title: data.title,
-        category: data.category,
         tags: data.tags,
         published: new Date(data.published || null),
         html: data.html,
