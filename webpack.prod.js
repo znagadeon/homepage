@@ -21,6 +21,7 @@ const tags = Array.from(new Set(metas.map(meta => meta.tags).reduce((a, b) => [.
 
 const routes = [
     '/index.html',
+    '/archive',
     ...tags.map(tag => `/tag/${tag}`),
     ...posts.map(page => page.replace(/posts\/(.+)\.md$/, '/post/$1.html')),
 ];

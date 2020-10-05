@@ -7,6 +7,7 @@ import App from './App.vue';
 import Home from './components/Home.vue';
 import Post from './components/Post.vue';
 import Tag from './components/Tags.vue';
+import Archive from './components/Archive.vue';
 
 import '../styles/master.scss';
 
@@ -22,6 +23,7 @@ new Vue({
             { path: IS_DEV ? '/': '/index.html', component: Home },
             { path: '/post/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
             { path: '/tag/:tag', component: Tag },
+            { path: '/archive', component: Archive },
         ],
     }),
 });
