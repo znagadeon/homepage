@@ -1,7 +1,7 @@
 ---
 title: jest와 mock-fs로 fs 유닛 테스트하기
-category: dev
 tags:
+    - dev
     - js
     - fs
     - jest

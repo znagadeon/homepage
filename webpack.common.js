@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 /**
  * TODO:
  *  - rss
- *  - search/category/tag page
+ *  - search page
  */
 module.exports = {
     context: __dirname,

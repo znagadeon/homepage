@@ -47,7 +47,7 @@
                         @apply flex;
                         @apply flex-row;
 
-                        .category, .tags {
+                        .tags {
                             @apply mr-3;
                         }
 
@@ -71,12 +71,6 @@
 
         // post
         .article {
-            .category {
-                a:hover {
-                    @apply text-blue-500;
-                }
-            }
-
             .title {
                 @apply text-4xl;
             }
