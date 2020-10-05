@@ -3,6 +3,7 @@ header
     div.top
         h1.title
             router-link(to="/") {{ config.blogName }}
+        router-link.archive(to="/archive") Archive
     section.profile
         img(:src="links.profileImage" alt="Profile Image")
         h2 {{ config.name }}

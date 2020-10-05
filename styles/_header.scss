@@ -26,6 +26,16 @@ header {
             @apply text-2xl;
             @apply font-bold;
         }
+
+        .archive {
+            @apply absolute;
+            @apply top-0;
+            @apply right-0;
+
+            @apply pt-1;
+            @apply mt-6;
+            @apply mr-10;
+        }
     }
 
     .profile {
