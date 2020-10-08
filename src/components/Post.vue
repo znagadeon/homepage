@@ -9,6 +9,7 @@
         span.sr-only published
         time {{ published }}
     article(v-html="html")
+    comment
 </template>
 
 <script>
@@ -17,12 +18,14 @@ import format from 'date-fns/format';
 import config from '@root/config.json';
 
 import Tag from './Tag.vue';
+import Comment from './Comment.vue';
 
 import { loadPost } from '@src/post-manager';
 
 export default {
     components: {
         Tag,
+        Comment,
     },
 
     data() {
