@@ -104,13 +104,13 @@ header {
                     }
                 }
 
-                .mail-link {
+                .rss-link {
                     @extend %fa-icon;
                     @extend .fas;
                     @extend .fa-lg;
 
                     &:before {
-                        content: fa-content($fa-var-envelope);
+                        content: fa-content($fa-var-rss);
                     }
                 }
             }

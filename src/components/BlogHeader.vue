@@ -19,8 +19,8 @@ header
                 a.twitter-link(target='_blank' :href="links.twitter" rel="noopener")
                     span.sr-only Twitter
             li
-                a.mail-link(target='_blank' :href="links.mail" rel="noopener")
-                    span.sr-only Mail
+                a.rss-link(target='_blank' :href="links.rss" rel="noopener")
+                    span.sr-only RSS
     nav
         ul.menu
             li
@@ -46,7 +46,7 @@ export default {
                 github: `https://github.com/${config.links.github}`,
                 linkedin:`https://linkedin.com/in/${config.links.linkedin}`,
                 twitter: `https://twitter.com/${config.links.twitter}`,
-                mail: `mailto:${config.links.mail}`,
+                rss: config.links.rss,
             };
         },
     },
