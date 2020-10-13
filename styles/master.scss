@@ -15,46 +15,6 @@
         @apply px-6;
         @apply mx-auto;
 
-        // home
-        .recent-posts {
-            @apply max-w-6xl;
-            @apply mx-auto;
-
-            h2 {
-                @apply mt-8;
-                @apply text-2xl;
-            }
-
-            .posts {
-                @apply flex;
-                @apply flex-col;
-                @apply mt-1;
-
-                .post {
-                    @apply w-full;
-                    @apply py-3;
-                    @apply border-b;
-
-                    &:last-child {
-                        @apply border-b-0;
-                    }
-
-                    h3 {
-                        @apply text-xl;
-                    }
-
-                    .meta {
-                        @apply flex;
-                        @apply flex-row;
-
-                        .tags {
-                            @apply mr-3;
-                        }
-                    }
-                }
-            }
-        }
-
         // post
         .article {
             .title {

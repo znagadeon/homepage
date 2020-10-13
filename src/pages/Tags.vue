@@ -1,6 +1,5 @@
 <template lang="pug">
-posts(:posts="posts")
-    h2 {{ `#${$route.params.tag}` }}
+posts(:posts="posts") {{ `#${$route.params.tag}` }}
 </template>
 
 <script>

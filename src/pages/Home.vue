@@ -1,15 +1,8 @@
 <template lang="pug">
-fragment
-    posts(:posts="posts")
-        h2 Recent Posts
+posts(:posts="posts") Recent Posts
 </template>
 
 <script>
-import Vue from 'vue';
-import { Plugin } from 'vue-fragment';
-
-Vue.use(Plugin);
-
 import Posts from '@src/components/Posts.vue';
 
 import { loadPosts, sortByPublished } from '@src/post-manager.js';

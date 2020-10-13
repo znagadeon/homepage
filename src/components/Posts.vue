@@ -1,16 +1,17 @@
 <template lang="pug">
-article.recent-posts
-    slot
-    ol.posts
+article.posts
+    h2.posts__title
+        slot
+    ol.posts__list
         li.post(v-for="post in posts")
             router-link(:to="post.url")
-                h3 {{ post.title }}
-            dl.meta
+                h3.post__title {{ post.title }}
+            dl.post__meta-info
                 dt.sr-only tags
-                dd
+                dd.post__tags
                     tags(:tags="post.tags")
                 dt.sr-only published
-                dd.published
+                dd.post__published
                     time {{ formatPublished(post.published) }}
 </template>
 
@@ -30,3 +31,44 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.posts {
+    @apply max-w-6xl;
+    @apply mx-auto;
+
+    &__title {
+        @apply mt-8;
+        @apply text-2xl;
+    }
+
+    &__list {
+        @apply flex;
+        @apply flex-col;
+        @apply mt-1;
+    }
+}
+
+.post {
+    @apply w-full;
+    @apply py-3;
+    @apply border-b;
+
+    &:last-child {
+        @apply border-b-0;
+    }
+
+    &__title {
+        @apply text-xl;
+    }
+
+    &__meta-info {
+        @apply flex;
+        @apply flex-row;
+    }
+
+    &__tags {
+        @apply mr-3;
+    }
+}
+</style>
