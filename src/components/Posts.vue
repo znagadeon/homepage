@@ -8,21 +8,20 @@ article.recent-posts
             dl.meta
                 dt.sr-only tags
                 dd
-                    ul.tags
-                        tag(v-for="tag in post.tags" :name="tag")
+                    tags(:tags="post.tags")
                 dt.sr-only published
                 dd.published
                     time {{ formatPublished(post.published) }}
 </template>
 
 <script>
-import Tag from './Tag.vue';
+import Tags from './Tags.vue';
 
 import format from 'date-fns/format';
 
 export default {
     props: ['posts'],
-    components: { Tag },
+    components: { Tags },
 
     methods: {
         formatPublished(datetime) {

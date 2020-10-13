@@ -3,8 +3,7 @@
     h1.title {{title}}
     div
         span.sr-only tags
-        ul.tags
-            tag(v-for="tag in tags" :name="tag")
+        tags(:tags="tags")
     .published
         span.sr-only published
         time {{ published }}
@@ -17,14 +16,14 @@ import format from 'date-fns/format';
 
 import config from '@root/config.json';
 
-import Tag from '@src/components/Tag.vue';
+import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
 
 import { loadPost } from '@src/post-manager';
 
 export default {
     components: {
-        Tag,
+        Tags,
         Comment,
     },
 
