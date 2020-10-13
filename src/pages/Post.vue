@@ -17,8 +17,8 @@ import format from 'date-fns/format';
 
 import config from '@root/config.json';
 
-import Tag from './Tag.vue';
-import Comment from './Comment.vue';
+import Tag from '@src/components/Tag.vue';
+import Comment from '@src/components/Comment.vue';
 
 import { loadPost } from '@src/post-manager';
 

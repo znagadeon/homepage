@@ -10,7 +10,7 @@ import { Plugin } from 'vue-fragment';
 
 Vue.use(Plugin);
 
-import Posts from './Posts.vue';
+import Posts from '@src/components/Posts.vue';
 
 import { loadPosts, sortByPublished } from '@src/post-manager.js';
 

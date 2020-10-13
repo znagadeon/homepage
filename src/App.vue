@@ -8,11 +8,10 @@
 
 <script>
 import BlogHeader from './components/BlogHeader.vue';
-import Home from './components/Home.vue';
 
 export default {
     components: {
-        BlogHeader, Home,
+        BlogHeader,
     },
 
     mounted() {

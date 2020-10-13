@@ -4,10 +4,10 @@ import VueRouter from 'vue-router';
 
 import App from './App.vue';
 
-import Home from './components/Home.vue';
-import Post from './components/Post.vue';
-import Tag from './components/Tags.vue';
-import Archive from './components/Archive.vue';
+import Home from './pages/Home.vue';
+import Post from './pages/Post.vue';
+import Tag from './pages/Tags.vue';
+import Archive from './pages/Archive.vue';
 
 import '../styles/master.scss';
 
