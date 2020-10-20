@@ -5,9 +5,10 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 
 import Home from './pages/Home.vue';
-import Post from './pages/Post.vue';
 import Tag from './pages/Tags.vue';
 import Archive from './pages/Archive.vue';
+
+import Post from './pages/Post.vue';
 
 import '../styles/master.scss';
 
