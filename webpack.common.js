@@ -3,11 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-/**
- * TODO:
- *  - rss
- *  - search page
- */
 module.exports = {
     context: __dirname,
     entry: {
