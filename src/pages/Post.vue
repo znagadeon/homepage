@@ -1,14 +1,14 @@
 <template lang="pug">
-.article
-    h1.title {{title}}
-    div
+.post
+    h1.post__title {{title}}
+    .post__tags
         span.sr-only tags
         tags(:tags="tags")
-    .published
+    .post__published
         span.sr-only published
         time {{ published }}
-    article(v-html="html")
-    comment
+    article.post__article(v-html="html")
+    comment.post__comment
 </template>
 
 <script>
@@ -73,3 +73,32 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+@import 'styles/markdown.scss';
+
+.post {
+    &__title {
+        @apply text-4xl;
+    }
+
+    &__tags {
+        @apply mt-2;
+    }
+
+    &__published {
+        @apply border-b;
+        @apply border-gray-300;
+        @apply pb-2;
+        @apply mb-6;
+    }
+
+    &__article {
+        @apply mb-6;
+
+        ::v-deep {
+            @include markdown;
+        }
+    }
+}
+</style>

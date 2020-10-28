@@ -3,44 +3,16 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 
-@import './common.scss';
-@import './markdown.scss';
-
 .container {
     max-width: none;
+
+    font-family: 'Noto Sans KR', sans-serif;
 
     main {
         max-width: 1000px;
         min-height: 500px;
         @apply px-6;
         @apply mx-auto;
-
-        // post
-        .article {
-            .title {
-                @apply text-4xl;
-            }
-
-            .published {
-                @apply border-b;
-                @apply border-gray-300;
-                @apply pb-2;
-                @apply mb-6;
-            }
-
-            article {
-                @include markdown;
-                @apply mb-6;
-            }
-
-            .tags {
-                @apply mb-2;
-            }
-
-            .comments {
-                @apply p-6;
-            }
-        }
     }
 }
 
