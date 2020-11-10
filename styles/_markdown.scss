@@ -19,6 +19,9 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 }
 
 @mixin markdown {
+    line-height: 1.6;
+    vertical-align: middle;
+
     h1 {
         @apply text-3xl;
         @apply mt-6;
@@ -27,6 +30,11 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
     h2 {
         @apply text-2xl;
         @apply mt-4;
+    }
+
+    h3 {
+        @apply text-xl;
+        @apply mt-3;
     }
 
     p {
@@ -137,6 +145,26 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
                 @include code;
                 @apply flex-1;
             }
+        }
+    }
+
+    blockquote {
+        @apply relative;
+        @apply m-0;
+
+        &:before {
+            content: '';
+            @apply absolute;
+
+            @apply inline-block;
+            @apply w-3;
+            @apply h-full;
+
+            @apply bg-gray-300;
+        }
+
+        * {
+            @apply ml-6;
         }
     }
 }
