@@ -152,6 +152,8 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
         @apply relative;
         @apply m-0;
 
+        @apply text-gray-800;
+
         &:before {
             content: '';
             @apply absolute;
