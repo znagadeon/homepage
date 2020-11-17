@@ -8,7 +8,7 @@
         span.sr-only published
         time {{ published }}
     article.post__article(v-html="html")
-    comment.post__comment
+    comment.post__comment(:title="title")
 </template>
 
 <script>
