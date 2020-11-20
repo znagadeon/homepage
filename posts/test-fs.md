@@ -3,7 +3,6 @@ title: jest와 mock-fs로 fs 유닛 테스트하기
 tags:
     - dev
     - js
-    - fs
     - jest
     - mock-fs
 published: 2020-02-01T18:16:00+09:00

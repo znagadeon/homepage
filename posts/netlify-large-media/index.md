@@ -4,7 +4,6 @@ tags:
     - dev
     - netlify
     - git-lfs
-    - github
 published: 2020-03-26T00:06:28+09:00
 ---
 
