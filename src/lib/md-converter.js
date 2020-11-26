@@ -14,7 +14,7 @@ marked.setOptions({ renderer });
 module.exports = {
 	md2html: (markdown) => {
 		const katexParsed = markdown.replace(
-			/\\\(([^\$\n]+?)\\\)/g,
+			/\\\(([^$\n]+?)\\\)/g,
 			(match, capture) => {
 				return katex.renderToString(capture);
 			}
