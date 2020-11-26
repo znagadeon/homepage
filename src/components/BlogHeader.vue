@@ -30,156 +30,156 @@ header.header
 import config from '@root/config.json';
 
 export default {
-    data() {
-        return {
-            config,
-            menus: [
-                { name: 'Dev', link: '/tag/dev' },
-                { name: 'Log', link: '/tag/log' },
-                { name: 'Archive', link: '/archive' },
-            ],
-        };
-    },
+	data() {
+		return {
+			config,
+			menus: [
+				{ name: 'Dev', link: '/tag/dev' },
+				{ name: 'Log', link: '/tag/log' },
+				{ name: 'Archive', link: '/archive' },
+			],
+		};
+	},
 
-    computed: {
-        links() {
-            return {
-                profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=150`,
-                github: `https://github.com/${config.links.github}`,
-                linkedin:`https://linkedin.com/in/${config.links.linkedin}`,
-                twitter: `https://twitter.com/${config.links.twitter}`,
-                rss: config.links.rss,
-            };
-        },
-    },
-}
+	computed: {
+		links() {
+			return {
+				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=150`,
+				github: `https://github.com/${config.links.github}`,
+				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
+				twitter: `https://twitter.com/${config.links.twitter}`,
+				rss: config.links.rss,
+			};
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
 
 .header {
-    @apply pb-6;
-    @apply mb-3;
-    @apply border-gray-300;
-    @apply border-b;
+	@apply pb-6;
+	@apply mb-3;
+	@apply border-gray-300;
+	@apply border-b;
 
-    &__profile {
-        @apply pt-20;
-    }
+	&__profile {
+		@apply pt-20;
+	}
 }
 
 .title {
-    @apply fixed;
-    @apply w-screen;
-    @apply h-20;
-    @apply p-6;
-    @apply z-10;
-    @apply bg-white;
-    @apply opacity-75;
-    @apply shadow-lg;
-    @apply leading-tight;
-    @apply align-middle;
+	@apply fixed;
+	@apply w-screen;
+	@apply h-20;
+	@apply p-6;
+	@apply z-10;
+	@apply bg-white;
+	@apply opacity-75;
+	@apply shadow-lg;
+	@apply leading-tight;
+	@apply align-middle;
 
-    &__blog-name {
-        @apply text-2xl;
-        @apply font-bold;
-    }
+	&__blog-name {
+		@apply text-2xl;
+		@apply font-bold;
+	}
 }
 
 .profile {
-    @apply relative;
-    @apply w-full;
+	@apply relative;
+	@apply w-full;
 
-    &__image {
-        @apply mt-10;
-        @apply rounded-full;
-        @apply mx-auto;
-    }
+	&__image {
+		@apply mt-10;
+		@apply rounded-full;
+		@apply mx-auto;
+	}
 
-    &__title {
-        @apply mt-5;
-        @apply text-2xl;
-        @apply text-center;
-    }
+	&__title {
+		@apply mt-5;
+		@apply text-2xl;
+		@apply text-center;
+	}
 
-    &__description {
-        @apply w-2/3;
-        @apply mx-auto;
-        @apply text-center;
-    }
+	&__description {
+		@apply w-2/3;
+		@apply mx-auto;
+		@apply text-center;
+	}
 
-    &__links {
-        @apply flex;
-        @apply flex-row;
-        @apply justify-center;
-        @apply mt-3;
+	&__links {
+		@apply flex;
+		@apply flex-row;
+		@apply justify-center;
+		@apply mt-3;
 
-        li {
-            @apply mr-6;
+		li {
+			@apply mr-6;
 
-            &:last-child {
-                @apply mr-0;
-            }
-        }
-    }
+			&:last-child {
+				@apply mr-0;
+			}
+		}
+	}
 
-    &__link {
-        @extend %fa-icon;
-        @extend .fa-lg;
+	&__link {
+		@extend %fa-icon;
+		@extend .fa-lg;
 
-        &--github {
-            @extend .fab;
-            &:before {
-                content: fa-content($fa-var-github);
-            }
-        }
+		&--github {
+			@extend .fab;
+			&:before {
+				content: fa-content($fa-var-github);
+			}
+		}
 
-        &--linkedin {
-            @extend .fab;
-            &:before {
-                content: fa-content($fa-var-linkedin-in);
-            }
-        }
+		&--linkedin {
+			@extend .fab;
+			&:before {
+				content: fa-content($fa-var-linkedin-in);
+			}
+		}
 
-        &--twitter {
-            @extend .fab;
-            &:before {
-                content: fa-content($fa-var-twitter);
-            }
-        }
+		&--twitter {
+			@extend .fab;
+			&:before {
+				content: fa-content($fa-var-twitter);
+			}
+		}
 
-        &--rss {
-            @extend .fas;
-            &:before {
-                content: fa-content($fa-var-rss);
-            }
-        }
-    }
+		&--rss {
+			@extend .fas;
+			&:before {
+				content: fa-content($fa-var-rss);
+			}
+		}
+	}
 
-    &__menu {
-        @apply mt-3;
-    }
+	&__menu {
+		@apply mt-3;
+	}
 }
 
 .menu {
-    ul {
-        @apply flex;
-        @apply flex-row;
-        @apply justify-center;
-    }
+	ul {
+		@apply flex;
+		@apply flex-row;
+		@apply justify-center;
+	}
 
-    &__menu-item {
-        @apply mr-6;
-        @apply text-xl;
+	&__menu-item {
+		@apply mr-6;
+		@apply text-xl;
 
-        &:last-child {
-            @apply mr-0;
-        }
-    }
+		&:last-child {
+			@apply mr-0;
+		}
+	}
 }
 </style>

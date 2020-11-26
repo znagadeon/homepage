@@ -1,9 +1,9 @@
 ---
 title: Netlify Large Media로 이미지 호스팅하기
 tags:
-    - dev
-    - netlify
-    - git-lfs
+  - dev
+  - netlify
+  - git-lfs
 published: 2020-03-26T00:06:28+09:00
 ---
 

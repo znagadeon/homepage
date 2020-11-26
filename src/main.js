@@ -16,15 +16,15 @@ Vue.use(VueMeta);
 Vue.use(VueRouter);
 
 new Vue({
-    el: '#app',
-    render: h => h(App),
-    router: new VueRouter({
-        mode: IS_DEV ? undefined : 'history',
-        routes: [
-            { path: IS_DEV ? '/': '/index.html', component: Home },
-            { path: '/post/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
-            { path: '/tag/:tag', component: Tag },
-            { path: '/archive', component: Archive },
-        ],
-    }),
+	el: '#app',
+	render: (h) => h(App),
+	router: new VueRouter({
+		mode: IS_DEV ? undefined : 'history',
+		routes: [
+			{ path: IS_DEV ? '/' : '/index.html', component: Home },
+			{ path: '/post/:path([A-Za-z0-9\\-\\.\\/]+)', component: Post },
+			{ path: '/tag/:tag', component: Tag },
+			{ path: '/archive', component: Archive },
+		],
+	}),
 });

@@ -10,12 +10,12 @@
 import BlogHeader from './components/BlogHeader.vue';
 
 export default {
-    components: {
-        BlogHeader,
-    },
+	components: {
+		BlogHeader,
+	},
 
-    mounted() {
-        document.dispatchEvent(new Event('ready-to-prerender'));
-    },
-}
+	mounted() {
+		document.dispatchEvent(new Event('ready-to-prerender'));
+	},
+};
 </script>

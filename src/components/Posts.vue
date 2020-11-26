@@ -21,54 +21,54 @@ import Tags from './Tags.vue';
 import format from 'date-fns/format';
 
 export default {
-    props: ['posts'],
-    components: { Tags },
+	props: ['posts'],
+	components: { Tags },
 
-    methods: {
-        formatPublished(datetime) {
-            return format(datetime, 'yyyy-MM-dd');
-        },
-    },
-}
+	methods: {
+		formatPublished(datetime) {
+			return format(datetime, 'yyyy-MM-dd');
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
 .posts {
-    @apply max-w-6xl;
-    @apply mx-auto;
+	@apply max-w-6xl;
+	@apply mx-auto;
 
-    &__title {
-        @apply mt-8;
-        @apply text-2xl;
-    }
+	&__title {
+		@apply mt-8;
+		@apply text-2xl;
+	}
 
-    &__list {
-        @apply flex;
-        @apply flex-col;
-        @apply mt-1;
-    }
+	&__list {
+		@apply flex;
+		@apply flex-col;
+		@apply mt-1;
+	}
 }
 
 .post {
-    @apply w-full;
-    @apply py-3;
-    @apply border-b;
+	@apply w-full;
+	@apply py-3;
+	@apply border-b;
 
-    &:last-child {
-        @apply border-b-0;
-    }
+	&:last-child {
+		@apply border-b-0;
+	}
 
-    &__title {
-        @apply text-xl;
-    }
+	&__title {
+		@apply text-xl;
+	}
 
-    &__meta-info {
-        @apply flex;
-        @apply flex-row;
-    }
+	&__meta-info {
+		@apply flex;
+		@apply flex-row;
+	}
 
-    &__tags {
-        @apply mr-3;
-    }
+	&__tags {
+		@apply mr-3;
+	}
 }
 </style>

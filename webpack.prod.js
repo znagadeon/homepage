@@ -17,76 +17,85 @@ const { getAllPosts, getAllMetas } = require('./src/lib/builder');
 const posts = getAllPosts('./posts');
 const metas = getAllMetas(posts);
 
-const tags = Array.from(new Set(metas.map(meta => meta.tags).reduce((a, b) => [...a, ...b], [])));
+const tags = Array.from(
+	new Set(metas.map((meta) => meta.tags).reduce((a, b) => [...a, ...b], []))
+);
 
 const routes = [
-    '/index.html',
-    '/archive',
-    ...tags.map(tag => `/tag/${tag}`),
-    ...posts.map(page => page.replace(/posts\/(.+)\.md$/, '/post/$1.html')),
+	'/index.html',
+	'/archive',
+	...tags.map((tag) => `/tag/${tag}`),
+	...posts.map((page) => page.replace(/posts\/(.+)\.md$/, '/post/$1.html')),
 ];
 
 module.exports = merge(common, {
-    mode: 'production',
+	mode: 'production',
 
-    output: {
-        filename: '[name]-[chunkhash:10].js',
-    },
+	output: {
+		filename: '[name]-[chunkhash:10].js',
+	},
 
-    module: {
-        rules: [{
-            test: /\.(svg|ttf|woff|woff2|eot)$/,
-            loader: 'file-loader',
-            options: {
-                publicPath: './',
-                name: '[name]-[contenthash:10].[ext]',
-            },
-        }, {
-            test: /\.(png|jpg)$/,
-            loader: 'file-loader',
-            options: {
-                publicPath: './',
-                context: './posts',
-                name: 'post/[path][name].[ext]',
-            }
-        }],
-    },
+	module: {
+		rules: [
+			{
+				test: /\.(svg|ttf|woff|woff2|eot)$/,
+				loader: 'file-loader',
+				options: {
+					publicPath: './',
+					name: '[name]-[contenthash:10].[ext]',
+				},
+			},
+			{
+				test: /\.(png|jpg)$/,
+				loader: 'file-loader',
+				options: {
+					publicPath: './',
+					context: './posts',
+					name: 'post/[path][name].[ext]',
+				},
+			},
+		],
+	},
 
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name]-[contenthash:10].css',
-        }),
-        new webpack.DefinePlugin({
-            IS_DEV: 'false',
-        }),
-        new HtmlWebpackPlugin({
-            template: './layouts/index.pug',
-            filename: 'index.html',
-            templateParameters: {
-                _config: config,
-                IS_DEV: false,
-            },
-            chunks: ['bundle'],
-            favicon: './favicon.ico',
-        }),
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: '[name]-[contenthash:10].css',
+		}),
+		new webpack.DefinePlugin({
+			IS_DEV: 'false',
+		}),
+		new HtmlWebpackPlugin({
+			template: './layouts/index.pug',
+			filename: 'index.html',
+			templateParameters: {
+				_config: config,
+				IS_DEV: false,
+			},
+			chunks: ['bundle'],
+			favicon: './favicon.ico',
+		}),
 
-        new PrerenderSPAPlugin({
-            staticDir: `${__dirname}/dist`,
-            routes,
-            postProcess (renderedRoute) {
-                renderedRoute.route = renderedRoute.originalRoute;
-                if (renderedRoute.route.endsWith('.html')) {
-                    renderedRoute.outputPath = path.join(__dirname, 'dist', renderedRoute.route);
-                }
+		new PrerenderSPAPlugin({
+			staticDir: `${__dirname}/dist`,
+			routes,
+			postProcess(renderedRoute) {
+				renderedRoute.route = renderedRoute.originalRoute;
+				if (renderedRoute.route.endsWith('.html')) {
+					renderedRoute.outputPath = path.join(
+						__dirname,
+						'dist',
+						renderedRoute.route
+					);
+				}
 
-                return renderedRoute;
-            },
+				return renderedRoute;
+			},
 
-            renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
-                renderAfterDocumentEvent: 'ready-to-prerender',
-            }),
-        }),
+			renderer: new PrerenderSPAPlugin.PuppeteerRenderer({
+				renderAfterDocumentEvent: 'ready-to-prerender',
+			}),
+		}),
 
-        new SitemapPlugin(config.host, routes),
-    ],
+		new SitemapPlugin(config.host, routes),
+	],
 });
