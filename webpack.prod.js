@@ -46,7 +46,7 @@ module.exports = merge(common, {
 				},
 			},
 			{
-				test: /\.(png|jpg)$/,
+				test: /\.(png|jpg|gif)$/,
 				loader: 'file-loader',
 				options: {
 					publicPath: './',
