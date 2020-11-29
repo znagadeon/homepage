@@ -36,6 +36,7 @@ export default {
 .posts {
 	@apply max-w-6xl;
 	@apply mx-auto;
+	@apply mb-6;
 
 	&__title {
 		@apply mt-8;
