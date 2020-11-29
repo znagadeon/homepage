@@ -1,9 +1,10 @@
 ---
 title: 나만의 웹팩 로더 만들기
 tags:
-    - dev
-    - js
-    - webpack
+  - dev
+  - js
+  - webpack
+  - geultto
 published: 2020-11-10T19:37:32+09:00
 ---
 
@@ -19,14 +20,16 @@ ES6+, 혹은 타입스크립트가 프론트엔드 개발의 대세가 된 이�
 
 ```js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-        }],
-    },
-    // ...
+	// ...
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+			},
+		],
+	},
+	// ...
 };
 ```
 
@@ -44,7 +47,7 @@ module.exports = {
 
 ```js
 module.exports = function (source) {
-    return '';
+	return '';
 };
 ```
 
@@ -52,7 +55,7 @@ module.exports = function (source) {
 
 ```js:2
 module.exports = function (source) {
-    return `module.exports = \`${doSomething(source)}\``;
+	return `module.exports = \`${doSomething(source)}\``;
 };
 ```
 
@@ -67,14 +70,16 @@ module.exports = function (source) {
 ```js
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /\.md$/,
-            loader: './loaders/md-loader.js',
-        }],
-    },
-    // ...
+	// ...
+	module: {
+		rules: [
+			{
+				test: /\.md$/,
+				loader: './loaders/md-loader.js',
+			},
+		],
+	},
+	// ...
 };
 ```
 
@@ -90,7 +95,7 @@ document.write(html);
 const marked = require('marked');
 
 module.exports = function (source) {
-    return `module.exports = \`${marked(source)}\``;
+	return `module.exports = \`${marked(source)}\``;
 };
 ```
 
@@ -105,15 +110,15 @@ module.exports = function (source) {
 ```js:8
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /\.md$/,
-            loader: './loaders/md-loader.js',
-            options: { gfm: false },
-        }],
-    },
-    // ...
+	// ...
+	module: {
+		rules: [{
+			test: /\.md$/,
+			loader: './loaders/md-loader.js',
+			options: { gfm: false },
+		}],
+	},
+	// ...
 };
 ```
 
@@ -121,7 +126,7 @@ module.exports = {
 const marked = require('marked');
 
 module.exports = function (source) {
-    return `module.exports = \`${marked(source, this.query)}\``;
+	return `module.exports = \`${marked(source, this.query)}\``;
 };
 ```
 
@@ -138,20 +143,20 @@ module.exports = function (source) {
 ```js:8-12
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            test: /\.md$/,
-            use: [
-                './loaders/html-loader.js',
-                {
-                    loader: './loaders/md-loader.js',
-                    options: { gfm: false },
-                },
-            ]
-        }],
-    },
-    // ...
+	// ...
+	module: {
+		rules: [{
+			test: /\.md$/,
+			use: [
+				'./loaders/html-loader.js',
+				{
+					loader: './loaders/md-loader.js',
+					options: { gfm: false },
+				},
+			]
+		}],
+	},
+	// ...
 };
 ```
 
@@ -162,14 +167,14 @@ module.exports = {
 const marked = require('marked');
 
 module.exports = function (source) {
-    return marked(source, this.query);
+	return marked(source, this.query);
 };
 ```
 
 ```js
 // loaders/html-loader.js
 module.exports = function (source) {
-    return `module.exports = \`${source}\``;
+	return `module.exports = \`${source}\``;
 };
 ```
 
@@ -185,15 +190,15 @@ module.exports = function (source) {
 // loaders/html-loader.js
 // ...
 module.exports = function (source) {
-    const images = getImagePaths(source);
-    images.forEach(image => {
-        this.emitFile(
-            image,
-            this.fs.readFileSync(path.join(this.resourcePath, '..', image)),
-        );
-    });
+	const images = getImagePaths(source);
+	images.forEach(image => {
+		this.emitFile(
+			image,
+			this.fs.readFileSync(path.join(this.resourcePath, '..', image)),
+		);
+	});
 
-    return `module.exports = \`${source}\``;
+	return `module.exports = \`${source}\``;
 };
 ```
 
@@ -208,17 +213,17 @@ module.exports = function (source) {
 ```js:8-10
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            // ...
-        }, {
-            test: /\.(jpe?g|png|gif)$/,
-            loader: 'file-loader',
-            options: { name: '[name].[ext]' },
-        }],
-    },
-    // ...
+	// ...
+	module: {
+		rules: [{
+			// ...
+		}, {
+			test: /\.(jpe?g|png|gif)$/,
+			loader: 'file-loader',
+			options: { name: '[name].[ext]' },
+		}],
+	},
+	// ...
 };
 ```
 
@@ -226,10 +231,10 @@ module.exports = {
 // loaders/html-loader.js
 // ...
 module.exports = function (source) {
-    const imageScripts = getImagePaths(source)
-        .map(image => `require('${image}');`);
+	const imageScripts = getImagePaths(source)
+		.map(image => `require('${image}');`);
 
-    return `${imageScripts}module.exports = \`${source}\``;
+	return `${imageScripts}module.exports = \`${source}\``;
 };
 ```
 
@@ -242,36 +247,36 @@ module.exports = function (source) {
 ```js:6-8
 // webpack.config.js
 module.exports = {
-    // ...
-    module: {
-        rules: [{
-            enforce: 'pre',
-            test: /\.md$/,
-            loader: './loaders/mdlint-loader.js',
-        }, {
-            // ...
-        }],
-    },
-    // ...
-}
+	// ...
+	module: {
+		rules: [{
+			enforce: 'pre',
+			test: /\.md$/,
+			loader: './loaders/mdlint-loader.js',
+		}, {
+			// ...
+		}],
+	},
+	// ...
+};
 ```
 
 ```js:4,14
 // loaders/mdlint-loader.js
 // ...
 module.exports = function (source) {
-    const callback = this.async();
+	const callback = this.async();
 
-    const links = getLinks(source);
-    const promises = links.map(link => axios({
-        method: 'GET',
-        url: link,
-        timeout: 300,
-    }));
+	const links = getLinks(source);
+	const promises = links.map(link => axios({
+		method: 'GET',
+		url: link,
+		timeout: 300,
+	}));
 
-    Promise.all(promises).then(() => {
-        callback(null, source);
-    });
+	Promise.all(promises).then(() => {
+		callback(null, source);
+	});
 };
 ```
 
@@ -281,18 +286,18 @@ module.exports = function (source) {
 // loaders/mdlint-loader.js
 // ...
 module.exports = function (source) {
-    // ...
-    Promise.all(promises).then(() => {
-        callback(null, source);
-    }).catch(err => {
-        // warning을 뱉을 때
-        this.emitWarning(new Error('Dead link found!'));
-        callback(null, source);
+	// ...
+	Promise.all(promises).then(() => {
+		callback(null, source);
+	}).catch(err => {
+		// warning을 뱉을 때
+		this.emitWarning(new Error('Dead link found!'));
+		callback(null, source);
 
-        // error를 뱉을 때
-        this.emitError(new Error('Dead link found!'));
-        callback(err);
-    });
+		// error를 뱉을 때
+		this.emitError(new Error('Dead link found!'));
+		callback(err);
+	});
 };
 ```
 

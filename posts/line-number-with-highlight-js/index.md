@@ -1,10 +1,10 @@
 ---
 title: highlight.js에 줄 번호를 넣어 보자
 tags:
-    - dev
-    - js
-    - web
-    - highlight.js
+  - dev
+  - js
+  - web
+  - highlight.js
 published: 2020-02-13T04:10:40+09:00
 ---
 
@@ -32,8 +32,8 @@ const convertedCode = hljs.highlight(lang || 'plaintext', code).value;
 결과는 어떨까? 이런 js 코드 문자열이 있다고 가정하자.
 
 ```js
-for (let i=0; i<10; i++) {
-    console.log('Hello, world!');
+for (let i = 0; i < 10; i++) {
+	console.log('Hello, world!');
 }
 ```
 
@@ -41,7 +41,7 @@ for (let i=0; i<10; i++) {
 
 ```html
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10</span>; i++) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello, world!'</span>);
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello, world!'</span>);
 }
 ```
 
@@ -106,15 +106,15 @@ const padder = length => num => num.toString().padStart(length, ' ');
 const padNumber = padder(splittedCode.length.toString().length);
 
 const lineAttachedCode = splittedCode
-    .map((code, i) => `<code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code>`)
-    .join('\n');
+	.map((code, i) => `<code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code>`)
+	.join('\n');
 ```
 
 물론 이렇게 한다고 바로 줄번호가 복사할 수 없는 상태가 되지는 않는다. 여기서부터는 css의 도움이 필요하다.
 
 ```css
 .line-number {
-    user-select: none;
+	user-select: none;
 }
 ```
 

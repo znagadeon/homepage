@@ -1,10 +1,10 @@
 ---
 title: jest와 mock-fs로 fs 유닛 테스트하기
 tags:
-    - dev
-    - js
-    - jest
-    - mock-fs
+  - dev
+  - js
+  - jest
+  - mock-fs
 published: 2020-02-01T18:16:00+09:00
 ---
 
@@ -28,26 +28,27 @@ const fs = require('fs');
 const mock = require('mock-fs');
 
 describe('sample test', () => {
-    it('mock-fs test', () => {
-        mock({
-            fake: {
-                dir: {
-                    'file.txt': 'content',
-                },
-            },
-            'file2.txt': '', // 빈 파일 생성
-            empty: {}, // 빈 디렉토리 생성
-            'path/to/file.txt': '', // full path를 써줄 수도 있다
-        });
+	it('mock-fs test', () => {
+		mock({
+			fake: {
+				dir: {
+					'file.txt': 'content',
+				},
+			},
+			'file2.txt': '', // 빈 파일 생성
+			empty: {}, // 빈 디렉토리 생성
+			'path/to/file.txt': '', // full path를 써줄 수도 있다
+		});
 
-        fs.readFile('./file2.txt', (err, str) => { // relative path 사용
-            // ...
-        });
-    });
+		fs.readFile('./file2.txt', (err, str) => {
+			// relative path 사용
+			// ...
+		});
+	});
 
-    afterEach(() => {
-        mock.restore();
-    });
+	afterEach(() => {
+		mock.restore();
+	});
 });
 ```
 
@@ -87,20 +88,20 @@ console.log(
 
 ```js
 describe('sample test', () => {
-    fs.writeFileSync = jest.fn();
-    const write = jest.spyOn(fs, 'writeFileSync');
+	fs.writeFileSync = jest.fn();
+	const write = jest.spyOn(fs, 'writeFileSync');
 
-    fs.mkdirSync = jest.fn();
-    const mkdir = jest.spyOn(fs, 'mkdirSync');
+	fs.mkdirSync = jest.fn();
+	const mkdir = jest.spyOn(fs, 'mkdirSync');
 
-    it('write test', () => {
-        fs.writeFileSync('./test.txt', 'content');
-        expect(write).toHaveBeenCalledWith('./test.txt', 'content');
-    });
+	it('write test', () => {
+		fs.writeFileSync('./test.txt', 'content');
+		expect(write).toHaveBeenCalledWith('./test.txt', 'content');
+	});
 
-    it('mkdir test', () => {
-        fs.mkdirSync('dir');
-        expect(mkdir).toHaveBeenCalledWith('dir');
-    });
+	it('mkdir test', () => {
+		fs.mkdirSync('dir');
+		expect(mkdir).toHaveBeenCalledWith('dir');
+	});
 });
 ```

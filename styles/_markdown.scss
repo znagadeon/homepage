@@ -1,172 +1,172 @@
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '@fortawesome/fontawesome-free/scss/solid.scss';
 
 @mixin list {
-    @apply ml-6;
-    @apply mt-3;
+	@apply ml-6;
+	@apply mt-3;
 }
 
 @mixin code {
-    @apply inline-block;
-    @apply whitespace-pre-wrap;
+	@apply inline-block;
+	@apply whitespace-pre-wrap;
 
-    font-family: "Roboto Mono", monospace;
+	font-family: 'Roboto Mono', monospace;
 
-    span {
-        font-family: "Roboto Mono", monospace;
-    }
+	span {
+		font-family: 'Roboto Mono', monospace;
+	}
 }
 
 @mixin markdown {
-    line-height: 1.6;
-    vertical-align: middle;
+	line-height: 1.6;
+	vertical-align: middle;
 
-    h1 {
-        @apply text-3xl;
-        @apply mt-6;
-    }
+	h1 {
+		@apply text-3xl;
+		@apply mt-6;
+	}
 
-    h2 {
-        @apply text-2xl;
-        @apply mt-4;
-    }
+	h2 {
+		@apply text-2xl;
+		@apply mt-4;
+	}
 
-    h3 {
-        @apply text-xl;
-        @apply mt-3;
-    }
+	h3 {
+		@apply text-xl;
+		@apply mt-3;
+	}
 
-    p {
-        @apply mt-4;
-    }
+	p {
+		@apply mt-4;
+	}
 
-    ol {
-        @include list;
-        @apply list-decimal;
-    }
+	ol {
+		@include list;
+		@apply list-decimal;
+	}
 
-    ul {
-        @include list;
-        @apply list-disc;
-    }
+	ul {
+		@include list;
+		@apply list-disc;
+	}
 
-    li {
-        @apply pt-2;
+	li {
+		@apply pt-2;
 
-        &:first-child {
-            @apply pt-0;
-        }
-    }
+		&:first-child {
+			@apply pt-0;
+		}
+	}
 
-    a {
-        @apply text-blue-400;
-        @apply underline;
+	a {
+		@apply text-blue-400;
+		@apply underline;
 
-        @extend %fa-icon;
-        @extend .fas;
+		@extend %fa-icon;
+		@extend .fas;
 
-        &:before {
-            content: fa-content($fa-var-link);
-        }
+		&:before {
+			content: fa-content($fa-var-link);
+		}
 
-        &:active {
-            @apply text-blue-800;
-        }
-    }
+		&:active {
+			@apply text-blue-800;
+		}
+	}
 
-    del {
-        @apply text-gray-500;
-    }
+	del {
+		@apply text-gray-500;
+	}
 
-    hr {
-        @apply mt-5;
-    }
+	hr {
+		@apply mt-5;
+	}
 
-    figure {
-        @apply text-center;
-        @apply mx-auto;
-        @apply my-4;
+	figure {
+		@apply text-center;
+		@apply mx-auto;
+		@apply my-4;
 
-        @media (max-width: 600px) {
-            max-width: 350px;
-        }
-        @media (min-width: 600px) {
-            max-width: 800px;
-        }
+		@media (max-width: 600px) {
+			max-width: 350px;
+		}
+		@media (min-width: 600px) {
+			max-width: 800px;
+		}
 
-        img {
-            @apply mx-auto;
-            @apply rounded-lg;
-            @apply shadow;
-        }
+		img {
+			@apply mx-auto;
+			@apply rounded-lg;
+			@apply shadow;
+		}
 
-        figcaption {
-            @apply text-gray-700;
-            @apply pt-2;
-            @apply text-sm;
-        }
-    }
+		figcaption {
+			@apply text-gray-700;
+			@apply pt-2;
+			@apply text-sm;
+		}
+	}
 
-    .short-code {
-        @apply px-1;
-        @apply rounded;
-        @apply bg-gray-200;
-        @apply text-blue-500;
-    }
+	.short-code {
+		@apply px-1;
+		@apply rounded;
+		@apply bg-gray-200;
+		@apply text-blue-500;
+	}
 
-    .hljs {
-        @apply w-full;
-        @apply px-0;
-        @apply py-3;
-        @apply mt-2;
-        @apply rounded-lg;
-        @apply whitespace-no-wrap;
-        @apply break-all;
+	.hljs {
+		@apply w-full;
+		@apply px-0;
+		@apply py-3;
+		@apply mt-2;
+		@apply rounded-lg;
+		@apply whitespace-no-wrap;
+		@apply break-all;
 
-        div {
-            @apply flex;
+		div {
+			@apply flex;
 
-            &.highlighted {
-                @apply bg-gray-900;
-            }
+			&.highlighted {
+				@apply bg-gray-900;
+			}
 
-            .line-number {
-                @include code;
-                @apply px-3;
-                @apply mr-3;
-                @apply border-r;
-                @apply border-gray-700;
-                @apply text-right;
+			.line-number {
+				@include code;
+				@apply px-3;
+				@apply mr-3;
+				@apply border-r;
+				@apply border-gray-700;
+				@apply text-right;
 
-                user-select: none;
-            }
-            .code {
-                @include code;
-                @apply flex-1;
-            }
-        }
-    }
+				user-select: none;
+			}
+			.code {
+				@include code;
+				@apply flex-1;
+			}
+		}
+	}
 
-    blockquote {
-        @apply relative;
-        @apply m-0;
+	blockquote {
+		@apply relative;
+		@apply m-0;
 
-        @apply text-gray-800;
+		@apply text-gray-800;
 
-        &:before {
-            content: '';
-            @apply absolute;
+		&:before {
+			content: '';
+			@apply absolute;
 
-            @apply inline-block;
-            @apply w-3;
-            @apply h-full;
+			@apply inline-block;
+			@apply w-3;
+			@apply h-full;
 
-            @apply bg-gray-300;
-        }
+			@apply bg-gray-300;
+		}
 
-        * {
-            @apply ml-6;
-        }
-    }
+		* {
+			@apply ml-6;
+		}
+	}
 }

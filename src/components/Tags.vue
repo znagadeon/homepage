@@ -6,26 +6,26 @@ ul.tags
 
 <script>
 export default {
-    props: {
-        tags: {
-            type: Array,
-        },
-    },
-}
+	props: {
+		tags: {
+			type: Array,
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
 .tags {
-    @apply flex;
-    @apply flex-row;
+	@apply flex;
+	@apply flex-row;
 
-    &__tag {
-        @apply text-blue-700;
-        @apply mr-2;
+	&__tag {
+		@apply text-blue-700;
+		@apply mr-2;
 
-        &:last-child {
-            @apply mr-0;
-        }
-    }
+		&:last-child {
+			@apply mr-0;
+		}
+	}
 }
 </style>
