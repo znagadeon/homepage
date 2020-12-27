@@ -5,18 +5,17 @@
     "node": true,
     "jest/globals": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:vue/essential",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:vue/essential", "prettier"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": ["vue", "jest"],
   "rules": {
-    "no-unused-vars": ["warn", {"vars": "all", "args": "after-used"}]
+    "no-unused-vars": [
+      "error",
+      {"vars": "all", "args": "after-used", "argsIgnorePattern": "^_"}
+    ]
   },
   "globals": {
     "IS_DEV": true
