@@ -170,4 +170,29 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			@apply ml-6;
 		}
 	}
+
+	table {
+		margin: 30px auto;
+
+		border-collapse: collapse;
+
+		thead {
+			@apply font-bold;
+			@apply bg-blue-200;
+		}
+
+		tr:not(:last-child) {
+			border-bottom: 1px solid;
+			@apply border-gray-300;
+		}
+
+		th, td {
+			@apply py-1;
+			@apply px-3;
+		}
+
+		td:nth-child(2n) {
+			@apply bg-blue-100;
+		}
+	}
 }
