@@ -36,25 +36,22 @@ module.exports = merge(common, {
 	},
 
 	module: {
-		rules: [
-			{
-				test: /\.(svg|ttf|woff|woff2|eot)$/,
-				loader: 'file-loader',
-				options: {
-					publicPath: './',
-					name: '[name]-[contenthash:10].[ext]',
-				},
+		rules: [{
+			test: /\.(svg|ttf|woff|woff2|eot)$/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				name: '[name]-[contenthash:10].[ext]',
 			},
-			{
-				test: /\.(png|jpg|gif)$/,
-				loader: 'file-loader',
-				options: {
-					publicPath: './',
-					context: './posts',
-					name: 'post/[path][name].[ext]',
-				},
+		}, {
+			test: /\.(png|jpg|gif)$/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				context: './posts',
+				name: 'post/[path][name].[ext]',
 			},
-		],
+		}],
 	},
 
 	plugins: [

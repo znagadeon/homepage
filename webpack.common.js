@@ -22,42 +22,36 @@ module.exports = {
 	},
 
 	module: {
-		rules: [
-			{
-				test: /\.md$/,
-				loader: './src/loaders/md-loader.js',
-			},
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-			},
-			{
-				test: /\.js$/,
-				loader: 'babel-loader',
-			},
-			{
-				test: /\.pug$/,
-				oneOf: [
-					{
-						resourceQuery: /^\?vue/,
-						use: ['pug-plain-loader'],
-					},
-					{
-						use: ['pug-loader'],
-					},
-				],
-			},
-			{
-				test: /\.s?css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader',
-					'postcss-loader',
-					'sass-loader',
-				],
-			},
-		],
+		rules: [{
+			test: /\.md$/,
+			loader: './src/loaders/md-loader.js',
+		}, {
+			test: /\.vue$/,
+			loader: 'vue-loader',
+		}, {
+			test: /\.js$/,
+			loader: 'babel-loader',
+		}, {
+			test: /\.pug$/,
+			oneOf: [{
+				resourceQuery: /^\?vue/,
+				use: ['pug-plain-loader'],
+			}, {
+				use: ['pug-loader'],
+			}],
+		}, {
+			test: /\.s?css$/,
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				'postcss-loader',
+				'sass-loader',
+			],
+		}],
 	},
 
-	plugins: [new CleanWebpackPlugin(), new VueLoaderPlugin()],
+	plugins: [
+		new CleanWebpackPlugin(),
+		new VueLoaderPlugin(),
+	],
 };

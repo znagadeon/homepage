@@ -25,24 +25,21 @@ module.exports = merge(common, {
 	},
 
 	module: {
-		rules: [
-			{
-				test: /\.(svg|ttf|woff|woff2|eot)$/,
-				loader: 'file-loader',
-				options: {
-					publicPath: './',
-					name: '[name].[ext]',
-				},
+		rules: [{
+			test: /\.(svg|ttf|woff|woff2|eot)$/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				name: '[name].[ext]',
 			},
-			{
-				test: /\.(png|jpg|gif)/,
-				loader: 'file-loader',
-				options: {
-					publicPath: './',
-					name: '[folder]/[name].[ext]',
-				},
+		}, {
+			test: /\.(png|jpg|gif)/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				name: '[folder]/[name].[ext]',
 			},
-		],
+		}],
 	},
 
 	plugins: [

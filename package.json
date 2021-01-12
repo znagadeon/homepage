@@ -25,7 +25,6 @@
     "css-loader": "^3.4.2",
     "date-fns": "^2.9.0",
     "eslint": "^7.14.0",
-    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-vue": "^7.1.0",
     "file-loader": "^6.0.0",
@@ -72,10 +71,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": [
-      "prettier --write",
-      "eslint"
-    ],
+    "**/*.js": "eslint",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
   }
