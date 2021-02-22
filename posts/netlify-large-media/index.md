@@ -53,6 +53,14 @@ netlify lm:setup
 
 `.netlify/state.json`, `.lfsconfig` 파일이 생성된다면 성공이다. `.netlify` 디렉토리는 ignore 처리되므로, 업데이트된 `.gitignore` 파일과 `.lfsconfig` 파일을 레포에 추가해주면 된다.
 
+## `lm:setup`이 계속 실패한다면
+
+netlify config 파일이 제대로 업데이트되지 않는 경우이다. 맥은 해당 config 파일을 두 곳에 저장하는데 우리가 접근해서 사용할 `~/.netlify/config.json`이 제대로 업데이트되지 않아 해당 스크립트가 실패하며, 아직까지는 맥에서 문제가 고쳐지지 않은 것으로 보인다. [이 링크](https://community.netlify.com/t/cant-push-after-trying-to-setup-large-media/31125/6)를 참고해서 해결했다.
+
+```sh
+cp ~/Library/Preferences/netlify/config.json ~/.netlify/config.json
+```
+
 ## 배포 폴더가 root가 아닌 경우 설정
 
 이 설정이 빠져 있어서 6시간동안 삽질했다. 나는 홈페이지의 배포판을 `/dist`에 저장하는데, **만약 이 디렉토리에 이미지 파일이 없다면 Netlify Large Media가 파일이 생성된 사실을 인지하지 못한다.** 반드시 배포용 디렉토리에 내 이미지 파일이 포함되도록 설정을 조정하거나 이미지를 복사하는 스크립트를 끼워 넣자. 나는 빌드를 웹팩으로 하고 있어서, [OnBuildPlugin](https://github.com/znagadeon/homepage/pull/12/commits/0b5380b8c0144cd411ce5e94c1b38ac1e18cd2f3)을 하나 추가해서 해결했다.
