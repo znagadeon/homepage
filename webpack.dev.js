@@ -26,13 +26,6 @@ module.exports = merge(common, {
 				publicPath: './',
 				name: '[name].[ext]',
 			},
-		}, {
-			test: /\.(png|jpg|gif)/,
-			loader: 'file-loader',
-			options: {
-				publicPath: './',
-				name: '[folder]/[name].[ext]',
-			},
 		}],
 	},
 

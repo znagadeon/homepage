@@ -43,14 +43,6 @@ module.exports = merge(common, {
 				publicPath: './',
 				name: '[name]-[contenthash:10].[ext]',
 			},
-		}, {
-			test: /\.(png|jpg|gif)$/,
-			loader: 'file-loader',
-			options: {
-				publicPath: './',
-				context: './posts',
-				name: 'post/[path][name].[ext]',
-			},
 		}],
 	},
 
