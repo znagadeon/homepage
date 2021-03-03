@@ -5,7 +5,7 @@ posts(:posts="posts") {{ `#${tag}` }}
 <script>
 import Posts from '@src/components/Posts.vue';
 
-import { loadPosts, sortByPublished } from '@src/post-manager.js';
+import axios from 'axios';
 
 import config from '@root/config.json';
 
@@ -45,12 +45,14 @@ export default {
 		};
 	},
 
-	created() {
+	async created() {
 		this.tag = location.pathname.split('/')[2];
 
-		this.posts = loadPosts()
-			.filter((post) => post.tags.indexOf(this.tag) > -1)
-			.sort(sortByPublished);
+		this.posts = (await axios.get('/api/posts', {
+			params: {
+				tag: this.tag,
+			},
+		})).data;
 	},
 };
 </script>
