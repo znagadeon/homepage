@@ -28,9 +28,9 @@ export default {
 	},
 
 	mounted() {
-		if (location.pathname === '/') {
+		if (location.pathname === '/' || location.pathname === '/index.html') {
 			this.currentComponent = 'Home';
-		} else if (location.pathname === '/archive') {
+		} else if (/^\/archive/.test(location.pathname)) {
 			this.currentComponent = 'Archive';
 		} else if (/^\/tag\//.test(location.pathname)) {
 			this.currentComponent = 'Tag';
