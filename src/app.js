@@ -1,7 +1,6 @@
 const express = require('express');
 
 global.ROOT = `${__dirname}/..`;
-global.IS_DEV = process.argv[2] === 'dev';
 
 const app = express();
 const port = 1337;

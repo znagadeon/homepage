@@ -10,9 +10,7 @@ const path = require('path');
 post.use('/', middleware(compiler));
 
 const getHtml = (filename) => {
-	if (global.IS_DEV) {
-		return compiler.outputFileSystem.readFileSync(path.join(compiler.outputPath, filename));
-	}
+	return compiler.outputFileSystem.readFileSync(path.join(compiler.outputPath, filename));
 };
 
 post.get('/', (req, res) => {
