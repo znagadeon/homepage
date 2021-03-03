@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const port = 1337;
 
+global.ROOT = `${__dirname}/..`;
+
 const api = require('./routers/api');
 app.use('/api', api);
 
