@@ -2,8 +2,7 @@ const express = require('express');
 
 const post = new express.Router();
 post.get('/:title', (req, res) => {
-	res.send(req.params.title);
-	res.end();
+	res.render('../layouts/index', { IS_DEV: true });
 });
 
 module.exports = post;
