@@ -24,9 +24,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss">
-.utterances:not(:last-child) {
-	display: none;
-}
-</style>
