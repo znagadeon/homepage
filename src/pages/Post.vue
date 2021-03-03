@@ -64,7 +64,7 @@ export default {
 
 	created() {
 		const data = loadPost(
-			`./${this.$route.params.path.replace(/\.html$/, '.md')}`
+			`./${location.pathname.split('/')[2]}/index.md`
 		);
 
 		this.title = data.title;

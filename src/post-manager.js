@@ -13,7 +13,7 @@ export const loadPosts = () => {
 		return {
 			...meta,
 			published: new Date(meta.published || null),
-			url: path.replace(/\.\/(.+)\.md$/, '/post/$1.html'),
+			url: path.replace(/\.\/(.+?)(\/index)?\.md$/, '/post/$1'),
 		};
 	});
 };

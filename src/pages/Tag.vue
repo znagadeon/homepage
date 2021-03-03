@@ -1,5 +1,5 @@
 <template lang="pug">
-posts(:posts="posts") {{ `#${$route.params.tag}` }}
+posts(:posts="posts") {{ `#${tag}` }}
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
 
 	data() {
 		return {
+			tag: '',
 			posts: [],
 		};
 	},
@@ -24,7 +25,7 @@ export default {
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
 
 		return {
-			title: `#${this.$route.params.tag} - ${config.blogName}`,
+			title: `#${this.tag} - ${config.blogName}`,
 			meta: [
 				{ name: 'author', content: config.name },
 				{ name: 'description', content: config.description },
@@ -45,8 +46,10 @@ export default {
 	},
 
 	created() {
+		this.tag = location.pathname.split('/')[2];
+
 		this.posts = loadPosts()
-			.filter((post) => post.tags.indexOf(this.$route.params.tag) > -1)
+			.filter((post) => post.tags.indexOf(this.tag) > -1)
 			.sort(sortByPublished);
 	},
 };
