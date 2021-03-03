@@ -4,7 +4,7 @@ article.posts
         slot
     ol.posts__list
         li.post(v-for="post in posts")
-            a(:href="post.url")
+            a(:href="post.url + '/index.html'")
                 h3.post__title {{ post.meta.title }}
             dl.post__meta-info
                 dt.sr-only tags

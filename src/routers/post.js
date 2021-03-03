@@ -19,7 +19,7 @@ post.get('/', (req, res) => {
 	res.set('content-type', 'text/html').end(getHtml('index.html'));
 });
 
-post.get('/post/:title', (req, res) => {
+post.get('/post/:title/index.html', (req, res) => {
 	res.set('content-type', 'text/html').end(getHtml(`index.html`));
 });
 
