@@ -19,6 +19,9 @@ app.use('/api', api);
 const post = require('./routers/post');
 app.use('/', post);
 
+const sitemap = require('./routers/sitemap');
+app.use('/', sitemap);
+
 app.listen(port, () => {
 	console.log(`Listening ${port}...`);
 });

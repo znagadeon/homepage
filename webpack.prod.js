@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
-const SitemapPlugin = require('sitemap-webpack-plugin').default;
 
 const path = require('path');
 
@@ -84,7 +83,5 @@ module.exports = merge(common, {
 				renderAfterDocumentEvent: 'ready-to-prerender',
 			}),
 		}),
-
-		new SitemapPlugin(config.host, routes),
 	],
 });
