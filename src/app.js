@@ -22,6 +22,9 @@ app.use('/', post);
 const sitemap = require('./routers/sitemap');
 app.use('/', sitemap);
 
+const rss = require('./routers/rss');
+app.use('/', rss);
+
 app.listen(port, () => {
 	console.log(`Listening ${port}...`);
 });
