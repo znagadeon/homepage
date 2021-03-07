@@ -1,6 +1,7 @@
 const express = require('express');
 
 global.ROOT = `${__dirname}/..`;
+global.IS_DEV = process.argv[2] === 'dev';
 
 const app = express();
 const port = 1337;
@@ -12,6 +13,10 @@ getPosts(`${global.ROOT}/posts`)
 	.forEach(path => {
 		app.use(`/post/${path.slice(global.ROOT.length)}`, express.static(path));
 	});
+
+if (!global.IS_DEV) {
+	app.use('/', express.static(`${global.ROOT}/dist`));
+}
 
 const api = require('./routers/api');
 app.use('/api', api);

@@ -6,7 +6,7 @@
   "repository": "znagadeon/homepage",
   "googleUA": "UA-121480188-1",
   "links": {
-    "rss": "https://znagadeon.dev/rss.xml",
+    "rss": "/rss.xml",
     "github": "znagadeon",
     "linkedin": "kim-songhyun",
     "twitter": "znagadeon",

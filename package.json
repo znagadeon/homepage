@@ -1,7 +1,6 @@
 {
   "name": "homepage",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
@@ -39,7 +38,6 @@
     "mock-fs": "^4.10.4",
     "nodemon": "^2.0.7",
     "postcss-loader": "^3.0.0",
-    "prerender-spa-plugin": "^3.4.0",
     "prettier": "^2.2.0",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
@@ -78,5 +76,14 @@
     "**/*.js": "eslint",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znagadeon/homepage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/znagadeon/homepage/issues"
+  },
+  "homepage": "https://znagadeon.dev",
+  "description": ""
 }

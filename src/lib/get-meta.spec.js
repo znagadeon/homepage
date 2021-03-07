@@ -1,6 +1,7 @@
 const mock = require('mock-fs');
 
 const getMeta = require('./get-meta');
+const { md2html } = require('./md-converter');
 
 describe('getMeta', () => {
 	it('returns meta info', () => {
@@ -13,7 +14,7 @@ describe('getMeta', () => {
 				title: 'test',
 				draft: true,
 			},
-			content: '# test',
+			content: md2html('# test'),
 		});
 	});
 

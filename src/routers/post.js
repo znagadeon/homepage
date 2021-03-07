@@ -1,20 +1,31 @@
 const express = require('express');
+const path = require('path');
+const fs = require('fs');
 
 const post = new express.Router();
 
-const webpack = require("webpack");
-const compiler = webpack(require("../../webpack.dev.js"));
-const middleware = require("webpack-dev-middleware");
-const path = require('path');
+let getHtml;
+if (global.IS_DEV) {
+	const webpack = require('webpack');
+	const compiler = webpack(require('../../webpack.dev.js'));
+	const middleware = require('webpack-dev-middleware');
+	post.use('/', middleware(compiler));
 
-post.use('/', middleware(compiler));
-
-const getHtml = (filename) => {
-	return compiler.outputFileSystem.readFileSync(path.join(compiler.outputPath, filename));
-};
+	getHtml = (filename) => {
+		return compiler.outputFileSystem.readFileSync(path.join(compiler.outputPath, filename));
+	}
+} else {
+	getHtml = (filename) => {
+		return fs.readFileSync(`${global.ROOT}/dist/${filename}`);
+	}
+}
 
 post.get('/', (req, res) => {
 	res.redirect(301, '/index.html');
+});
+
+post.get('/post/:title', (req, res) => {
+	res.redirect(301, `/post/${req.params.title}/index.html`);
 });
 
 post.get('/archive', (req, res) => {

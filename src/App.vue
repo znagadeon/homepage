@@ -37,8 +37,6 @@ export default {
 		} else if (/^\/post\//.test(location.pathname)) {
 			this.currentComponent = 'Post';
 		}
-
-		document.dispatchEvent(new Event('ready-to-prerender'));
 	},
 };
 </script>
