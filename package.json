@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "start:old": "webpack-dev-server --config webpack.dev.js",
+    "serve": "node src/app.js prod",
     "start": "nodemon src/app.js dev",
     "test": "jest --coverage"
   },
