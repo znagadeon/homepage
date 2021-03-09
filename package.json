@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
+    "build:static": "webpack --config webpack.prod.js",
     "serve": "node src/app.js prod",
+    "build": "node build.js",
     "start": "nodemon src/app.js dev",
     "test": "jest --coverage"
   },
