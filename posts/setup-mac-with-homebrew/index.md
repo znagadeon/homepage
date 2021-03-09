@@ -3,7 +3,7 @@ title: 새 맥북 세팅하기 - Homebrew를 중심으로
 tags:
   - dev
   - homebrew
-  - gueltto
+  - geultto
 published: 2021-01-24T22:13:47+09:00
 ---
 
