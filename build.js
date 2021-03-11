@@ -1,10 +1,11 @@
 const fs = require('fs');
 const { spawn, spawnSync } = require('child_process');
-const axios = require('axios');
 const path = require('path');
 
 const getPosts = require('./src/lib/get-posts');
 const getMeta = require('./src/lib/get-meta');
+
+const puppeteer = require('puppeteer');
 
 const removeRecursively = (directory) => {
 	const files = fs.readdirSync(directory, { withFileTypes: true });
@@ -24,16 +25,35 @@ const delay = async (timeout) => {
 	});
 };
 
-const capture = async (url, filename) => {
-	const { data } = await axios.get(url);
-	const dir = path.dirname(filename);
-	if (!fs.existsSync(dir)) {
-		fs.mkdirSync(dir, { recursive: true });
-	}
-	fs.writeFile(filename, data, (err) => {
-		if (err) throw err;
-		console.log(`Capture ${url} -> ${filename} complete`);
-	});
+const generateCapture = async () => {
+	const browser = await puppeteer.launch({ headless: true });
+
+	return {
+		capture: async (url, filename) => {
+			const dir = path.dirname(filename);
+			if (!fs.existsSync(dir)) {
+				fs.mkdirSync(dir, { recursive: true });
+			}
+
+			const page = await browser.newPage();
+
+			await page.goto(url, { waitUntil: 'networkidle0' });
+			await delay(1000); // fixme
+
+			const content = (await page.content())
+				.replace(/<script src="\/bundle-.+\.js"><\/script>/, '');
+
+			await page.close();
+
+			fs.writeFile(filename, content, (err) => {
+				if (err) throw err;
+				console.log(`Capture ${url} -> ${filename} complete`);
+			});
+		},
+		close: async () => {
+			await browser.close();
+		},
+	};
 };
 
 const copyRecursively = (src, dest) => {
@@ -85,17 +105,18 @@ const dest = './public';
 		}
 	});
 
+	const { capture, close } = await generateCapture(10);
 	await Promise.all([
 		// home
-		capture(host, `${dest}/index.html`),
+		capture(`${host}/index.html`, `${dest}/index.html`),
 
 		// posts
-		capture(`${host}/archive`, `${dest}/archive/index.html`),
+		capture(`${host}/archive/index.html`, `${dest}/archive/index.html`),
 		...postNames.map(post => {
-			return capture(`${host}/post/${post}`, `${dest}/post/${post}/index.html`);
+			return capture(`${host}/post/${post}/index.html`, `${dest}/post/${post}/index.html`);
 		}),
 		...tags.map(tag => {
-			return capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
+			return capture(`${host}/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
 		}),
 
 		// sitemap, rss
@@ -103,5 +124,6 @@ const dest = './public';
 		capture(`${host}/rss.xml`, `${dest}/rss.xml`),
 	]);
 
+	await close();
 	server.kill();
 })();
