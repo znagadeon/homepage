@@ -1,11 +1,11 @@
 <template lang="pug">
-posts(:posts="posts") {{ `#${$route.params.tag}` }}
+posts(:posts="posts") {{ `#${tag}` }}
 </template>
 
 <script>
 import Posts from '@src/components/Posts.vue';
 
-import { loadPosts, sortByPublished } from '@src/post-manager.js';
+import axios from 'axios';
 
 import config from '@root/config.json';
 
@@ -16,6 +16,7 @@ export default {
 
 	data() {
 		return {
+			tag: '',
 			posts: [],
 		};
 	},
@@ -24,7 +25,7 @@ export default {
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
 
 		return {
-			title: `#${this.$route.params.tag} - ${config.blogName}`,
+			title: `#${this.tag} - ${config.blogName}`,
 			meta: [
 				{ name: 'author', content: config.name },
 				{ name: 'description', content: config.description },
@@ -44,10 +45,14 @@ export default {
 		};
 	},
 
-	created() {
-		this.posts = loadPosts()
-			.filter((post) => post.tags.indexOf(this.$route.params.tag) > -1)
-			.sort(sortByPublished);
+	async created() {
+		this.tag = location.pathname.split('/')[2];
+
+		this.posts = (await axios.get('/api/posts', {
+			params: {
+				tag: this.tag,
+			},
+		})).data;
 	},
 };
 </script>
