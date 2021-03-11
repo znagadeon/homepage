@@ -3,7 +3,7 @@ title: 메이플스토리 강화 효율을 큰 수의 법칙으로 시뮬레이�
 tags:
   - maplestory
   - statistics
-  - geultto
+  - gueltto
 published: 2021-01-10T22:35:12+09:00
 ---
 

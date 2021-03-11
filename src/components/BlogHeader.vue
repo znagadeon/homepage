@@ -2,7 +2,7 @@
 header.header
     div.header__title.title
         h1.title__blog-name
-            a(href="/") {{ config.blogName }}
+            router-link(to="/") {{ config.blogName }}
     section.header__profile.profile
         img.profile__image(:src="links.profileImage" alt="Profile Image")
         h2.profile__title {{ config.name }}
@@ -23,7 +23,7 @@ header.header
         nav.profile__menu.menu
             ul
                 li.menu__menu-item(v-for="menu in menus")
-                    a(:href="menu.link") {{ menu.name }}
+                    router-link(:to="menu.link") {{ menu.name }}
 </template>
 
 <script>

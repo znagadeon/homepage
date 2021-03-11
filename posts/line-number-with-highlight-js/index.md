@@ -4,7 +4,7 @@ tags:
   - dev
   - js
   - web
-  - highlight-js
+  - highlight.js
 published: 2020-02-13T04:10:40+09:00
 ---
 

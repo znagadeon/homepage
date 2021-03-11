@@ -1,7 +1,7 @@
 <template lang="pug">
 ul.tags
     li.tags__tag(v-for="tag in tags" :key="tag")
-        a(:href="`/tag/${tag}`") {{ `#${tag}` }}
+        router-link(:to="`/tag/${tag}`") {{ `#${tag}` }}
 </template>
 
 <script>

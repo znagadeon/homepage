@@ -23,6 +23,9 @@ module.exports = {
 
 	module: {
 		rules: [{
+			test: /\.md$/,
+			loader: './src/loaders/md-loader.js',
+		}, {
 			test: /\.vue$/,
 			loader: 'vue-loader',
 		}, {

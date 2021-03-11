@@ -4,15 +4,15 @@ article.posts
         slot
     ol.posts__list
         li.post(v-for="post in posts")
-            a(:href="post.url + '/index.html'")
-                h3.post__title {{ post.meta.title }}
+            router-link(:to="post.url")
+                h3.post__title {{ post.title }}
             dl.post__meta-info
                 dt.sr-only tags
                 dd.post__tags
-                    tags(:tags="post.meta.tags")
+                    tags(:tags="post.tags")
                 dt.sr-only published
                 dd.post__published
-                    time {{ formatPublished(post.meta.published) }}
+                    time {{ formatPublished(post.published) }}
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
 
 	methods: {
 		formatPublished(datetime) {
-			return format(new Date(datetime), 'yyyy-MM-dd');
+			return format(datetime, 'yyyy-MM-dd');
 		},
 	},
 };

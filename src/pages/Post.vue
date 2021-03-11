@@ -8,7 +8,7 @@
         span.sr-only published
         time {{ published }}
     article.post__article(v-html="html")
-    comment.post__comment(v-if="title" :title="title")
+    comment.post__comment(:title="title")
 </template>
 
 <script>
@@ -19,7 +19,7 @@ import config from '@root/config.json';
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
 
-import axios from 'axios';
+import { loadPost } from '@src/post-manager';
 
 export default {
 	components: {
@@ -62,14 +62,16 @@ export default {
 		};
 	},
 
-	async created() {
-		const post = (await axios.get(`/api${location.pathname.slice(0, -('/index.html'.length))}`)).data;
+	created() {
+		const data = loadPost(
+			`./${this.$route.params.path.replace(/\.html$/, '.md')}`
+		);
 
-		this.title = post.meta.title;
-		this.tags = post.meta.tags;
-		this.published = format(new Date(post.meta.published), 'yyyy-MM-dd');
+		this.title = data.title;
+		this.tags = data.tags;
+		this.published = format(data.published, 'yyyy-MM-dd');
 
-		this.html = post.content;
+		this.html = data.html;
 	},
 };
 </script>

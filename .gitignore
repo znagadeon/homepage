@@ -8,7 +8,6 @@ coverage
 
 # output
 dist
-public
 
 # Local Netlify folder
 .netlify

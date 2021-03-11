@@ -4,7 +4,7 @@ tags:
   - dev
   - js
   - ansi-escape-code
-  - geultto
+  - gueltto
 published: 2020-12-27T23:46:29+09:00
 ---
 

@@ -6,10 +6,11 @@
   "repository": "znagadeon/homepage",
   "googleUA": "UA-121480188-1",
   "links": {
-    "rss": "/rss.xml",
+    "rss": "https://feeds.pinboard.in/rss/u:yeonmu4121/t:post/",
     "github": "znagadeon",
     "linkedin": "kim-songhyun",
     "twitter": "znagadeon",
-    "gravatar": "c1db11b57685a2fc71655a869cdac430"
+    "gravatar": "c1db11b57685a2fc71655a869cdac430",
+    "disqus": "https://znagadeon.disqus.com/embed.js"
   }
 }
