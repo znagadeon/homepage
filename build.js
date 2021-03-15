@@ -30,10 +30,8 @@ const capture = async (url, filename) => {
 	if (!fs.existsSync(dir)) {
 		fs.mkdirSync(dir, { recursive: true });
 	}
-	fs.writeFile(filename, data, (err) => {
-		if (err) throw err;
-		console.log(`Capture ${url} -> ${filename} complete`);
-	});
+	fs.writeFileSync(filename, data);
+	console.log(`Capture ${url} -> ${filename} complete`);
 };
 
 const captureApi = async (url, filename) => {
@@ -42,10 +40,8 @@ const captureApi = async (url, filename) => {
 	if (!fs.existsSync(dir)) {
 		fs.mkdirSync(dir, { recursive: true });
 	}
-	fs.writeFile(filename, JSON.stringify(data), (err) => {
-		if (err) throw err;
-		console.log(`Capture ${url} -> ${filename} complete`);
-	});
+	fs.writeFileSync(filename, JSON.stringify(data));
+	console.log(`Capture ${url} -> ${filename} complete`);
 };
 
 const copyRecursively = (src, dest) => {
@@ -104,33 +100,31 @@ const dest = './public';
 		}
 	});
 
-	await Promise.all([
-		// home
-		capture(host, `${dest}/index.html`),
+	// home
+	await capture(host, `${dest}/index.html`);
 
-		// posts
-		capture(`${host}/archive`, `${dest}/archive/index.html`),
-		...postNames.map(post => {
-			return capture(`${host}/post/${post}`, `${dest}/post/${post}/index.html`);
-		}),
-		...tags.map(tag => {
-			return capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
-		}),
+	// posts
+	await capture(`${host}/archive`, `${dest}/archive/index.html`);
+	for (let post of postNames) {
+		await capture(`${host}/post/${post}`, `${dest}/post/${post}/index.html`);
+	}
+	for (let tag of tags) {
+		await capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
+	}
 
-		// api
-		captureApi(`${host}/api/posts?length=5`, `${dest}/api/home.json`),
-		captureApi(`${host}/api/posts`, `${dest}/api/archive.json`),
-		...postNames.map(post => {
-			return captureApi(`${host}/api/post/${post}`, `${dest}/api/post/${post}.json`);
-		}),
-		...tags.map(tag => {
-			return captureApi(`${host}/api/posts?tag=${tag}`, `${dest}/api/tag/${tag}.json`);
-		}),
+	// api
+	await captureApi(`${host}/api/posts?length=5`, `${dest}/api/home.json`);
+	await captureApi(`${host}/api/posts`, `${dest}/api/archive.json`);
+	for (let post of postNames) {
+		await captureApi(`${host}/api/post/${post}`, `${dest}/api/post/${post}.json`);
+	}
+	for (let tag of tags) {
+		captureApi(`${host}/api/posts?tag=${tag}`, `${dest}/api/tag/${tag}.json`);
+	}
 
-		// sitemap, rss
-		capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`),
-		capture(`${host}/rss.xml`, `${dest}/rss.xml`),
-	]);
+	// sitemap, rss
+	await capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`);
+	await capture(`${host}/rss.xml`, `${dest}/rss.xml`);
 
 	server.kill();
 	console.log('Build complete');
