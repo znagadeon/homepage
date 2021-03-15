@@ -133,4 +133,5 @@ const dest = './public';
 	]);
 
 	server.kill();
+	console.log('Build complete');
 })();
