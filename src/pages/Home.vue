@@ -5,7 +5,7 @@ posts(:posts="posts") Recent Posts
 <script>
 import Posts from '@src/components/Posts.vue';
 
-import { loadPosts, sortByPublished } from '@src/post-manager.js';
+import axios from 'axios';
 
 import config from '@root/config.json';
 
@@ -44,8 +44,16 @@ export default {
 		};
 	},
 
-	created() {
-		this.posts = loadPosts().sort(sortByPublished).slice(0, 5);
+	async created() {
+		if (IS_DEV) {
+			this.posts = (await axios.get('/api/posts', {
+				params: {
+					length: 5,
+				},
+			})).data;
+		} else {
+			this.posts = (await axios.get('/api/home.json')).data;
+		}
 	},
 };
 </script>

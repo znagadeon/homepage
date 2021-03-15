@@ -1,11 +1,12 @@
 {
   "name": "homepage",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "build:static": "webpack --config webpack.prod.js",
+    "serve": "node src/app.js prod",
+    "build": "node build.js",
+    "start": "nodemon src/app.js dev",
     "test": "jest --coverage"
   },
   "keywords": [],
@@ -36,20 +37,18 @@
     "marked": "^1.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "mock-fs": "^4.10.4",
+    "nodemon": "^2.0.7",
     "postcss-loader": "^3.0.0",
-    "prerender-spa-plugin": "^3.4.0",
     "prettier": "^2.2.0",
-    "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
-    "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
-    "sitemap-webpack-plugin": "^0.7.1",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.7.0",
     "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^4.1.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },
@@ -57,13 +56,17 @@
     "node": ">=12.13.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
     "highlight.js": "^10.4.1",
     "katex": "^0.12.0",
+    "pug": "^2.0.4",
+    "sass": "^1.25.0",
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.11",
     "vue-fragment": "^1.5.1",
     "vue-meta": "^2.3.3",
-    "vue-router": "^3.1.6"
+    "xml-js": "^1.6.11"
   },
   "husky": {
     "hooks": {
@@ -74,5 +77,14 @@
     "**/*.js": "eslint",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znagadeon/homepage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/znagadeon/homepage/issues"
+  },
+  "homepage": "https://znagadeon.dev",
+  "description": ""
 }

@@ -5,8 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-	.BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const config = require('./config.json');
 
@@ -18,11 +17,6 @@ module.exports = merge(common, {
 	},
 
 	devtool: 'inline-source-map',
-	devServer: {
-		contentBase: './dist',
-		port: 1337,
-		open: true,
-	},
 
 	module: {
 		rules: [{
@@ -31,13 +25,6 @@ module.exports = merge(common, {
 			options: {
 				publicPath: './',
 				name: '[name].[ext]',
-			},
-		}, {
-			test: /\.(png|jpg|gif)/,
-			loader: 'file-loader',
-			options: {
-				publicPath: './',
-				name: '[folder]/[name].[ext]',
 			},
 		}],
 	},
@@ -60,6 +47,8 @@ module.exports = merge(common, {
 			favicon: './favicon.ico',
 		}),
 
-		new BundleAnalyzerPlugin(),
+		new BundleAnalyzerPlugin({
+			openAnalyzer: false,
+		}),
 	],
 });
