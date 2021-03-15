@@ -63,7 +63,13 @@ export default {
 	},
 
 	async created() {
-		const post = (await axios.get(`/api${location.pathname.slice(0, -('/index.html'.length))}`)).data;
+		const title = location.pathname.slice(0, -('/index.html'.length));
+		let post;
+		if (IS_DEV) {
+			post = (await axios.get(`/api${title}`)).data;
+		} else {
+			post = (await axios.get(`/api${title}.json`)).data;
+		}
 
 		this.title = post.meta.title;
 		this.tags = post.meta.tags;

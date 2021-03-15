@@ -48,11 +48,15 @@ export default {
 	async created() {
 		this.tag = location.pathname.split('/')[2];
 
-		this.posts = (await axios.get('/api/posts', {
-			params: {
-				tag: this.tag,
-			},
-		})).data;
+		if (IS_DEV) {
+			this.posts = (await axios.get('/api/posts', {
+				params: {
+					tag: this.tag,
+				},
+			})).data;
+		} else {
+			this.posts = (await axios.get(`/api/tag/${this.tag}.json`)).data;
+		}
 	},
 };
 </script>

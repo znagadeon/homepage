@@ -45,11 +45,15 @@ export default {
 	},
 
 	async created() {
-		this.posts = (await axios.get('/api/posts', {
-			params: {
-				length: 5,
-			},
-		})).data;
+		if (IS_DEV) {
+			this.posts = (await axios.get('/api/posts', {
+				params: {
+					length: 5,
+				},
+			})).data;
+		} else {
+			this.posts = (await axios.get('/api/home.json')).data;
+		}
 	},
 };
 </script>

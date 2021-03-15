@@ -45,7 +45,11 @@ export default {
 	},
 
 	async created() {
-		this.posts = (await axios.get('/api/posts')).data;
+		if (IS_DEV) {
+			this.posts = (await axios.get('/api/posts')).data;
+		} else {
+			this.posts = (await axios.get('/api/archive.json')).data;
+		}
 	},
 };
 </script>

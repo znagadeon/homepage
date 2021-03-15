@@ -36,6 +36,18 @@ const capture = async (url, filename) => {
 	});
 };
 
+const captureApi = async (url, filename) => {
+	const { data } = await axios.get(url);
+	const dir = path.dirname(filename);
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir, { recursive: true });
+	}
+	fs.writeFile(filename, JSON.stringify(data), (err) => {
+		if (err) throw err;
+		console.log(`Capture ${url} -> ${filename} complete`);
+	});
+};
+
 const copyRecursively = (src, dest) => {
 	if (!fs.existsSync(dest)) {
 		fs.mkdirSync(dest, { recursive: true });
@@ -68,7 +80,14 @@ const dest = './public';
 	console.log('Webpack build complete');
 
 	const server = spawn('npm', ['run', 'serve']);
-	await delay(500);
+	for(;;) {
+		try {
+			await axios.get(`${host}/health`);
+			break;
+		} catch (e) {
+			await delay(100);
+		}
+	}
 	console.log('Server is running');
 
 	const postsPath = './posts';
@@ -96,6 +115,16 @@ const dest = './public';
 		}),
 		...tags.map(tag => {
 			return capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
+		}),
+
+		// api
+		captureApi(`${host}/api/posts?length=5`, `${dest}/api/home.json`),
+		captureApi(`${host}/api/posts`, `${dest}/api/archive.json`),
+		...postNames.map(post => {
+			return captureApi(`${host}/api/post/${post}`, `${dest}/api/post/${post}.json`);
+		}),
+		...tags.map(tag => {
+			return captureApi(`${host}/api/posts?tag=${tag}`, `${dest}/api/tag/${tag}.json`);
 		}),
 
 		// sitemap, rss

@@ -30,6 +30,10 @@ app.use('/', sitemap);
 const rss = require('./routers/rss');
 app.use('/', rss);
 
+app.get('/health', (req, res) => {
+	res.status(200).end();
+});
+
 app.listen(port, () => {
 	console.log(`Listening ${port}...`);
 });
