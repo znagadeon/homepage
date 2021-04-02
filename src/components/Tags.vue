@@ -1,7 +1,9 @@
-<template lang="pug">
-ul.tags
-    li.tags__tag(v-for="tag in tags" :key="tag")
-        a(:href="`/tag/${tag}`") {{ `#${tag}` }}
+<template>
+<ul class="tags">
+	<li class="tags__tag" v-for="tag in tags" :key="tag">
+		<a :href="`/tag/${tag}`">#{{tag}}</a>
+	</li>
+</ul>
 </template>
 
 <script>

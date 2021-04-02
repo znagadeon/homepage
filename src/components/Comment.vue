@@ -1,5 +1,5 @@
-<template lang="pug">
-.utterances
+<template>
+<div class="utterances"></div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
-<template lang="pug">
-posts(:posts="posts") Recent Posts
+<template>
+<posts :posts="posts">Recent Posts</posts>
 </template>
 
 <script>

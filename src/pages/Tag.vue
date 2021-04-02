@@ -1,5 +1,5 @@
-<template lang="pug">
-posts(:posts="posts") {{ `#${tag}` }}
+<template>
+<posts :posts="posts">#{{tag}}</posts>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
-<template lang="pug">
-posts(:posts="posts") Archive
+<template>
+<posts :posts="posts">Archive</posts>
 </template>
 
 <script>
