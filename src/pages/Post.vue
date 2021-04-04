@@ -1,14 +1,17 @@
-<template lang="pug">
-.post
-    h1.post__title {{title}}
-    .post__tags
-        span.sr-only tags
-        tags(:tags="tags")
-    .post__published
-        span.sr-only published
-        time {{ published }}
-    article.post__article(v-html="html")
-    comment.post__comment(v-if="title" :title="title")
+<template>
+<div class="post">
+	<h1 class="post__title">{{title}}</h1>
+    <div class="post__tags">
+		<span class="sr-only">tags</span>
+        <tags :tags="tags"></tags>
+	</div>
+    <div class="post__published">
+		<span class="sr-only">published</span>
+		<time>{{ published }}</time>
+	</div>
+    <article class="post__article" v-html="html"></article>
+    <comment class="post__comment" v-if="title" :title="title"></comment>
+</div>
 </template>
 
 <script>

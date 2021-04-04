@@ -30,12 +30,7 @@ module.exports = {
 			loader: 'babel-loader',
 		}, {
 			test: /\.pug$/,
-			oneOf: [{
-				resourceQuery: /^\?vue/,
-				use: ['pug-plain-loader'],
-			}, {
-				use: ['pug-loader'],
-			}],
+			loader: 'pug-loader',
 		}, {
 			test: /\.s?css$/,
 			use: [

@@ -1,29 +1,37 @@
-<template lang="pug">
-header.header
-    div.header__title.title
-        h1.title__blog-name
-            a(href="/") {{ config.blogName }}
-    section.header__profile.profile
-        img.profile__image(:src="links.profileImage" alt="Profile Image")
-        h2.profile__title {{ config.name }}
-        p.profile__description {{ config.description }}
-        ul.profile__links
-            li
-                a.profile__link.profile__link--github(target='_blank' :href="links.github" rel="noopener")
-                    span.sr-only GitHub
-            li
-                a.profile__link.profile__link--linkedin(target='_blank' :href="links.linkedin" rel="noopener")
-                    span.sr-only LinkedIn
-            li
-                a.profile__link.profile__link--twitter(target='_blank' :href="links.twitter" rel="noopener")
-                    span.sr-only Twitter
-            li
-                a.profile__link.profile__link--rss(target='_blank' :href="links.rss" rel="noopener")
-                    span.sr-only RSS
-        nav.profile__menu.menu
-            ul
-                li.menu__menu-item(v-for="menu in menus")
-                    a(:href="menu.link") {{ menu.name }}
+<template>
+<header class="header">
+	<div class="header__title title">
+		<h1 class="title__blog-name">
+			<a href="/">{{ config.blogName }}</a>
+		</h1>
+	</div>
+	<section class="header__profile profile">
+		<img :src="links.profileImage" alt="Profile image" class="profile__image">
+		<h2 class="profile__title">{{ config.name }}</h2>
+		<p class="profile__description">{{ config.description }}</p>
+        <ul class="profile__links">
+			<li>
+				<a :href="links.github" class="profile__link profile__link--github" target="_blank" rel="noopener" aria-label="GitHub"></a>
+			</li>
+			<li>
+				<a :href="links.linkedin" class="profile__link profile__link--linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"></a>
+			</li>
+			<li>
+				<a :href="links.twitter" class="profile__link profile__link--twitter" target="_blank" rel="noopener" aria-label="Twitter"></a>
+			</li>
+			<li>
+				<a :href="links.rss" class="profile__link profile__link--rss" target="_blank" rel="noopener" aria-label="RSS"></a>
+			</li>
+		</ul>
+        <nav class="profile__menu menu">
+			<ul>
+				<li class="menu__menu-item" :key="menu.link" v-for="menu in menus">
+					<a :href="menu.link">{{ menu.name }}</a>
+				</li>
+			</ul>
+		</nav>
+	</section>
+</header>
 </template>
 
 <script>

@@ -1,18 +1,25 @@
-<template lang="pug">
-article.posts
-    h2.posts__title
-        slot
-    ol.posts__list
-        li.post(v-for="post in posts")
-            a(:href="post.url + '/index.html'")
-                h3.post__title {{ post.meta.title }}
-            dl.post__meta-info
-                dt.sr-only tags
-                dd.post__tags
-                    tags(:tags="post.meta.tags")
-                dt.sr-only published
-                dd.post__published
-                    time {{ formatPublished(post.meta.published) }}
+<template>
+<article class="posts">
+	<h2 class="posts__title"><slot></slot></h2>
+	<ol class="posts__list">
+		<li class="post" :key="post.url" v-for="post in posts">
+			<a :href="post.url + '/index.html'">
+				<h3 class="post__title">{{ post.meta.title }}</h3>
+			</a>
+			<dl class="post__meta-info">
+				<dt class="sr-only">tags</dt>
+				<dd class="post__tags">
+					<tags :tags="post.meta.tags"></tags>
+				</dd>
+				<dt class="sr-only">published</dt>
+
+				<dd class="post__published">
+					<time>{{ formatPublished(post.meta.published) }}</time>
+				</dd>
+			</dl>
+		</li>
+	</ol>
+</article>
 </template>
 
 <script>

@@ -1,9 +1,11 @@
-<template lang="pug">
-.container
-    blog-header
-    main
-        components(:is="currentComponent")
-    footer
+<template>
+<div class="container">
+	<blog-header></blog-header>
+    <main>
+		<components :is="currentComponent"></components>
+	</main>
+    <footer></footer>
+</div>
 </template>
 
 <script>
