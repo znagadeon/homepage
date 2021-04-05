@@ -5,7 +5,7 @@
 <script>
 import Posts from '@src/components/Posts.vue';
 
-import axios from 'axios';
+import { mapState, mapActions } from 'vuex';
 
 import config from '@root/config.json';
 
@@ -14,10 +14,12 @@ export default {
 		Posts,
 	},
 
-	data() {
-		return {
-			posts: [],
-		};
+	computed: {
+		...mapState(['posts']),
+	},
+
+	methods: {
+		...mapActions(['loadPosts']),
 	},
 
 	metaInfo() {
@@ -44,12 +46,8 @@ export default {
 		};
 	},
 
-	async created() {
-		if (IS_DEV) {
-			this.posts = (await axios.get('/api/posts')).data;
-		} else {
-			this.posts = (await axios.get('/api/archive.json')).data;
-		}
+	async serverPrefetch() {
+		await this.loadPosts();
 	},
 };
 </script>

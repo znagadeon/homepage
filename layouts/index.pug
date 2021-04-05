@@ -2,5 +2,13 @@ doctype html
 html(lang="ko")
 	head
 		include _head.pug
+		.
+			{{{ renderResourceHints() }}}
+		.
+			{{{ renderStyles() }}}
 	body
 		//vue-ssr-outlet
+		.
+			{{{ renderState() }}}
+		.
+			{{{ renderScripts() }}}

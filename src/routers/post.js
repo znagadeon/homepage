@@ -10,6 +10,7 @@ const clientManifest = require('../../dist/client/vue-ssr-client-manifest.json')
 const renderer = createBundleRenderer(bundle, {
 	template: fs.readFileSync(`${global.ROOT}/dist/client/layout.html`).toString(),
 	clientManifest,
+	inject: false,
 });
 
 post.get('/', (req, res) => {
@@ -29,19 +30,29 @@ post.get('/tag/:tag', (req, res) => {
 });
 
 post.get('/index.html', async (req, res) => {
-	res.send(await renderer.renderToString());
+	res.send(await renderer.renderToString({
+		type: 'Home',
+	}));
 });
 
 post.get('/post/:title/index.html', async (req, res) => {
-	res.send(await renderer.renderToString());
+	res.send(await renderer.renderToString({
+		type: 'Post',
+		title: req.params.title,
+	}));
 });
 
 post.get('/archive/index.html', async (req, res) => {
-	res.send(await renderer.renderToString());
+	res.send(await renderer.renderToString({
+		type: 'Archive',
+	}));
 });
 
 post.get('/tag/:tag/index.html', async (req, res) => {
-	res.send(await renderer.renderToString());
+	res.send(await renderer.renderToString({
+		type: 'Tag',
+		tag: req.params.tag,
+	}));
 });
 
 module.exports = post;
