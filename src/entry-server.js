@@ -5,8 +5,8 @@ export default (context) => {
 		const { app, store } = createApp(context);
 
 		context.rendered = () => {
-            context.state = store.state;
-        };
+			context.state = store.state;
+		};
 
 		resolve(app);
 	});

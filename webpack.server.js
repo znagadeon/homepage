@@ -12,7 +12,7 @@ module.exports = merge(common, {
 	entry: './src/entry-server.js',
 	output: {
 		libraryTarget: 'commonjs2',
-        path: `${__dirname}/dist/server`,
+		path: `${__dirname}/dist/server`,
 	},
 
 	devtool: 'source-map',

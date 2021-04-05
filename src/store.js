@@ -9,16 +9,16 @@ Vue.use(Vuex);
 const host = 'http://localhost:1337';
 
 export default ({ type, title, tag }) => {
-    return new Vuex.Store({
-        state: () => ({
+	return new Vuex.Store({
+		state: () => ({
 			posts: [],
 			post: {},
 			type,
 			title,
 			tag,
-        }),
+		}),
 
-        actions: {
+		actions: {
 			async loadPosts({ state }, params) {
 				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
 			},
@@ -33,6 +33,6 @@ export default ({ type, title, tag }) => {
 					},
 				};
 			},
-        },
-    })
+		},
+	})
 }
