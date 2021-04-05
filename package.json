@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "build:static": "webpack --config webpack.prod.js",
-    "serve": "node src/app.js prod",
+    "serve": "node src/server.js prod",
     "build": "node build.js",
-    "start": "nodemon src/app.js dev",
+    "start": "nodemon src/server.js dev",
     "test": "jest --coverage"
   },
   "keywords": [],
