@@ -1,28 +1,26 @@
 <template>
 <div class="post">
-	<h1 class="post__title">{{title}}</h1>
-    <div class="post__tags">
+	<h1 class="post__title">{{post.meta.title}}</h1>
+	<div class="post__tags">
 		<span class="sr-only">tags</span>
-        <tags :tags="tags"></tags>
+		<tags :tags="post.meta.tags"></tags>
 	</div>
-    <div class="post__published">
+	<div class="post__published">
 		<span class="sr-only">published</span>
-		<time>{{ published }}</time>
+		<time>{{ post.meta.published }}</time>
 	</div>
-    <article class="post__article" v-html="html"></article>
-    <comment class="post__comment" v-if="title" :title="title"></comment>
+	<article class="post__article" v-html="post.content"></article>
+	<comment class="post__comment" v-if="post.meta.title" :title="post.meta.title"></comment>
 </div>
 </template>
 
 <script>
-import format from 'date-fns/format';
-
 import config from '@root/config.json';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
 
-import axios from 'axios';
+import { mapActions, mapState } from 'vuex';
 
 export default {
 	components: {
@@ -30,22 +28,20 @@ export default {
 		Comment,
 	},
 
-	data() {
-		return {
-			title: '',
-			tags: [],
-			published: null,
+	computed: {
+		...mapState(['post']),
+	},
 
-			html: '',
-		};
+	methods: {
+		...mapActions(['loadPost']),
 	},
 
 	metaInfo() {
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-		const desc = this.html.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
+		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 
 		return {
-			title: `${this.title} - ${config.blogName}`,
+			title: `${this.post.meta.title} - ${config.blogName}`,
 			meta: [
 				{ name: 'author', content: config.name },
 				{ name: 'description', content: desc },
@@ -65,20 +61,8 @@ export default {
 		};
 	},
 
-	async created() {
-		const title = location.pathname.slice(0, -('/index.html'.length));
-		let post;
-		if (IS_DEV) {
-			post = (await axios.get(`/api${title}`)).data;
-		} else {
-			post = (await axios.get(`/api${title}.json`)).data;
-		}
-
-		this.title = post.meta.title;
-		this.tags = post.meta.tags;
-		this.published = format(new Date(post.meta.published), 'yyyy-MM-dd');
-
-		this.html = post.content;
+	async serverPrefetch() {
+		await this.loadPost();
 	},
 };
 </script>

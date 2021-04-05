@@ -34,16 +34,6 @@ const capture = async (url, filename) => {
 	console.log(`Capture ${url} -> ${filename} complete`);
 };
 
-const captureApi = async (url, filename) => {
-	const { data } = await axios.get(url);
-	const dir = path.dirname(filename);
-	if (!fs.existsSync(dir)) {
-		fs.mkdirSync(dir, { recursive: true });
-	}
-	fs.writeFileSync(filename, JSON.stringify(data));
-	console.log(`Capture ${url} -> ${filename} complete`);
-};
-
 const copyRecursively = (src, dest) => {
 	if (!fs.existsSync(dest)) {
 		fs.mkdirSync(dest, { recursive: true });
@@ -73,8 +63,7 @@ const dest = './public';
 	console.log('Start build');
 
 	spawnSync('npm', ['run', 'build:static']);
-	console.log('Webpack build complete');
-
+	spawnSync('npm', ['run', 'build:ssr']);
 	const server = spawn('npm', ['run', 'serve']);
 	for(;;) {
 		try {
@@ -88,11 +77,13 @@ const dest = './public';
 
 	const postsPath = './posts';
 	const posts = getPosts(postsPath);
-	const postNames = posts.map(post => post.replace(/^posts\/(.+)\/index.md$/, '$1'));
+	const postNames = posts
+		.filter(post => !getMeta(post).meta.draft)
+		.map(post => post.replace(/^posts\/(.+)\/index.md$/, '$1'));
 	const tags = Array.from(new Set(posts.map(post => getMeta(post).meta.tags).reduce((a, b) => [...a, ...b], [])));
 
 	// static files & assets
-	copyRecursively('./dist', dest);
+	copyRecursively('./dist/client', dest);
 	postNames.forEach((post) => {
 		const src = `${postsPath}/${post}/assets`;
 		if (fs.existsSync(src)) {
@@ -110,16 +101,6 @@ const dest = './public';
 	}
 	for (let tag of tags) {
 		await capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
-	}
-
-	// api
-	await captureApi(`${host}/api/posts?length=5`, `${dest}/api/home.json`);
-	await captureApi(`${host}/api/posts`, `${dest}/api/archive.json`);
-	for (let post of postNames) {
-		await captureApi(`${host}/api/post/${post}`, `${dest}/api/post/${post}.json`);
-	}
-	for (let tag of tags) {
-		captureApi(`${host}/api/posts?tag=${tag}`, `${dest}/api/tag/${tag}.json`);
 	}
 
 	// sitemap, rss

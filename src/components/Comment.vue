@@ -10,7 +10,7 @@ export default {
 		title: String,
 	},
 
-	created() {
+	mounted() {
 		const script = document.createElement('script');
 		script.setAttribute('src', 'https://utteranc.es/client.js');
 		script.setAttribute('repo', config.repository);

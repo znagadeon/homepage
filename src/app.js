@@ -1,39 +1,42 @@
-const express = require('express');
+import Vue from 'vue';
+import VueMeta from 'vue-meta';
 
-global.ROOT = `${__dirname}/..`;
-global.IS_DEV = process.argv[2] === 'dev';
+import App from './App.vue';
+import createStore from './store';
 
-const app = express();
-const port = 1337;
+Vue.use(VueMeta);
 
-const getPosts = require('./lib/get-posts');
+import '../styles/master.scss';
 
-getPosts(`${global.ROOT}/posts`)
-	.map(filename => `${filename.slice(0, -'/index.md'.length)}/assets`)
-	.forEach(path => {
-		app.use(`/post/${path.slice(global.ROOT.length)}`, express.static(path));
+export default (context) => {
+	let type, title, tag;
+    if (context) {
+        type = context.type;
+		title = context.title;
+		tag = context.tag;
+    } else {
+		if (location.pathname === '/' || location.pathname === '/index.html') {
+			type = 'Home';
+		} else if (/^\/archive/.test(location.pathname)) {
+			type = 'Archive';
+		} else if (/^\/tag\//.test(location.pathname)) {
+			type = 'Tag';
+			tag = location.pathname.replace(/^\/tag\/(.+)\/index.html$/, '$1');
+		} else if (/^\/post\//.test(location.pathname)) {
+			type = 'Post';
+			title = location.pathname.replace(/^\/post\/(.+)\/index.html$/, '$1');
+		}
+    }
+
+	const store = createStore({
+		type,
+		title,
+		tag,
+	});
+	const app = new Vue({
+		render: (h) => h(App),
+		store,
 	});
 
-if (!global.IS_DEV) {
-	app.use('/', express.static(`${global.ROOT}/dist`));
+	return { app, store };
 }
-
-const api = require('./routers/api');
-app.use('/api', api);
-
-const post = require('./routers/post');
-app.use('/', post);
-
-const sitemap = require('./routers/sitemap');
-app.use('/', sitemap);
-
-const rss = require('./routers/rss');
-app.use('/', rss);
-
-app.get('/health', (req, res) => {
-	res.status(200).end();
-});
-
-app.listen(port, () => {
-	console.log(`Listening ${port}...`);
-});

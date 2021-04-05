@@ -1,18 +1,8 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
 	context: __dirname,
-	entry: {
-		bundle: './src/main.js',
-	},
-
-	output: {
-		publicPath: '/',
-		path: `${__dirname}/dist`,
-	},
 
 	resolve: {
 		alias: {
@@ -32,13 +22,12 @@ module.exports = {
 			test: /\.pug$/,
 			loader: 'pug-loader',
 		}, {
-			test: /\.s?css$/,
-			use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'postcss-loader',
-				'sass-loader',
-			],
+			test: /\.(svg|ttf|woff|woff2|eot)$/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				name: '[name].[ext]',
+			},
 		}],
 	},
 

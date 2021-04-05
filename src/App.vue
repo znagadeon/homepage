@@ -1,8 +1,8 @@
 <template>
-<div class="container">
+<div id="app" class="container">
 	<blog-header></blog-header>
     <main>
-		<components :is="currentComponent"></components>
+		<components :is="type"></components>
 	</main>
     <footer></footer>
 </div>
@@ -16,6 +16,8 @@ import Tag from './pages/Tag.vue';
 import Archive from './pages/Archive.vue';
 import Post from './pages/Post.vue';
 
+import { mapState } from 'vuex';
+
 export default {
 	components: {
 		BlogHeader,
@@ -23,22 +25,8 @@ export default {
 		Home, Tag, Archive, Post,
 	},
 
-	data() {
-		return {
-			currentComponent: '',
-		};
-	},
-
-	mounted() {
-		if (location.pathname === '/' || location.pathname === '/index.html') {
-			this.currentComponent = 'Home';
-		} else if (/^\/archive/.test(location.pathname)) {
-			this.currentComponent = 'Archive';
-		} else if (/^\/tag\//.test(location.pathname)) {
-			this.currentComponent = 'Tag';
-		} else if (/^\/post\//.test(location.pathname)) {
-			this.currentComponent = 'Post';
-		}
+	computed: {
+		...mapState(['type']),
 	},
 };
 </script>
