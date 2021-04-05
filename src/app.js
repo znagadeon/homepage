@@ -7,7 +7,8 @@ import '../styles/master.scss';
 
 Vue.use(VueMeta);
 
-new Vue({
-	el: '#app',
-	render: (h) => h(App),
-});
+export default () => {
+	return new Vue({
+		render: (h) => h(App),
+	});
+}

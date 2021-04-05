@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div id="app" class="container">
 	<blog-header></blog-header>
     <main>
 		<components :is="currentComponent"></components>

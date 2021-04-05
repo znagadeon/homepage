@@ -15,7 +15,7 @@ getPosts(`${global.ROOT}/posts`)
 	});
 
 if (!global.IS_DEV) {
-	app.use('/', express.static(`${global.ROOT}/dist`));
+	app.use('/', express.static(`${global.ROOT}/dist/client`));
 }
 
 const api = require('./routers/api');
