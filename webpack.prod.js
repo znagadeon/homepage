@@ -47,6 +47,9 @@ module.exports = merge(common, {
 			},
 			inject: false,
 			favicon: './favicon.ico',
+			minify: {
+				removeComments: false,
+			},
 		}),
 	],
 });
