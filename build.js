@@ -1,5 +1,6 @@
 const fs = require('fs');
-const { spawn, spawnSync } = require('child_process');
+const pids = require('port-pid');
+const { spawn, spawnSync, execSync } = require('child_process');
 const axios = require('axios');
 const path = require('path');
 
@@ -52,7 +53,16 @@ const copyRecursively = (src, dest) => {
 	});
 };
 
-const host = 'http://localhost:1337';
+const kill = async port => {
+	const pid = await pids(port);
+
+	if (pid.tcp.length) {
+		execSync(`kill -9 ${pid.tcp[0]}`);
+	}
+};
+
+const port = 1337;
+const host = `http://localhost:${port}`;
 const dest = './public';
 
 (async () => {
@@ -62,6 +72,7 @@ const dest = './public';
 	fs.mkdirSync(dest);
 	console.log('Start build');
 
+	await kill(port);
 	spawnSync('npm', ['run', 'build:static']);
 	spawnSync('npm', ['run', 'build:ssr']);
 	const server = spawn('npm', ['run', 'serve']);
@@ -107,8 +118,9 @@ const dest = './public';
 	await capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`);
 	await capture(`${host}/rss.xml`, `${dest}/rss.xml`);
 
-	server.kill();
 	console.log('Build complete');
 
+	server.kill();
+	await kill(port);
 	process.exit();
 })();
