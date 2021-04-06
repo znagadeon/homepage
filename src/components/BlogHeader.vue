@@ -6,7 +6,7 @@
 		</h1>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" alt="Profile image" class="profile__image">
+		<img :src="links.profileImage" :width="size" :height="size" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
@@ -40,6 +40,7 @@ import config from '@root/config.json';
 export default {
 	data() {
 		return {
+			size: 150,
 			config,
 			menus: [
 				{ name: 'Dev', link: '/tag/dev' },
@@ -52,7 +53,7 @@ export default {
 	computed: {
 		links() {
 			return {
-				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=150`,
+				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=${this.size}`,
 				github: `https://github.com/${config.links.github}`,
 				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
 				twitter: `https://twitter.com/${config.links.twitter}`,
