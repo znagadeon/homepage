@@ -56,6 +56,8 @@ const copyRecursively = (src, dest) => {
 const kill = async port => {
 	const pid = await pids(port);
 
+	console.log(pid);
+
 	if (pid.tcp.length) {
 		execSync(`kill -9 ${pid.tcp[0]}`);
 	}
