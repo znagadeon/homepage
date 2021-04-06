@@ -1,3 +1,0 @@
-describe('stub', () => {
-	it('stub', () => {});
-});
