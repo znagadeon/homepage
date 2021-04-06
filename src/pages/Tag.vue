@@ -22,34 +22,33 @@ export default {
 		...mapActions(['loadPosts']),
 	},
 
-	metaInfo() {
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-
-		return {
-			title: `#${this.tag} - ${config.blogName}`,
-			meta: [
-				{ name: 'author', content: config.name },
-				{ name: 'description', content: config.description },
-
-				{ property: 'og:type', content: 'website' },
-				{ property: 'og:url', content: config.host },
-				{ property: 'og:title', content: config.blogName },
-				{ property: 'og:description', content: config.description },
-				{ property: 'og:image', content: gravatar },
-
-				{ name: 'twitter:card', content: 'summary' },
-				{ name: 'twitter:site', content: `@${config.links.twitter}` },
-				{ name: 'twitter:title', content: config.blogName },
-				{ name: 'twitter:description', content: config.description },
-				{ name: 'twitter:image', content: gravatar },
-			],
-		};
-	},
-
 	async serverPrefetch() {
 		await this.loadPosts({
 			tag: this.tag,
 		});
+
+		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		this.$ssrContext.title = `#${this.tag} - ${config.blogName}`,
+		this.$ssrContext.meta = {
+			author: config.name,
+			description: config.description,
+
+			opengraph: {
+				type: 'website',
+				url: config.host,
+				title: config.blogName,
+				description: config.description,
+				image: gravatar,
+			},
+
+			twitter: {
+				card: 'summary',
+				site: `@${config.links.twitter}`,
+				title: config.blogName,
+				description: config.description,
+				image: gravatar,
+			},
+		};
 	}
 };
 </script>

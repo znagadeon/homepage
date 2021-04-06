@@ -29,40 +29,40 @@ export default {
 	},
 
 	computed: {
-		...mapState(['post']),
+		...mapState(['post', 'title']),
 	},
 
 	methods: {
 		...mapActions(['loadPost']),
 	},
 
-	metaInfo() {
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-
-		return {
-			title: `${this.post.meta.title} - ${config.blogName}`,
-			meta: [
-				{ name: 'author', content: config.name },
-				{ name: 'description', content: desc },
-
-				{ property: 'og:type', content: 'article' },
-				{ property: 'og:url', content: location.href },
-				{ property: 'og:title', content: this.title },
-				{ property: 'og:description', content: desc },
-				{ property: 'og:image', content: gravatar },
-
-				{ name: 'twitter:card', content: 'summary' },
-				{ name: 'twitter:site', content: `@${config.links.twitter}` },
-				{ name: 'twitter:title', content: this.title },
-				{ name: 'twitter:description', content: desc },
-				{ name: 'twitter:image', content: gravatar },
-			],
-		};
-	},
-
 	async serverPrefetch() {
 		await this.loadPost();
+
+		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const title = this.post.meta.title;
+		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
+		this.$ssrContext.title = `${this.post.meta.title} - ${config.blogName}`,
+		this.$ssrContext.meta = {
+			author: config.name,
+			description: config.description,
+
+			opengraph: {
+				type: 'article',
+				url: `${config.host}/post/${this.title}/index.html`,
+				title,
+				description: desc,
+				image: gravatar,
+			},
+
+			twitter: {
+				card: 'summary',
+				site: `@${config.links.twitter}`,
+				title,
+				description: desc,
+				image: gravatar,
+			},
+		};
 	},
 };
 </script>
