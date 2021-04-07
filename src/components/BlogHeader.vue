@@ -114,22 +114,24 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		@apply mt-5;
 		@apply text-2xl;
 		@apply text-center;
+		@apply font-bold;
 	}
 
 	&__description {
-		@apply w-2/3;
+		width: 66%;
 		@apply mx-auto;
 		@apply text-center;
+		@apply font-light;
 	}
 
 	&__links {
 		@apply flex;
 		@apply flex-row;
 		@apply justify-center;
-		@apply mt-3;
+		@apply mt-5;
 
 		li {
-			@apply mr-6;
+			@apply mr-4;
 
 			&:last-child {
 				@apply mr-0;
@@ -139,7 +141,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 	&__link {
 		@extend %fa-icon;
-		@extend .fa-lg;
 
 		&--github {
 			@extend .fab;
@@ -171,7 +172,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	&__menu {
-		@apply mt-3;
+		@apply mt-1;
 	}
 }
 
@@ -183,8 +184,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	&__menu-item {
-		@apply mr-6;
-		@apply text-xl;
+		@apply mr-5;
+		@apply text-lg;
 
 		&:last-child {
 			@apply mr-0;

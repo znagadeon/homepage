@@ -71,12 +71,15 @@ export default {
 @import 'styles/markdown.scss';
 
 .post {
+	@apply mt-6;
+
 	&__title {
-		@apply text-4xl;
+		@apply text-3xl;
+		@apply font-bold;
 	}
 
 	&__tags {
-		@apply mt-2;
+		@apply mt-1;
 	}
 
 	&__published {
