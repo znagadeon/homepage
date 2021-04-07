@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const host = 'http://localhost:1337';
 
-export default ({ type, title, tag }) => {
+export default ({ type, title, tag, query }) => {
 	return new Vuex.Store({
 		state: () => ({
 			posts: [],
@@ -16,6 +16,7 @@ export default ({ type, title, tag }) => {
 			type,
 			title,
 			tag,
+			query,
 		}),
 
 		actions: {

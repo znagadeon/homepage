@@ -4,6 +4,13 @@
 		<h1 class="title__blog-name">
 			<a href="/">{{ config.blogName }}</a>
 		</h1>
+		<div class="title__search search">
+			<label>
+				<span class="sr-only">Search</span>
+				<input type="text" class="search__input" v-model="searchQuery" @keyup.enter="search">
+			</label>
+			<button @click="search" class="search__submit" aria-label="Search"></button>
+		</div>
 	</div>
 	<section class="header__profile profile">
 		<img :src="links.profileImage" :width="size" :height="size" alt="Profile image" class="profile__image">
@@ -47,6 +54,8 @@ export default {
 				{ name: 'Log', link: '/tag/log' },
 				{ name: 'Archive', link: '/archive' },
 			],
+
+			searchQuery: '',
 		};
 	},
 
@@ -59,6 +68,17 @@ export default {
 				twitter: `https://twitter.com/${config.links.twitter}`,
 				rss: config.links.rss,
 			};
+		},
+	},
+
+	methods: {
+		async search() {
+			if (!this.searchQuery) {
+				alert('검색어를 입력하세요');
+				return;
+			}
+
+			location.href = `/search/index.html?q=${this.searchQuery}`;
 		},
 	},
 };
@@ -84,6 +104,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .title {
 	@apply fixed;
+	@apply flex;
+	@apply flex-row;
+	@apply justify-between;
 	@apply w-screen;
 	@apply h-20;
 	@apply p-6;
@@ -97,6 +120,34 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	&__blog-name {
 		@apply text-2xl;
 		@apply font-bold;
+	}
+}
+
+.search {
+	@apply flex;
+	@apply flex-row;
+	@apply items-center;
+
+	&__input {
+		@apply border-0;
+		@apply border-b;
+		@apply border-gray-400;
+		@apply w-40;
+		@apply h-8;
+		@apply mr-3;
+	}
+
+	&__submit {
+		@apply p-2;
+		@apply border-0;
+
+		@apply bg-transparent;
+
+		@extend %fa-icon;
+		@extend .fas;
+		&:before {
+			content: fa-content($fa-var-search);
+		}
 	}
 }
 

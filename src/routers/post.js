@@ -51,4 +51,11 @@ post.get('/tag/:tag/index.html', async (req, res) => {
 	}));
 });
 
+post.get('/search/index.html', async (req, res) => {
+	res.send(await renderer.renderToString({
+		type: 'Search',
+		query: req.query.q,
+	}));
+});
+
 module.exports = post;

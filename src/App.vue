@@ -15,6 +15,7 @@ import Home from './pages/Home.vue';
 import Tag from './pages/Tag.vue';
 import Archive from './pages/Archive.vue';
 import Post from './pages/Post.vue';
+import Search from './pages/Search.vue';
 
 import { mapState } from 'vuex';
 
@@ -22,7 +23,7 @@ export default {
 	components: {
 		BlogHeader,
 
-		Home, Tag, Archive, Post,
+		Home, Tag, Archive, Post, Search,
 	},
 
 	computed: {
