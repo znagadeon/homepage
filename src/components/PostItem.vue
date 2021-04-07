@@ -1,6 +1,6 @@
 <template>
 <li class="post">
-	<a :href="post.url + '/index.html'">
+	<a :href="post.url">
 		<h3 class="post__title">{{ post.meta.title }}</h3>
 		<p class="post__desc">{{ desc }}</p>
 	</a>
