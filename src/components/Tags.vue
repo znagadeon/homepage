@@ -18,12 +18,12 @@ export default {
 
 <style lang="scss" scoped>
 .tags {
-	@apply flex;
-	@apply flex-row;
+	@apply inline-block;
 
 	&__tag {
-		@apply text-blue-700;
+		@apply inline-block;
 		@apply mr-2;
+		@apply text-blue-700;
 
 		&:last-child {
 			@apply mr-0;

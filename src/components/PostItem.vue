@@ -75,5 +75,9 @@ export default {
 	&__tags {
 		@apply mr-3;
 	}
+
+	&__published {
+		min-width: 91px;
+	}
 }
 </style>

@@ -106,6 +106,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	@apply fixed;
 	@apply flex;
 	@apply flex-row;
+	@apply items-center;
 	@apply justify-between;
 	@apply w-screen;
 	@apply h-20;
