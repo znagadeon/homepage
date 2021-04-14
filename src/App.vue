@@ -31,3 +31,20 @@ export default {
 	},
 };
 </script>
+
+<style scoped lang="scss">
+@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
+
+.container {
+	max-width: none;
+
+	font-family: 'Spoqa Han Sans Neo', sans-serif;
+
+	main {
+		max-width: 1000px;
+		min-height: 500px;
+		@apply px-6;
+		@apply mx-auto;
+	}
+}
+</style>

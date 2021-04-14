@@ -13,7 +13,7 @@
 		</div>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" :width="size" :height="size" alt="Profile image" class="profile__image">
+		<img :src="links.profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
@@ -47,7 +47,7 @@ import config from '@root/config.json';
 export default {
 	data() {
 		return {
-			size: 150,
+			size: 300,
 			config,
 			menus: [
 				{ name: 'Dev', link: '/tag/dev' },
