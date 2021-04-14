@@ -16,8 +16,14 @@ export default ({ type, title, tag, query }) => {
 			type,
 			title,
 			tag,
-			query,
+			query: query || '',
 		}),
+
+		mutations: {
+			setQuery(state, query) {
+				state.query = query;
+			},
+		},
 
 		actions: {
 			async loadPosts({ state }, params) {

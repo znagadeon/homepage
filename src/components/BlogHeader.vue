@@ -7,7 +7,7 @@
 		<div class="title__search search">
 			<label>
 				<span class="sr-only">Search</span>
-				<input type="text" class="search__input" v-model="searchQuery" @keyup.enter="search">
+				<input type="text" class="search__input" v-model="_query" @keyup.enter="search">
 			</label>
 			<button @click="search" class="search__submit" aria-label="Search"></button>
 		</div>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 import config from '@root/config.json';
 
 export default {
@@ -54,12 +55,12 @@ export default {
 				{ name: 'Log', link: '/tag/log' },
 				{ name: 'Archive', link: '/archive' },
 			],
-
-			searchQuery: '',
 		};
 	},
 
 	computed: {
+		...mapState(['query']),
+
 		links() {
 			return {
 				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=${this.size}`,
@@ -69,16 +70,27 @@ export default {
 				rss: config.links.rss,
 			};
 		},
+
+		_query: {
+			get() {
+				return this.query;
+			},
+			set(query) {
+				this.setQuery(query);
+			},
+		},
 	},
 
 	methods: {
+		...mapMutations(['setQuery']),
+
 		async search() {
-			if (!this.searchQuery) {
+			if (!this.query) {
 				alert('검색어를 입력하세요');
 				return;
 			}
 
-			location.href = `/search/index.html?q=${this.searchQuery}`;
+			location.href = `/search/index.html?q=${this.query}`;
 		},
 	},
 };
@@ -125,12 +137,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .search {
 	@media (max-width: 600px) {
-		@apply hidden;
+		& {
+			@apply hidden;
+		}
 	}
 	@media (min-width: 600px) {
-		@apply flex;
-		@apply flex-row;
-		@apply items-center;
+		& {
+			@apply flex;
+			@apply flex-row;
+			@apply items-center;
+		}
 	}
 
 	&__input {
