@@ -124,9 +124,14 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 }
 
 .search {
-	@apply flex;
-	@apply flex-row;
-	@apply items-center;
+	@media (max-width: 600px) {
+		@apply hidden;
+	}
+	@media (min-width: 600px) {
+		@apply flex;
+		@apply flex-row;
+		@apply items-center;
+	}
 
 	&__input {
 		@apply border-0;
