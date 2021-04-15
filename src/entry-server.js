@@ -2,12 +2,16 @@ import createApp from './app';
 
 export default (context) => {
 	return new Promise((resolve) => {
-		const { app, store } = createApp(context);
+		const { app, store, router } = createApp();
 
-		context.rendered = () => {
-			context.state = store.state;
-		};
+		router.push(context.url);
 
-		resolve(app);
+		router.onReady(() => {
+			context.rendered = () => {
+				context.state = store.state;
+			};
+
+			resolve(app);
+		});
 	});
 }

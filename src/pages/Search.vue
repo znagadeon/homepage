@@ -3,13 +3,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 import config from '@root/config.json';
 
 export default {
-	computed: {
-		...mapState(['query']),
+	props: {
+		query: String,
 	},
 
 	serverPrefetch() {

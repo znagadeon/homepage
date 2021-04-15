@@ -29,7 +29,7 @@ export default {
 	},
 
 	computed: {
-		...mapState(['post', 'title']),
+		...mapState(['post']),
 	},
 
 	methods: {
@@ -37,7 +37,7 @@ export default {
 	},
 
 	async serverPrefetch() {
-		await this.loadPost();
+		await this.loadPost(this.$route.params.title);
 
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
 		const title = this.post.meta.title;

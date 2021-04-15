@@ -15,7 +15,11 @@ export default {
 	},
 
 	computed: {
-		...mapState(['posts', 'tag']),
+		...mapState(['posts']),
+
+		tag() {
+			return this.$route.params.tag;
+		},
 	},
 
 	methods: {
