@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 
-const post = new express.Router();
+const page = new express.Router();
 
 const { createBundleRenderer } = require('vue-server-renderer');
 const bundle = require('../../dist/server/vue-ssr-server-bundle.json');
@@ -13,7 +13,7 @@ const renderer = createBundleRenderer(bundle, {
 	inject: false,
 });
 
-post.get('*', async (req, res) => {
+page.get('*', async (req, res) => {
 	try {
 		res.send(await renderer.renderToString({
 			url: req.url,
@@ -24,4 +24,4 @@ post.get('*', async (req, res) => {
 	}
 });
 
-module.exports = post;
+module.exports = page;
