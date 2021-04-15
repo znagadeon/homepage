@@ -13,12 +13,14 @@ marked.setOptions({ renderer });
 
 module.exports = {
 	md2html: (markdown) => {
-		const katexParsed = markdown.replace(
-			/\\\(([^$\n]+?)\\\)/g,
+		const katexParsed = markdown.replace(/\${1,2}([^$\n]+?)\${1,2}/g,
 			(match, capture) => {
-				return katex.renderToString(capture);
-			}
-		);
+				try {
+					return katex.renderToString(capture);
+				} catch (e) {
+					return match;
+				}
+			});
 		return marked(katexParsed);
 	},
 };
