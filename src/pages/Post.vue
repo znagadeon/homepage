@@ -1,13 +1,15 @@
 <template>
 <div class="post">
-	<h1 class="post__title">{{post.meta.title}}</h1>
-	<div class="post__tags">
-		<span class="sr-only">tags</span>
-		<tags :tags="post.meta.tags"></tags>
-	</div>
-	<div class="post__published">
-		<span class="sr-only">published</span>
-		<time>{{ post.meta.published }}</time>
+	<div class="post__meta">
+		<h1 class="post__title">{{post.meta.title}}</h1>
+		<div class="post__tags">
+			<span class="sr-only">tags</span>
+			<tags :tags="post.meta.tags"></tags>
+		</div>
+		<div class="post__published">
+			<span class="sr-only">published</span>
+			<time>{{ post.meta.published }}</time>
+		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
 	<comment class="post__comment" v-if="post.meta.title" :title="post.meta.title"></comment>
@@ -73,6 +75,13 @@ export default {
 .post {
 	@apply mt-6;
 
+	&__meta {
+		@apply border-b;
+		@apply border-gray-300;
+		@apply pb-2;
+		@apply mb-6;
+	}
+
 	&__title {
 		@apply text-3xl;
 		@apply font-bold;
@@ -80,13 +89,6 @@ export default {
 
 	&__tags {
 		@apply mt-1;
-	}
-
-	&__published {
-		@apply border-b;
-		@apply border-gray-300;
-		@apply pb-2;
-		@apply mb-6;
 	}
 
 	&__article {
