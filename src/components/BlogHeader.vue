@@ -50,8 +50,7 @@ export default {
 			size: 300,
 			config,
 			menus: [
-				{ name: 'Dev', link: '/tag/dev' },
-				{ name: 'Log', link: '/tag/log' },
+				{ name: 'Wiki', link: 'https://wiki.znagadeon.dev' },
 				{ name: 'Archive', link: '/archive' },
 			],
 
