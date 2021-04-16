@@ -21,13 +21,6 @@ module.exports = {
 		}, {
 			test: /\.pug$/,
 			loader: 'pug-loader',
-		}, {
-			test: /\.(svg|ttf|woff|woff2|eot)$/,
-			loader: 'file-loader',
-			options: {
-				publicPath: './',
-				name: '[name].[ext]',
-			},
 		}],
 	},
 

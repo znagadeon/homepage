@@ -18,8 +18,8 @@ app.use('/', express.static(`${global.ROOT}/dist/client`));
 const api = require('./routers/api');
 app.use('/api', api);
 
-const post = require('./routers/post');
-app.use('/', post);
+const page = require('./routers/page');
+app.use('/', page);
 
 const sitemap = require('./routers/sitemap');
 app.use('/', sitemap);

@@ -1,3 +1,6 @@
+@import '~highlight.js/styles/atom-one-dark.css';
+@import '~katex/dist/katex.css';
+
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '@fortawesome/fontawesome-free/scss/solid.scss';
@@ -23,18 +26,20 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	vertical-align: middle;
 
 	h1 {
-		@apply text-3xl;
-		@apply mt-6;
+		@apply text-2xl;
+		@apply font-bold;
+		@apply mt-8;
 	}
 
 	h2 {
-		@apply text-2xl;
-		@apply mt-4;
+		@apply text-xl;
+		@apply font-bold;
+		@apply mt-6;
 	}
 
 	h3 {
 		@apply text-xl;
-		@apply mt-3;
+		@apply mt-4;
 	}
 
 	p {

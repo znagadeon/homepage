@@ -4,9 +4,16 @@
 		<h1 class="title__blog-name">
 			<a href="/">{{ config.blogName }}</a>
 		</h1>
+		<div class="title__search search">
+			<label>
+				<span class="sr-only">Search</span>
+				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
+			</label>
+			<button @click="search" class="search__submit" aria-label="Search"></button>
+		</div>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" alt="Profile image" class="profile__image">
+		<img :src="links.profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
@@ -40,25 +47,42 @@ import config from '@root/config.json';
 export default {
 	data() {
 		return {
+			size: 300,
 			config,
 			menus: [
-				{ name: 'Dev', link: '/tag/dev' },
-				{ name: 'Log', link: '/tag/log' },
+				{ name: 'Wiki', link: 'https://wiki.znagadeon.dev' },
 				{ name: 'Archive', link: '/archive' },
 			],
+
+			query: '',
 		};
 	},
 
 	computed: {
 		links() {
 			return {
-				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=150`,
+				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=${this.size}`,
 				github: `https://github.com/${config.links.github}`,
 				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
 				twitter: `https://twitter.com/${config.links.twitter}`,
 				rss: config.links.rss,
 			};
 		},
+	},
+
+	methods: {
+		async search() {
+			if (!this.query) {
+				alert('검색어를 입력하세요');
+				return;
+			}
+
+			location.href = `/search?q=${this.query}`;
+		},
+	},
+
+	created() {
+		this.query = this.$route.query.q || '';
 	},
 };
 </script>
@@ -83,12 +107,15 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .title {
 	@apply fixed;
+	@apply flex;
+	@apply flex-row;
+	@apply items-center;
+	@apply justify-between;
 	@apply w-screen;
 	@apply h-20;
 	@apply p-6;
 	@apply z-10;
-	@apply bg-white;
-	@apply opacity-75;
+	background-color: rgba(255, 255, 255, 0.75);
 	@apply shadow-lg;
 	@apply leading-tight;
 	@apply align-middle;
@@ -96,6 +123,45 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	&__blog-name {
 		@apply text-2xl;
 		@apply font-bold;
+	}
+}
+
+.search {
+	@media (max-width: 600px) {
+		& {
+			@apply hidden;
+		}
+	}
+	@media (min-width: 600px) {
+		& {
+			@apply flex;
+			@apply flex-row;
+			@apply items-center;
+		}
+	}
+
+	&__input {
+		@apply border-0;
+		@apply border-b;
+		@apply border-gray-400;
+		@apply w-40;
+		@apply h-8;
+		@apply mr-3;
+
+		@apply bg-transparent;
+	}
+
+	&__submit {
+		@apply p-2;
+		@apply border-0;
+
+		@apply bg-transparent;
+
+		@extend %fa-icon;
+		@extend .fas;
+		&:before {
+			content: fa-content($fa-var-search);
+		}
 	}
 }
 
@@ -113,22 +179,24 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		@apply mt-5;
 		@apply text-2xl;
 		@apply text-center;
+		@apply font-bold;
 	}
 
 	&__description {
-		@apply w-2/3;
+		width: 66%;
 		@apply mx-auto;
 		@apply text-center;
+		@apply font-light;
 	}
 
 	&__links {
 		@apply flex;
 		@apply flex-row;
 		@apply justify-center;
-		@apply mt-3;
+		@apply mt-5;
 
 		li {
-			@apply mr-6;
+			@apply mr-4;
 
 			&:last-child {
 				@apply mr-0;
@@ -138,7 +206,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 	&__link {
 		@extend %fa-icon;
-		@extend .fa-lg;
 
 		&--github {
 			@extend .fab;
@@ -170,7 +237,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	&__menu {
-		@apply mt-3;
+		@apply mt-1;
 	}
 }
 
@@ -182,8 +249,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	}
 
 	&__menu-item {
-		@apply mr-6;
-		@apply text-xl;
+		@apply mr-5;
+		@apply text-lg;
 
 		&:last-child {
 			@apply mr-0;

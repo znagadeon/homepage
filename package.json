@@ -71,6 +71,7 @@
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.12",
     "vue-fragment": "^1.5.1",
+    "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "xml-js": "^1.6.11"
   },
@@ -80,7 +81,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": "eslint",
+    "**/*.js": "eslint --fix",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
   },

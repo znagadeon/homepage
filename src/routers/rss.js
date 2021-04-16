@@ -21,7 +21,7 @@ rss.get('/rss.xml', (req, res) => {
 			if (a.meta.published < b.meta.published) return 1;
 			if (a.meta.published > b.meta.published) return -1;
 			return 0;
-		}).slice(0, 10);
+		});
 
 	res.set('content-type', 'Application/xml').end(convert.js2xml({
 		elements: [{

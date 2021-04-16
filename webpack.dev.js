@@ -30,6 +30,13 @@ module.exports = merge(common, {
 				'postcss-loader',
 				'sass-loader',
 			],
+		}, {
+			test: /\.(svg|ttf|woff|woff2|eot)$/,
+			loader: 'file-loader',
+			options: {
+				publicPath: './',
+				name: '[name].[ext]',
+			},
 		}],
 	},
 

@@ -1,32 +1,19 @@
 <template>
-<post-list :posts="posts">Archive</post-list>
+<div class="gcse-searchresults-only"></div>
 </template>
 
 <script>
-import PostList from '@src/components/PostList.vue';
-
-import { mapState, mapActions } from 'vuex';
-
 import config from '@root/config.json';
 
 export default {
-	components: {
-		PostList,
+	props: {
+		query: String,
 	},
 
-	computed: {
-		...mapState(['posts']),
-	},
-
-	methods: {
-		...mapActions(['loadPosts']),
-	},
-
-	async serverPrefetch() {
-		await this.loadPosts();
-
+	serverPrefetch() {
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-		this.$ssrContext.title = `Archive - ${config.blogName}`,
+
+		this.$ssrContext.title = `Search - ${config.blogName}`,
 		this.$ssrContext.meta = {
 			author: config.name,
 			description: config.description,
@@ -48,5 +35,17 @@ export default {
 			},
 		};
 	},
-};
+
+	mounted() {
+		const script = document.createElement('script');
+		script.setAttribute('async', true);
+		script.setAttribute('src', `https://cse.google.com/cse.js?cx=${config.googleSearch}`);
+
+		document.body.appendChild(script);
+	},
+}
 </script>
+
+<style>
+
+</style>

@@ -1,9 +1,9 @@
 <template>
-<posts :posts="posts">Recent Posts</posts>
+<post-list :posts="posts">Recent Posts</post-list>
 </template>
 
 <script>
-import Posts from '@src/components/Posts.vue';
+import PostList from '@src/components/PostList.vue';
 
 import { mapState, mapActions } from 'vuex';
 
@@ -11,7 +11,7 @@ import config from '@root/config.json';
 
 export default {
 	components: {
-		Posts,
+		PostList,
 	},
 
 	computed: {

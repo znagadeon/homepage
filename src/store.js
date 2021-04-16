@@ -8,14 +8,11 @@ Vue.use(Vuex);
 
 const host = 'http://localhost:1337';
 
-export default ({ type, title, tag }) => {
+export default () => {
 	return new Vuex.Store({
 		state: () => ({
 			posts: [],
 			post: {},
-			type,
-			title,
-			tag,
 		}),
 
 		actions: {
@@ -23,8 +20,8 @@ export default ({ type, title, tag }) => {
 				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
 			},
 
-			async loadPost({ state }) {
-				const { data } = (await axios.get(`${host}/api/post/${state.title}`));
+			async loadPost({ state }, title) {
+				const { data } = (await axios.get(`${host}/api/post/${title}`));
 				state.post = {
 					content: data.content,
 					meta: {

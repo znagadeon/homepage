@@ -2,38 +2,18 @@ import Vue from 'vue';
 
 import App from './App.vue';
 import createStore from './store';
+import createRouter from './router';
 
 import '../styles/master.scss';
 
-export default (context) => {
-	let type, title, tag;
-	if (context) {
-		type = context.type;
-		title = context.title;
-		tag = context.tag;
-	} else {
-		if (location.pathname === '/' || location.pathname === '/index.html') {
-			type = 'Home';
-		} else if (/^\/archive/.test(location.pathname)) {
-			type = 'Archive';
-		} else if (/^\/tag\//.test(location.pathname)) {
-			type = 'Tag';
-			tag = location.pathname.replace(/^\/tag\/(.+)\/index.html$/, '$1');
-		} else if (/^\/post\//.test(location.pathname)) {
-			type = 'Post';
-			title = location.pathname.replace(/^\/post\/(.+)\/index.html$/, '$1');
-		}
-	}
-
-	const store = createStore({
-		type,
-		title,
-		tag,
-	});
+export default () => {
+	const store = createStore();
+	const router = createRouter();
 	const app = new Vue({
 		render: (h) => h(App),
 		store,
+		router,
 	});
 
-	return { app, store };
+	return { app, store, router };
 }

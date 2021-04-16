@@ -1,9 +1,9 @@
 <template>
-<posts :posts="posts">#{{tag}}</posts>
+<post-list :posts="posts">#{{tag}}</post-list>
 </template>
 
 <script>
-import Posts from '@src/components/Posts.vue';
+import PostList from '@src/components/PostList.vue';
 
 import { mapState, mapActions } from 'vuex';
 
@@ -11,11 +11,15 @@ import config from '@root/config.json';
 
 export default {
 	components: {
-		Posts,
+		PostList,
 	},
 
 	computed: {
-		...mapState(['posts', 'tag']),
+		...mapState(['posts']),
+
+		tag() {
+			return this.$route.params.tag;
+		},
 	},
 
 	methods: {
