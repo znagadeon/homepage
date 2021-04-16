@@ -32,8 +32,11 @@
 		</ul>
         <nav class="profile__menu menu">
 			<ul>
-				<li class="menu__menu-item" :key="menu.link" v-for="menu in menus">
-					<a :href="menu.link">{{ menu.name }}</a>
+				<li class="menu__menu-item">
+					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
+				</li>
+				<li class="menu__menu-item">
+					<a href="/archive">Archive</a>
 				</li>
 			</ul>
 		</nav>
@@ -49,11 +52,6 @@ export default {
 		return {
 			size: 300,
 			config,
-			menus: [
-				{ name: 'Wiki', link: 'https://wiki.znagadeon.dev' },
-				{ name: 'Archive', link: '/archive' },
-			],
-
 			query: '',
 		};
 	},
