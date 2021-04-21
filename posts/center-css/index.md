@@ -1,7 +1,6 @@
 ---
 title: CSS 중앙 정렬의 역사
 tags:
-  - dev
   - css
   - geultto
 published: 2021-02-21T21:45:47+09:00

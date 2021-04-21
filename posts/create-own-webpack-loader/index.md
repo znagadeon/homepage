@@ -1,9 +1,9 @@
 ---
 title: 나만의 웹팩 로더 만들기
 tags:
-  - dev
   - js
   - webpack
+  - tutorial
   - geultto
 published: 2020-11-10T19:37:32+09:00
 ---

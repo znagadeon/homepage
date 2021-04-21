@@ -1,7 +1,6 @@
 ---
 title: husky를 이용한 정적 분석 자동화
 tags:
-  - dev
   - husky
   - lint-staged
   - geultto

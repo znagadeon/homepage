@@ -1,7 +1,6 @@
 ---
 title: highlight.js에 줄 번호를 넣어 보자
 tags:
-  - dev
   - js
   - highlight-js
 published: 2020-02-13T04:10:40+09:00

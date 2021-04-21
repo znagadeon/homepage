@@ -1,7 +1,6 @@
 ---
 title: 내 소스를 어디서나 깔끔하게 - editorconfig, prettier, eslint
 tags:
-  - dev
   - js
   - editorconfig
   - prettier

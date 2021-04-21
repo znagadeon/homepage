@@ -1,7 +1,6 @@
 ---
 title: 블로그는 사드세요... 제발
 tags:
-  - dev
   - js
   - vue
   - ssr
