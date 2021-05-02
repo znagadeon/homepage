@@ -1,7 +1,6 @@
 ---
 title: highlight.js에 줄 번호를 넣어 보자
 tags:
-  - dev
   - js
   - highlight-js
 published: 2020-02-13T04:10:40+09:00
@@ -105,7 +104,7 @@ const padder = length => num => num.toString().padStart(length, ' ');
 const padNumber = padder(splittedCode.length.toString().length);
 
 const lineAttachedCode = splittedCode
-	.map((code, i) => `<code class="line-number">${padNumber(i+1)}</code><code class="code">${v}</code>`)
+	.map((code, i) => `<code class="line-number">${padNumber(i+1)}</code><code class="code">${code}</code>`)
 	.join('\n');
 ```
 

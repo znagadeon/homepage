@@ -1,7 +1,6 @@
 ---
 title: Node.js로 색깔 있는 콘솔 찍기
 tags:
-  - dev
   - js
   - ansi-escape-code
   - geultto

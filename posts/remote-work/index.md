@@ -1,7 +1,6 @@
 ---
 title: 재택근무 일기
 tags:
-  - log
   - remote-work
 published: 2020-03-04T21:05:45+09:00
 ---
