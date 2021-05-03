@@ -66,7 +66,7 @@ const sharp = require('sharp');
 const getImageFromWeb = async (url) => {
     return axios.get(url, {
         responseType: 'arraybuffer',
-    }).then(({data}) => {
+    }).then(({ data }) => {
         return sharp(data);
     });
 };
@@ -152,6 +152,8 @@ const generateText = (text, width, height, fontSize, color) => {
 };
 
 (async() => {
+	const meta = await image.metadata();
+
 	const watermarked = await image.composite([{
 		// ...
 	}, {
