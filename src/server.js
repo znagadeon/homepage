@@ -28,7 +28,7 @@ const rss = require('./routers/rss');
 app.use('/', rss);
 
 app.get('/health', (req, res) => {
-	res.status(200).end();
+	res.status(200).end('OK');
 });
 
 app.listen(port, () => {
