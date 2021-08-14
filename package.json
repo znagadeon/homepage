@@ -6,7 +6,7 @@
     "watch:client": "webpack --config webpack.dev.js --watch",
     "watch:ssr": "webpack --config webpack.server.js --watch",
     "watch:server": "nodemon src/server.js",
-    "start": "npm-run-all -p watch:*",
+    "start": "npm-run-all -p 'watch:*'",
     "build:static": "webpack --config webpack.prod.js",
     "build:ssr": "webpack --config webpack.server.js",
     "serve": "node src/server.js",

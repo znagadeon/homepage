@@ -73,9 +73,9 @@ const dest = './public';
 	console.log('Start build');
 
 	await kill(port);
-	spawnSync('npm', ['run', 'build:static']);
-	spawnSync('npm', ['run', 'build:ssr']);
-	const server = spawn('npm', ['run', 'serve']);
+	spawnSync('yarn', ['build:static']);
+	spawnSync('yarn', ['build:ssr']);
+	const server = spawn('yarn', ['serve']);
 	for(;;) {
 		try {
 			await axios.get(`${host}/health`);

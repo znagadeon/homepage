@@ -2,6 +2,13 @@
 node_modules
 coverage
 .tool-versions
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 # commonly ignored files
 .DS_Store
