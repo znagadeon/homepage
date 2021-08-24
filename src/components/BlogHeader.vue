@@ -29,6 +29,9 @@
 			<li>
 				<a :href="links.rss" class="profile__link profile__link--rss" target="_blank" rel="noopener" aria-label="RSS"></a>
 			</li>
+			<li>
+				<a :href="links.donation" class="profile__link profile__link--donation" target="_blank" rel="noopener" aria-label="Donation"></a>
+			</li>
 		</ul>
         <nav class="profile__menu menu">
 			<ul>
@@ -64,6 +67,7 @@ export default {
 				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
 				twitter: `https://twitter.com/${config.links.twitter}`,
 				rss: config.links.rss,
+				donation: config.links.donation,
 			};
 		},
 	},
@@ -230,6 +234,13 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 			@extend .fas;
 			&:before {
 				content: fa-content($fa-var-rss);
+			}
+		}
+
+		&--donation {
+			@extend .fas;
+			&:before {
+				content: fa-content($fa-var-hand-holding-usd);
 			}
 		}
 	}
