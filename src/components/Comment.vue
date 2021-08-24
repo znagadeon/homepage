@@ -18,7 +18,7 @@ export default {
 		script.dataset.repoId = config.comment.repoId;
 		script.dataset.category = config.comment.category;
 		script.dataset.categoryId = config.comment.categoryId;
-		script.dataset.dataMapping = 'specific';
+		script.dataset.mapping = 'specific';
 		script.dataset.term = this.title;
 		script.dataset.reactionEnabled = '1';
 		script.dataset.emitMetadata = '0';
