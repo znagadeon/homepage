@@ -46,8 +46,9 @@ const convertCode = (code, infostring = 'plaintext') => {
 		? getHighlightLines(highlightLineStr)
 		: [];
 
-	const convertedCode = hljs.highlight(lang || 'plaintext', code.trim())
-		.value;
+	const convertedCode = hljs.highlight(code.trim(), {
+		language: lang || 'plaintext',
+	}).value;
 
 	return `<pre class="hljs">${highlightCode(
 		convertedCode,
