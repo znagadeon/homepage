@@ -1,5 +1,5 @@
 <template>
-<div class="utterances"></div>
+<div class="giscus"></div>
 </template>
 
 <script>
@@ -12,11 +12,18 @@ export default {
 
 	mounted() {
 		const script = document.createElement('script');
-		script.setAttribute('src', 'https://utteranc.es/client.js');
-		script.setAttribute('repo', config.repository);
-		script.setAttribute('issue-term', this.title);
-		script.setAttribute('label', 'comment');
-		script.setAttribute('theme', 'github-light');
+		script.setAttribute('src', 'https://giscus.app/client.js');
+
+		script.dataset.repo = config.comment.repository;
+		script.dataset.repoId = config.comment.repoId;
+		script.dataset.category = config.comment.category;
+		script.dataset.categoryId = config.comment.categoryId;
+		script.dataset.dataMapping = 'specific';
+		script.dataset.term = this.title;
+		script.dataset.reactionEnabled = '1';
+		script.dataset.emitMetadata = '0';
+		script.dataset.theme = 'light';
+
 		script.setAttribute('crossorigin', 'anonymous');
 		script.setAttribute('async', true);
 
@@ -24,3 +31,9 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.giscus {
+	@apply mb-4;
+}
+</style>
