@@ -13,7 +13,7 @@ const renderer = createBundleRenderer(bundle, {
 	inject: false,
 });
 
-page.get(/\/($|post|tag|archive)/, async (req, res) => {
+page.get(/\/($|post|tag|search|archive)/, async (req, res) => {
 	try {
 		res.send(await renderer.renderToString({
 			url: req.url,

@@ -26,8 +26,7 @@ export default () => {
 				path: '/search/index.html',
 				component: Search,
 				props: (route) => ({ query: route.query.q }),
-				alias: '/search',
 			},
 		],
 	});
-}
+};
