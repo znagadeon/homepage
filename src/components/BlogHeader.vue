@@ -79,7 +79,7 @@ export default {
 				return;
 			}
 
-			location.href = `/search?q=${this.query}`;
+			location.href = `/search/index.html?q=${this.query}`;
 		},
 	},
 
