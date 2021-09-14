@@ -114,6 +114,9 @@ const dest = './public';
 		await capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
 	}
 
+	// search page
+	await capture(`${host}/search/index.html`, `${dest}/search/index.html`);
+
 	// sitemap, rss
 	await capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`);
 	await capture(`${host}/rss.xml`, `${dest}/rss.xml`);
