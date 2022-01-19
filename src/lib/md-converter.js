@@ -1,4 +1,4 @@
-const marked = require('marked');
+const { marked } = require('marked');
 const katex = require('katex');
 
 const { link, image, code, codespan } = require('./convert-rules');
@@ -21,6 +21,6 @@ module.exports = {
 					return match;
 				}
 			});
-		return marked(katexParsed);
+		return marked.parse(katexParsed);
 	},
 };
