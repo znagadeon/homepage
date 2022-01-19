@@ -126,7 +126,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		@apply py-3;
 		@apply mt-2;
 		@apply rounded-lg;
-		@apply whitespace-no-wrap;
+		@apply whitespace-nowrap;
 		@apply break-all;
 
 		div {
