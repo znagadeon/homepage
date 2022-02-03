@@ -1,10 +1,6 @@
 @import '~highlight.js/styles/atom-one-dark.css';
 @import '~katex/dist/katex.css';
 
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '@fortawesome/fontawesome-free/scss/solid.scss';
-
 @mixin list {
 	@apply ml-6;
 	@apply mt-3;
@@ -67,13 +63,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 	a {
 		@apply text-blue-400;
 		@apply underline;
-
-		@extend %fa-icon;
-		@extend .fas;
-
-		&:before {
-			content: fa-content($fa-var-link);
-		}
 
 		&:active {
 			@apply text-blue-800;

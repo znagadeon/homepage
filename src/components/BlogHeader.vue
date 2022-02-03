@@ -9,7 +9,9 @@
 				<span class="sr-only">Search</span>
 				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
 			</label>
-			<button @click="search" class="search__submit" aria-label="Search"></button>
+			<button @click="search" aria-label="Search">
+				<icon name="search" size="20"></icon>
+			</button>
 		</div>
 	</div>
 	<section class="header__profile profile">
@@ -18,19 +20,29 @@
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
 			<li>
-				<a :href="links.github" class="profile__link profile__link--github" target="_blank" rel="noopener" aria-label="GitHub"></a>
+				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
+					<icon name="github" size="20"></icon>
+				</a>
 			</li>
 			<li>
-				<a :href="links.linkedin" class="profile__link profile__link--linkedin" target="_blank" rel="noopener" aria-label="LinkedIn"></a>
+				<a :href="links.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+					<icon name="linkedin" size="20"></icon>
+				</a>
 			</li>
 			<li>
-				<a :href="links.twitter" class="profile__link profile__link--twitter" target="_blank" rel="noopener" aria-label="Twitter"></a>
+				<a :href="links.twitter" target="_blank" rel="noopener" aria-label="Twitter">
+					<icon name="twitter" size="20"></icon>
+				</a>
 			</li>
 			<li>
-				<a :href="links.rss" class="profile__link profile__link--rss" target="_blank" rel="noopener" aria-label="RSS"></a>
+				<a :href="links.rss" target="_blank" rel="noopener" aria-label="RSS">
+					<icon name="rss" size="20"></icon>
+				</a>
 			</li>
 			<li>
-				<a :href="links.donation" class="profile__link profile__link--donation" target="_blank" rel="noopener" aria-label="Donation"></a>
+				<a :href="links.donation" target="_blank" rel="noopener" aria-label="Donation">
+					<icon name="dollar-sign" size="20"></icon>
+				</a>
 			</li>
 		</ul>
         <nav class="profile__menu menu">
@@ -50,7 +62,13 @@
 <script>
 import config from '@root/config.json';
 
+import Icon from './Icon.vue';
+
 export default {
+	components: {
+		Icon,
+	},
+
 	data() {
 		return {
 			size: 300,
@@ -90,12 +108,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-
-@import '~@fortawesome/fontawesome-free/scss/solid.scss';
-@import '~@fortawesome/fontawesome-free/scss/brands.scss';
-
 .header {
 	@apply pb-6;
 	@apply mb-3;
@@ -158,12 +170,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 		@apply border-0;
 
 		@apply bg-transparent;
-
-		@extend %fa-icon;
-		@extend .fas;
-		&:before {
-			content: fa-content($fa-var-search);
-		}
 	}
 }
 
@@ -202,45 +208,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 			&:last-child {
 				@apply mr-0;
-			}
-		}
-	}
-
-	&__link {
-		@extend %fa-icon;
-
-		&--github {
-			@extend .fab;
-			&:before {
-				content: fa-content($fa-var-github);
-			}
-		}
-
-		&--linkedin {
-			@extend .fab;
-			&:before {
-				content: fa-content($fa-var-linkedin-in);
-			}
-		}
-
-		&--twitter {
-			@extend .fab;
-			&:before {
-				content: fa-content($fa-var-twitter);
-			}
-		}
-
-		&--rss {
-			@extend .fas;
-			&:before {
-				content: fa-content($fa-var-rss);
-			}
-		}
-
-		&--donation {
-			@extend .fas;
-			&:before {
-				content: fa-content($fa-var-hand-holding-usd);
 			}
 		}
 	}
