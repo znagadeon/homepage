@@ -46,6 +46,7 @@
     "prettier": "^2.2.0",
     "pug-loader": "^2.4.0",
     "sass-loader": "^8.0.2",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "vue-loader": "^15.9.8",
     "vue-server-renderer": "^2.6.12",
     "vue-template-compiler": "^2.6.12",

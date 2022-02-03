@@ -62,6 +62,7 @@ module.exports = merge(common, {
 
 		new BundleAnalyzerPlugin({
 			openAnalyzer: false,
+			analyzerPort: 5000,
 		}),
 	],
 });
