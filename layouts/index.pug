@@ -4,12 +4,6 @@ html(lang="ko")
 		include _head.pug
 		include _meta.pug
 		.
-			{{{ renderResourceHints() }}}
-		.
 			{{{ renderStyles() }}}
 	body
 		//vue-ssr-outlet
-		.
-			{{{ renderState() }}}
-		.
-			{{{ renderScripts() }}}

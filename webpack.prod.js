@@ -6,6 +6,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+
 const config = require('./config.json');
 
 module.exports = merge(common, {
@@ -58,5 +60,7 @@ module.exports = merge(common, {
 				removeComments: false,
 			},
 		}),
+
+		new SpeedMeasurePlugin(),
 	],
 });
