@@ -1,5 +1,21 @@
 <template>
-<div class="giscus"></div>
+<div>
+	<div class="giscus"></div>
+	<component :is="'script'"
+		src="https://giscus.app/client.js"
+		:data-repo="config.comment.repository"
+		:data-repo-id="config.comment.repoId"
+		:data-category="config.comment.category"
+		:data-category-id="config.comment.categoryId"
+		data-mapping="specific"
+		:data-term="title"
+		data-reaction-enabled="1"
+		data-emit-metadata="0"
+		data-theme="light"
+		crossorigin="anonymous"
+		async
+	></component>
+</div>
 </template>
 
 <script>
@@ -10,24 +26,10 @@ export default {
 		title: String,
 	},
 
-	mounted() {
-		const script = document.createElement('script');
-		script.setAttribute('src', 'https://giscus.app/client.js');
-
-		script.dataset.repo = config.comment.repository;
-		script.dataset.repoId = config.comment.repoId;
-		script.dataset.category = config.comment.category;
-		script.dataset.categoryId = config.comment.categoryId;
-		script.dataset.mapping = 'specific';
-		script.dataset.term = this.title;
-		script.dataset.reactionEnabled = '1';
-		script.dataset.emitMetadata = '0';
-		script.dataset.theme = 'light';
-
-		script.setAttribute('crossorigin', 'anonymous');
-		script.setAttribute('async', true);
-
-		document.body.appendChild(script);
+	data() {
+		return {
+			config,
+		};
 	},
 };
 </script>
