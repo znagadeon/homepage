@@ -23,7 +23,7 @@ export default {
 	&__tag {
 		@apply inline-block;
 		@apply mr-2;
-		@apply text-blue-700;
+		@apply text-blue-800;
 
 		&:last-child {
 			@apply mr-0;
