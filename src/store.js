@@ -17,7 +17,11 @@ export default () => {
 
 		actions: {
 			async loadPosts({ state }, params) {
-				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
+				state.posts = (await axios.get(`${host}/api/posts`, { params })).data
+					.map(post => ({
+						...post,
+						url: `${post.url}/`,
+					}));
 			},
 
 			async loadPost({ state }, title) {
@@ -31,5 +35,5 @@ export default () => {
 				};
 			},
 		},
-	})
-}
+	});
+};
