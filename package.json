@@ -93,5 +93,6 @@
     "url": "https://github.com/znagadeon/homepage/issues"
   },
   "homepage": "https://znagadeon.dev",
-  "description": ""
+  "description": "",
+  "packageManager": "yarn@3.1.1"
 }
