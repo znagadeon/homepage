@@ -16,7 +16,7 @@ module.exports = {
 			test: /\.vue$/,
 			loader: 'vue-loader',
 		}, {
-			test: /\.js$/,
+			test: /\.[tj]s$/,
 			loader: 'babel-loader',
 		}, {
 			test: /\.pug$/,
