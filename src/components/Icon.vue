@@ -1,5 +1,5 @@
 <template>
-  	<svg aria-hidden="true" class="feather-icon" v-html="icon" :width="size" :height="size"></svg>
+	<span aria-hidden="true" class="feather-icon" v-html="icon"></span>
 </template>
 
 <script>

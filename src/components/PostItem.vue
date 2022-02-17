@@ -21,7 +21,7 @@
 <script>
 import Tags from './Tags.vue';
 
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 
 export default {
 	components: { Tags },
