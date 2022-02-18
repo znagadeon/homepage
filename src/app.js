@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 
 import App from './App.vue';
 import createStore from './store';
@@ -9,11 +9,9 @@ import '../styles/master.scss';
 export default () => {
 	const store = createStore();
 	const router = createRouter();
-	const app = new Vue({
-		render: (h) => h(App),
-		store,
-		router,
-	});
+	const app = createApp(App);
+	app.use(store);
+	app.use(router);
 
 	return { app, store, router };
-}
+};

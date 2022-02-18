@@ -1,15 +1,12 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 import axios from 'axios';
 import format from 'date-fns/format';
 
-Vue.use(Vuex);
-
 const host = 'http://localhost:1337';
 
 export default () => {
-	return new Vuex.Store({
+	return createStore({
 		state: () => ({
 			posts: [],
 			post: {},

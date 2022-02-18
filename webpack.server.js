@@ -3,8 +3,6 @@ const common = require('./webpack.common');
 
 const nodeExternals = require('webpack-node-externals');
 
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
-
 module.exports = merge(common, {
 	mode: 'production',
 	target: 'node',
@@ -25,8 +23,4 @@ module.exports = merge(common, {
 	},
 
 	externals: nodeExternals(),
-
-	plugins: [
-		new VueSSRServerPlugin(),
-	],
 });

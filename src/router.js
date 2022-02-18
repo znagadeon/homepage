@@ -1,7 +1,4 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-
-Vue.use(Router);
+import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '@src/pages/Home.vue';
 
@@ -12,8 +9,8 @@ import Tag from '@src/pages/Tag.vue';
 import Search from '@src/pages/Search.vue';
 
 export default () => {
-	return new Router({
-		mode: 'history',
+	return createRouter({
+		history: createWebHistory(),
 		routes: [
 			{ path: '/index.html', component: Home, alias: '/' },
 

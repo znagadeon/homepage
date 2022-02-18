@@ -94,7 +94,7 @@ export default {
 	&__article {
 		@apply mb-6;
 
-		::v-deep {
+		:deep(*) {
 			@include markdown;
 		}
 	}

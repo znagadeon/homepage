@@ -7,5 +7,5 @@ router.onReady(() => {
 		store.replaceState(window.__INITIAL_STATE__);
 	}
 
-	app.$mount('#app', true);
+	app.mount('#app', true);
 });
