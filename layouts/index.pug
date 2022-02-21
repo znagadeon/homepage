@@ -2,14 +2,15 @@ doctype html
 html(lang="ko")
 	head
 		include _head.pug
-		include _meta.pug
-		.
-			{{{ renderResourceHints() }}}
-		.
-			{{{ renderStyles() }}}
+		//- include _meta.pug
+		//- .
+		//- 	{{{ renderResourceHints() }}}
+		//- .
+		//- 	{{{ renderStyles() }}}
 	body
 		//vue-ssr-outlet
-		.
-			{{{ renderState() }}}
-		.
-			{{{ renderScripts() }}}
+		//- .
+		//- 	{{{ renderState() }}}
+		//- .
+		//- 	{{{ renderScripts() }}}
+		#app

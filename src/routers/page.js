@@ -13,16 +13,21 @@ const page = new express.Router();
 // 	inject: false,
 // });
 
+const middleware = require('webpack-dev-middleware');
+const webpack = require('webpack');
+const compiler = webpack(require('../../webpack.dev'));
+const path = `${compiler.outputPath}/layout.html`;
+
+page.use(middleware(compiler));
+
 page.get(/\/($|post|tag|search|archive)/, async (req, res) => {
-	try {
-		res.send('<html><head></head><body>test</body></html>');
-		// res.send(await renderer.renderToString({
-		// 	url: req.url,
-		// }));
-	} catch (e) {
-		// metainfo loading fails while post redirection
-		res.end();
-	}
+	compiler.outputFileSystem.readFile(path, (err, result) => {
+		if (err) {
+			res.end();
+			return;
+		}
+		res.set('Content-Type', 'text/html').end(result);
+	});
 });
 
 module.exports = page;
