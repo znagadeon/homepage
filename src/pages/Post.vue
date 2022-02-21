@@ -1,18 +1,18 @@
 <template>
 <div class="post">
 	<div class="post__meta">
-		<h1 class="post__title">{{post.meta.title}}</h1>
+		<h1 class="post__title">{{post.meta?.title}}</h1>
 		<div class="post__tags">
 			<span class="sr-only">tags</span>
-			<tags :tags="post.meta.tags"></tags>
+			<tags :tags="post.meta?.tags"></tags>
 		</div>
 		<div class="post__published">
 			<span class="sr-only">published</span>
-			<time>{{ post.meta.published }}</time>
+			<time>{{ post.meta?.published }}</time>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
-	<comment class="post__comment" v-if="post.meta.title" :title="post.meta.title"></comment>
+	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
 </template>
 
@@ -95,7 +95,7 @@ export default {
 	&__article {
 		@apply mb-6;
 
-		:deep(*) {
+		:deep {
 			@include markdown;
 		}
 	}

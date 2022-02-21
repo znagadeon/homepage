@@ -14,8 +14,7 @@ export default () => {
 		routes: [
 			{ path: '/index.html', component: Home, alias: '/' },
 
-			{ path: '/post/:title/index.html', component: Post },
-			{ path: '/post/:title', redirect: '/post/:title/index.html' },
+			{ path: '/post/:title/index.html', component: Post, alais: '/post/:title' },
 			{ path: '/archive/index.html', component: Archive, alias: '/archive' },
 			{ path: '/tag/:tag/index.html', component: Tag, alias: '/tag/:tag' },
 
