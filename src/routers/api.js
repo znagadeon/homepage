@@ -1,6 +1,6 @@
-const express = require('express');
-const getPosts = require('../lib/get-posts');
-const getMeta = require('../lib/get-meta');
+import express from 'express';
+import getPosts from '../lib/get-posts';
+import getMeta from '../lib/get-meta';
 
 const api = new express.Router();
 
@@ -31,4 +31,4 @@ api.get('/post/:title', (req, res) => {
 	res.end();
 });
 
-module.exports = api;
+export default api;

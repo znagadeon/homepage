@@ -9,6 +9,7 @@ module.exports = {
 			'@src': `${__dirname}/src`,
 			'@root': __dirname,
 		},
+		extensions: ['.js', '.ts', '.json', '.vue'],
 	},
 
 	module: {

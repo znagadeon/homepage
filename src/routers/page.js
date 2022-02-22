@@ -1,5 +1,4 @@
-const express = require('express');
-// const fs = require('fs');
+import express from 'express';
 
 const page = new express.Router();
 
@@ -13,21 +12,8 @@ const page = new express.Router();
 // 	inject: false,
 // });
 
-const middleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const compiler = webpack(require('../../webpack.dev'));
-const path = `${compiler.outputPath}/layout.html`;
-
-page.use(middleware(compiler));
-
 page.get(/\/($|post|tag|search|archive)/, async (req, res) => {
-	compiler.outputFileSystem.readFile(path, (err, result) => {
-		if (err) {
-			res.end();
-			return;
-		}
-		res.set('Content-Type', 'text/html').end(result);
-	});
+	res.sendFile(`${global.ROOT}/dist/client/layout.html`);
 });
 
-module.exports = page;
+export default page;
