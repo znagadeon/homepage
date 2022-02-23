@@ -31,9 +31,7 @@ export default {
 	computed: {
 		desc() {
 			const maxLength = 100;
-			const desc = this.post.content
-				.replace(/<pre class="hljs">[\s\S]+?<\/pre>/g, '')
-				.replace(/<.+?>/g, '');
+			const desc = this.post.content;
 
 			return desc.length > maxLength ? `${desc.slice(0, maxLength)}...` : desc;
 		},

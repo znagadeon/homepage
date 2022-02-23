@@ -14,6 +14,13 @@ api.get('/posts', (req, res) => {
 			if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1) return false;
 
 			return true;
+		}).map(post => {
+			return {
+				...post,
+				content: post.content
+					.replace(/<pre class="hljs">[\s\S]+?<\/pre>/g, '')
+					.replace(/<.+?>/g, ''),
+			};
 		}).sort((a, b) => {
 			if (a.meta.published < b.meta.published) return 1;
 			if (a.meta.published > b.meta.published) return -1;

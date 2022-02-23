@@ -18,7 +18,7 @@ export default () => {
 			},
 
 			async loadPost({ state }, title) {
-				const { data } = (await axios.get(`${host}/api/post/${title}`));
+				const { data } = await axios.get(`${host}/api/post/${title}`);
 				state.post = {
 					content: data.content,
 					meta: {
