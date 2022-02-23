@@ -1,19 +1,30 @@
 import express from 'express';
+import { renderToString } from 'vue/server-renderer';
 
 const page = new express.Router();
 
-// const { createBundleRenderer } = require('vue-server-renderer');
-// const bundle = require('../../dist/server/vue-ssr-server-bundle.json');
-// const clientManifest = require('../../dist/client/vue-ssr-client-manifest.json');
+import createApp from '../app';
 
-// const renderer = createBundleRenderer(bundle, {
-// 	template: fs.readFileSync(`${global.ROOT}/dist/client/layout.html`).toString(),
-// 	clientManifest,
-// 	inject: false,
+const { app, router } = createApp();
+
+// router.push(context.url);
+
+// router.onReady(() => {
+// 	context.rendered = () => {
+// 		context.state = store.state;
+// 	};
+
+// 	resolve(app);
 // });
 
 page.get(/\/($|post|tag|search|archive)/, async (req, res) => {
-	res.sendFile(`${global.ROOT}/dist/client/layout.html`);
+	try {
+		await router.push(req.originalUrl);
+		await router.isReady();
+		res.send(await renderToString(app));
+	} catch (e) {
+		res.end();
+	}
 });
 
 export default page;

@@ -8,7 +8,7 @@ api.get('/posts', (req, res) => {
 	const posts = getPosts(`${global.ROOT}/posts`)
 		.map(filename => ({
 			...getMeta(filename),
-			url: `/post/${filename.slice(global.ROOT.length, -('/index.md'.length))}`,
+			url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)[1]}/index.html`,
 		})).filter(post => {
 			if (post.meta.draft) return false;
 			if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1) return false;

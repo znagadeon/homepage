@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router';
 
 import Home from '@src/pages/Home.vue';
 
@@ -9,8 +9,9 @@ import Tag from '@src/pages/Tag.vue';
 import Search from '@src/pages/Search.vue';
 
 export default () => {
+	const isServer = typeof window === 'undefined';
 	return createRouter({
-		history: createWebHistory(),
+		history: isServer ? createMemoryHistory() : createWebHistory(),
 		routes: [
 			{ path: '/index.html', component: Home, alias: '/' },
 

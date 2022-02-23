@@ -22,8 +22,7 @@ export default {
 		...mapActions(['loadPosts']),
 	},
 
-	// async serverPrefetch() {
-	async created() {
+	async serverPrefetch() {
 		await this.loadPosts();
 
 		// const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;

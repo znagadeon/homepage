@@ -26,8 +26,7 @@ export default {
 		...mapActions(['loadPosts']),
 	},
 
-	// async serverPrefetch() {
-	async created() {
+	async serverPrefetch() {
 		await this.loadPosts({
 			tag: this.tag,
 		});

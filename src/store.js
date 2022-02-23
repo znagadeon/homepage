@@ -14,11 +14,7 @@ export default () => {
 
 		actions: {
 			async loadPosts({ state }, params) {
-				state.posts = (await axios.get(`${host}/api/posts`, { params })).data
-					.map(post => ({
-						...post,
-						url: `${post.url}/`,
-					}));
+				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
 			},
 
 			async loadPost({ state }, title) {
