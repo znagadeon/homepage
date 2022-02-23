@@ -1,15 +1,10 @@
 import createApp from './app';
 
-const { app, router } = createApp();
+const { app, store, router } = createApp();
 
 router.isReady().then(() => {
-	app.mount('#app', true);
+	if (window.__INITIAL_STATE__) {
+		store.replaceState(window.__INITIAL_STATE__);
+	}
+	app.mount('#app');
 });
-
-// router.onReady(() => {
-// 	if (window.__INITIAL_STATE__) {
-// 		store.replaceState(window.__INITIAL_STATE__);
-// 	}
-
-// 	app.mount('#app', true);
-// });
