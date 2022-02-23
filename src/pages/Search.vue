@@ -1,5 +1,6 @@
 <template>
 <div class="gcse-searchresults-only"></div>
+<component :is="script" :src="src" async></component>
 </template>
 
 <script>
@@ -8,6 +9,12 @@ import config from '@root/config.json';
 export default {
 	props: {
 		query: String,
+	},
+
+	computed: {
+		src() {
+			return `https://cse.google.com/cse.js?cx=${config.googleSearch}`;
+		},
 	},
 
 	serverPrefetch() {
