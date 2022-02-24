@@ -52,7 +52,6 @@ module.exports = merge(common, {
 				_config: config,
 				IS_DEV: false,
 			},
-			inject: false,
 			favicon: './favicon.ico',
 			minify: {
 				removeComments: false,

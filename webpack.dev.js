@@ -54,7 +54,6 @@ module.exports = merge(common, {
 				IS_DEV: true,
 			},
 			cache: false,
-			// inject: false,
 			favicon: './favicon.ico',
 		}),
 

@@ -7,7 +7,7 @@
     "dev:ssr": "webpack --config webpack.server.js --watch --mode=development",
     "dev:server": "nodemon ./dist/server/run-server.js",
     "dev": "npm-run-all -p 'dev:*'",
-    "build:static": "webpack --config webpack.prod.js",
+    "build:client": "webpack --config webpack.prod.js",
     "build:ssr": "webpack --config webpack.server.js --mode=production",
     "serve": "node ./dist/server/run-server.js",
     "build": "node build.js",

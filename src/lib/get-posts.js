@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 const getPosts = (contentDir) => {
 	const root = fs.readdirSync(contentDir, { withFileTypes: true });
@@ -23,4 +23,4 @@ const getPosts = (contentDir) => {
 
 const isPage = (path) => Boolean(path.match(/\.md$/));
 
-export default (contentDir) => getPosts(contentDir).filter(v => isPage(v));
+module.exports = (contentDir) => getPosts(contentDir).filter(v => isPage(v));

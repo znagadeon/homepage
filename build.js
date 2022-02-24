@@ -73,8 +73,10 @@ const dest = './public';
 	console.log('Start build');
 
 	await kill(port);
-	spawnSync('yarn', ['build:static']);
+	spawnSync('yarn', ['build:client']);
+	console.log('Client build complete');
 	spawnSync('yarn', ['build:ssr']);
+	console.log('Server build complete');
 	const server = spawn('yarn', ['serve']);
 	for(;;) {
 		try {
@@ -106,12 +108,12 @@ const dest = './public';
 	await capture(host, `${dest}/index.html`);
 
 	// posts
-	await capture(`${host}/archive`, `${dest}/archive/index.html`);
+	await capture(`${host}/archive/index.html`, `${dest}/archive/index.html`);
 	for (let post of postNames) {
-		await capture(`${host}/post/${post}`, `${dest}/post/${post}/index.html`);
+		await capture(`${host}/post/${post}/index.html`, `${dest}/post/${post}/index.html`);
 	}
 	for (let tag of tags) {
-		await capture(`${host}/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
+		await capture(`${host}/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
 	}
 
 	// search page
