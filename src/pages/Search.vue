@@ -1,6 +1,6 @@
 <template>
 <div class="gcse-searchresults-only"></div>
-<component :is="script" :src="src" async></component>
+<component :is="'script'" :src="src" async></component>
 <teleport to="head">
 	<page-meta :meta="meta"></page-meta>
 </teleport>
