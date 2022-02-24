@@ -14,6 +14,9 @@
 	<article class="post__article" v-html="post.content"></article>
 	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
+<teleport to="head">
+	<page-meta :meta="meta"></page-meta>
+</teleport>
 </template>
 
 <script>
@@ -21,50 +24,56 @@ import config from '@root/config.json';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
+import PageMeta from '@src/components/PageMeta.vue';
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
 	components: {
 		Tags,
 		Comment,
+		PageMeta,
 	},
 
 	computed: {
-		...mapState(['post']),
+		...mapState(['post', 'meta']),
+		title() {
+			return this.$route.params.title;
+		},
 	},
 
 	methods: {
+		...mapMutations(['setMeta']),
 		...mapActions(['loadPost']),
 	},
 
 	async serverPrefetch() {
-		await this.loadPost(this.$route.params.title);
+		await this.loadPost(this.title);
 
-		// const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-		// const title = this.post.meta.title;
-		// const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-		// this.$ssrContext.title = `${this.post.meta.title} - ${config.blogName}`,
-		// this.$ssrContext.meta = {
-		// 	author: config.name,
-		// 	description: config.description,
+		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const title = this.post.meta.title;
+		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
+		this.setMeta({
+			title: `${title} - ${config.blogName}`,
+			author: config.name,
+			description: config.description,
 
-		// 	opengraph: {
-		// 		type: 'article',
-		// 		url: `${config.host}/post/${this.title}/index.html`,
-		// 		title,
-		// 		description: desc,
-		// 		image: gravatar,
-		// 	},
+			opengraph: {
+				type: 'article',
+				url: `${config.host}/post/${this.title}/index.html`,
+				title,
+				description: desc,
+				image: gravatar,
+			},
 
-		// 	twitter: {
-		// 		card: 'summary',
-		// 		site: `@${config.links.twitter}`,
-		// 		title,
-		// 		description: desc,
-		// 		image: gravatar,
-		// 	},
-		// };
+			twitter: {
+				card: 'summary',
+				site: `@${config.links.twitter}`,
+				title,
+				description: desc,
+				image: gravatar,
+			},
+		});
 	},
 };
 </script>

@@ -10,7 +10,14 @@ export default () => {
 		state: () => ({
 			posts: [],
 			post: {},
+			meta: {},
 		}),
+
+		mutations: {
+			setMeta(state, meta) {
+				state.meta = meta;
+			},
+		},
 
 		actions: {
 			async loadPosts({ state }, params) {

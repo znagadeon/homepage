@@ -1,21 +1,26 @@
 <template>
 <post-list :posts="posts">#{{tag}}</post-list>
+<teleport to="head">
+	<page-meta :meta="meta"></page-meta>
+</teleport>
 </template>
 
 <script>
 import PostList from '@src/components/PostList.vue';
+import PageMeta from '@src/components/PageMeta.vue';
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 import config from '@root/config.json';
 
 export default {
 	components: {
 		PostList,
+		PageMeta,
 	},
 
 	computed: {
-		...mapState(['posts']),
+		...mapState(['posts', 'meta']),
 
 		tag() {
 			return this.$route.params.tag;
@@ -23,6 +28,7 @@ export default {
 	},
 
 	methods: {
+		...mapMutations(['setMeta']),
 		...mapActions(['loadPosts']),
 	},
 
@@ -31,29 +37,29 @@ export default {
 			tag: this.tag,
 		});
 
-		// const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
-		// this.$ssrContext.title = `#${this.tag} - ${config.blogName}`,
-		// this.$ssrContext.meta = {
-		// 	author: config.name,
-		// 	description: config.description,
+		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		this.setMeta({
+			title: `#${this.tag} - ${config.blogName}`,
+			author: config.name,
+			description: config.description,
 
-		// 	opengraph: {
-		// 		type: 'website',
-		// 		url: config.host,
-		// 		title: config.blogName,
-		// 		description: config.description,
-		// 		image: gravatar,
-		// 	},
+			opengraph: {
+				type: 'website',
+				url: config.host,
+				title: config.blogName,
+				description: config.description,
+				image: gravatar,
+			},
 
-		// 	twitter: {
-		// 		card: 'summary',
-		// 		site: `@${config.links.twitter}`,
-		// 		title: config.blogName,
-		// 		description: config.description,
-		// 		image: gravatar,
-		// 	},
-		// };
-	}
+			twitter: {
+				card: 'summary',
+				site: `@${config.links.twitter}`,
+				title: config.blogName,
+				description: config.description,
+				image: gravatar,
+			},
+		});
+	},
 };
 </script>
 
