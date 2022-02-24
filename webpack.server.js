@@ -4,7 +4,6 @@ const common = require('./webpack.common');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = merge(common, {
-	mode: 'production', // TODO
 	target: 'node',
 
 	entry: './src/entry-server.js',
