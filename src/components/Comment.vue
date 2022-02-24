@@ -37,5 +37,9 @@ export default {
 <style lang="scss" scoped>
 .giscus {
 	@apply mb-4;
+
+	:deep(.giscus-frame) {
+		width: 100%;
+	}
 }
 </style>
