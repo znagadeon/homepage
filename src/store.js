@@ -1,31 +1,31 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
 import axios from 'axios';
 import format from 'date-fns/format';
 
-Vue.use(Vuex);
-
 const host = 'http://localhost:1337';
 
 export default () => {
-	return new Vuex.Store({
+	return createStore({
 		state: () => ({
 			posts: [],
 			post: {},
+			meta: {},
 		}),
+
+		mutations: {
+			setMeta(state, meta) {
+				state.meta = meta;
+			},
+		},
 
 		actions: {
 			async loadPosts({ state }, params) {
-				state.posts = (await axios.get(`${host}/api/posts`, { params })).data
-					.map(post => ({
-						...post,
-						url: `${post.url}/`,
-					}));
+				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
 			},
 
 			async loadPost({ state }, title) {
-				const { data } = (await axios.get(`${host}/api/post/${title}`));
+				const { data } = await axios.get(`${host}/api/post/${title}`);
 				state.post = {
 					content: data.content,
 					meta: {

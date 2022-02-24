@@ -1,19 +1,22 @@
 <template>
 <div class="post">
 	<div class="post__meta">
-		<h1 class="post__title">{{post.meta.title}}</h1>
+		<h1 class="post__title">{{post.meta?.title}}</h1>
 		<div class="post__tags">
 			<span class="sr-only">tags</span>
-			<tags :tags="post.meta.tags"></tags>
+			<tags :tags="post.meta?.tags"></tags>
 		</div>
 		<div class="post__published">
 			<span class="sr-only">published</span>
-			<time>{{ post.meta.published }}</time>
+			<time>{{ post.meta?.published }}</time>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
-	<comment class="post__comment" v-if="post.meta.title" :title="post.meta.title"></comment>
+	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
+<teleport to="head">
+	<page-meta :meta="meta"></page-meta>
+</teleport>
 </template>
 
 <script>
@@ -21,31 +24,37 @@ import config from '@root/config.json';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
+import PageMeta from '@src/components/PageMeta.vue';
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
 	components: {
 		Tags,
 		Comment,
+		PageMeta,
 	},
 
 	computed: {
-		...mapState(['post']),
+		...mapState(['post', 'meta']),
+		title() {
+			return this.$route.params.title;
+		},
 	},
 
 	methods: {
+		...mapMutations(['setMeta']),
 		...mapActions(['loadPost']),
 	},
 
 	async serverPrefetch() {
-		await this.loadPost(this.$route.params.title);
+		await this.loadPost(this.title);
 
 		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
 		const title = this.post.meta.title;
 		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-		this.$ssrContext.title = `${this.post.meta.title} - ${config.blogName}`,
-		this.$ssrContext.meta = {
+		this.setMeta({
+			title: `${title} - ${config.blogName}`,
 			author: config.name,
 			description: config.description,
 
@@ -64,7 +73,7 @@ export default {
 				description: desc,
 				image: gravatar,
 			},
-		};
+		});
 	},
 };
 </script>
@@ -94,7 +103,7 @@ export default {
 	&__article {
 		@apply mb-6;
 
-		::v-deep {
+		:deep {
 			@include markdown;
 		}
 	}

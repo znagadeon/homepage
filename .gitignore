@@ -1,5 +1,4 @@
 # for dev
-node_modules
 coverage
 .tool-versions
 .yarn/*

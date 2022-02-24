@@ -1,10 +1,10 @@
-const express = require('express');
-const getPosts = require('../lib/get-posts');
-const getMeta = require('../lib/get-meta');
+import express from 'express';
+import getPosts from '../lib/get-posts';
+import getMeta from '../lib/get-meta';
 
-const convert = require('xml-js');
+import convert from 'xml-js';
 
-const config = require('../../config.json');
+import config from '../../config';
 
 const rss = new express.Router();
 
@@ -85,4 +85,4 @@ rss.get('/rss.xml', (req, res) => {
 	}));
 });
 
-module.exports = rss;
+export default rss;

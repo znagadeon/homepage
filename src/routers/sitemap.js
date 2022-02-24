@@ -1,9 +1,9 @@
-const express = require('express');
-const getPosts = require('../lib/get-posts');
-const getMeta = require('../lib/get-meta');
+import express from 'express';
+import getPosts from '../lib/get-posts';
+import getMeta from '../lib/get-meta';
 
-const convert = require('xml-js');
-const { format } = require('date-fns');
+import convert from 'xml-js';
+import { format } from 'date-fns';
 
 const config = require('../../config.json');
 
@@ -126,4 +126,4 @@ sitemap.get('/sitemap.xml', (req, res) => {
 	}));
 });
 
-module.exports = sitemap;
+export default sitemap;

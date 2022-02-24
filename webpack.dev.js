@@ -4,7 +4,6 @@ const common = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const config = require('./config.json');
@@ -41,7 +40,6 @@ module.exports = merge(common, {
 	},
 
 	plugins: [
-		new VueSSRClientPlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'style.css',
 		}),
@@ -56,13 +54,11 @@ module.exports = merge(common, {
 				IS_DEV: true,
 			},
 			cache: false,
-			inject: false,
 			favicon: './favicon.ico',
 		}),
 
 		new BundleAnalyzerPlugin({
-			openAnalyzer: false,
-			analyzerPort: 5000,
+			analyzerMode: 'json',
 		}),
 	],
 });

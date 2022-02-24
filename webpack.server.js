@@ -3,16 +3,16 @@ const common = require('./webpack.common');
 
 const nodeExternals = require('webpack-node-externals');
 
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
-
 module.exports = merge(common, {
-	mode: 'production',
 	target: 'node',
 
 	entry: './src/entry-server.js',
 	output: {
-		libraryTarget: 'commonjs2',
+		library: {
+			type: 'commonjs2',
+		},
 		path: `${__dirname}/dist/server`,
+		filename: 'run-server.js',
 	},
 
 	devtool: 'source-map',
@@ -25,8 +25,4 @@ module.exports = merge(common, {
 	},
 
 	externals: nodeExternals(),
-
-	plugins: [
-		new VueSSRServerPlugin(),
-	],
 });

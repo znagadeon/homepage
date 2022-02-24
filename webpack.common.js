@@ -1,5 +1,5 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
 	context: __dirname,
@@ -9,6 +9,7 @@ module.exports = {
 			'@src': `${__dirname}/src`,
 			'@root': __dirname,
 		},
+		extensions: ['.js', '.ts', '.json', '.vue'],
 	},
 
 	module: {
@@ -16,7 +17,7 @@ module.exports = {
 			test: /\.vue$/,
 			loader: 'vue-loader',
 		}, {
-			test: /\.js$/,
+			test: /\.[tj]s$/,
 			loader: 'babel-loader',
 		}, {
 			test: /\.pug$/,

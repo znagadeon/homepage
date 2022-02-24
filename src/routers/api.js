@@ -1,6 +1,6 @@
-const express = require('express');
-const getPosts = require('../lib/get-posts');
-const getMeta = require('../lib/get-meta');
+import express from 'express';
+import getPosts from '../lib/get-posts';
+import getMeta from '../lib/get-meta';
 
 const api = new express.Router();
 
@@ -8,12 +8,19 @@ api.get('/posts', (req, res) => {
 	const posts = getPosts(`${global.ROOT}/posts`)
 		.map(filename => ({
 			...getMeta(filename),
-			url: `/post/${filename.slice(global.ROOT.length, -('/index.md'.length))}`,
+			url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)[1]}/index.html`,
 		})).filter(post => {
 			if (post.meta.draft) return false;
 			if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1) return false;
 
 			return true;
+		}).map(post => {
+			return {
+				...post,
+				content: post.content
+					.replace(/<pre class="hljs">[\s\S]+?<\/pre>/g, '')
+					.replace(/<.+?>/g, ''),
+			};
 		}).sort((a, b) => {
 			if (a.meta.published < b.meta.published) return 1;
 			if (a.meta.published > b.meta.published) return -1;
@@ -31,4 +38,4 @@ api.get('/post/:title', (req, res) => {
 	res.end();
 });
 
-module.exports = api;
+export default api;

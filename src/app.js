@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createSSRApp } from 'vue';
 
 import App from './App.vue';
 import createStore from './store';
@@ -9,11 +9,10 @@ import '../styles/master.scss';
 export default () => {
 	const store = createStore();
 	const router = createRouter();
-	const app = new Vue({
-		render: (h) => h(App),
-		store,
-		router,
-	});
+	const app = createSSRApp(App);
+
+	app.use(store);
+	app.use(router);
 
 	return { app, store, router };
-}
+};

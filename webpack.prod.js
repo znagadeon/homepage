@@ -4,7 +4,6 @@ const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
@@ -40,7 +39,6 @@ module.exports = merge(common, {
 	},
 
 	plugins: [
-		new VueSSRClientPlugin(),
 		new MiniCssExtractPlugin({
 			filename: 'style-[contenthash:10].min.css',
 		}),
@@ -54,7 +52,6 @@ module.exports = merge(common, {
 				_config: config,
 				IS_DEV: false,
 			},
-			inject: false,
 			favicon: './favicon.ico',
 			minify: {
 				removeComments: false,
