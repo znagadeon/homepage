@@ -8,7 +8,7 @@
 		</div>
 		<div class="post__published">
 			<span class="sr-only">published</span>
-			<time>{{ post.meta?.published }}</time>
+			<a target="_blank" :href="githubLink"><time>{{ post.meta?.published }}</time></a>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
@@ -39,6 +39,9 @@ export default {
 		...mapState(['post', 'meta']),
 		title() {
 			return this.$route.params.title;
+		},
+		githubLink() {
+			return `https://github.com/${config.comment.repository}/tree/develop/posts/${this.title}/index.md`;
 		},
 	},
 
@@ -89,6 +92,10 @@ export default {
 		@apply border-gray-300;
 		@apply pb-2;
 		@apply mb-6;
+	}
+
+	&__published {
+		@apply underline;
 	}
 
 	&__title {
