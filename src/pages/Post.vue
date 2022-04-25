@@ -8,7 +8,7 @@
 		</div>
 		<div class="post__published">
 			<span class="sr-only">published</span>
-			<a target="_blank" :href="githubLink"><time>{{ post.meta?.published }}</time></a>
+			<a target="_blank" :href="commitLog"><time>{{ post.meta?.published }}</time></a>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
@@ -40,8 +40,8 @@ export default {
 		title() {
 			return this.$route.params.title;
 		},
-		githubLink() {
-			return `https://github.com/${config.comment.repository}/tree/develop/posts/${this.title}/index.md`;
+		commitLog() {
+			return `https://github.com/${config.comment.repository}/commits/develop/posts/${this.title}`;
 		},
 	},
 
