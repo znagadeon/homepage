@@ -13,7 +13,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
 	const posts = getPosts(`${global.ROOT}/posts`)
 		.map(filename => ({
 			...getMeta(filename),
-			url: `/post/${filename.slice(global.ROOT.length, -('/index.md'.length))}`,
+			url: `/post/${filename.slice(global.ROOT.length, -('/index.md'.length))}/index.html`,
 		}))
 		.filter(post => !post.meta.draft)
 		.sort((a, b) => {
