@@ -10,10 +10,11 @@ const config = require('../../config.json');
 const sitemap = new express.Router();
 
 sitemap.get('/sitemap.xml', (req, res) => {
-	const posts = getPosts(`${global.ROOT}/posts`)
+	const POST_PATH = `${global.ROOT}/posts/`;
+	const posts = getPosts(POST_PATH)
 		.map(filename => ({
 			...getMeta(filename),
-			url: `/post/${filename.slice(global.ROOT.length, -('/index.md'.length))}/index.html`,
+			url: `/post/${filename.slice(POST_PATH.length, -('/index.md'.length))}/index.html`,
 		}))
 		.filter(post => !post.meta.draft)
 		.sort((a, b) => {
