@@ -5,7 +5,7 @@ import getMeta from '../lib/get-meta';
 import convert from 'xml-js';
 import { format } from 'date-fns';
 
-const config = require('../../config');
+const { host } = require('../../config');
 
 const sitemap = new express.Router();
 
@@ -38,7 +38,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
 					elements: [{
 						type: 'element',
 						name: 'loc',
-						elements: [{ type: 'text', text: `${config.host}${post.url}` }],
+						elements: [{ type: 'text', text: `${host}${post.url}` }],
 					}, {
 						type: 'element',
 						name: 'lastmod',
@@ -58,7 +58,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
 					elements: [{
 						type: 'element',
 						name: 'loc',
-						elements: [{ type: 'text', text: `${config.host}/tag/${tag}` }],
+						elements: [{ type: 'text', text: `${host}/tag/${tag}` }],
 					}, {
 						type: 'element',
 						name: 'lastmod',
@@ -78,7 +78,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
 					elements: [{
 						type: 'element',
 						name: 'loc',
-						elements: [{ type: 'text', text: config.host }],
+						elements: [{ type: 'text', text: host }],
 					}, {
 						type: 'element',
 						name: 'lastmod',
@@ -98,7 +98,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
 					elements: [{
 						type: 'element',
 						name: 'loc',
-						elements: [{ type: 'text', text: `${config.host}/archive` }],
+						elements: [{ type: 'text', text: `${host}/archive` }],
 					}, {
 						type: 'element',
 						name: 'lastmod',

@@ -4,7 +4,7 @@ import getMeta from '../lib/get-meta';
 
 import convert from 'xml-js';
 
-import config from '../../config';
+import { blogName, host, description, name } from '../../config';
 
 const rss = new express.Router();
 
@@ -37,15 +37,15 @@ rss.get('/rss.xml', (req, res) => {
 				elements: [{
 					type: 'element',
 					name: 'title',
-					elements: [{ type: 'text', text: wrapCData(config.blogName) }],
+					elements: [{ type: 'text', text: wrapCData(blogName) }],
 				}, {
 					type: 'element',
 					name: 'link',
-					elements: [{ type: 'text', text: config.host }],
+					elements: [{ type: 'text', text: host }],
 				}, {
 					type: 'element',
 					name: 'description',
-					elements: [{ type: 'text', text: wrapCData(config.description) }],
+					elements: [{ type: 'text', text: wrapCData(description) }],
 				}, ...posts.map(post => ({
 					type: 'element',
 					name: 'item',
@@ -56,7 +56,7 @@ rss.get('/rss.xml', (req, res) => {
 					}, {
 						type: 'element',
 						name: 'link',
-						elements: [{ type: 'text', text: `${config.host}${post.url}` }],
+						elements: [{ type: 'text', text: `${host}${post.url}` }],
 					}, {
 						type: 'element',
 						name: 'description',
@@ -64,11 +64,11 @@ rss.get('/rss.xml', (req, res) => {
 					}, {
 						type: 'element',
 						name: 'author',
-						elements: [{ type: 'text', text: wrapCData(config.name) }],
+						elements: [{ type: 'text', text: wrapCData(name) }],
 					}, {
 						type: 'element',
 						name: 'guid',
-						elements: [{ type: 'text', text: `${config.host}${post.url}` }],
+						elements: [{ type: 'text', text: `${host}${post.url}` }],
 					}, {
 						type: 'element',
 						name: 'pubDate',
