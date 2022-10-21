@@ -6,14 +6,19 @@
 	</main>
     <footer></footer>
 </div>
+<teleport to="head">
+	<google-analytics></google-analytics>
+</teleport>
 </template>
 
 <script>
 import BlogHeader from './components/BlogHeader.vue';
+import GoogleAnalytics from './components/GoogleAnalytics.vue';
 
 export default {
 	components: {
 		BlogHeader,
+		GoogleAnalytics,
 	},
 };
 </script>
