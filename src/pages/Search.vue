@@ -9,7 +9,7 @@
 <script>
 import PageMeta from '@src/components/PageMeta.vue';
 
-import config from '@root/config';
+import { googleSearch, links, name, blogName, description, host } from '@root/config';
 
 import { mapState, mapMutations } from 'vuex';
 
@@ -25,7 +25,7 @@ export default {
 	computed: {
 		...mapState(['meta']),
 		src() {
-			return `https://cse.google.com/cse.js?cx=${config.googleSearch}`;
+			return `https://cse.google.com/cse.js?cx=${googleSearch}`;
 		},
 	},
 
@@ -34,25 +34,25 @@ export default {
 	},
 
 	serverPrefetch() {
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
 		this.setMeta({
-			title: `Search - ${config.blogName}`,
-			author: config.name,
-			description: config.description,
+			title: `Search - ${blogName}`,
+			author: name,
+			description: description,
 
 			opengraph: {
 				type: 'website',
-				url: config.host,
-				title: config.blogName,
-				description: config.description,
+				url: host,
+				title: blogName,
+				description: description,
 				image: gravatar,
 			},
 
 			twitter: {
 				card: 'summary',
-				site: `@${config.links.twitter}`,
-				title: config.blogName,
-				description: config.description,
+				site: `@${links.twitter}`,
+				title: blogName,
+				description: description,
 				image: gravatar,
 			},
 		});

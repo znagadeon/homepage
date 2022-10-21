@@ -6,8 +6,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-const config = require('./config');
-
 module.exports = merge(common, {
 	mode: 'development',
 
@@ -50,7 +48,6 @@ module.exports = merge(common, {
 			template: './index.html',
 			filename: 'layout.html',
 			templateParameters: {
-				_config: config,
 				IS_DEV: true,
 			},
 			cache: false,

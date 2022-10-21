@@ -2,7 +2,7 @@
 <header class="header">
 	<div class="header__title title">
 		<h1 class="title__blog-name">
-			<a href="/">{{ config.blogName }}</a>
+			<a href="/">{{ blogName }}</a>
 		</h1>
 		<div class="title__search search">
 			<label>
@@ -16,8 +16,8 @@
 	</div>
 	<section class="header__profile profile">
 		<img :src="links.profileImage" :width="profileSize/2" :height="profileSize/2" alt="Profile image" class="profile__image">
-		<h2 class="profile__title">{{ config.name }}</h2>
-		<p class="profile__description">{{ config.description }}</p>
+		<h2 class="profile__title">{{ name }}</h2>
+		<p class="profile__description">{{ description }}</p>
         <ul class="profile__links">
 			<li>
 				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
@@ -61,7 +61,7 @@
 
 <script>
 import { ref } from 'vue';
-import config from '@root/config';
+import { links, name, blogName, description } from '@root/config';
 
 import Icon from './Icon.vue';
 
@@ -74,13 +74,13 @@ export default {
 		const profileSize = 300;
 		const query = ref('');
 
-		const links = {
-			profileImage: `https://www.gravatar.com/avatar/${config.links.gravatar}?s=${profileSize}`,
-			github: `https://github.com/${config.links.github}`,
-			linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
-			twitter: `https://twitter.com/${config.links.twitter}`,
-			rss: config.links.rss,
-			donation: config.links.donation,
+		const _links = {
+			profileImage: `https://www.gravatar.com/avatar/${links.gravatar}?s=${profileSize}`,
+			github: `https://github.com/${links.github}`,
+			linkedin: `https://linkedin.com/in/${links.linkedin}`,
+			twitter: `https://twitter.com/${links.twitter}`,
+			rss: links.rss,
+			donation: links.donation,
 		};
 
 		const search = async () => {
@@ -92,7 +92,7 @@ export default {
 			location.href = `/search/index.html?q=${query.value}`;
 		};
 
-		return { query, config, links, search, profileSize };
+		return { query, blogName, name, description, links: _links, search, profileSize };
 	},
 
 	created() {

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import config from '@root/config';
+import { comment, links, blogName, name, description, host } from '@root/config';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
@@ -41,7 +41,7 @@ export default {
 			return this.$route.params.title;
 		},
 		commitLog() {
-			return `https://github.com/${config.comment.repository}/commits/develop/posts/${this.title}`;
+			return `https://github.com/${comment.repository}/commits/develop/posts/${this.title}`;
 		},
 	},
 
@@ -53,17 +53,17 @@ export default {
 	async serverPrefetch() {
 		await this.loadPost(this.title);
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
 		const title = this.post.meta.title;
 		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 		this.setMeta({
-			title: `${title} - ${config.blogName}`,
-			author: config.name,
-			description: config.description,
+			title: `${title} - ${blogName}`,
+			author: name,
+			description: description,
 
 			opengraph: {
 				type: 'article',
-				url: `${config.host}/post/${this.title}/index.html`,
+				url: `${host}/post/${this.title}/index.html`,
 				title,
 				description: desc,
 				image: gravatar,
@@ -71,7 +71,7 @@ export default {
 
 			twitter: {
 				card: 'summary',
-				site: `@${config.links.twitter}`,
+				site: `@${links.twitter}`,
 				title,
 				description: desc,
 				image: gravatar,

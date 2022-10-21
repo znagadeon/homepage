@@ -11,7 +11,7 @@ import PageMeta from '@src/components/PageMeta.vue';
 
 import { mapState, mapMutations, mapActions } from 'vuex';
 
-import config from '@root/config';
+import { links, blogName, name, description, host } from '@root/config';
 
 export default {
 	components: {
@@ -31,25 +31,25 @@ export default {
 	async serverPrefetch() {
 		await this.loadPosts();
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
 		this.setMeta({
-			title: `Archive - ${config.blogName}`,
-			author: config.name,
-			description: config.description,
+			title: `Archive - ${blogName}`,
+			author: name,
+			description: description,
 
 			opengraph: {
 				type: 'website',
-				url: config.host,
-				title: config.blogName,
-				description: config.description,
+				url: host,
+				title: blogName,
+				description: description,
 				image: gravatar,
 			},
 
 			twitter: {
 				card: 'summary',
-				site: `@${config.links.twitter}`,
-				title: config.blogName,
-				description: config.description,
+				site: `@${links.twitter}`,
+				title: blogName,
+				description: description,
 				image: gravatar,
 			},
 		});
