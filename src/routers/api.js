@@ -2,10 +2,12 @@ import express from 'express';
 import getPosts from '../lib/get-posts';
 import getMeta from '../lib/get-meta';
 
+import { ROOT } from '../consts';
+
 const api = new express.Router();
 
 api.get('/posts', (req, res) => {
-	const posts = getPosts(`${global.ROOT}/posts`)
+	const posts = getPosts(`${ROOT}/posts`)
 		.map(filename => ({
 			...getMeta(filename),
 			url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)[1]}/index.html`,
@@ -32,7 +34,7 @@ api.get('/posts', (req, res) => {
 });
 
 api.get('/post/:title', (req, res) => {
-	const filename = getPosts(`${global.ROOT}/posts`)
+	const filename = getPosts(`${ROOT}/posts`)
 		.find(v => v.indexOf(req.params.title) > -1);
 	res.send(getMeta(filename));
 	res.end();

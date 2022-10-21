@@ -2,6 +2,8 @@ import express from 'express';
 import getPosts from '../lib/get-posts';
 import getMeta from '../lib/get-meta';
 
+import { ROOT } from '../consts';
+
 import convert from 'xml-js';
 import { format } from 'date-fns';
 
@@ -10,7 +12,7 @@ const { host } = require('../../config');
 const sitemap = new express.Router();
 
 sitemap.get('/sitemap.xml', (req, res) => {
-	const POST_PATH = `${global.ROOT}/posts/`;
+	const POST_PATH = `${ROOT}/posts/`;
 	const posts = getPosts(POST_PATH)
 		.map(filename => ({
 			...getMeta(filename),
