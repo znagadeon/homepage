@@ -18,3 +18,6 @@ public
 
 # Local Netlify folder
 .netlify
+
+# Vite
+node_modules

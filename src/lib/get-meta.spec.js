@@ -1,3 +1,5 @@
+import { describe, it, afterEach, expect } from 'vitest';
+
 const mock = require('mock-fs');
 
 const getMeta = require('./get-meta');
