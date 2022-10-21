@@ -23,24 +23,21 @@ import Tags from './Tags.vue';
 
 import { format } from 'date-fns';
 
+const formatPublished = (datetime) => format(new Date(datetime), 'yyyy-MM-dd');
+
 export default {
 	components: { Tags },
 
-	props: ['post'],
-
-	computed: {
-		desc() {
-			const maxLength = 100;
-			const desc = this.post.content;
-
-			return desc.length > maxLength ? `${desc.slice(0, maxLength)}...` : desc;
-		},
+	props: {
+		post: Object,
 	},
 
-	methods: {
-		formatPublished(datetime) {
-			return format(new Date(datetime), 'yyyy-MM-dd');
-		},
+	setup({ post }) {
+		const maxLength = 100;
+		const { content } = post;
+		const desc = content.length > maxLength ? `${content.slice(0, maxLength)}...` : content;
+
+		return { desc, formatPublished };
 	},
 }
 </script>

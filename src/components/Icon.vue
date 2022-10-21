@@ -6,12 +6,16 @@
 import feather from 'feather-icons';
 
 export default {
-	props: ['name', 'size'],
+	props: {
+		name: String,
+		size: Number,
+	},
 
-	computed: {
-		icon() {
-			return feather.icons[this.name].toSvg({ width: this.size, height: this.size });
-		},
+	setup({ name, size }) {
+		const icon = feather.icons[name]
+			.toSvg({ width: size, height: size });
+
+		return { icon };
 	}
 }
 </script>

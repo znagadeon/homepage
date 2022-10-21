@@ -3,10 +3,10 @@
 	<div class="giscus"></div>
 	<component :is="'script'"
 		src="https://giscus.app/client.js"
-		:data-repo="config.comment.repository"
-		:data-repo-id="config.comment.repoId"
-		:data-category="config.comment.category"
-		:data-category-id="config.comment.categoryId"
+		:data-repo="comment.repository"
+		:data-repo-id="comment.repoId"
+		:data-category="comment.category"
+		:data-category-id="comment.categoryId"
 		data-mapping="specific"
 		:data-term="title"
 		data-reaction-enabled="1"
@@ -19,17 +19,15 @@
 </template>
 
 <script>
-import config from '@root/config';
+import { comment } from '@root/config';
 
 export default {
 	props: {
 		title: String,
 	},
 
-	data() {
-		return {
-			config,
-		};
+	setup({ title }) {
+		return { title, comment };
 	},
 };
 </script>

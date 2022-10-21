@@ -10,38 +10,38 @@
 				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
 			</label>
 			<button @click="search" aria-label="Search">
-				<icon name="search" size="20"></icon>
+				<icon name="search" :size="20"></icon>
 			</button>
 		</div>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
+		<img :src="links.profileImage" :width="profileSize/2" :height="profileSize/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
 			<li>
 				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
-					<icon name="github" size="20"></icon>
+					<icon name="github" :size="20"></icon>
 				</a>
 			</li>
 			<li>
 				<a :href="links.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
-					<icon name="linkedin" size="20"></icon>
+					<icon name="linkedin" :size="20"></icon>
 				</a>
 			</li>
 			<li>
 				<a :href="links.twitter" target="_blank" rel="noopener" aria-label="Twitter">
-					<icon name="twitter" size="20"></icon>
+					<icon name="twitter" :size="20"></icon>
 				</a>
 			</li>
 			<li>
 				<a :href="links.rss" target="_blank" rel="noopener" aria-label="RSS">
-					<icon name="rss" size="20"></icon>
+					<icon name="rss" :size="20"></icon>
 				</a>
 			</li>
 			<li>
 				<a :href="links.donation" target="_blank" rel="noopener" aria-label="Donation">
-					<icon name="dollar-sign" size="20"></icon>
+					<icon name="dollar-sign" :size="20"></icon>
 				</a>
 			</li>
 		</ul>
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import config from '@root/config';
 
 import Icon from './Icon.vue';
@@ -69,36 +70,29 @@ export default {
 		Icon,
 	},
 
-	data() {
-		return {
-			size: 300,
-			config,
-			query: '',
+	setup() {
+		const profileSize = 300;
+		const query = ref('');
+
+		const links = {
+			profileImage: `https://www.gravatar.com/avatar/${config.links.gravatar}?s=${profileSize}`,
+			github: `https://github.com/${config.links.github}`,
+			linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
+			twitter: `https://twitter.com/${config.links.twitter}`,
+			rss: config.links.rss,
+			donation: config.links.donation,
 		};
-	},
 
-	computed: {
-		links() {
-			return {
-				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=${this.size}`,
-				github: `https://github.com/${config.links.github}`,
-				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
-				twitter: `https://twitter.com/${config.links.twitter}`,
-				rss: config.links.rss,
-				donation: config.links.donation,
-			};
-		},
-	},
-
-	methods: {
-		async search() {
-			if (!this.query) {
+		const search = async () => {
+			if (!query.value) {
 				alert('검색어를 입력하세요');
 				return;
 			}
 
-			location.href = `/search/index.html?q=${this.query}`;
-		},
+			location.href = `/search/index.html?q=${query.value}`;
+		};
+
+		return { query, config, links, search, profileSize };
 	},
 
 	created() {

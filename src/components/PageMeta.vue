@@ -20,6 +20,8 @@
 
 <script>
 export default {
-	props: ['meta'],
+	props: {
+		meta: Object,
+	},
 }
 </script>

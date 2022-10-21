@@ -15,7 +15,9 @@ export default {
 		PostItem,
 	},
 
-	props: ['posts'],
+	props: {
+		posts: Array,
+	},
 };
 </script>
 
