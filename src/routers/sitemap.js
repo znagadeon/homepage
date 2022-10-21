@@ -5,7 +5,7 @@ import getMeta from '../lib/get-meta';
 import convert from 'xml-js';
 import { format } from 'date-fns';
 
-const config = require('../../config.json');
+const config = require('../../config');
 
 const sitemap = new express.Router();
 

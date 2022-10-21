@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import config from '@root/config.json';
+import config from '@root/config';
 
 export default {
 	props: {

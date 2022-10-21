@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
-const config = require('./config.json');
+const config = require('./config');
 
 module.exports = merge(common, {
 	mode: 'development',

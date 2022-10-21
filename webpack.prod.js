@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
-const config = require('./config.json');
+const config = require('./config');
 
 module.exports = merge(common, {
 	mode: 'production',

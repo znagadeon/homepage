@@ -9,7 +9,7 @@
 <script>
 import PageMeta from '@src/components/PageMeta.vue';
 
-import config from '@root/config.json';
+import config from '@root/config';
 
 import { mapState, mapMutations } from 'vuex';
 
