@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import getPosts from '../lib/get-posts';
 import getMeta from '../lib/get-meta';
 
@@ -8,9 +8,9 @@ import convert from 'xml-js';
 
 import { blogName, host, description, name } from '../../config';
 
-const rss = new express.Router();
+const rss = Router();
 
-const wrapCData = text => `<![CDATA[${text}]]>`;
+const wrapCData = (text: string) => `<![CDATA[${text}]]>`;
 
 rss.get('/rss.xml', (req, res) => {
 	const POST_PATH = `${ROOT}/posts/`;
