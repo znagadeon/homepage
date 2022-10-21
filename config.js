@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	blogName: '지나가던 개발자',
 	name: 'Kim Songhyun',
 	description: '카카오 프론트엔드 개발자 since 2018. 01.',

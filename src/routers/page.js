@@ -4,7 +4,7 @@ import { renderToString } from 'vue/server-renderer';
 
 const page = new express.Router();
 
-import createApp from '../app';
+import createApp from '../createApp';
 
 const { app, store, router } = createApp();
 
