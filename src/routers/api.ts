@@ -1,17 +1,27 @@
-import express from 'express';
+import { Router, Request } from 'express';
 import getPosts from '../lib/get-posts';
 import getMeta from '../lib/get-meta';
 
 import { ROOT } from '../consts';
 
-const api = new express.Router();
+const api = Router();
 
-api.get('/posts', (req, res) => {
+type Query = {
+  tag?: string,
+  length?: number,
+};
+
+api.get('/posts', (req: Request<{}, {}, {}, Query>, res) => {
 	const posts = getPosts(`${ROOT}/posts`)
-		.map(filename => ({
-			...getMeta(filename),
-			url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)[1]}/index.html`,
-		})).filter(post => {
+		.map(filename => {
+			const match = filename.match(/posts\/(.+)\/index\.md$/) as RegExpMatchArray;
+
+			return {
+				...getMeta(filename),
+				url: `/post/${match[1]}/index.html`,
+			};
+		}).filter(post => {
+			if (post === null) return false;
 			if (post.meta.draft) return false;
 			if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1) return false;
 
@@ -19,7 +29,7 @@ api.get('/posts', (req, res) => {
 		}).map(post => {
 			return {
 				...post,
-				content: post.content
+				content: post?.content
 					.replace(/<pre class="hljs">[\s\S]+?<\/pre>/g, '')
 					.replace(/<.+?>/g, ''),
 			};
@@ -36,6 +46,12 @@ api.get('/posts', (req, res) => {
 api.get('/post/:title', (req, res) => {
 	const filename = getPosts(`${ROOT}/posts`)
 		.find(v => v.indexOf(req.params.title) > -1);
+
+	if (!filename) {
+		res.status(404).end();
+		return;
+	}
+
 	res.send(getMeta(filename));
 	res.end();
 });
