@@ -58,6 +58,7 @@
     "node": ">=16.1.0"
   },
   "dependencies": {
+    "@types/express": "^4.17.14",
     "@types/katex": "^0.14.0",
     "@types/marked": "^4.0.7",
     "@types/node": "^18.11.3",
