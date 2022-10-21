@@ -59,6 +59,8 @@
     "node": ">=16.1.0"
   },
   "dependencies": {
+    "@types/katex": "^0.14.0",
+    "@types/marked": "^4.0.7",
     "@types/node": "^18.11.3",
     "axios": "^0.21.1",
     "date-fns": "^2.9.0",
