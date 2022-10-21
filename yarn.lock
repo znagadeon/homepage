@@ -1700,10 +1700,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mock-fs@npm:^4.13.1":
+  version: 4.13.1
+  resolution: "@types/mock-fs@npm:4.13.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: a5fcf8212daa270e6aa560019a4bd28a66e6fa49c55c1373746d5894f4aa1aafa5588335194953cf014de3c77df6be67a041fb6638ead7124307370985880b6c
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 16.6.1
   resolution: "@types/node@npm:16.6.1"
   checksum: c13aa0da0c2bf9070e521d1b537ba38f64b213dd1b8aeec66c279fc21f8c0ccaf380364f6dc2ec8f84440c4cd1460b67dfe47de2cafcb6eaf4b648817cb27dc4
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.11.3":
+  version: 18.11.3
+  resolution: "@types/node@npm:18.11.3"
+  checksum: 3a2a9142d891a90a195c296149bf64a69cc0abcc42f543be911ab22b2e0ead85ff077f90af92f0f13f6e3e5e72501469200fd753dfd1101825d4646a89d3ee47
   languageName: node
   linkType: hard
 
@@ -4807,6 +4823,8 @@ __metadata:
     "@babel/polyfill": ^7.8.7
     "@babel/preset-env": ^7.9.5
     "@babel/preset-typescript": ^7.16.7
+    "@types/mock-fs": ^4.13.1
+    "@types/node": ^18.11.3
     "@vue/compiler-sfc": ^3.2.31
     autoprefixer: ^10.4.2
     axios: ^0.21.1
