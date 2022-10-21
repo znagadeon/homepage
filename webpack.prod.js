@@ -46,7 +46,7 @@ module.exports = merge(common, {
 			IS_DEV: 'false',
 		}),
 		new HtmlWebpackPlugin({
-			template: './layouts/index.pug',
+			template: './index.html',
 			filename: 'layout.html',
 			templateParameters: {
 				_config: config,
