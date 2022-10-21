@@ -109,10 +109,10 @@ export default {
 
 	&__article {
 		@apply mb-6;
+	}
 
-		:deep {
-			@include markdown;
-		}
+	:deep(.post__article) {
+		@include markdown;
 	}
 }
 </style>
