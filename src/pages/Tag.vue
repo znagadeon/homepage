@@ -32,7 +32,7 @@ export default {
 		...mapActions(['loadPosts']),
 	},
 
-	async serverPrefetch() {
+	async created() {
 		await this.loadPosts({
 			tag: this.tag,
 		});

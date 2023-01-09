@@ -28,7 +28,7 @@ export default {
 		...mapActions(['loadPosts']),
 	},
 
-	async serverPrefetch() {
+	async created() {
 		await this.loadPosts({
 			length: 5,
 		});

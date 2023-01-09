@@ -33,7 +33,7 @@ export default {
 		...mapMutations(['setMeta']),
 	},
 
-	serverPrefetch() {
+	created() {
 		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
 		this.setMeta({
 			title: `Search - ${blogName}`,
