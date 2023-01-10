@@ -14,12 +14,15 @@ const app = express();
 const port = 1337;
 
 getPosts(`${ROOT}/posts`)
-	.map(filename => filename.match(/posts\/(.+)\/index\.md$/)[1])
+	.map(filename => {
+		const match = filename.match(/posts\/(.+)\/index\.md$/);
+		return match ? match[1] : '';
+	})
 	.forEach(title => {
 		app.use(`/post/${title}/assets`, express.static(`${ROOT}/posts/${title}/assets`));
 	});
 
-app.use('/', express.static(path.join(ROOT, 'dist/client')));
+app.use('/', express.static(path.join(ROOT, 'dist')));
 
 app.use('/api', api);
 app.use('/', page);

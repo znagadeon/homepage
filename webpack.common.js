@@ -1,5 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -23,6 +24,14 @@ module.exports = {
 		}, {
 			test: /\.pug$/,
 			loader: 'pug-loader',
+		}, {
+			test: /\.s?css$/,
+			use: [
+				MiniCssExtractPlugin.loader,
+				'css-loader',
+				'postcss-loader',
+				'sass-loader',
+			],
 		}],
 	},
 

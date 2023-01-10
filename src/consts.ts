@@ -1,3 +1,3 @@
 import path from 'path';
 
-export const ROOT = path.join(__dirname, '../..');
+export const ROOT = path.join(__dirname, '..');

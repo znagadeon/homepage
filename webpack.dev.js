@@ -12,7 +12,7 @@ module.exports = merge(common, {
 	entry: './src/entry-client.js',
 	output: {
 		publicPath: '/',
-		path: `${__dirname}/dist/client`,
+		path: `${__dirname}/dist`,
 		filename: 'bundle.js',
 	},
 
@@ -20,14 +20,6 @@ module.exports = merge(common, {
 
 	module: {
 		rules: [{
-			test: /\.s?css$/,
-			use: [
-				MiniCssExtractPlugin.loader,
-				'css-loader',
-				'postcss-loader',
-				'sass-loader',
-			],
-		}, {
 			test: /\.(svg|ttf|woff|woff2|eot)$/,
 			loader: 'file-loader',
 			options: {
@@ -46,7 +38,7 @@ module.exports = merge(common, {
 		}),
 		new HtmlWebpackPlugin({
 			template: './index.html',
-			filename: 'layout.html',
+			filename: 'index.html',
 			templateParameters: {
 				IS_DEV: true,
 			},
