@@ -1,13 +1,14 @@
 import express from 'express';
-import fs from 'fs/promises';
+import { createServer as createViteServer } from 'vite';
 
-import { ROOT } from '../consts';
+export const createPageRouter = async () => {
+  const page = express.Router();
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'spa',
+  });
 
-const page = express.Router();
+  page.use(vite.middlewares);
 
-page.get(/\/($|post|tag|search|archive)/, async (req, res) => {
-	const html = (await fs.readFile(`${ROOT}/dist/index.html`)).toString();
-	res.send(html);
-});
-
-export default page;
+  return page;
+};

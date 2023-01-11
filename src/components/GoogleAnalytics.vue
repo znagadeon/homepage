@@ -10,21 +10,21 @@ import { reactive } from 'vue';
 import { googleAnalytics } from '@root/config';
 
 export default {
-	setup() {
-		const isDev = reactive(true);
-		return { isDev, googleAnalytics };
-	},
+  setup() {
+    const isDev = reactive(true);
+    return { isDev, googleAnalytics };
+  },
 
-	mounted() {
-		this.isDev = IS_DEV;
-		if (this.isDev) return;
+  mounted() {
+    this.isDev = import.meta.env.VITE_IS_DEV;
+    if (this.isDev) return;
 
-		window.dataLayer = window.dataLayer || [];
-		const gtag = () => {
-			window.dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', this.googleAnalytics);
-	},
+    window.dataLayer = window.dataLayer || [];
+    const gtag = () => {
+      window.dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', this.googleAnalytics);
+  },
 };
 </script>
