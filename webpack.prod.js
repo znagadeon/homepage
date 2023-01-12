@@ -1,52 +1,81 @@
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
-module.exports = merge(common, {
-	mode: 'production',
+module.exports = {
+  mode: 'production',
 
-	entry: './src/entry-client.js',
-	output: {
-		publicPath: '/',
-		path: `${__dirname}/dist`,
-		filename: 'bundle-[chunkhash:10].min.js',
-	},
+  context: __dirname,
+  entry: './src/entry-client.js',
+  output: {
+    publicPath: '/',
+    path: `${__dirname}/dist`,
+    filename: 'bundle-[chunkhash:10].min.js',
+  },
 
-	module: {
-		rules: [{
-			test: /\.(svg|ttf|woff|woff2|eot)$/,
-			loader: 'file-loader',
-			options: {
-				publicPath: './',
-				name: '[name]-[contenthash:10].[ext]',
-			},
-		}],
-	},
+  resolve: {
+    alias: {
+      '@src': `${__dirname}/src`,
+      '@root': __dirname,
+    },
+    extensions: ['.js', '.ts', '.vue'],
+  },
 
-	plugins: [
-		new MiniCssExtractPlugin({
-			filename: 'style-[contenthash:10].min.css',
-		}),
-		new webpack.DefinePlugin({
-			IS_DEV: 'false',
-		}),
-		new HtmlWebpackPlugin({
-			template: './index.html',
-			filename: 'index.html',
-			templateParameters: {
-				IS_DEV: false,
-			},
-			favicon: './favicon.ico',
-			minify: {
-				removeComments: false,
-			},
-		}),
+  module: {
+    rules: [{
+      test: /\.vue$/,
+      loader: 'vue-loader',
+    }, {
+      test: /\.[tj]s$/,
+      loader: 'babel-loader',
+    }, {
+      test: /\.pug$/,
+      loader: 'pug-loader',
+    }, {
+      test: /\.s?css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        'postcss-loader',
+        'sass-loader',
+      ],
+    }, {
+      test: /\.(svg|ttf|woff|woff2|eot)$/,
+      loader: 'file-loader',
+      options: {
+        publicPath: './',
+        name: '[name]-[contenthash:10].[ext]',
+      },
+    }],
+  },
 
-		new SpeedMeasurePlugin(),
-	],
-});
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style-[contenthash:10].min.css',
+    }),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: 'true',
+      __VUE_PROD_DEVTOOLS__: 'false',
+      IS_DEV: 'false',
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: 'index.html',
+      templateParameters: {
+        IS_DEV: false,
+      },
+      favicon: './favicon.ico',
+      minify: {
+        removeComments: false,
+      },
+    }),
+
+    new SpeedMeasurePlugin(),
+    new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
+  ],
+};
