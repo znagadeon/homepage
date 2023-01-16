@@ -1,31 +1,23 @@
 <template>
-	<span aria-hidden="true" class="feather-icon" v-html="icon"></span>
+  <span ref="icon"></span>
 </template>
 
 <script>
-import feather from 'feather-icons';
+import { createRoot } from 'react-dom/client';
+import { Icon } from './Icon';
 
 export default {
-	props: {
-		name: String,
-		size: Number,
-	},
+  props: {
+    name: String,
+    size: Number,
+  },
 
-	setup({ name, size }) {
-		const icon = feather.icons[name]
-			.toSvg({ width: size, height: size });
-
-		return { icon };
-	}
+  mounted() {
+    const root = createRoot(this.$refs.icon);
+    root.render(Icon({
+      name: this.name,
+      size: this.size
+    }));
+  }
 }
 </script>
-
-<style scoped lang="scss">
-.feather-icon {
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-}
-</style>

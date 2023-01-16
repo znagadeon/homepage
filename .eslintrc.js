@@ -23,7 +23,4 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
   },
-  globals: {
-    'VITE_IS_DEV': true,
-  },
 };
