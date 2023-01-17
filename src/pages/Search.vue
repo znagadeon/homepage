@@ -9,7 +9,7 @@
 <script>
 import PageMeta from '@src/components/PageMeta.vue';
 
-import { googleSearch, links, name, blogName, description, host } from '@root/config';
+import { googleSearch, social, name, blogName, description, host } from '@root/config';
 
 import { mapState, mapMutations } from 'vuex';
 
@@ -34,7 +34,7 @@ export default {
 	},
 
 	created() {
-		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
 		this.setMeta({
 			title: `Search - ${blogName}`,
 			author: name,
@@ -50,7 +50,7 @@ export default {
 
 			twitter: {
 				card: 'summary',
-				site: `@${links.twitter}`,
+				site: `@${social.twitter}`,
 				title: blogName,
 				description: description,
 				image: gravatar,

@@ -15,37 +15,11 @@
 		</div>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" :width="profileSize/2" :height="profileSize/2" alt="Profile image" class="profile__image">
+		<img :src="profileImage" :width="profileSize/2" :height="profileSize/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ name }}</h2>
 		<p class="profile__description">{{ description }}</p>
-        <ul class="profile__links">
-			<li>
-				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
-					<icon name="github" :size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
-					<icon name="linkedin" :size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.twitter" target="_blank" rel="noopener" aria-label="Twitter">
-					<icon name="twitter" :size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.rss" target="_blank" rel="noopener" aria-label="RSS">
-					<icon name="rss" :size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.donation" target="_blank" rel="noopener" aria-label="Donation">
-					<icon name="dollar-sign" :size="20"></icon>
-				</a>
-			</li>
-		</ul>
-        <nav class="profile__menu menu">
+    <div ref="social"></div>
+    <nav class="profile__menu menu">
 			<ul>
 				<li class="menu__menu-item">
 					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
@@ -61,7 +35,9 @@
 
 <script>
 import { ref } from 'vue';
-import { links, name, blogName, description } from '@root/config';
+import { createRoot } from 'react-dom/client';
+import { Social } from './Social';
+import { social, name, blogName, description } from '@root/config';
 
 import Icon from './Icon.vue';
 
@@ -74,14 +50,7 @@ export default {
 		const profileSize = 300;
 		const query = ref('');
 
-		const _links = {
-			profileImage: `https://www.gravatar.com/avatar/${links.gravatar}?s=${profileSize}`,
-			github: `https://github.com/${links.github}`,
-			linkedin: `https://linkedin.com/in/${links.linkedin}`,
-			twitter: `https://twitter.com/${links.twitter}`,
-			rss: links.rss,
-			donation: links.donation,
-		};
+    const profileImage = `https://www.gravatar.com/avatar/${social.gravatar}?s=${profileSize}`;
 
 		const search = async () => {
 			if (!query.value) {
@@ -92,16 +61,23 @@ export default {
 			location.href = `/search/index.html?q=${query.value}`;
 		};
 
-		return { query, blogName, name, description, links: _links, search, profileSize };
+		return { query, blogName, name, description, profileImage, search, profileSize };
 	},
 
 	created() {
 		this.query = this.$route.query.q || '';
 	},
+
+  mounted() {
+    const root = createRoot(this.$refs.social);
+    root.render(Social({
+      className: 'profile__social',
+    }));
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
 	@apply pb-6;
 	@apply mb-3;
@@ -191,20 +167,9 @@ export default {
 		@apply font-light;
 	}
 
-	&__links {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-		@apply mt-5;
-
-		li {
-			@apply mr-4;
-
-			&:last-child {
-				@apply mr-0;
-			}
-		}
-	}
+  &__social {
+    @apply mt-5;
+  }
 
 	&__menu {
 		@apply mt-1;

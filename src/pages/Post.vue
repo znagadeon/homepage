@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { comment, links, blogName, name, description, host } from '@root/config';
+import { comment, social, blogName, name, description, host } from '@root/config';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
@@ -53,7 +53,7 @@ export default {
 	async created() {
 		await this.loadPost(this.title);
 
-		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
 		const title = this.post.meta.title;
 		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 		this.setMeta({
@@ -71,7 +71,7 @@ export default {
 
 			twitter: {
 				card: 'summary',
-				site: `@${links.twitter}`,
+				site: `@${social.twitter}`,
 				title,
 				description: desc,
 				image: gravatar,

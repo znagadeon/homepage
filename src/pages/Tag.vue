@@ -11,7 +11,7 @@ import PageMeta from '@src/components/PageMeta.vue';
 
 import { mapState, mapMutations, mapActions } from 'vuex';
 
-import { blogName, name, description, host, links } from '@root/config';
+import { blogName, name, description, host, social } from '@root/config';
 
 export default {
 	components: {
@@ -37,7 +37,7 @@ export default {
 			tag: this.tag,
 		});
 
-		const gravatar = `https://www.gravatar.com/avatar/${links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
 		this.setMeta({
 			title: `#${this.tag} - ${blogName}`,
 			author: name,
@@ -53,7 +53,7 @@ export default {
 
 			twitter: {
 				card: 'summary',
-				site: `@${links.twitter}`,
+				site: `@${social.twitter}`,
 				title: blogName,
 				description: description,
 				image: gravatar,

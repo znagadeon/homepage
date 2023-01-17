@@ -1,0 +1,9 @@
+.social {
+  @apply flex;
+  @apply flex-row;
+  @apply justify-center;
+
+  &__item:not(:first-child) {
+    @apply ml-4;
+  }
+}
