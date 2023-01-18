@@ -19,16 +19,7 @@
 		<h2 class="profile__title">{{ name }}</h2>
 		<p class="profile__description">{{ description }}</p>
     <div ref="social"></div>
-    <nav class="profile__menu menu">
-			<ul>
-				<li class="menu__menu-item">
-					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
-				</li>
-				<li class="menu__menu-item">
-					<a href="/archive">Archive</a>
-				</li>
-			</ul>
-		</nav>
+    <div ref="menu"></div>
 	</section>
 </header>
 </template>
@@ -37,6 +28,7 @@
 import { ref } from 'vue';
 import { createRoot } from 'react-dom/client';
 import { Social } from './Social';
+import { Menu } from './Menu';
 import { social, name, blogName, description } from '@root/config';
 
 import Icon from './Icon.vue';
@@ -69,9 +61,14 @@ export default {
 	},
 
   mounted() {
-    const root = createRoot(this.$refs.social);
-    root.render(Social({
+    const socialRoot = createRoot(this.$refs.social);
+    socialRoot.render(Social({
       className: 'profile__social',
+    }));
+
+    const menuRoot = createRoot(this.$refs.menu);
+    menuRoot.render(Menu({
+      className: 'profile__menu',
     }));
   },
 };
@@ -173,23 +170,6 @@ export default {
 
 	&__menu {
 		@apply mt-1;
-	}
-}
-
-.menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
-
-	&__menu-item {
-		@apply mr-5;
-		@apply text-lg;
-
-		&:last-child {
-			@apply mr-0;
-		}
 	}
 }
 </style>
