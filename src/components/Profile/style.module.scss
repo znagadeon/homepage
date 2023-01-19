@@ -1,0 +1,31 @@
+.profile {
+  @apply relative;
+  @apply w-full;
+
+  &__image {
+    @apply rounded-full;
+    @apply mx-auto;
+  }
+
+  &__title {
+    @apply mt-5;
+    @apply text-2xl;
+    @apply text-center;
+    @apply font-bold;
+  }
+
+  &__description {
+    width: 66%;
+    @apply mx-auto;
+    @apply text-center;
+    @apply font-light;
+  }
+
+  &__social {
+    @apply mt-5;
+  }
+
+  &__menu {
+    @apply mt-1;
+  }
+}

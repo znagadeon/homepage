@@ -1,15 +1,15 @@
 .menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
+  ul {
+    @apply flex;
+    @apply flex-row;
+    @apply justify-center;
+  }
 
-	&__item {
-		@apply text-lg;
+  &__item {
+    @apply text-lg;
 
-		&:not(:first-child) {
+    &:not(:first-child) {
       @apply ml-5;
-		}
-	}
+    }
+  }
 }
