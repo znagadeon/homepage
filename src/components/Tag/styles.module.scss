@@ -1,0 +1,12 @@
+.tags {
+  @apply inline-block;
+
+  &__tag {
+    @apply inline-block;
+    @apply text-blue-800;
+
+    &:not(:first-child) {
+      @apply ml-2;
+    }
+  }
+}

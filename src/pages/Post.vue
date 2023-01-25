@@ -4,7 +4,7 @@
 		<h1 class="post__title">{{post.meta?.title}}</h1>
 		<div class="post__tags">
 			<span class="sr-only">tags</span>
-			<tags :tags="post.meta?.tags"></tags>
+      <div ref="tags"></div>
 		</div>
 		<div class="post__published">
 			<span class="sr-only">published</span>
@@ -22,7 +22,9 @@
 <script>
 import { comment, social, blogName, name, description, host } from '@root/config';
 
-import Tags from '@src/components/Tags.vue';
+import { createRoot } from 'react-dom/client';
+import { Tag } from '@src/components/Tag';
+
 import Comment from '@src/components/Comment.vue';
 import PageMeta from '@src/components/PageMeta.vue';
 
@@ -30,7 +32,6 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
 	components: {
-		Tags,
 		Comment,
 		PageMeta,
 	},
@@ -49,6 +50,13 @@ export default {
 		...mapMutations(['setMeta']),
 		...mapActions(['loadPost']),
 	},
+
+  mounted() {
+    const root = createRoot(this.$refs.tags);
+    root.render(Tag({
+      tags: this.post.meta?.tags,
+    }));
+  },
 
 	async created() {
 		await this.loadPost(this.title);

@@ -7,7 +7,7 @@
 	<dl class="post__meta-info">
 		<dt class="sr-only">tags</dt>
 		<dd class="post__tags">
-			<tags :tags="post.meta.tags"></tags>
+      <div ref="tags"></div>
 		</dd>
 		<dt class="sr-only">published</dt>
 
@@ -19,15 +19,16 @@
 </template>
 
 <script>
-import Tags from './Tags.vue';
+import { createRoot } from 'react-dom/client';
+import { Tag } from './Tag';
+
+import { onMounted, ref } from 'vue';
 
 import { format } from 'date-fns';
 
 const formatPublished = (datetime) => format(new Date(datetime), 'yyyy-MM-dd');
 
 export default {
-	components: { Tags },
-
 	props: {
 		post: Object,
 	},
@@ -36,8 +37,16 @@ export default {
 		const maxLength = 100;
 		const { content } = post;
 		const desc = content.length > maxLength ? `${content.slice(0, maxLength)}...` : content;
+    const tags = ref(null);
 
-		return { desc, formatPublished };
+    onMounted(() => {
+      const root = createRoot(tags.value);
+      root.render(Tag({
+        tags: post.meta.tags,
+      }));
+    });
+
+		return { desc, formatPublished, tags };
 	},
 }
 </script>
