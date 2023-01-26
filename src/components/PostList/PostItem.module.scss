@@ -1,0 +1,31 @@
+.post {
+  @apply w-full;
+  @apply py-4;
+
+  &:not(:last-child) {
+    @apply border-b;
+  }
+
+  &__title {
+    @apply text-xl;
+    @apply pb-1;
+  }
+
+  &__desc {
+    @apply font-light;
+  }
+
+  &__meta {
+    @apply flex;
+    @apply flex-row;
+    @apply pt-1;
+  }
+
+  &__tags {
+    @apply mr-3;
+  }
+
+  &__published {
+    min-width: 91px;
+  }
+}
