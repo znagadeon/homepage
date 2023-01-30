@@ -14,26 +14,22 @@
 	<article class="post__article" v-html="post.content"></article>
 	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
-<teleport to="head">
-	<page-meta :meta="meta"></page-meta>
-</teleport>
 </template>
 
 <script>
-import { comment, social, blogName, name, description, host } from '@root/config';
-
 import { createRoot } from 'react-dom/client';
 import { Tag } from '@src/components/Tag';
 
 import Comment from '@src/components/Comment.vue';
-import PageMeta from '@src/components/PageMeta.vue';
 
-import { mapActions, mapMutations, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+
+import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
+import { comment, social, blogName, name, description, host } from '@root/config';
 
 export default {
 	components: {
 		Comment,
-		PageMeta,
 	},
 
 	computed: {
@@ -47,7 +43,6 @@ export default {
 	},
 
 	methods: {
-		...mapMutations(['setMeta']),
 		...mapActions(['loadPost']),
 	},
 
@@ -56,35 +51,40 @@ export default {
     root.render(Tag({
       tags: this.post.meta?.tags,
     }));
+
+    const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
+		const title = this.post.meta.title;
+    const siteName = `${title} - ${blogName}`;
+    const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
+
+    console.log(title);
+
+    const common = createCommonMeta({
+      title: siteName,
+      author: name,
+      description: description,
+    });
+    const opengraph = createOpengraphMeta({
+      siteName,
+      type: 'article',
+      url: `${host}/post/${this.title}/index.html`,
+      title,
+      description: desc,
+      image: gravatar,
+    });
+    const twitter = createTwitterMeta({
+      card: 'summary',
+      site: `@${social.twitter}`,
+      title,
+      description: desc,
+      image: gravatar,
+    });
+
+    document.head.append(common, opengraph, twitter);
   },
 
 	async created() {
 		await this.loadPost(this.title);
-
-		const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
-		const title = this.post.meta.title;
-		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-		this.setMeta({
-			title: `${title} - ${blogName}`,
-			author: name,
-			description: description,
-
-			opengraph: {
-				type: 'article',
-				url: `${host}/post/${this.title}/index.html`,
-				title,
-				description: desc,
-				image: gravatar,
-			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${social.twitter}`,
-				title,
-				description: desc,
-				image: gravatar,
-			},
-		});
 	},
 };
 </script>

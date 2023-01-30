@@ -6,34 +6,27 @@ import format from 'date-fns/format';
 const host = 'http://localhost:1337';
 
 export default () => {
-	return createStore({
-		state: () => ({
-			posts: [],
-			post: {},
-			meta: {},
-		}),
+  return createStore({
+    state: () => ({
+      posts: [],
+      post: {},
+    }),
 
-		mutations: {
-			setMeta(state, meta) {
-				state.meta = meta;
-			},
-		},
+    actions: {
+      async loadPosts({ state }, params) {
+        state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
+      },
 
-		actions: {
-			async loadPosts({ state }, params) {
-				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
-			},
-
-			async loadPost({ state }, title) {
-				const { data } = await axios.get(`${host}/api/post/${title}`);
-				state.post = {
-					content: data.content,
-					meta: {
-						...data.meta,
-						published: format(new Date(data.meta.published), 'yyyy-MM-dd')
-					},
-				};
-			},
-		},
-	});
+      async loadPost({ state }, title) {
+        const { data } = await axios.get(`${host}/api/post/${title}`);
+        state.post = {
+          content: data.content,
+          meta: {
+            ...data.meta,
+            published: format(new Date(data.meta.published), 'yyyy-MM-dd')
+          },
+        };
+      },
+    },
+  });
 };

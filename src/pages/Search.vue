@@ -1,23 +1,15 @@
 <template>
 <div class="gcse-searchresults-only"></div>
 <component :is="'script'" :src="src" async></component>
-<teleport to="head">
-	<page-meta :meta="meta"></page-meta>
-</teleport>
 </template>
 
 <script>
-import PageMeta from '@src/components/PageMeta.vue';
-
+import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
 import { googleSearch, social, name, blogName, description, host } from '@root/config';
 
-import { mapState, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
-	components: {
-		PageMeta,
-	},
-
 	props: {
 		query: String,
 	},
@@ -29,33 +21,31 @@ export default {
 		},
 	},
 
-	methods: {
-		...mapMutations(['setMeta']),
-	},
+	mounted() {
+    const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
+    const siteName = `Search - ${blogName}`;
+    const common = createCommonMeta({
+      title: siteName,
+      author: name,
+      description: description,
+    });
+    const opengraph = createOpengraphMeta({
+      siteName,
+      type: 'website',
+      url: host,
+      title: blogName,
+      description: description,
+      image: gravatar,
+    });
+    const twitter = createTwitterMeta({
+      card: 'summary',
+      site: `@${social.twitter}`,
+      title: blogName,
+      description: description,
+      image: gravatar,
+    });
 
-	created() {
-		const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
-		this.setMeta({
-			title: `Search - ${blogName}`,
-			author: name,
-			description: description,
-
-			opengraph: {
-				type: 'website',
-				url: host,
-				title: blogName,
-				description: description,
-				image: gravatar,
-			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${social.twitter}`,
-				title: blogName,
-				description: description,
-				image: gravatar,
-			},
-		});
+    document.head.append(common, opengraph, twitter);
 	},
 }
 </script>
