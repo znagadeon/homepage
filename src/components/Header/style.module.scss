@@ -1,0 +1,31 @@
+.header {
+  @apply pb-6;
+  @apply mb-6;
+  @apply border-gray-300;
+  @apply border-b;
+
+  &__profile {
+    @apply pt-28;
+  }
+}
+
+.title {
+  @apply fixed;
+  @apply flex;
+  @apply flex-row;
+  @apply items-center;
+  @apply justify-between;
+  @apply w-screen;
+  @apply h-20;
+  @apply p-6;
+  @apply z-10;
+  background-color: rgba(255, 255, 255, 0.75);
+  @apply shadow-lg;
+  @apply leading-tight;
+  @apply align-middle;
+
+  &__blog-name {
+    @apply text-2xl;
+    @apply font-bold;
+  }
+}

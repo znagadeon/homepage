@@ -1,10 +1,9 @@
 <template>
 <div class="container">
-	<blog-header></blog-header>
-    <main>
-		<router-view></router-view>
-	</main>
-    <footer></footer>
+  <div ref="header"></div>
+  <main>
+    <router-view></router-view>
+  </main>
 </div>
 <teleport to="head">
 	<google-analytics></google-analytics>
@@ -12,14 +11,20 @@
 </template>
 
 <script>
-import BlogHeader from './components/BlogHeader.vue';
+import { createRoot } from 'react-dom/client';
+import { Header } from '@src/components/Header';
+
 import GoogleAnalytics from './components/GoogleAnalytics.vue';
 
 export default {
 	components: {
-		BlogHeader,
 		GoogleAnalytics,
 	},
+
+  mounted() {
+    const root = createRoot(this.$refs.header);
+    root.render(Header());
+  },
 };
 </script>
 
