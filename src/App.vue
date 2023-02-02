@@ -5,25 +5,20 @@
     <router-view></router-view>
   </main>
 </div>
-<teleport to="head">
-	<google-analytics></google-analytics>
-</teleport>
 </template>
 
 <script>
 import { createRoot } from 'react-dom/client';
 import { Header } from '@src/components/Header';
 
-import GoogleAnalytics from './components/GoogleAnalytics.vue';
+import { runGoogleAnalytics } from '@src/utils/googleAnalytics';
 
 export default {
-	components: {
-		GoogleAnalytics,
-	},
-
   mounted() {
     const root = createRoot(this.$refs.header);
     root.render(Header());
+
+    runGoogleAnalytics();
   },
 };
 </script>
