@@ -12,15 +12,14 @@
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
-	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
+  <div ref="comment"></div>
 </div>
 </template>
 
 <script>
 import { createRoot } from 'react-dom/client';
 import { Tag } from '@src/components/Tag';
-
-import Comment from '@src/components/Comment.vue';
+import { Comment } from '@src/components/Comment';
 
 import { mapActions, mapState } from 'vuex';
 
@@ -28,12 +27,8 @@ import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/u
 import { comment, social, blogName, name, description, host } from '@root/config';
 
 export default {
-	components: {
-		Comment,
-	},
-
 	computed: {
-		...mapState(['post', 'meta']),
+		...mapState(['post']),
 		title() {
 			return this.$route.params.title;
 		},
@@ -47,17 +42,21 @@ export default {
 	},
 
   mounted() {
-    const root = createRoot(this.$refs.tags);
-    root.render(Tag({
+    const tagRoot = createRoot(this.$refs.tags);
+    tagRoot.render(Tag({
       tags: this.post.meta?.tags,
     }));
 
-    const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
-		const title = this.post.meta.title;
-    const siteName = `${title} - ${blogName}`;
-    const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
+    const commentRoot = createRoot(this.$refs.comment);
+    commentRoot.render(Comment({
+      title: this.post.meta?.title,
+      className: 'post__comment',
+    }));
 
-    console.log(title);
+    const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
+		const title = this.post.meta?.title;
+    const siteName = `${title} - ${blogName}`;
+    const desc = this.post.content?.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 
     const common = createCommonMeta({
       title: siteName,
