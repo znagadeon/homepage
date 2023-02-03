@@ -1,0 +1,33 @@
+@import 'styles/markdown.scss';
+
+.post {
+	@apply mt-6;
+
+	&__meta {
+		@apply border-b;
+		@apply border-gray-300;
+		@apply pb-2;
+		@apply mb-6;
+	}
+
+	&__published {
+		@apply underline;
+	}
+
+	&__title {
+		@apply text-3xl;
+		@apply font-bold;
+	}
+
+	&__tags {
+		@apply mt-1;
+	}
+
+	&__article {
+		@apply mb-6;
+	}
+
+	.post__article {
+		@include markdown;
+	}
+}

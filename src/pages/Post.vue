@@ -1,125 +1,40 @@
 <template>
-<div class="post">
-	<div class="post__meta">
-		<h1 class="post__title">{{post.meta?.title}}</h1>
-		<div class="post__tags">
-			<span class="sr-only">tags</span>
-      <div ref="tags"></div>
-		</div>
-		<div class="post__published">
-			<span class="sr-only">published</span>
-			<a target="_blank" :href="commitLog"><time>{{ post.meta?.published }}</time></a>
-		</div>
-	</div>
-	<article class="post__article" v-html="post.content"></article>
-  <div ref="comment"></div>
-</div>
+<div ref="post"></div>
 </template>
 
 <script>
 import { createRoot } from 'react-dom/client';
-import { Tag } from '@src/components/Tag';
-import { Comment } from '@src/components/Comment';
+import { PostPage } from './Post';
 
-import { mapActions, mapState } from 'vuex';
-
-import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
-import { comment, social, blogName, name, description, host } from '@root/config';
+import { fetchPost } from '@src/api';
 
 export default {
+  data() {
+    return {
+      post: {},
+    };
+  },
+
 	computed: {
-		...mapState(['post']),
 		title() {
 			return this.$route.params.title;
 		},
-		commitLog() {
-			return `https://github.com/${comment.repository}/commits/develop/posts/${this.title}`;
-		},
 	},
 
-	methods: {
-		...mapActions(['loadPost']),
-	},
-
-  mounted() {
-    const tagRoot = createRoot(this.$refs.tags);
-    tagRoot.render(Tag({
-      tags: this.post.meta?.tags,
-    }));
-
-    const commentRoot = createRoot(this.$refs.comment);
-    commentRoot.render(Comment({
-      title: this.post.meta?.title,
-      className: 'post__comment',
-    }));
-
-    const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
-		const title = this.post.meta?.title;
-    const siteName = `${title} - ${blogName}`;
-    const desc = this.post.content?.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-
-    const common = createCommonMeta({
-      title: siteName,
-      author: name,
-      description: description,
-    });
-    const opengraph = createOpengraphMeta({
-      siteName,
-      type: 'article',
-      url: `${host}/post/${this.title}/index.html`,
-      title,
-      description: desc,
-      image: gravatar,
-    });
-    const twitter = createTwitterMeta({
-      card: 'summary',
-      site: `@${social.twitter}`,
-      title,
-      description: desc,
-      image: gravatar,
-    });
-
-    document.head.append(common, opengraph, twitter);
+  methods: {
+    async loadPost(title) {
+      this.post = await fetchPost(title);
+    },
   },
 
-	async created() {
-		await this.loadPost(this.title);
-	},
+  async mounted() {
+    await this.loadPost(this.title);
+    const root = createRoot(this.$refs.post);
+    root.render(PostPage({
+      post: this.post,
+    }));
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-@import 'styles/markdown.scss';
-
-.post {
-	@apply mt-6;
-
-	&__meta {
-		@apply border-b;
-		@apply border-gray-300;
-		@apply pb-2;
-		@apply mb-6;
-	}
-
-	&__published {
-		@apply underline;
-	}
-
-	&__title {
-		@apply text-3xl;
-		@apply font-bold;
-	}
-
-	&__tags {
-		@apply mt-1;
-	}
-
-	&__article {
-		@apply mb-6;
-	}
-
-	:deep(.post__article) {
-		@include markdown;
-	}
-}
-</style>
+<style></style>

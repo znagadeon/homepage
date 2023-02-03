@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react';
 import styles from './style.module.scss';
 
 export const Comment = ({ title, className }: HTMLAttributes<{ title: string }>) => {
-  if (!title) return;
+  if (!title) return null;
 
   return (
     <>
