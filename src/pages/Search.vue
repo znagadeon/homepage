@@ -7,15 +7,12 @@
 import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
 import { googleSearch, social, name, blogName, description, host } from '@root/config';
 
-import { mapState } from 'vuex';
-
 export default {
 	props: {
 		query: String,
 	},
 
 	computed: {
-		...mapState(['meta']),
 		src() {
 			return `https://cse.google.com/cse.js?cx=${googleSearch}`;
 		},

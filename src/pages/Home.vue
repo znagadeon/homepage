@@ -6,30 +6,29 @@
 import { createRoot } from 'react-dom/client';
 import { PostList } from '@src/components/PostList';
 
-import { mapState, mapActions } from 'vuex';
+import { fetchPosts } from '@src/api';
 
 import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
 import { social, blogName, name, description, host } from '@root/config';
 
 export default {
-	computed: {
-		...mapState(['posts', 'meta']),
-	},
+  data() {
+    return {
+      posts: [],
+    };
+  },
 
 	methods: {
-		...mapActions(['loadPosts']),
+    async loadPosts(params) {
+      this.posts = await fetchPosts(params);
+    },
 	},
 
   mounted() {
     const root = createRoot(this.$refs.postList);
+
     root.render(PostList({
-      posts: this.posts.map(post => ({
-        ...post,
-        meta: {
-          ...post.meta,
-          published: new Date(post.meta.published),
-        },
-      })),
+      posts: this.posts,
       title: 'Recent Posts',
     }));
 
