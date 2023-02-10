@@ -2,6 +2,7 @@ import { Icon } from '@src/components/Icon';
 import { HTMLAttributes, KeyboardEventHandler } from 'react';
 
 import styles from './style.module.scss';
+import rootStyles from '@src/style.module.scss';
 
 export const Search = ({ className }: HTMLAttributes<Record<string, never>>) => {
   const search = () => {
@@ -25,7 +26,7 @@ export const Search = ({ className }: HTMLAttributes<Record<string, never>>) => 
   return (
     <div className={`${className} ${styles.search}`}>
       <label>
-        <span className="sr-only">Search</span>
+        <span className={rootStyles.srOnly}>Search</span>
         {/* FIXME: onChange */}
         <input id="searchInput" type="text" className={styles.search__input} v-model="query" onKeyUp={searchUsingKeyboard} />
       </label>

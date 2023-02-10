@@ -3,6 +3,7 @@ import { Tag } from '@src/components/Tag';
 import { Post } from '@src/types/Post';
 
 import styles from './PostItem.module.scss';
+import rootStyles from '@src/style.module.scss';
 
 const MAX_LENGTH = 100;
 
@@ -21,11 +22,11 @@ export const PostItem = ({ post }: { post: Post }) => {
         <p className={styles.post__desc}>{desc}</p>
       </a>
       <dl className={styles.post__meta}>
-        <dt className="sr-only">tags</dt>
+        <dt className={rootStyles.srOnly}>tags</dt>
         <dd className={styles.post__tags}>
           <Tag tags={meta.tags} />
         </dd>
-        <dt className="sr-only">published</dt>
+        <dt className={rootStyles.srOnly}>published</dt>
         <dd className={styles.post__published}>
           <time>{published}</time>
         </dd>
