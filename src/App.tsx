@@ -5,6 +5,7 @@ import { Header } from '@src/components/Header';
 import styles from './style.module.scss';
 import { runGoogleAnalytics } from '@src/utils/googleAnalytics';
 import { HomePage } from '@src/pages/Home';
+import { PostPage } from '@src/pages/Post';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />,
+      },
+      {
+        path: '/post/:title/index.html',
+        element: <PostPage />,
       },
     ],
   },
