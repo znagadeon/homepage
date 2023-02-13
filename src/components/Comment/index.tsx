@@ -1,28 +1,32 @@
 import { comment } from '@root/config';
-import { HTMLAttributes } from 'react';
+import { useEffect } from 'react';
 
 import styles from './style.module.scss';
 
-export const Comment = ({ title, className }: HTMLAttributes<{ title: string }>) => {
-  if (!title) return null;
+export const Comment = ({ title }: {title: string}) => {
+  useEffect(() => {
+    if (!title) return;
+
+    const { repository, repoId, category, categoryId } = comment;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.src = 'https://giscus.app/client.js';
+    script.dataset.repo = repository;
+    script.dataset.repoId = repoId;
+    script.dataset.category = category;
+    script.dataset.categoryId = categoryId;
+    script.dataset.mapping = 'specific';
+    script.dataset.term = title;
+    script.dataset.reactionEnabled = '1';
+    script.dataset.emitMetadata = '0';
+    script.dataset.theme = 'light';
+
+    document.body.append(script);
+  }, [title]);
 
   return (
-    <>
-      <div className={`${className} ${styles.giscus}`}></div>
-      <script
-        async
-        src="https://giscus.app/client.js"
-        data-repo={comment.repository}
-        data-repo-id={comment.repoId}
-        data-category={comment.category}
-        data-category-id={comment.categoryId}
-        data-mapping="specific"
-        data-term={title}
-        data-reaction-enabled="1"
-        data-emit-metadata="0"
-        data-theme="light"
-        crossOrigin="anonymous"
-      />
-    </>
+    <div className={`giscus ${styles.giscus}`}></div>
   );
 };
