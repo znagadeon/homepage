@@ -1,30 +1,28 @@
 import { comment } from '@root/config';
-import { useEffect } from 'react';
+import { useScript } from '@src/hooks/useScript';
 
 import styles from './style.module.scss';
 
 export const Comment = ({ title }: {title: string}) => {
-  useEffect(() => {
-    if (!title) return;
+  if (!title) return null;
 
-    const { repository, repoId, category, categoryId } = comment;
+  const { repository, repoId, category, categoryId } = comment;
 
-    const script = document.createElement('script');
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-    script.src = 'https://giscus.app/client.js';
-    script.dataset.repo = repository;
-    script.dataset.repoId = repoId;
-    script.dataset.category = category;
-    script.dataset.categoryId = categoryId;
-    script.dataset.mapping = 'specific';
-    script.dataset.term = title;
-    script.dataset.reactionEnabled = '1';
-    script.dataset.emitMetadata = '0';
-    script.dataset.theme = 'light';
-
-    document.body.append(script);
-  }, [title]);
+  useScript({
+    appendTo: 'body',
+    src: 'https://giscus.app/client.js',
+    async: true,
+    crossOrigin: 'anonymous',
+    dataset: {
+      repo: repository,
+      repoId, category, categoryId,
+      mapping: 'specific',
+      term: title,
+      reactionEnabled: '1',
+      emitMetadata: '0',
+      theme: 'light',
+    },
+  });
 
   return (
     <div className={`giscus ${styles.giscus}`}></div>
