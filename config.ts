@@ -3,7 +3,7 @@ export const name = 'Kim Songhyun';
 export const description = '카카오 프론트엔드 개발자 since 2018. 01.';
 export const host = 'https://znagadeon.dev';
 export const googleSearch = '981b407e9acf0f1f0';
-export const googleAnalytics = 'G-TP8Y4MDDCD';
+export const googleAnalytics = 'G-GKW2XJEWEJ';
 export const social = {
   rss: '/rss.xml',
   github: 'znagadeon',
