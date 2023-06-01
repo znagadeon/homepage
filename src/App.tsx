@@ -6,6 +6,9 @@ import styles from './style.module.scss';
 import { runGoogleAnalytics } from '@src/utils/googleAnalytics';
 import { HomePage } from '@src/pages/Home';
 import { PostPage } from '@src/pages/Post';
+import { Archive } from '@src/pages/Archive';
+import { Tag } from './pages/Tag';
+import { Search } from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: '/post/:title/index.html',
         element: <PostPage />,
+      },
+      {
+        path: '/archive/index.html',
+        element: <Archive />,
+      },
+      {
+        path: '/tag/:tag/index.html',
+        element: <Tag />,
+      },
+      {
+        path: '/search/index.html',
+        element: <Search />,
       },
     ],
   },

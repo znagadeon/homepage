@@ -31,7 +31,7 @@ export const Menu = ({ className }: HTMLAttributes<HTMLDivElement>) => {
     },
     {
       name: 'Archive',
-      href: '/archive',
+      href: '/archive/index.html',
     },
   ];
 

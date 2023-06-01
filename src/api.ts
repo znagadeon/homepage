@@ -6,7 +6,7 @@ type Param = {
   tag?: string;
 };
 
-export const fetchPosts = async (params: Param) => {
+export const fetchPosts = async (params?: Param) => {
   return (await axios.get<Post[]>('/api/posts', { params })).data
     .map(post => ({
       ...post,

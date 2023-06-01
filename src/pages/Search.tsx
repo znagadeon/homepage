@@ -1,38 +1,18 @@
-<template>
-<div ref="postList"></div>
-</template>
-
-<script>
-import { createRoot } from 'react-dom/client';
-import { PostList } from '@src/components/PostList';
-
-import { fetchPosts } from '@src/api';
-
+import { useEffect } from 'react';
+import { useScript } from '@src/hooks/useScript';
+import { blogName, name, description, host, social, googleSearch } from '@root/config';
 import { createCommonMeta, createOpengraphMeta, createTwitterMeta } from '@src/utils/meta';
-import { social, blogName, name, description, host } from '@root/config';
 
-export default {
-  data() {
-    return {
-      posts: [],
-    };
-  },
+export const Search = () => {
+  useScript({
+    appendTo: 'body',
+    src: `https://cse.google.com/cse.js?cx=${googleSearch}`,
+    async: true,
+  });
 
-	methods: {
-    async loadPosts(params) {
-      this.posts = await fetchPosts(params);
-    },
-	},
-
-  mounted() {
-    const root = createRoot(this.$refs.postList);
-    root.render(PostList({
-      posts: this.posts,
-      title: 'Archive',
-    }));
-
+  useEffect(() => {
     const gravatar = `https://www.gravatar.com/avatar/${social.gravatar}`;
-    const siteName = `Archive - ${blogName}`;
+    const siteName = `Search - ${blogName}`;
     const common = createCommonMeta({
       title: siteName,
       author: name,
@@ -55,10 +35,9 @@ export default {
     });
 
     document.head.append(common, opengraph, twitter);
-  },
+  }, []);
 
-	async created() {
-		await this.loadPosts();
-	},
+  return (
+    <div className="gcse-searchresults-only"></div>
+  );
 };
-</script>
