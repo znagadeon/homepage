@@ -1,7 +1,6 @@
 import styles from './styles.module.scss';
 
-// FIXME: optional
-export const Tag = ({ tags }: { tags?: string[] }) => {
+export const Tag = ({ tags }: { tags: string[] }) => {
   return (
     <ul className={styles.tags}>
       {tags?.map((tag, i) => (

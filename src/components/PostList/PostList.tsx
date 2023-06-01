@@ -3,8 +3,7 @@ import { Post } from '@src/types/Post';
 
 import styles from './PostList.module.scss';
 
-// FIXME: optional
-export const PostList = ({ posts, title }: { posts?: Post[], title: string }) => {
+export const PostList = ({ posts, title }: { posts: Post[], title: string }) => {
   return (
     <article className={styles.posts}>
       <h2 className={styles.posts__title}>{title}</h2>
