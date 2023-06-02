@@ -81,7 +81,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": "eslint --fix",
+    "**/*.[jt]sx?": "eslint --fix",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
   },
