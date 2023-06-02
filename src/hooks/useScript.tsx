@@ -6,15 +6,16 @@ type Params = {
   async?: boolean;
   crossOrigin?: 'anonymous' | 'use-credentials' | '';
   dataset?: Record<string, string>;
+  callback?: () => void;
 };
 
-export const useScript = ({ appendTo, src, dataset, ...rest }: Params) => {
+export const useScript = ({ appendTo, src, dataset, callback, ...rest }: Params) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = src;
 
-    const entries = Object.entries(dataset ?? {});
-    entries.forEach(([key, value]) => {
+    const _dataset = Object.entries(dataset ?? {});
+    _dataset.forEach(([key, value]) => {
       script.dataset[key] = value;
     });
 
@@ -31,5 +32,7 @@ export const useScript = ({ appendTo, src, dataset, ...rest }: Params) => {
     } else {
       document.body.append(script);
     }
+
+    callback?.();
   }, []);
 };

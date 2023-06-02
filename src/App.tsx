@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { Header } from '@src/components/Header';
+import { useAnalytics } from '@src/hooks/useAnalytics';
 
 import styles from './style.module.scss';
-import { runGoogleAnalytics } from '@src/utils/googleAnalytics';
 import { HomePage } from '@src/pages/Home';
 import { PostPage } from '@src/pages/Post';
 import { Archive } from '@src/pages/Archive';
-import { Tag } from './pages/Tag';
-import { Search } from './pages/Search';
+import { Tag } from '@src/pages/Tag';
+import { Search } from '@src/pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -46,9 +45,7 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  useEffect(() => {
-    runGoogleAnalytics();
-  }, []);
+  useAnalytics();
 
   return (
     <RouterProvider router={router} />
