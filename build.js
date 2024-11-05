@@ -1,7 +1,7 @@
 import { wait } from './src/utils/time';
 import fs from 'fs';
 import pids from 'port-pid';
-import { spawn, spawnSync, execSync } from 'child_process';
+import { spawn, execSync } from 'child_process';
 import axios from 'axios';
 import path from 'path';
 
@@ -82,11 +82,7 @@ const dest = './public';
   console.log('Start build');
 
   await kill(port);
-  spawnSync('yarn', ['build:client']);
-  console.log('Client build complete');
-  spawnSync('yarn', ['build:ssr']);
-  console.log('Server build complete');
-  const server = spawn('yarn', ['serve']);
+  const server = spawn('yarn', ['dev']);
   for(;;) {
     try {
       await axios.get(`${host}/health`);
