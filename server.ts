@@ -11,6 +11,8 @@ import rss from './src/routers/rss';
 const PORT = 1337;
 global.ROOT = __dirname;
 
+const isProduction = process.env.PHASE === 'production';
+
 const createServer = async () => {
   const app = express();
   const vite = await createViteServer({
@@ -37,10 +39,14 @@ const createServer = async () => {
     const rawHtml = (await fs.readFile(`${__dirname}/index.html`)).toString();
     const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
     const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+    const analytics = isProduction
+      ? (await fs.readFile(`${__dirname}/layouts/analytics.html`)).toString()
+      : '';
 
     const html = template
       .replace('<!--app-body-->', `${ssr}${hydration}`)
-      .replace('<!--app-head-->', ctx.teleports.head ?? '');
+      .replace('<!--app-head-->', ctx.teleports.head ?? '')
+      .replace('<!--analytics-->', analytics);
 
     res.contentType('text/html').status(200).end(html);
   });
