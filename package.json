@@ -9,8 +9,8 @@
     "dev": "npm-run-all -p 'dev:*'",
     "build:client": "NODE_OPTIONS=\"--openssl-legacy-provider\" yarn webpack --config webpack.prod.js",
     "build:ssr": "webpack --config webpack.server.js --mode=production",
-    "serve": "node ./dist/server/run-server.js",
-    "build": "node build.js",
+    "serve": "tsx ./dist/server/run-server.js",
+    "build": "tsx build.js",
     "test": "jest --coverage"
   },
   "keywords": [],
@@ -48,6 +48,7 @@
     "pug-loader": "^2.4.0",
     "sass-loader": "^8.0.2",
     "speed-measure-webpack-plugin": "^1.5.0",
+    "tsx": "^4.19.2",
     "vue-loader": "^17.0.0",
     "webpack": "^5.66.0",
     "webpack-bundle-analyzer": "^3.7.0",
