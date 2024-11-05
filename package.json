@@ -51,6 +51,7 @@
     "sass-loader": "^8.0.2",
     "speed-measure-webpack-plugin": "^1.5.0",
     "tsx": "^4.19.2",
+    "vite": "^5.4.10",
     "vue-loader": "^17.0.0",
     "webpack": "^5.66.0",
     "webpack-bundle-analyzer": "^3.7.0",
@@ -62,6 +63,7 @@
     "node": ">=20.11.1"
   },
   "dependencies": {
+    "@types/express": "^5.0.0",
     "axios": "^1.6.0",
     "date-fns": "^2.9.0",
     "express": "^4.17.1",
