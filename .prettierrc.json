@@ -1,6 +1,6 @@
 {
-  "tabWidth": 4,
-  "useTabs": true,
+  "tabWidth": 2,
+  "useTabs": false,
   "semi": true,
   "singleQuote": true,
   "quoteProps": "as-needed",
@@ -14,8 +14,6 @@
   "overrides": [{
     "files": ["*.json", "*.babelrc", "*.yml", "*.yaml"],
     "options": {
-      "useTabs": false,
-      "tabWidth": 2,
       "bracketSpacing": false
     }
   }]
