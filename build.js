@@ -32,16 +32,6 @@ const capture = async (url, filename) => {
   console.log(`Capture ${url} -> ${filename} complete`);
 };
 
-const captureJson = async (url, filename) => {
-  const { data } = await axios.get(url);
-  const dir = path.dirname(filename);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  fs.writeFileSync(filename, JSON.stringify(data));
-  console.log(`Capture ${url} -> ${filename} complete`);
-};
-
 const copyRecursively = (src, dest) => {
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true });
@@ -116,7 +106,6 @@ const dest = './public';
   await capture(`${host}/archive/index.html`, `${dest}/archive/index.html`);
   for (let post of postNames) {
     await capture(`${host}/post/${post}/index.html`, `${dest}/post/${post}/index.html`);
-    await captureJson(`${host}/api/post/${post}`, `${dest}/post/${post}.json`);
   }
   for (let tag of tags) {
     await capture(`${host}/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
