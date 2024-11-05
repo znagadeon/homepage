@@ -32,12 +32,17 @@ const createServer = async () => {
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
     const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
-    const { ssr, state } = await render(req.originalUrl);
+    const { ssr, state, ctx } = await render(req.originalUrl);
 
+    const rawHtml = (await fs.readFile(`${__dirname}/index.html`)).toString();
+    const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
     const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
 
-    const html = (await fs.readFile(`${__dirname}/dist/client/layout.html`)).toString();
-    res.status(200).send(html.replace('<!--vue-ssr-outlet-->', `<div id="app">${ssr}</div>${hydration}`));
+    const html = template
+      .replace('<!--app-body-->', `${ssr}${hydration}`)
+      .replace('<!--app-head-->', ctx.teleports.head ?? '');
+
+    res.contentType('text/html').status(200).end(html);
   });
 
   app.use('/', express.static(path.join(__dirname, 'dist/client')));
