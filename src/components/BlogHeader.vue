@@ -107,7 +107,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
 	@apply pb-6;
 	@apply mb-3;

@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .posts {
 	@apply max-w-6xl;
 	@apply mx-auto;
