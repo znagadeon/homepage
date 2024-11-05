@@ -11,7 +11,7 @@ import PageMeta from '@src/components/PageMeta.vue';
 
 import { mapState, mapMutations, mapActions } from 'vuex';
 
-import config from '@root/config.json';
+import {config} from '@root/config';
 
 export default {
 	components: {

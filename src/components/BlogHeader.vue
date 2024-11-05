@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import config from '@root/config.json';
+import {config} from '@root/config';
 
 import Icon from './Icon.vue';
 

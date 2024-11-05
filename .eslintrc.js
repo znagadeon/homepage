@@ -23,6 +23,17 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
   },
+  overrides: [
+    {
+      files: [
+        '*.js',
+        '*.vue',
+      ],
+      rules: {
+        '@typescript-eslint/no-require-imports': 'warn',
+      },
+    }
+  ],
   globals: {
     'IS_DEV': true,
   },
