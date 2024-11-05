@@ -11,4 +11,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  ssr: {
+    noExternal: ['date-fns'],
+  },
 });
