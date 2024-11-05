@@ -14,8 +14,11 @@ const createServer = async () => {
 
   app.use(vite.middlewares);
 
-  app.get('*', (req, res) => {
-    res.status(200).send('test');
+  app.get('*', async (req, res) => {
+    const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
+    const { ssr, state } = await render(req.originalUrl);
+
+    res.status(200).send(ssr);
   });
 
   app.listen(PORT, () => {

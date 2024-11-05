@@ -1,4 +1,5 @@
 import {defineConfig} from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   resolve: {
@@ -7,4 +8,7 @@ export default defineConfig({
       '@root': '/',
     },
   },
+  plugins: [
+    vue(),
+  ],
 });

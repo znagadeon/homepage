@@ -3184,6 +3184,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitejs/plugin-vue@npm:^5.1.4":
+  version: 5.1.4
+  resolution: "@vitejs/plugin-vue@npm:5.1.4"
+  peerDependencies:
+    vite: ^5.0.0
+    vue: ^3.2.25
+  checksum: 80ee2d749c84fc8c495647f7704b143b8670464e6ddc894171d7a28547073cce6055e47fb6ce596a2ae525ae1059a08499d0336cc5a27997c21368d4db2bb6be
+  languageName: node
+  linkType: hard
+
 "@vue/compiler-core@npm:3.2.31":
   version: 3.2.31
   resolution: "@vue/compiler-core@npm:3.2.31"
@@ -7167,6 +7177,7 @@ __metadata:
     "@types/express": ^5.0.0
     "@typescript-eslint/eslint-plugin": ^8.13.0
     "@typescript-eslint/parser": ^8.13.0
+    "@vitejs/plugin-vue": ^5.1.4
     "@vue/compiler-sfc": ^3.2.31
     autoprefixer: ^10.4.2
     axios: ^1.6.0

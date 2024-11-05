@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {config} from '@root/config';
+import {config} from '@src/config';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';

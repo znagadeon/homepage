@@ -1,10 +1,10 @@
 <template>
 <div class="container">
-	<blog-header></blog-header>
-    <main>
-		<router-view></router-view>
-	</main>
-    <footer></footer>
+  <blog-header></blog-header>
+  <main>
+    <router-view></router-view>
+  </main>
+  <footer></footer>
 </div>
 </template>
 
