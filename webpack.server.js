@@ -4,25 +4,25 @@ const common = require('./webpack.common');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = merge(common, {
-	target: 'node',
+  target: 'node',
 
-	entry: './src/entry-server.js',
-	output: {
-		library: {
-			type: 'commonjs2',
-		},
-		path: `${__dirname}/dist/server`,
-		filename: 'run-server.js',
-	},
+  entry: './src/entry-server-old.js',
+  output: {
+    library: {
+      type: 'commonjs2',
+    },
+    path: `${__dirname}/dist/server`,
+    filename: 'run-server.js',
+  },
 
-	devtool: 'source-map',
+  devtool: 'source-map',
 
-	module: {
-		rules: [{
-			test: /\.s?css$/,
-			loader: 'null-loader',
-		}],
-	},
+  module: {
+    rules: [{
+      test: /\.s?css$/,
+      loader: 'null-loader',
+    }],
+  },
 
-	externals: nodeExternals(),
+  externals: nodeExternals(),
 });

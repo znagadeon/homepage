@@ -14,10 +14,10 @@ const port = 1337;
 global.ROOT = path.join(__dirname, '../..');
 
 getPosts(`${global.ROOT}/posts`)
-	.map(filename => filename.match(/posts\/(.+)\/index\.md$/)[1])
-	.forEach(title => {
-		app.use(`/post/${title}/assets`, express.static(`${global.ROOT}/posts/${title}/assets`));
-	});
+  .map(filename => filename.match(/posts\/(.+)\/index\.md$/)[1])
+  .forEach(title => {
+    app.use(`/post/${title}/assets`, express.static(`${global.ROOT}/posts/${title}/assets`));
+  });
 
 app.use('/', express.static(path.join(global.ROOT, 'dist/client')));
 
@@ -27,9 +27,9 @@ app.use('/', sitemap);
 app.use('/', rss);
 
 app.get('/health', (req, res) => {
-	res.status(200).end('OK');
+  res.status(200).end('OK');
 });
 
 app.listen(port, () => {
-	console.log(`Listening ${port}...`);
+  console.log(`Listening ${port}...`);
 });
