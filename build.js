@@ -1,28 +1,26 @@
-const fs = require('fs');
-const pids = require('port-pid');
-const { spawn, spawnSync, execSync } = require('child_process');
-const axios = require('axios');
-const path = require('path');
+import { wait } from './src/utils/time';
+import fs from 'fs';
+import pids from 'port-pid';
+import { spawn, spawnSync, execSync } from 'child_process';
+import axios from 'axios';
+import path from 'path';
 
-const getPosts = require('./src/lib/get-posts');
-const getMeta = require('./src/lib/get-meta');
+import getPosts from './src/lib/get-posts';
+import getMeta from './src/lib/get-meta';
 
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
   files.forEach(file => {
     const filename = `${directory}/${file.name}`;
-    file.isFile() ? fs.unlinkSync(filename) : removeRecursively(filename);
+    if (file.isFile()) {
+      fs.unlinkSync(filename);
+    } else {
+      removeRecursively(filename);
+    }
   });
 
   fs.rmdirSync(directory);
 };
-
-const delay = (timeout) =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, timeout);
-  });
 
 const capture = async (url, filename) => {
   const { data } = await axios.get(url);
@@ -54,11 +52,13 @@ const copyRecursively = (src, dest) => {
     const _src = `${src}/${file.name}`;
     const _dest = `${dest}/${file.name}`;
 
-    file.isFile()
-      ? fs.copyFile(_src, _dest, () => {
+    if (file.isFile()) {
+      fs.copyFile(_src, _dest, () => {
         console.log(`Copy ${_src} -> ${_dest} complete`);
-      })
-      : copyRecursively(_src, _dest);
+      });
+    } else {
+      copyRecursively(_src, _dest);
+    }
   });
 };
 
@@ -91,8 +91,8 @@ const dest = './public';
     try {
       await axios.get(`${host}/health`);
       break;
-    } catch (e) {
-      await delay(100);
+    } catch {
+      await wait(100);
     }
   }
   console.log('Server is running');
