@@ -7541,7 +7541,6 @@ __metadata:
     mock-fs: ^4.10.4
     nodemon: ^2.0.7
     npm-run-all: ^4.1.5
-    null-loader: ^4.0.1
     port-pid: 0.0.7
     postcss: ^8.4.47
     postcss-loader: ^6.2.1
@@ -7564,7 +7563,6 @@ __metadata:
     webpack-bundle-analyzer: ^3.7.0
     webpack-cli: ^4.9.1
     webpack-merge: ^4.2.2
-    webpack-node-externals: ^2.5.2
     xml-js: ^1.6.11
   languageName: unknown
   linkType: soft
@@ -10192,18 +10190,6 @@ __metadata:
   dependencies:
     boolbase: ^1.0.0
   checksum: 5386d035c48438ff304fe687704d93886397349d1bed136de97aeae464caba10e8ffac55a04b215b86b3bc8897f33e0a5aa1045a9d8b2f251ae61b2a3ad3e450
-  languageName: node
-  linkType: hard
-
-"null-loader@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "null-loader@npm:4.0.1"
-  dependencies:
-    loader-utils: ^2.0.0
-    schema-utils: ^3.0.0
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: eeb4c4dd2f8f41e46f5665e4500359109e95ec1028a178a60e0161984906572da7dd87644bcc3cb29f0125d77e2b2508fb4f3813cfb1c6604a15865beb4b987b
   languageName: node
   linkType: hard
 
@@ -13782,13 +13768,6 @@ __metadata:
     clone-deep: ^4.0.1
     wildcard: ^2.0.0
   checksum: 88786ab91013f1bd2a683834ff381be81c245a4b0f63304a5103e90f6653f44dab496a0768287f8531761f8ad957d1f9f3ccb2cb55df0de1bd9ee343e079da26
-  languageName: node
-  linkType: hard
-
-"webpack-node-externals@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "webpack-node-externals@npm:2.5.2"
-  checksum: faded9face71ae9d261fc7ae5b512b25d4cc76fec7f957dbcd4fbd5e730120d295286101a2ac707c488c07722599ea7b63efb6b41ba39389e24ff8b6a89be4fe
   languageName: node
   linkType: hard
 

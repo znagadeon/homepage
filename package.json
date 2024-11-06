@@ -4,16 +4,12 @@
   "main": "index.js",
   "scripts": {
     "dev-old:client": "webpack --config webpack.dev.js --watch",
-    "dev-old:ssr": "webpack --config webpack.server.js --watch --mode=development",
-    "dev-old:server": "nodemon ./dist/server/run-server.js",
     "dev:client": "vite build --mode=development --watch --outDir dist/client",
     "dev:server": "PHASE=dev nodemon --exec tsx server.ts",
     "dev": "npm-run-all -p 'dev:*'",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
     "build-old:client": "NODE_OPTIONS=\"--openssl-legacy-provider\" yarn webpack --config webpack.prod.js",
-    "build:ssr": "webpack --config webpack.server.js --mode=production",
-    "serve-old": "tsx ./dist/server/run-server.js",
     "serve": "PHASE=production tsx server.ts",
     "build": "tsx build.js",
     "test": "vitest"
@@ -48,7 +44,6 @@
     "mock-fs": "^4.10.4",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
-    "null-loader": "^4.0.1",
     "port-pid": "0.0.7",
     "postcss": "^8.4.47",
     "postcss-loader": "^6.2.1",
@@ -63,8 +58,7 @@
     "webpack": "^5.66.0",
     "webpack-bundle-analyzer": "^3.7.0",
     "webpack-cli": "^4.9.1",
-    "webpack-merge": "^4.2.2",
-    "webpack-node-externals": "^2.5.2"
+    "webpack-merge": "^4.2.2"
   },
   "engines": {
     "node": ">=20.11.1"
