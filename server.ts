@@ -18,6 +18,9 @@ const createServer = async () => {
   const vite = await createViteServer({
     server: {
       middlewareMode: true,
+      watch: {
+        ignored: /public\//,
+      },
     },
     appType: 'custom',
   });
