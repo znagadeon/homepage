@@ -16,7 +16,7 @@
     "serve-old": "tsx ./dist/server/run-server.js",
     "serve": "PHASE=production tsx server.ts",
     "build": "tsx build.js",
-    "test": "jest --coverage"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -58,6 +58,7 @@
     "speed-measure-webpack-plugin": "^1.5.0",
     "tsx": "^4.19.2",
     "vite": "^5.4.10",
+    "vitest": "^2.1.4",
     "vue-loader": "^17.0.0",
     "webpack": "^5.66.0",
     "webpack-bundle-analyzer": "^3.7.0",
