@@ -1,5 +1,5 @@
 export default {
-  content: ['./layouts/*.pug', './src/**/*.vue'],
+  content: ['./src/**/*.vue'],
   theme: {
     extend: {},
   },
