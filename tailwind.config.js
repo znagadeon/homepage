@@ -1,7 +1,7 @@
-module.exports = {
-	content: ['./layouts/*.pug', './src/**/*.vue'],
-	theme: {
-		extend: {},
-	},
-	plugins: [],
+export default {
+  content: ['./src/**/*.vue'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };

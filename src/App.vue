@@ -1,10 +1,10 @@
 <template>
 <div class="container">
-	<blog-header></blog-header>
-    <main>
-		<router-view></router-view>
-	</main>
-    <footer></footer>
+  <blog-header></blog-header>
+  <main>
+    <router-view></router-view>
+  </main>
+  <footer></footer>
 </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
 
 .container {

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import config from '@root/config.json';
+import {config} from '@src/config';
 
 import Tags from '@src/components/Tags.vue';
 import Comment from '@src/components/Comment.vue';
@@ -81,8 +81,25 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import 'styles/markdown.scss';
+<style lang="scss">
+@import 'highlight.js/styles/atom-one-dark.css';
+@import 'katex/dist/katex.css';
+
+@mixin list {
+	@apply ml-6;
+	@apply mt-3;
+}
+
+@mixin code {
+	@apply inline-block;
+	@apply whitespace-pre;
+
+	font-family: 'Roboto Mono', monospace;
+
+	span {
+		font-family: 'Roboto Mono', monospace;
+	}
+}
 
 .post {
 	@apply mt-6;
@@ -110,9 +127,177 @@ export default {
 	&__article {
 		@apply mb-6;
 
-		:deep {
-			@include markdown;
-		}
-	}
+    line-height: 1.6;
+    vertical-align: middle;
+
+    h1 {
+      @apply text-2xl;
+      @apply font-bold;
+      @apply mt-8;
+    }
+
+    h2 {
+      @apply text-xl;
+      @apply font-bold;
+      @apply mt-6;
+    }
+
+    h3 {
+      @apply text-xl;
+      @apply mt-4;
+    }
+
+    p {
+      @apply mt-4;
+    }
+
+    ol {
+      @include list;
+      @apply list-decimal;
+    }
+
+    ul {
+      @include list;
+      @apply list-disc;
+    }
+
+    li {
+      @apply pt-2;
+
+      &:first-child {
+        @apply pt-0;
+      }
+    }
+
+    a {
+      @apply text-blue-400;
+      @apply underline;
+
+      &:active {
+        @apply text-blue-800;
+      }
+    }
+
+    del {
+      @apply text-gray-500;
+    }
+
+    hr {
+      @apply mt-5;
+    }
+
+    figure {
+      @apply text-center;
+      @apply mx-auto;
+      @apply my-4;
+
+      @media (max-width: 600px) {
+        max-width: 350px;
+      }
+      @media (min-width: 600px) {
+        max-width: 800px;
+      }
+
+      img {
+        @apply mx-auto;
+        @apply rounded-lg;
+        @apply shadow;
+      }
+
+      figcaption {
+        @apply text-gray-700;
+        @apply pt-2;
+        @apply text-sm;
+      }
+    }
+
+    .short-code {
+      @apply px-1;
+      @apply rounded;
+      @apply bg-gray-200;
+      @apply text-blue-500;
+    }
+
+    .hljs {
+      @apply w-full;
+      @apply px-0;
+      @apply py-3;
+      @apply mt-2;
+      @apply rounded-lg;
+      @apply whitespace-nowrap;
+      @apply break-all;
+
+      div {
+        @apply flex;
+
+        &.highlighted {
+          @apply bg-gray-900;
+        }
+
+        .line-number {
+          @include code;
+          @apply px-3;
+          @apply mr-3;
+          @apply border-r;
+          @apply border-gray-700;
+          @apply text-right;
+
+          user-select: none;
+        }
+        .code {
+          @include code;
+          @apply flex-1;
+        }
+      }
+    }
+
+    blockquote {
+      @apply relative;
+      @apply m-0;
+      @apply mb-6;
+
+      @apply text-gray-800;
+
+      &:before {
+        content: '';
+        @apply absolute;
+
+        @apply inline-block;
+        @apply w-3;
+        @apply h-full;
+
+        @apply bg-gray-300;
+      }
+
+      & > * {
+        @apply ml-6;
+      }
+    }
+
+    table {
+      margin: 30px auto;
+
+      border-collapse: collapse;
+
+      thead {
+        @apply font-bold;
+        @apply bg-blue-200;
+      }
+
+      tr:not(:last-child) {
+        border-bottom: 1px solid;
+        @apply border-gray-300;
+      }
+
+      th, td {
+        @apply py-1;
+        @apply px-3;
+      }
+
+      td:nth-child(2n) {
+        @apply bg-blue-100;
+      }
+    }
+  }
 }
 </style>

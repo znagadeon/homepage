@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .feather-icon {
   stroke: currentColor;
   stroke-width: 2;
