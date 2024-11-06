@@ -3,7 +3,6 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    'jest/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -15,7 +14,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['vue', 'jest'],
+  plugins: ['vue'],
   rules: {
     'no-unused-vars': ['error', {'vars': 'all', 'args': 'after-used', 'argsIgnorePattern': '^_'}],
     indent: ['error', 2],
@@ -31,6 +30,7 @@ module.exports = {
       ],
       rules: {
         '@typescript-eslint/no-require-imports': 'warn',
+        indent: ['warn', 2],
       },
     }
   ],
