@@ -9,7 +9,7 @@
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
     "serve": "PHASE=production tsx server.ts",
-    "build": "tsx build.js",
+    "build": "yarn build:client && yarn build:server && tsx build.js",
     "test": "vitest"
   },
   "keywords": [],

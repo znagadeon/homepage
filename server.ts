@@ -40,14 +40,10 @@ const createServer = async () => {
 
       const template = (await fs.readFile('./dist/client/index.html')).toString();
       const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
-      const analytics = isProduction
-        ? (await fs.readFile(`${__dirname}/layouts/analytics.html`)).toString()
-        : '';
 
       const html = template
         .replace('<!--app-body-->', `${ssr}${hydration}`)
         .replace('<!--app-head-->', manifest.teleports.head ?? '')
-        .replace('<!--analytics-->', analytics);
 
       res.contentType('text/html').status(200).end(html);
     } else {

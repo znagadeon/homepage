@@ -5,10 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!--app-head-->
-  <!--analytics-->
 </head>
 <body>
   <div id="app"><!--app-body--></div>
   <script type="module" src="/src/entry-client.js"></script>
+  <script>
+    const analyze = (id) => {
+      if (!id) return;
+      const script = document.createElement('script');
+      script.async = true;
+      script.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${id}`);
+      document.head.append(script);
+
+      window.dataLayer = window.dataLayer || [];
+      const gtag = () => {
+        dataLayer.push(arguments);
+      };
+      gtag('js', new Date());
+      gtag('config', id);
+    };
+    analyze('%VITE_GOOGLE_ANALYTICS%');
+  </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import { wait } from './src/utils/time';
 import fs from 'fs';
 import pids from 'port-pid';
-import { spawn, spawnSync, execSync } from 'child_process';
+import { spawn, execSync } from 'child_process';
 import axios from 'axios';
 import path from 'path';
 
@@ -70,12 +70,6 @@ const dest = './public';
   }
   fs.mkdirSync(dest);
   console.log('Start build');
-
-  spawnSync('yarn build:client');
-  console.log('Client build complete');
-
-  spawnSync('yarn build:server');
-  console.log('Server build complete');
 
   await kill(port);
   const server = spawn('yarn', ['serve']);
