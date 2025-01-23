@@ -1,0 +1,16 @@
+.menu {
+	ul {
+		@apply flex;
+		@apply flex-row;
+		@apply justify-center;
+	}
+}
+
+.menu-item {
+  @apply mr-5;
+  @apply text-lg;
+
+  &:last-child {
+    @apply mr-0;
+  }
+}

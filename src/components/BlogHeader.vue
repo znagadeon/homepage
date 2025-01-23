@@ -40,21 +40,15 @@
 				</a>
 			</li>
 		</ul>
-        <nav class="profile__menu menu">
-			<ul>
-				<li class="menu__menu-item">
-					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
-				</li>
-				<li class="menu__menu-item">
-					<a href="/archive">Archive</a>
-				</li>
-			</ul>
-		</nav>
+    <div class="profile__menu" ref="menu"></div>
 	</section>
 </header>
 </template>
 
-<script>
+<script lang="jsx">
+import {createRoot} from 'react-dom/client';
+import { Menu } from './Menu';
+
 import {config} from '@src/config';
 
 import Icon from './Icon.vue';
@@ -99,6 +93,15 @@ export default {
 	created() {
 		this.query = this.$route.query.q || '';
 	},
+
+  mounted() {
+    const menu = createRoot(this.$refs.menu);
+    const links = [
+      { name: 'Wiki', path: 'https://wiki.znagadeon.dev' },
+      { name: 'Archive', path: '/archive' },
+    ];
+    menu.render(<Menu links={links} />);
+  },
 };
 </script>
 
@@ -209,23 +212,6 @@ export default {
 
 	&__menu {
 		@apply mt-1;
-	}
-}
-
-.menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
-
-	&__menu-item {
-		@apply mr-5;
-		@apply text-lg;
-
-		&:last-child {
-			@apply mr-0;
-		}
 	}
 }
 </style>
