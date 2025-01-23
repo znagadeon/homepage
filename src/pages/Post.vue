@@ -120,10 +120,6 @@ export default {
 		@apply font-bold;
 	}
 
-	&__tags {
-		@apply mt-1;
-	}
-
 	&__article {
 		@apply mb-6;
 
