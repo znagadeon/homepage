@@ -8,7 +8,7 @@
     "dev": "npm-run-all -p 'dev:*'",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
-    "serve": "PHASE=production ts-node --transpile-only server.ts",
+    "serve": "PHASE=production tsx server.ts",
     "build": "yarn build:client && yarn build:server && ts-node build.js",
     "test": "vitest"
   },

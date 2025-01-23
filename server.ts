@@ -40,7 +40,7 @@ const createServer = async () => {
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
     if (isProduction) {
-      const { render } = require('./dist/server/entry-server.js');
+      const { render } = require('./dist/server/entry-server.cjs');
       const _manifest = JSON.parse((await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString());
       const { ssr, state, manifest } = await render(req.originalUrl, _manifest);
 
