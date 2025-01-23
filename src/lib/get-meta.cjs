@@ -1,7 +1,7 @@
 const fm = require('front-matter');
 const fs = require('fs');
 
-const { md2html } = require('../lib/md-converter');
+const { md2html } = require('./md-converter.cjs');
 
 module.exports = (path) => {
 	const file = fs.readFileSync(path).toString();

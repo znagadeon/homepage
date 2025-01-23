@@ -1,7 +1,7 @@
 const { marked } = require('marked');
 const katex = require('katex');
 
-const { link, image, code, codespan } = require('./convert-rules');
+const { link, image, code, codespan } = require('./convert-rules.cjs');
 
 const renderer = new marked.Renderer();
 renderer.link = link;

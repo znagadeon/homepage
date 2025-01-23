@@ -5,7 +5,7 @@ import {createServer as createViteServer} from 'vite';
 import {createRequire} from 'module';
 const require = createRequire(import.meta.url);
 
-const getPosts = require('./src/lib/get-posts');
+const getPosts = require('./src/lib/get-posts.cjs');
 
 import api from './src/routers/api';
 import sitemap from './src/routers/sitemap';
