@@ -4,9 +4,12 @@ import pids from 'port-pid';
 import { spawn, execSync } from 'child_process';
 import axios from 'axios';
 import path from 'path';
+import {createRequire} from 'module';
 
-import getPosts from './src/lib/get-posts';
-import getMeta from './src/lib/get-meta';
+const require = createRequire(import.meta.url);
+
+const getPosts = require('./src/lib/get-posts.cjs');
+const getMeta = require('./src/lib/get-meta.cjs');
 
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });

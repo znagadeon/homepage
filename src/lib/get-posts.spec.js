@@ -1,7 +1,10 @@
 import {describe, it, expect, afterEach} from 'vitest';
 import mock from 'mock-fs';
 
-const getPosts = require('./get-posts');
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
+
+const getPosts = require('./get-posts.cjs');
 
 describe('getPosts', () => {
   it('returns page info list and assets', () => {

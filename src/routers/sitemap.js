@@ -1,6 +1,9 @@
 import express from 'express';
-import getPosts from '../lib/get-posts';
-import getMeta from '../lib/get-meta';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
+
+const getPosts = require('../lib/get-posts.cjs');
+const getMeta = require('../lib/get-meta.cjs');
 
 import convert from 'xml-js';
 import { format } from 'date-fns';

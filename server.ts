@@ -2,14 +2,17 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs/promises';
 import {createServer as createViteServer} from 'vite';
-import getPosts from './src/lib/get-posts';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
+
+const getPosts = require('./src/lib/get-posts.cjs');
 
 import api from './src/routers/api';
 import sitemap from './src/routers/sitemap';
 import rss from './src/routers/rss';
 
 const PORT = 1337;
-global.ROOT = __dirname;
+global.ROOT = import.meta.dirname;
 
 const isProduction = process.env.PHASE === 'production';
 
@@ -27,17 +30,17 @@ const createServer = async () => {
 
   app.use(vite.middlewares);
 
-  getPosts(`${__dirname}/posts`)
+  getPosts(`${import.meta.dirname}/posts`)
     .map(filename => filename.match(/posts\/(.+)\/index\.md$/)[1])
     .forEach(title => {
-      app.use(`/post/${title}/assets`, express.static(`${__dirname}/posts/${title}/assets`));
+      app.use(`/post/${title}/assets`, express.static(`${import.meta.dirname}/posts/${title}/assets`));
     });
 
   app.use('/api', api);
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
     if (isProduction) {
-      const { render } = require('./dist/server/entry-server.js');
+      const { render } = require('./dist/server/entry-server.cjs');
       const _manifest = JSON.parse((await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString());
       const { ssr, state, manifest } = await render(req.originalUrl, _manifest);
 
@@ -53,7 +56,7 @@ const createServer = async () => {
       const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
       const { ssr, state, manifest } = await render(req.originalUrl);
 
-      const rawHtml = (await fs.readFile(`${__dirname}/index.html`)).toString();
+      const rawHtml = (await fs.readFile(`${import.meta.dirname}/index.html`)).toString();
       const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
       const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
 
@@ -65,7 +68,7 @@ const createServer = async () => {
     }
   });
 
-  app.use('/', express.static(path.join(__dirname, 'dist/client')));
+  app.use('/', express.static(path.join(import.meta.dirname, 'dist/client')));
 
   app.use('/', sitemap);
   app.use('/', rss);
