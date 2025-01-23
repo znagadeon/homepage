@@ -24,6 +24,7 @@
     "@vue/compiler-sfc": "^3.2.31",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
+    "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-vue": "^7.1.0",
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
@@ -68,7 +69,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": "eslint --fix",
+    "**/*.(js|ts|tsx)": "eslint --fix",
     "**/*.json": "prettier --write",
     ".babelrc": "prettier --write"
   },
