@@ -39,11 +39,6 @@
 					<icon name="rss" size="20"></icon>
 				</a>
 			</li>
-			<li>
-				<a :href="links.donation" target="_blank" rel="noopener" aria-label="Donation">
-					<icon name="dollar-sign" size="20"></icon>
-				</a>
-			</li>
 		</ul>
         <nav class="profile__menu menu">
 			<ul>
