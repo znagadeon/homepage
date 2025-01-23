@@ -12,6 +12,7 @@
     "build": "yarn build:client && yarn build:server && ts-node build.js",
     "test": "vitest"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
