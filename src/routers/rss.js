@@ -1,10 +1,12 @@
 import express from 'express';
-import getPosts from '../lib/get-posts';
-import getMeta from '../lib/get-meta';
-
 import convert from 'xml-js';
 
-import {config} from '../../config';
+import {config} from '../config';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
+
+const getPosts = require('../lib/get-posts');
+const getMeta = require('../lib/get-meta');
 
 const rss = new express.Router();
 
