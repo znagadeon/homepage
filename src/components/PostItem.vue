@@ -1,17 +1,17 @@
 <template>
-<li class="post">
+<li class="post-item">
 	<a :href="post.url">
-		<h3 class="post__title">{{ post.meta.title }}</h3>
-		<p class="post__desc">{{ desc }}</p>
+		<h3 class="post-item__title">{{ post.meta.title }}</h3>
+		<p class="post-item__desc">{{ desc }}</p>
 	</a>
-	<dl class="post__meta-info">
+	<dl class="post-item__meta-info">
 		<dt class="sr-only">tags</dt>
-		<dd class="post__tags">
+		<dd class="post-item__tags">
 			<tags :tags="post.meta.tags"></tags>
 		</dd>
 		<dt class="sr-only">published</dt>
 
-		<dd class="post__published">
+		<dd class="post-item__published">
 			<time>{{ formatPublished(post.meta.published) }}</time>
 		</dd>
 	</dl>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.post {
+.post-item {
 	@apply w-full;
 	@apply py-4;
 	@apply border-b;
