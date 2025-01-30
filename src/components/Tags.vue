@@ -1,21 +1,33 @@
 <template>
-<div ref="ref"></div>
+<ul class="tags">
+	<li class="tags__tag" v-for="tag in tags" :key="tag">
+		<a :href="`/tag/${tag}`">#{{tag}}</a>
+	</li>
+</ul>
 </template>
 
-<script lang="jsx">
-import {createRoot} from 'react-dom/client';
-import { TagList } from './TagList';
-
+<script>
 export default {
-  props: {
-    tags: {
-      type: Array,
-    },
-  },
-
-  mounted() {
-    const root = createRoot(this.$refs.ref);
-    root.render(<TagList tags={this.tags} />);
-  },
+	props: {
+		tags: {
+			type: Array,
+		},
+	},
 };
 </script>
+
+<style lang="scss" scoped>
+.tags {
+	@apply inline-block;
+
+	&__tag {
+		@apply inline-block;
+		@apply mr-2;
+		@apply text-blue-800;
+
+		&:last-child {
+			@apply mr-0;
+		}
+	}
+}
+</style>

@@ -39,16 +39,27 @@
 					<icon name="rss" size="20"></icon>
 				</a>
 			</li>
+			<li>
+				<a :href="links.donation" target="_blank" rel="noopener" aria-label="Donation">
+					<icon name="dollar-sign" size="20"></icon>
+				</a>
+			</li>
 		</ul>
-    <div class="profile__menu" ref="menu"></div>
+        <nav class="profile__menu menu">
+			<ul>
+				<li class="menu__menu-item">
+					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
+				</li>
+				<li class="menu__menu-item">
+					<a href="/archive">Archive</a>
+				</li>
+			</ul>
+		</nav>
 	</section>
 </header>
 </template>
 
-<script lang="jsx">
-import {createRoot} from 'react-dom/client';
-import { Menu } from './Menu';
-
+<script>
 import {config} from '@src/config';
 
 import Icon from './Icon.vue';
@@ -93,15 +104,6 @@ export default {
 	created() {
 		this.query = this.$route.query.q || '';
 	},
-
-  mounted() {
-    const menu = createRoot(this.$refs.menu);
-    const links = [
-      { name: 'Wiki', path: 'https://wiki.znagadeon.dev' },
-      { name: 'Archive', path: '/archive' },
-    ];
-    menu.render(<Menu links={links} />);
-  },
 };
 </script>
 
@@ -212,6 +214,23 @@ export default {
 
 	&__menu {
 		@apply mt-1;
+	}
+}
+
+.menu {
+	ul {
+		@apply flex;
+		@apply flex-row;
+		@apply justify-center;
+	}
+
+	&__menu-item {
+		@apply mr-5;
+		@apply text-lg;
+
+		&:last-child {
+			@apply mr-0;
+		}
 	}
 }
 </style>

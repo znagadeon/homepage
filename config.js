@@ -12,6 +12,7 @@ module.exports = {
       'linkedin': 'kim-songhyun',
       'twitter': 'znagadeon',
       'gravatar': 'c1db11b57685a2fc71655a869cdac430',
+      'donation': 'https://toss.me/znagadeon',
     },
     'comment': {
       'repository': 'znagadeon/homepage',
