@@ -3,10 +3,7 @@ import convert from 'xml-js';
 import { format } from 'date-fns';
 import {config} from '../config';
 import { getPosts } from '../lib/getPosts';
-
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
-const getMeta = require('../lib/get-meta.cjs');
+import { getMeta } from '../lib/getMeta';
 
 const sitemap = new express.Router();
 

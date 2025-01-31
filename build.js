@@ -5,10 +5,7 @@ import axios from 'axios';
 import path from 'path';
 import { wait } from './src/utils/time';
 import { getPosts } from './src/lib/getPosts';
-
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
-const getMeta = require('./src/lib/get-meta.cjs');
+import { getMeta } from './src/lib/getMeta';
 
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });

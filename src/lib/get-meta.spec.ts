@@ -1,11 +1,10 @@
 import {describe, it, expect, afterEach} from 'vitest';
+import mock from 'mock-fs';
+
+import {getMeta} from './getMeta';
 
 import {createRequire} from 'module';
 const require = createRequire(import.meta.url);
-
-const mock = require('mock-fs');
-
-const getMeta = require('./get-meta.cjs');
 const { md2html } = require('./md-converter.cjs');
 
 describe('getMeta', () => {
