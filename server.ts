@@ -2,10 +2,10 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs/promises';
 import {createServer as createViteServer} from 'vite';
+import { getPosts } from './src/lib/getPosts';
+
 import {createRequire} from 'module';
 const require = createRequire(import.meta.url);
-
-const getPosts = require('./src/lib/get-posts.cjs');
 
 import api from './src/routers/api';
 import sitemap from './src/routers/sitemap';

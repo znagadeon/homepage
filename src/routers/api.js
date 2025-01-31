@@ -1,9 +1,6 @@
 import express from 'express';
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
-
-const getPosts = require('../lib/get-posts.cjs');
-const getMeta = require('../lib/get-meta.cjs');
+import { getPosts } from '../lib/getPosts';
+import { getMeta } from '../lib/getMeta';
 
 const api = new express.Router();
 
