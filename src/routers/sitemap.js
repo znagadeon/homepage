@@ -1,14 +1,12 @@
 import express from 'express';
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
-
-const getPosts = require('../lib/get-posts.cjs');
-const getMeta = require('../lib/get-meta.cjs');
-
 import convert from 'xml-js';
 import { format } from 'date-fns';
+import {config} from '../config';
 
-const {config} = require('../../config');
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
+const getPosts = require('../lib/get-posts.cjs');
+const getMeta = require('../lib/get-meta.cjs');
 
 const sitemap = new express.Router();
 
