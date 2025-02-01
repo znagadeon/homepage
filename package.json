@@ -65,9 +65,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": "eslint --fix",
-    "**/*.json": "prettier --write",
-    ".babelrc": "prettier --write"
+    "**/*.{js,ts,tsx,json}": "biome check --write"
   },
   "repository": {
     "type": "git",
