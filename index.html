@@ -18,8 +18,8 @@
       document.head.append(script);
 
       window.dataLayer = window.dataLayer || [];
-      const gtag = () => {
-        dataLayer.push(arguments);
+      const gtag = (...params) => {
+        dataLayer.push(params);
       };
       gtag('js', new Date());
       gtag('config', id);
