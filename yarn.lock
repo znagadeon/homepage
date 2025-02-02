@@ -1105,6 +1105,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/feather-icons@npm:^4.29.4":
+  version: 4.29.4
+  resolution: "@types/feather-icons@npm:4.29.4"
+  checksum: 3251820c71be83bec5357827556d28bda83eaf9ea22be8a7e483fa7680eef76e1731da1f18d8f6b5cc71f8b5619e8988c3ced5ce7c29571e55af5ce968ca9dc1
+  languageName: node
+  linkType: hard
+
 "@types/http-errors@npm:*":
   version: 2.0.4
   resolution: "@types/http-errors@npm:2.0.4"
@@ -3455,6 +3462,7 @@ __metadata:
   dependencies:
     "@biomejs/biome": ^1.9.4
     "@types/express": ^5.0.0
+    "@types/feather-icons": ^4.29.4
     "@types/mock-fs": ^4.13.4
     "@types/react": ^19.0.8
     "@types/react-dom": ^19.0.3
