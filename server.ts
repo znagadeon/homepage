@@ -1,15 +1,15 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import express from 'express';
-import path from 'path';
-import fs from 'fs/promises';
-import {createServer as createViteServer} from 'vite';
+import { createServer as createViteServer } from 'vite';
 import { getPosts } from './src/lib/getPosts';
 
-import {createRequire} from 'module';
+import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
 import api from './src/routers/api';
-import sitemap from './src/routers/sitemap';
 import rss from './src/routers/rss';
+import sitemap from './src/routers/sitemap';
 
 const PORT = 1337;
 global.ROOT = import.meta.dirname;
@@ -30,21 +30,30 @@ const createServer = async () => {
 
   app.use(vite.middlewares);
 
-  getPosts(`${import.meta.dirname}/posts`)
-    .map(filename => filename.match(/posts\/(.+)\/index\.md$/)[1])
-    .forEach(title => {
-      app.use(`/post/${title}/assets`, express.static(`${import.meta.dirname}/posts/${title}/assets`));
-    });
+  const titles = getPosts(`${import.meta.dirname}/posts`).map(
+    (filename) => filename.match(/posts\/(.+)\/index\.md$/)?.[1],
+  );
+
+  for (const title of titles) {
+    app.use(
+      `/post/${title}/assets`,
+      express.static(`${import.meta.dirname}/posts/${title}/assets`),
+    );
+  }
 
   app.use('/api', api);
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
     if (isProduction) {
       const { render } = require('./dist/server/entry-server.cjs');
-      const _manifest = JSON.parse((await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString());
+      const _manifest = JSON.parse(
+        (await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString(),
+      );
       const { ssr, state, manifest } = await render(req.originalUrl, _manifest);
 
-      const template = (await fs.readFile('./dist/client/index.html')).toString();
+      const template = (
+        await fs.readFile('./dist/client/index.html')
+      ).toString();
       const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
 
       const html = template
@@ -56,7 +65,9 @@ const createServer = async () => {
       const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
       const { ssr, state, manifest } = await render(req.originalUrl);
 
-      const rawHtml = (await fs.readFile(`${import.meta.dirname}/index.html`)).toString();
+      const rawHtml = (
+        await fs.readFile(`${import.meta.dirname}/index.html`)
+      ).toString();
       const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
       const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
 
@@ -78,7 +89,9 @@ const createServer = async () => {
   });
 
   app.listen(PORT, () => {
-    console.log(`Listening ${PORT}...`);
+    const link = `http://localhost:${PORT}`;
+    const clickable = `\x1b]8;;${link}\x1b\\${link}\x1b]8;;\x1b\\`;
+    console.log(`Listening ${clickable}...`);
   });
 };
 
