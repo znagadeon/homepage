@@ -10,19 +10,23 @@
   <div id="app"><!--app-body--></div>
   <script type="module" src="/src/entry-client.js"></script>
   <script>
+    const gtag = (...params) => {
+      dataLayer.push(params);
+    };
+
     const analyze = (id) => {
       if (!id) return;
       const script = document.createElement('script');
       script.async = true;
+
+      script.addEventListener('load', () => {
+        window.dataLayer = window.dataLayer || [];
+        gtag('js', new Date());
+        gtag('config', id);
+      });
+
       script.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${id}`);
       document.head.append(script);
-
-      window.dataLayer = window.dataLayer || [];
-      const gtag = (...params) => {
-        dataLayer.push(params);
-      };
-      gtag('js', new Date());
-      gtag('config', id);
     };
     analyze('%VITE_GOOGLE_ANALYTICS%');
   </script>
