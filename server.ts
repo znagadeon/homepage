@@ -4,9 +4,6 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { getPosts } from './src/lib/getPosts';
 
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-
 import api from './src/routers/api';
 import rss from './src/routers/rss';
 import sitemap from './src/routers/sitemap';
@@ -45,7 +42,7 @@ const createServer = async () => {
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
     if (isProduction) {
-      const { render } = require('./dist/server/entry-server.cjs');
+      const { render } = await import('./dist/server/entry-server.js');
       const _manifest = JSON.parse(
         (await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString(),
       );

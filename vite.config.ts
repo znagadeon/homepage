@@ -13,11 +13,4 @@ export default defineConfig({
   ssr: {
     noExternal: ['date-fns'],
   },
-  build: {
-    rollupOptions: {
-      output: {
-        format: 'cjs',
-      },
-    },
-  },
 });
