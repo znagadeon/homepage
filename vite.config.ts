@@ -10,7 +10,4 @@ export default defineConfig({
     },
   },
   plugins: [vue(), react()],
-  ssr: {
-    noExternal: ['date-fns'],
-  },
 });

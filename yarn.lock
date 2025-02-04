@@ -2323,13 +2323,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.9.0":
-  version: 2.23.0
-  resolution: "date-fns@npm:2.23.0"
-  checksum: 485216d550255a548552db16379e7a5cd440e262b90fbdc0362f63ee71d0e74bd00ce29ca8d76b343f6df36c1ecb6f22edba0b72848a4c32674e755619695c1f
-  languageName: node
-  linkType: hard
-
 "debug@npm:2.6.9, debug@npm:^2.2.0":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -3471,7 +3464,6 @@ __metadata:
     "@vue/compiler-sfc": ^3.2.31
     autoprefixer: ^10.4.20
     axios: ^1.6.0
-    date-fns: ^2.9.0
     express: ^4.17.1
     feather-icons: ^4.28.0
     front-matter: ^3.1.0

@@ -1,39 +1,39 @@
 import { createStore } from 'vuex';
 
 import axios from 'axios';
-import format from 'date-fns/format';
+import { formatDate } from './utils/format';
 
 const host = 'http://localhost:1337';
 
 export default () => {
-	return createStore({
-		state: () => ({
-			posts: [],
-			post: {},
-			meta: {},
-		}),
+  return createStore({
+    state: () => ({
+      posts: [],
+      post: {},
+      meta: {},
+    }),
 
-		mutations: {
-			setMeta(state, meta) {
-				state.meta = meta;
-			},
-		},
+    mutations: {
+      setMeta(state, meta) {
+        state.meta = meta;
+      },
+    },
 
-		actions: {
-			async loadPosts({ state }, params) {
-				state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
-			},
+    actions: {
+      async loadPosts({ state }, params) {
+        state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
+      },
 
-			async loadPost({ state }, title) {
-				const { data } = await axios.get(`${host}/api/post/${title}`);
-				state.post = {
-					content: data.content,
-					meta: {
-						...data.meta,
-						published: format(new Date(data.meta.published), 'yyyy-MM-dd')
-					},
-				};
-			},
-		},
-	});
+      async loadPost({ state }, title) {
+        const { data } = await axios.get(`${host}/api/post/${title}`);
+        state.post = {
+          content: data.content,
+          meta: {
+            ...data.meta,
+            published: formatDate(new Date(data.meta.published)),
+          },
+        };
+      },
+    },
+  });
 };
