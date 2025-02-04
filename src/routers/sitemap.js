@@ -3,7 +3,7 @@ import convert from 'xml-js';
 import { config } from '../config';
 import { getMeta } from '../lib/getMeta';
 import { getPosts } from '../lib/getPosts';
-import { formatDate } from '../utils/format';
+import { createEntry } from '../utils/sitemap';
 
 const sitemap = new express.Router();
 
@@ -33,116 +33,31 @@ sitemap.get('/sitemap.xml', (req, res) => {
           type: 'element',
           name: 'urlset',
           elements: [
-            ...posts.map((post) => ({
-              type: 'element',
-              name: 'url',
-              elements: [
-                {
-                  type: 'element',
-                  name: 'loc',
-                  elements: [
-                    { type: 'text', text: `${config.host}${post.url}` },
-                  ],
-                },
-                {
-                  type: 'element',
-                  name: 'lastmod',
-                  elements: [
-                    { type: 'text', text: formatDate(post.meta.published) },
-                  ],
-                },
-                {
-                  type: 'element',
-                  name: 'changefreq',
-                  elements: [{ type: 'text', text: 'weekly' }],
-                },
-                {
-                  type: 'element',
-                  name: 'priority',
-                  elements: [{ type: 'text', text: 0.7 }],
-                },
-              ],
-            })),
-            ...tags.map((tag) => ({
-              type: 'element',
-              name: 'url',
-              elements: [
-                {
-                  type: 'element',
-                  name: 'loc',
-                  elements: [
-                    { type: 'text', text: `${config.host}/tag/${tag}` },
-                  ],
-                },
-                {
-                  type: 'element',
-                  name: 'lastmod',
-                  elements: [{ type: 'text', text: formatDate(new Date()) }],
-                },
-                {
-                  type: 'element',
-                  name: 'changefreq',
-                  elements: [{ type: 'text', text: 'weekly' }],
-                },
-                {
-                  type: 'element',
-                  name: 'priority',
-                  elements: [{ type: 'text', text: 0.3 }],
-                },
-              ],
-            })),
-            {
-              type: 'element',
-              name: 'url',
-              elements: [
-                {
-                  type: 'element',
-                  name: 'loc',
-                  elements: [{ type: 'text', text: config.host }],
-                },
-                {
-                  type: 'element',
-                  name: 'lastmod',
-                  elements: [{ type: 'text', text: formatDate(new Date()) }],
-                },
-                {
-                  type: 'element',
-                  name: 'changefreq',
-                  elements: [{ type: 'text', text: 'weekly' }],
-                },
-                {
-                  type: 'element',
-                  name: 'priority',
-                  elements: [{ type: 'text', text: 0.9 }],
-                },
-              ],
-            },
-            {
-              type: 'element',
-              name: 'url',
-              elements: [
-                {
-                  type: 'element',
-                  name: 'loc',
-                  elements: [{ type: 'text', text: `${config.host}/archive` }],
-                },
-                {
-                  type: 'element',
-                  name: 'lastmod',
-                  elements: [{ type: 'text', text: formatDate(new Date()) }],
-                },
-                {
-                  type: 'element',
-                  name: 'changefreq',
-                  elements: [{ type: 'text', text: 'weekly' }],
-                },
-                {
-                  type: 'element',
-                  name: 'priority',
-                  elements: [{ type: 'text', text: 0.1 }],
-                },
-              ],
-            },
+            createEntry({
+              url: config.host,
+              changeFrequency: 'weekly',
+              priority: 0.9,
+            }),
+            ...posts.map((post) =>
+              createEntry({
+                url: `${config.host}${post.url}`,
+                modifiedAt: post.meta.published,
+                changeFrequency: 'weekly',
+                priority: 0.7,
+              }),
+            ),
+            ...tags.map((tag) =>
+              createEntry({
+                url: `${config.host}/tag/${tag}`,
+                changeFrequency: 'weekly',
+                priority: 0.3,
+              }),
+            ),
+            createEntry({
+              url: `${config.host}/archive`,
+              changeFrequency: 'weekly',
+              priority: 0.1,
+            }),
           ],
           attributes: {
             xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
