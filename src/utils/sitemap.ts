@@ -19,10 +19,15 @@ type Entry = {
 
 const createText = (text: string | number) => ({ type: 'text', text });
 
-const createElement = (name: string, elements: XmlElement[]) => ({
+const createElement = (
+  name: string,
+  elements: XmlElement[],
+  attributes: Record<string, string | number> = {},
+) => ({
   type: 'element',
   name,
   elements,
+  attributes,
 });
 
 export const createEntry = ({
@@ -31,18 +36,44 @@ export const createEntry = ({
   changeFrequency,
   priority,
 }: Entry) => {
-  const elements = [
-    createElement('loc', [createText(url)]),
-    modifiedAt &&
+  const elements = [createElement('loc', [createText(url)])];
+
+  if (modifiedAt) {
+    elements.push(
       createElement('lastmod', [createText(formatDate(modifiedAt))]),
-    changeFrequency &&
-      createElement('changefreq', [createText(changeFrequency)]),
-    priority && createElement('priority', [createText(priority)]),
-  ];
+    );
+  }
+
+  if (changeFrequency) {
+    elements.push(createElement('changefreq', [createText(changeFrequency)]));
+  }
+
+  if (priority) {
+    elements.push(createElement('priority', [createText(priority)]));
+  }
 
   return {
     type: 'element',
     name: 'url',
-    elements: elements.filter(Boolean),
+    elements,
   };
 };
+
+export const createSitemap = (entries: Entry[]) =>
+  js2xml({
+    declaration: {
+      attributes: {
+        version: '1.0',
+        encoding: 'utf-8',
+      },
+    },
+    elements: [
+      createElement(
+        'urlset',
+        entries.map((entry) => createEntry(entry)),
+        {
+          xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
+        },
+      ),
+    ],
+  });
