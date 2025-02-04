@@ -1,3 +1,7 @@
+const formatter = Intl.DateTimeFormat('sv-SE', {
+  timeZone: 'Asia/Seoul',
+});
+
 export const formatDate = (date: Date) => {
-  return date.toISOString().split('T')[0];
+  return formatter.format(date);
 };
