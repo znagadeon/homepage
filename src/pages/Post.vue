@@ -7,7 +7,7 @@
 			<tags :tags="post.meta?.tags"></tags>
 		</div>
 		<div class="post__published">
-			<span class="sr-only">published</span>
+			<span>Last Updated: </span>
 			<a target="_blank" :href="commitLog"><time>{{ post.meta?.published }}</time></a>
 		</div>
 	</div>
@@ -111,7 +111,7 @@ export default {
 		@apply mb-6;
 	}
 
-	&__published {
+	&__published a {
 		@apply underline;
 	}
 
