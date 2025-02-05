@@ -44,14 +44,6 @@ export default {
 				description: config.description,
 				image: gravatar,
 			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${config.links.twitter}`,
-				title: config.blogName,
-				description: config.description,
-				image: gravatar,
-			},
 		});
 	},
 };

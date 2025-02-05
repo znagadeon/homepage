@@ -68,14 +68,6 @@ export default {
 				description: desc,
 				image: gravatar,
 			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${config.links.twitter}`,
-				title,
-				description: desc,
-				image: gravatar,
-			},
 		});
 	},
 };
