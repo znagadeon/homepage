@@ -30,7 +30,7 @@ export default () => {
           content: data.content,
           meta: {
             ...data.meta,
-            published: formatDate(new Date(data.meta.published)),
+            updated: formatDate(new Date(data.meta.updated)),
           },
         };
       },

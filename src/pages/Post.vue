@@ -6,9 +6,9 @@
 			<span class="sr-only">tags</span>
 			<tags :tags="post.meta?.tags"></tags>
 		</div>
-		<div class="post__published">
-			<span class="sr-only">published</span>
-			<a target="_blank" :href="commitLog"><time>{{ post.meta?.published }}</time></a>
+		<div class="post__updated">
+			<span>Last Updated: </span>
+			<a target="_blank" :href="commitLog"><time>{{ post.meta?.updated }}</time></a>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
@@ -111,7 +111,7 @@ export default {
 		@apply mb-6;
 	}
 
-	&__published {
+	&__updated a {
 		@apply underline;
 	}
 
@@ -145,6 +145,11 @@ export default {
     h3 {
       @apply text-xl;
       @apply mt-4;
+    }
+
+    h4 {
+      @apply mt-3;
+      @apply font-bold;
     }
 
     p {

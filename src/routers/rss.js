@@ -17,8 +17,8 @@ rss.get('/rss.xml', (req, res) => {
     }))
     .filter((post) => !post.meta.draft)
     .sort((a, b) => {
-      if (a.meta.published < b.meta.published) return 1;
-      if (a.meta.published > b.meta.published) return -1;
+      if (a.meta.updated < b.meta.updated) return 1;
+      if (a.meta.updated > b.meta.updated) return -1;
       return 0;
     });
 
@@ -97,7 +97,7 @@ rss.get('/rss.xml', (req, res) => {
                     {
                       type: 'element',
                       name: 'pubDate',
-                      elements: [{ type: 'text', text: post.meta.published }],
+                      elements: [{ type: 'text', text: post.meta.updated }],
                     },
                   ],
                 })),

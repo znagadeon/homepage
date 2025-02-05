@@ -14,7 +14,7 @@ api.get('/posts', (req, res) => {
     }))
     .filter((post) => {
       if (post.meta.draft) return false;
-      if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1)
+      if (req.query.tag && post.meta.tags?.indexOf(req.query.tag) === -1)
         return false;
 
       return true;
@@ -28,8 +28,8 @@ api.get('/posts', (req, res) => {
       };
     })
     .sort((a, b) => {
-      if (a.meta.published < b.meta.published) return 1;
-      if (a.meta.published > b.meta.published) return -1;
+      if (a.meta.updated < b.meta.updated) return 1;
+      if (a.meta.updated > b.meta.updated) return -1;
       return 0;
     });
 

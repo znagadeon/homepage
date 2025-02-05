@@ -1,11 +1,9 @@
 ---
-title: Node.js로 색깔 있는 콘솔 찍기
 tags:
-  - js
-  - ansi-escape-code
   - geultto
-published: 2020-12-27T23:46:29+09:00
 ---
+
+# Node.js로 색깔 있는 콘솔 찍기
 
 인터넷을 돌아다니다 보면 `console.log`를 이용해 예술을 하는 사람들을 가끔 만날 수 있다.
 

@@ -15,13 +15,18 @@ sitemap.get('/sitemap.xml', (req, res) => {
     }))
     .filter((post) => !post.meta.draft)
     .sort((a, b) => {
-      if (a.meta.published < b.meta.published) return 1;
-      if (a.meta.published > b.meta.published) return -1;
+      if (a.meta.updated < b.meta.updated) return 1;
+      if (a.meta.updated > b.meta.updated) return -1;
       return 0;
     });
   const tags = Array.from(
     new Set(
-      posts.map((post) => post.meta.tags).reduce((a, b) => [...a, ...b], []),
+      posts
+        .map((post) => post.meta.tags)
+        .reduce((acc, cur) => {
+          if (!cur) return acc;
+          return acc.concat(cur);
+        }, []),
     ),
   );
 
@@ -34,7 +39,7 @@ sitemap.get('/sitemap.xml', (req, res) => {
       },
       ...posts.map((post) => ({
         url: `${config.host}${post.url}`,
-        modifiedAt: post.meta.published,
+        modifiedAt: post.meta.updated,
         changeFrequency: 'weekly',
         priority: 0.7,
       })),

@@ -3,16 +3,11 @@
 	<a :href="post.url">
 		<h3 class="post-item__title">{{ post.meta.title }}</h3>
 		<p class="post-item__desc">{{ desc }}</p>
-	</a>
-	<dl class="post-item__meta-info">
+  </a>
+	<dl v-if="post.meta.tags?.length > 0" class="post-item__meta-info">
 		<dt class="sr-only">tags</dt>
 		<dd class="post-item__tags">
 			<tags :tags="post.meta.tags"></tags>
-		</dd>
-		<dt class="sr-only">published</dt>
-
-		<dd class="post-item__published">
-			<time>{{ formatPublished(post.meta.published) }}</time>
 		</dd>
 	</dl>
 </li>
@@ -20,7 +15,6 @@
 
 <script>
 import Tags from './Tags.vue';
-import { formatDate } from '../utils/format';
 
 export default {
 	components: { Tags },
@@ -33,12 +27,6 @@ export default {
 			const desc = this.post.content;
 
 			return desc.length > maxLength ? `${desc.slice(0, maxLength)}...` : desc;
-		},
-	},
-
-	methods: {
-		formatPublished(datetime) {
-			return formatDate(new Date(datetime));
 		},
 	},
 }
@@ -71,10 +59,6 @@ export default {
 
 	&__tags {
 		@apply mr-3;
-	}
-
-	&__published {
-		min-width: 91px;
 	}
 }
 </style>
