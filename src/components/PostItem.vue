@@ -9,18 +9,12 @@
 		<dd class="post-item__tags">
 			<tags :tags="post.meta.tags"></tags>
 		</dd>
-		<dt class="sr-only">published</dt>
-
-		<dd class="post-item__published">
-			<time>{{ formatPublished(post.meta.published) }}</time>
-		</dd>
 	</dl>
 </li>
 </template>
 
 <script>
 import Tags from './Tags.vue';
-import { formatDate } from '../utils/format';
 
 export default {
 	components: { Tags },
@@ -33,12 +27,6 @@ export default {
 			const desc = this.post.content;
 
 			return desc.length > maxLength ? `${desc.slice(0, maxLength)}...` : desc;
-		},
-	},
-
-	methods: {
-		formatPublished(datetime) {
-			return formatDate(new Date(datetime));
 		},
 	},
 }
@@ -71,10 +59,6 @@ export default {
 
 	&__tags {
 		@apply mr-3;
-	}
-
-	&__published {
-		min-width: 91px;
 	}
 }
 </style>
