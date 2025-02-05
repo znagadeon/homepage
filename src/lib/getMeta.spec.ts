@@ -21,7 +21,7 @@ describe('getMeta', () => {
       meta: {
         title: 'test',
         draft: true,
-        published: datetime,
+        updated: datetime,
       },
       content: md2html('# test'),
     });

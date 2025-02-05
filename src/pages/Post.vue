@@ -6,9 +6,9 @@
 			<span class="sr-only">tags</span>
 			<tags :tags="post.meta?.tags"></tags>
 		</div>
-		<div class="post__published">
+		<div class="post__updated">
 			<span>Last Updated: </span>
-			<a target="_blank" :href="commitLog"><time>{{ post.meta?.published }}</time></a>
+			<a target="_blank" :href="commitLog"><time>{{ post.meta?.updated }}</time></a>
 		</div>
 	</div>
 	<article class="post__article" v-html="post.content"></article>
@@ -111,7 +111,7 @@ export default {
 		@apply mb-6;
 	}
 
-	&__published a {
+	&__updated a {
 		@apply underline;
 	}
 

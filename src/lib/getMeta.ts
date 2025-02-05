@@ -13,7 +13,7 @@ export const getMeta = (path: string) => {
   return {
     meta: {
       ...meta.attributes,
-      published: getModifiedAt(path),
+      updated: getModifiedAt(path),
     },
     content: md2html(meta.body),
   };

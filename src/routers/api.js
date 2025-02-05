@@ -28,8 +28,8 @@ api.get('/posts', (req, res) => {
       };
     })
     .sort((a, b) => {
-      if (a.meta.published < b.meta.published) return 1;
-      if (a.meta.published > b.meta.published) return -1;
+      if (a.meta.updated < b.meta.updated) return 1;
+      if (a.meta.updated > b.meta.updated) return -1;
       return 0;
     });
 
