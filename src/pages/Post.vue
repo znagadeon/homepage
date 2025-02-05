@@ -147,6 +147,11 @@ export default {
       @apply mt-4;
     }
 
+    h4 {
+      @apply mt-3;
+      @apply font-bold;
+    }
+
     p {
       @apply mt-4;
     }
