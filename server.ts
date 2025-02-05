@@ -9,7 +9,6 @@ import rss from './src/routers/rss';
 import sitemap from './src/routers/sitemap';
 
 const PORT = 1337;
-global.ROOT = import.meta.dirname;
 
 const isProduction = process.env.PHASE === 'production';
 
@@ -27,14 +26,14 @@ const createServer = async () => {
 
   app.use(vite.middlewares);
 
-  const titles = getPosts(`${import.meta.dirname}/posts`).map(
+  const titles = getPosts(`${process.cwd()}/posts`).map(
     (filename) => filename.match(/posts\/(.+)\/index\.md$/)?.[1],
   );
 
   for (const title of titles) {
     app.use(
       `/post/${title}/assets`,
-      express.static(`${import.meta.dirname}/posts/${title}/assets`),
+      express.static(`${process.cwd()}/posts/${title}/assets`),
     );
   }
 
@@ -63,7 +62,7 @@ const createServer = async () => {
       const { ssr, state, manifest } = await render(req.originalUrl);
 
       const rawHtml = (
-        await fs.readFile(`${import.meta.dirname}/index.html`)
+        await fs.readFile(`${process.cwd()}/index.html`)
       ).toString();
       const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
       const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
@@ -76,7 +75,7 @@ const createServer = async () => {
     }
   });
 
-  app.use('/', express.static(path.join(import.meta.dirname, 'dist/client')));
+  app.use('/', express.static(path.join(process.cwd(), 'dist/client')));
 
   app.use('/', sitemap);
   app.use('/', rss);
