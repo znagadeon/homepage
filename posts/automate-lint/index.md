@@ -4,7 +4,6 @@ tags:
   - husky
   - lint-staged
   - geultto
-published: 2020-12-13T21:46:30+09:00
 ---
 
 [지난 글](https://znagadeon.dev/post/format-my-code/index.html)에서 editorconfig, prettier, eslint를 이용해 코드를 정적 분석하고 일관된 스타일을 적용하는 법에 대해 알아보았다. 분명 이 작업을 통해서 코드의 품질이 좋아지고, 놓치는 버그의 수도 확연히 줄어들었을 것이다. 하지만 과연 실제로도 그럴까? 충분히 꼼꼼한 사람이 아니라면 이런 일이 쉽게 발생할 수 있다.

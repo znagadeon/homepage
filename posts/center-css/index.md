@@ -3,7 +3,6 @@ title: CSS 중앙 정렬의 역사
 tags:
   - css
   - geultto
-published: 2021-02-21T21:45:47+09:00
 ---
 
 가운데 정렬은 어렵다.
