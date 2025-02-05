@@ -21,7 +21,12 @@ sitemap.get('/sitemap.xml', (req, res) => {
     });
   const tags = Array.from(
     new Set(
-      posts.map((post) => post.meta.tags).reduce((a, b) => [...a, ...b], []),
+      posts
+        .map((post) => post.meta.tags)
+        .reduce((acc, cur) => {
+          if (!cur) return acc;
+          return acc.concat(cur);
+        }, []),
     ),
   );
 

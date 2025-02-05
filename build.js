@@ -93,7 +93,10 @@ const dest = './public';
     new Set(
       posts
         .map((post) => getMeta(post).meta.tags)
-        .reduce((a, b) => [...a, ...b], []),
+        .reduce((acc, cur) => {
+          if (!cur) return acc;
+          return acc.concat(cur);
+        }, []),
     ),
   );
 

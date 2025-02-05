@@ -14,7 +14,7 @@ api.get('/posts', (req, res) => {
     }))
     .filter((post) => {
       if (post.meta.draft) return false;
-      if (req.query.tag && post.meta.tags.indexOf(req.query.tag) === -1)
+      if (req.query.tag && post.meta.tags?.indexOf(req.query.tag) === -1)
         return false;
 
       return true;
