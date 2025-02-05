@@ -11,22 +11,12 @@ export const getMeta = (path: string) => {
   // biome-ignore lint/suspicious/noExplicitAny:
   const meta = fm<any>(file);
 
-  if (!meta.attributes.title) {
-    return {
-      meta: {
-        ...meta.attributes,
-        title: meta.body.match(/^# (.+)$/m)?.[1],
-        updated: getModifiedAt(path),
-      },
-      content: md2html(meta.body.replace(/^# .+\n*/, '')),
-    };
-  }
-
   return {
     meta: {
       ...meta.attributes,
+      title: meta.body.match(/^# (.+)$/m)?.[1],
       updated: getModifiedAt(path),
     },
-    content: md2html(meta.body),
+    content: md2html(meta.body.replace(/^# .+\n*/, '')),
   };
 };

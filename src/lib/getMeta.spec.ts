@@ -13,11 +13,7 @@ describe('getMeta', () => {
   beforeEach(() => {
     mock({
       'index.md': mock.file({
-        content: '---\ntitle: test\ndraft: true\n---\n\n# test',
-        mtime: datetime,
-      }),
-      'without-fm.md': mock.file({
-        content: '# test\n\n ## test 2',
+        content: '---\ndraft: true\n---\n\n# test\n\n ## test 2',
         mtime: datetime,
       }),
     });
@@ -27,18 +23,8 @@ describe('getMeta', () => {
     expect(getMeta('index.md')).toEqual({
       meta: {
         title: 'test',
+        updated: datetime,
         draft: true,
-        updated: datetime,
-      },
-      content: md2html('# test'),
-    });
-  });
-
-  it('Extract title if front matter does not exist', () => {
-    expect(getMeta('without-fm.md')).toEqual({
-      meta: {
-        title: 'test',
-        updated: datetime,
       },
       content: md2html('## test 2'),
     });
