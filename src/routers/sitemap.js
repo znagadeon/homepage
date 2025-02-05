@@ -7,7 +7,7 @@ import { createSitemap } from '../utils/sitemap';
 const sitemap = new express.Router();
 
 sitemap.get('/sitemap.xml', (req, res) => {
-  const POST_PATH = `${process.cwd()}/posts/`;
+  const POST_PATH = `${process.cwd()}/posts`;
   const posts = getPosts(POST_PATH)
     .map((filename) => ({
       ...getMeta(filename),
