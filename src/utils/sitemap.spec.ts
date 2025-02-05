@@ -18,25 +18,21 @@ describe('createEntry', () => {
           type: 'element',
           name: 'loc',
           elements: [{ type: 'text', text: 'test' }],
-          attributes: {},
         },
         {
           type: 'element',
           name: 'lastmod',
           elements: [{ type: 'text', text: '2025-01-01' }],
-          attributes: {},
         },
         {
           type: 'element',
           name: 'changefreq',
           elements: [{ type: 'text', text: 'always' }],
-          attributes: {},
         },
         {
           type: 'element',
           name: 'priority',
           elements: [{ type: 'text', text: 1 }],
-          attributes: {},
         },
       ],
     });
@@ -55,7 +51,6 @@ describe('createEntry', () => {
           type: 'element',
           name: 'loc',
           elements: [{ type: 'text', text: 'test' }],
-          attributes: {},
         },
       ],
     });

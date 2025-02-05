@@ -22,7 +22,7 @@ const createText = (text: string | number) => ({ type: 'text', text });
 const createElement = (
   name: string,
   elements: XmlElement[],
-  attributes: Record<string, string | number> = {},
+  attributes?: Record<string, string | number>,
 ) => ({
   type: 'element',
   name,
