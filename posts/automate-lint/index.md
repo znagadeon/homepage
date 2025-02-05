@@ -1,7 +1,5 @@
 ---
 tags:
-  - husky
-  - lint-staged
   - geultto
 ---
 

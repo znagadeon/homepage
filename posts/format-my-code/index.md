@@ -1,9 +1,5 @@
 ---
 tags:
-  - js
-  - editorconfig
-  - prettier
-  - eslint
   - geultto
 ---
 

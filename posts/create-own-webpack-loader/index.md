@@ -1,8 +1,5 @@
 ---
 tags:
-  - js
-  - webpack
-  - tutorial
   - geultto
 ---
 

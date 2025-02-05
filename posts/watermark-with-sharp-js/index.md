@@ -1,7 +1,5 @@
 ---
 tags:
-  - js
-  - sharp.js
   - geultto
 ---
 

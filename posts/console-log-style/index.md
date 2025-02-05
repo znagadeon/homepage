@@ -1,7 +1,5 @@
 ---
 tags:
-  - js
-  - ansi-escape-code
   - geultto
 ---
 

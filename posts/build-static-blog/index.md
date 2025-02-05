@@ -1,8 +1,5 @@
 ---
 tags:
-  - js
-  - vue
-  - ssr
   - geultto
 ---
 
