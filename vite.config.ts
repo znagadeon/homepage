@@ -10,14 +10,4 @@ export default defineConfig({
     },
   },
   plugins: [vue(), react()],
-  ssr: {
-    noExternal: ['date-fns'],
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        format: 'cjs',
-      },
-    },
-  },
 });

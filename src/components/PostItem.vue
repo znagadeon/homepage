@@ -20,8 +20,7 @@
 
 <script>
 import Tags from './Tags.vue';
-
-import { format } from 'date-fns';
+import { formatDate } from '../utils/format';
 
 export default {
 	components: { Tags },
@@ -39,7 +38,7 @@ export default {
 
 	methods: {
 		formatPublished(datetime) {
-			return format(new Date(datetime), 'yyyy-MM-dd');
+			return formatDate(new Date(datetime));
 		},
 	},
 }

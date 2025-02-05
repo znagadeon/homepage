@@ -1,22 +1,23 @@
-import fs from 'fs';
-import pids from 'port-pid';
-import { spawn, execSync } from 'child_process';
+import { execSync, spawn } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 import axios from 'axios';
-import path from 'path';
-import { wait } from './src/utils/time';
-import { getPosts } from './src/lib/getPosts';
+import pids from 'port-pid';
 import { getMeta } from './src/lib/getMeta';
+import { getPosts } from './src/lib/getPosts';
+import { wait } from './src/utils/time';
 
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
-  files.forEach(file => {
+
+  for (const file of files) {
     const filename = `${directory}/${file.name}`;
     if (file.isFile()) {
       fs.unlinkSync(filename);
     } else {
       removeRecursively(filename);
     }
-  });
+  }
 
   fs.rmdirSync(directory);
 };
@@ -37,7 +38,8 @@ const copyRecursively = (src, dest) => {
   }
 
   const files = fs.readdirSync(src, { withFileTypes: true });
-  files.forEach(file => {
+
+  for (const file of files) {
     const _src = `${src}/${file.name}`;
     const _dest = `${dest}/${file.name}`;
 
@@ -48,14 +50,14 @@ const copyRecursively = (src, dest) => {
     } else {
       copyRecursively(_src, _dest);
     }
-  });
+  }
 };
 
-const kill = async port => {
+const kill = async (port) => {
   const pid = await pids(port);
 
-  if (pid.tcp.length) {
-    execSync(`kill -9 ${pid.tcp[0]}`);
+  for (const id of pid.all.reverse()) {
+    execSync(`kill -9 ${id}`);
   }
 };
 
@@ -72,7 +74,7 @@ const dest = './public';
 
   await kill(port);
   const server = spawn('yarn', ['serve']);
-  for(;;) {
+  for (;;) {
     try {
       await axios.get(`${host}/health`);
       break;
@@ -85,29 +87,41 @@ const dest = './public';
   const postsPath = './posts';
   const posts = getPosts(postsPath);
   const postNames = posts
-    .filter(post => !getMeta(post).meta.draft)
-    .map(post => post.replace(/^posts\/(.+)\/index.md$/, '$1'));
-  const tags = Array.from(new Set(posts.map(post => getMeta(post).meta.tags).reduce((a, b) => [...a, ...b], [])));
+    .filter((post) => !getMeta(post).meta.draft)
+    .map((post) => post.replace(/^posts\/(.+)\/index.md$/, '$1'));
+  const tags = Array.from(
+    new Set(
+      posts
+        .map((post) => getMeta(post).meta.tags)
+        .reduce((a, b) => [...a, ...b], []),
+    ),
+  );
 
   // static files & assets
   copyRecursively('./dist/client', dest);
-  postNames.forEach((post) => {
+  for (const post of postNames) {
     const src = `${postsPath}/${post}/assets`;
     if (fs.existsSync(src)) {
       copyRecursively(src, `${dest}/post/${post}/assets`);
     }
-  });
+  }
 
   // home
   await capture(host, `${dest}/index.html`);
 
   // posts
   await capture(`${host}/archive/index.html`, `${dest}/archive/index.html`);
-  for (let post of postNames) {
-    await capture(`${host}/post/${post}/index.html`, `${dest}/post/${post}/index.html`);
+  for (const post of postNames) {
+    await capture(
+      `${host}/post/${post}/index.html`,
+      `${dest}/post/${post}/index.html`,
+    );
   }
-  for (let tag of tags) {
-    await capture(`${host}/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
+  for (const tag of tags) {
+    await capture(
+      `${host}/tag/${tag}/index.html`,
+      `${dest}/tag/${tag}/index.html`,
+    );
   }
 
   // search page
