@@ -3,8 +3,8 @@
 	<a :href="post.url">
 		<h3 class="post-item__title">{{ post.meta.title }}</h3>
 		<p class="post-item__desc">{{ desc }}</p>
-	</a>
-	<dl class="post-item__meta-info">
+  </a>
+	<dl v-if="post.meta.tags?.length > 0" class="post-item__meta-info">
 		<dt class="sr-only">tags</dt>
 		<dd class="post-item__tags">
 			<tags :tags="post.meta.tags"></tags>
