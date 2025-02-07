@@ -10,9 +10,25 @@ export class PostRepository {
 
     if (!found) throw new Error('Post not found');
 
+    return this.getMeta(found);
+  }
+
+  getAllPosts() {
+    const posts = getPosts(POST_ROOT);
+    return posts
+      .map((post) => this.getMeta(post))
+      .filter((post) => !post.meta.draft)
+      .sort((a, b) => {
+        if (a.meta.updated < b.meta.updated) return 1;
+        if (a.meta.updated > b.meta.updated) return -1;
+        return 0;
+      });
+  }
+
+  private getMeta(filename: string) {
     return {
-      ...getMeta(found),
-      url: `/post/${found.match(/posts\/(.+)\/index\.md$/)?.[1]}/index.html`,
+      ...getMeta(filename),
+      url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)?.[1]}/index.html`,
     };
   }
 }
