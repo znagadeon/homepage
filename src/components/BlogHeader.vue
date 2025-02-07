@@ -19,7 +19,7 @@
 		<img :src="profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
-        <div ref="social" class="profile__social"></div>
+    <div ref="social" class="profile__social"></div>
         <nav class="profile__menu menu">
 			<ul>
 				<li class="menu__menu-item">
