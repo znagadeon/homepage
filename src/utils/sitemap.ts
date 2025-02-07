@@ -1,5 +1,6 @@
-import { type Element as XmlElement, js2xml } from 'xml-js';
+import { js2xml } from 'xml-js';
 import { formatDate } from './format';
+import { createElement } from './xml';
 
 type Frequency =
   | 'always'
@@ -16,25 +17,6 @@ type Entry = {
   changeFrequency?: Frequency;
   priority?: number;
 };
-
-const createText = (text: string | number) => ({ type: 'text', text });
-
-const createElement = (
-  name: string,
-  elements: (XmlElement | string | number)[],
-  attributes?: Record<string, string | number>,
-) => ({
-  type: 'element',
-  name,
-  elements: elements.map((el) => {
-    if (typeof el === 'number' || typeof el === 'string') {
-      return createText(el);
-    }
-
-    return el;
-  }),
-  attributes,
-});
 
 export const createEntry = ({
   url,
