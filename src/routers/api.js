@@ -3,9 +3,10 @@ import { PostRepository } from '../repositories/PostRepository';
 
 const api = new express.Router();
 
-api.get('/posts', (req, res) => {
-  const repository = new PostRepository();
+const POST_ROOT = `${process.cwd()}/posts`;
+const repository = new PostRepository(POST_ROOT);
 
+api.get('/posts', (req, res) => {
   const posts = repository
     .getAllPosts()
     .filter((post) => {
@@ -28,7 +29,6 @@ api.get('/posts', (req, res) => {
 });
 
 api.get('/post/:title', (req, res) => {
-  const repository = new PostRepository();
   res.send(repository.getPostById(req.params.title));
 });
 

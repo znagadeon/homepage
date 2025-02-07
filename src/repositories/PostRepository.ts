@@ -1,11 +1,11 @@
 import { getMeta } from '../lib/getMeta';
 import { getPosts } from '../lib/getPosts';
 
-const POST_ROOT = `${process.cwd()}/posts`;
-
 export class PostRepository {
+  constructor(private root: string) {}
+
   getPostById(id: string) {
-    const posts = getPosts(POST_ROOT);
+    const posts = getPosts(this.root);
     const found = posts.find((filename) => filename.includes(id));
 
     if (!found) throw new Error('Post not found');
@@ -14,7 +14,7 @@ export class PostRepository {
   }
 
   getAllPosts() {
-    const posts = getPosts(POST_ROOT);
+    const posts = getPosts(this.root);
     return posts
       .map((post) => this.getMeta(post))
       .filter((post) => !post.meta.draft)
