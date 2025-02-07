@@ -1,6 +1,7 @@
 import express from 'express';
 import { getMeta } from '../lib/getMeta';
 import { getPosts } from '../lib/getPosts';
+import { PostRepository } from '../repositories/PostRepository';
 
 const api = new express.Router();
 
@@ -38,11 +39,8 @@ api.get('/posts', (req, res) => {
 });
 
 api.get('/post/:title', (req, res) => {
-  const filename = getPosts(POST_PATH).find(
-    (v) => v.indexOf(req.params.title) > -1,
-  );
-  res.send(getMeta(filename));
-  res.end();
+  const repository = new PostRepository();
+  res.send(repository.getPostById(req.params.title));
 });
 
 export default api;
