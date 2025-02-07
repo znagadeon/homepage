@@ -1,26 +1,17 @@
 import express from 'express';
 import convert from 'xml-js';
 import { config } from '../config';
-import { getMeta } from '../lib/getMeta';
-import { getPosts } from '../lib/getPosts';
+import { PostRepository } from '../repositories/PostRepository';
 
 const rss = new express.Router();
 
 const wrapCData = (text) => `<![CDATA[${text}]]>`;
 
+const POST_PATH = `${process.cwd()}/posts`;
+const repository = new PostRepository(POST_PATH);
+
 rss.get('/rss.xml', (req, res) => {
-  const POST_PATH = `${process.cwd()}/posts/`;
-  const posts = getPosts(POST_PATH)
-    .map((filename) => ({
-      ...getMeta(filename),
-      url: `/post/${filename.slice(POST_PATH.length, -'/index.md'.length)}/index.html`,
-    }))
-    .filter((post) => !post.meta.draft)
-    .sort((a, b) => {
-      if (a.meta.updated < b.meta.updated) return 1;
-      if (a.meta.updated > b.meta.updated) return -1;
-      return 0;
-    });
+  const posts = repository.getAllPosts();
 
   res.set('content-type', 'Application/xml').end(
     convert.js2xml({
