@@ -39,40 +39,43 @@ const createServer = async () => {
 
   app.use('/api', api);
 
-  app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
+  const prepareTemplate = async (url: string) => {
     if (isProduction) {
       const { render } = await import('./dist/server/entry-server.js');
       const _manifest = JSON.parse(
         (await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString(),
       );
-      const { ssr, state, manifest } = await render(req.originalUrl, _manifest);
+      const { ssr, state, manifest } = await render(url, _manifest);
 
       const template = (
         await fs.readFile('./dist/client/index.html')
       ).toString();
-      const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
 
-      const html = template
-        .replace('<!--app-body-->', `${ssr}${hydration}`)
-        .replace('<!--app-head-->', manifest.teleports.head ?? '');
-
-      res.contentType('text/html').status(200).end(html);
-    } else {
-      const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
-      const { ssr, state, manifest } = await render(req.originalUrl);
-
-      const rawHtml = (
-        await fs.readFile(`${process.cwd()}/index.html`)
-      ).toString();
-      const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
-      const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
-
-      const html = template
-        .replace('<!--app-body-->', `${ssr}${hydration}`)
-        .replace('<!--app-head-->', manifest.teleports.head ?? '');
-
-      res.contentType('text/html').status(200).end(html);
+      return { ssr, state, manifest, template };
     }
+
+    const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
+    const { ssr, state, manifest } = await render(url);
+
+    const rawHtml = (
+      await fs.readFile(`${process.cwd()}/index.html`)
+    ).toString();
+    const template = await vite.transformIndexHtml(url, rawHtml);
+
+    return { ssr, state, manifest, template };
+  };
+
+  app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
+    const { ssr, state, manifest, template } = await prepareTemplate(
+      req.originalUrl,
+    );
+
+    const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+    const html = template
+      .replace('<!--app-body-->', `${ssr}${hydration}`)
+      .replace('<!--app-head-->', manifest.teleports.head ?? '');
+
+    res.contentType('text/html').status(200).end(html);
   });
 
   app.use('/', express.static(path.join(process.cwd(), 'dist/client')));
