@@ -33,7 +33,7 @@ export default {
 			length: 5,
 		});
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: config.blogName,
 			author: config.name,

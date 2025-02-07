@@ -53,7 +53,7 @@ export default {
 	async serverPrefetch() {
 		await this.loadPost(this.title);
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		const title = this.post.meta.title;
 		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 		this.setMeta({

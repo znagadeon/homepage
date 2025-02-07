@@ -1,4 +1,4 @@
-import feather, { type FeatherIconNames } from 'feather-icons';
+import { type FeatherIconNames, icons } from 'feather-icons';
 
 import style from './Icon.module.scss';
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Icon = ({ name, size }: Props) => {
-  const icon = feather.icons[name].toSvg({
+  const icon = icons[name].toSvg({
     width: size,
     height: size,
   });

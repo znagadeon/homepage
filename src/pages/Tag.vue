@@ -37,7 +37,7 @@ export default {
 			tag: this.tag,
 		});
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: `#${this.tag} - ${config.blogName}`,
 			author: config.name,

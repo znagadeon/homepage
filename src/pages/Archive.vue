@@ -31,7 +31,7 @@ export default {
 	async serverPrefetch() {
 		await this.loadPosts();
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: `Archive - ${config.blogName}`,
 			author: config.name,
