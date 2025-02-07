@@ -9,8 +9,9 @@
 				<span class="sr-only">Search</span>
 				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
 			</label>
-			<button @click="search" aria-label="Search">
+			<button @click="search">
 				<icon name="search" size="20"></icon>
+        <span class="sr-only">Search</span>
 			</button>
 		</div>
 	</div>
@@ -20,23 +21,27 @@
 		<p class="profile__description">{{ config.description }}</p>
         <ul class="profile__links">
 			<li>
-				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
+				<a :href="links.github" target="_blank" rel="noopener">
 					<icon name="github" size="20"></icon>
+          <span class="sr-only">GitHub</span>
 				</a>
 			</li>
 			<li>
-				<a :href="links.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+				<a :href="links.linkedin" target="_blank" rel="noopener">
 					<icon name="linkedin" size="20"></icon>
+          <span class="sr-only">LinkedIn</span>
 				</a>
 			</li>
 			<li>
-				<a :href="links.twitter" target="_blank" rel="noopener" aria-label="Twitter">
+				<a :href="links.twitter" target="_blank" rel="noopener">
 					<icon name="twitter" size="20"></icon>
+          <span class="sr-only">Twitter</span>
 				</a>
 			</li>
 			<li>
-				<a :href="links.rss" target="_blank" rel="noopener" aria-label="RSS">
+				<a :href="links.rss" target="_blank" rel="noopener">
 					<icon name="rss" size="20"></icon>
+          <span class="sr-only">RSS</span>
 				</a>
 			</li>
 		</ul>
