@@ -21,12 +21,18 @@ const createText = (text: string | number) => ({ type: 'text', text });
 
 const createElement = (
   name: string,
-  elements: XmlElement[],
+  elements: (XmlElement | string | number)[],
   attributes?: Record<string, string | number>,
 ) => ({
   type: 'element',
   name,
-  elements,
+  elements: elements.map((el) => {
+    if (typeof el === 'number' || typeof el === 'string') {
+      return createText(el);
+    }
+
+    return el;
+  }),
   attributes,
 });
 
@@ -36,20 +42,18 @@ export const createEntry = ({
   changeFrequency,
   priority,
 }: Entry) => {
-  const elements = [createElement('loc', [createText(url)])];
+  const elements = [createElement('loc', [url])];
 
   if (modifiedAt) {
-    elements.push(
-      createElement('lastmod', [createText(formatDate(modifiedAt))]),
-    );
+    elements.push(createElement('lastmod', [formatDate(modifiedAt)]));
   }
 
   if (changeFrequency) {
-    elements.push(createElement('changefreq', [createText(changeFrequency)]));
+    elements.push(createElement('changefreq', [changeFrequency]));
   }
 
   if (priority) {
-    elements.push(createElement('priority', [createText(priority)]));
+    elements.push(createElement('priority', [priority]));
   }
 
   return {
