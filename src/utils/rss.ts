@@ -1,9 +1,9 @@
 import { formatDate } from './format';
-import { createElement } from './xml';
+import { convert, createElement } from './xml';
 
 export const wrapCData = (text: string) => `<![CDATA[${text}]]>`;
 
-type Props = {
+type Item = {
   title: string;
   link: string;
   description: string;
@@ -17,7 +17,7 @@ export const createItem = ({
   description,
   author,
   published,
-}: Props) => {
+}: Item) => {
   const elements = [
     createElement('title', [wrapCData(title)]),
     createElement('link', [link]),
@@ -33,4 +33,28 @@ export const createItem = ({
   }
 
   return createElement('item', elements);
+};
+
+type Rss = {
+  title: string;
+  link: string;
+  description: string;
+  items: Item[];
+};
+
+export const createRss = ({ title, link, description, items }: Rss) => {
+  return convert([
+    createElement(
+      'rss',
+      [
+        createElement('channel', [
+          createElement('title', [wrapCData(title)]),
+          createElement('link', [link]),
+          createElement('description', [wrapCData(description)]),
+          ...items.map((item) => createItem(item)),
+        ]),
+      ],
+      { version: '2.0' },
+    ),
+  ]);
 };
