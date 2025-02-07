@@ -1,4 +1,4 @@
-import type { Element as XmlElement } from 'xml-js';
+import { type Element as XmlElement, js2xml } from 'xml-js';
 
 const createText = (text: string | number) => ({ type: 'text', text });
 
@@ -18,3 +18,15 @@ export const createElement = (
   }),
   attributes,
 });
+
+export const convert = (elements: XmlElement[]) => {
+  return js2xml({
+    declaration: {
+      attributes: {
+        version: '1.0',
+        encoding: 'utf-8',
+      },
+    },
+    elements,
+  });
+};

@@ -1,6 +1,5 @@
-import { js2xml } from 'xml-js';
 import { formatDate } from './format';
-import { createElement } from './xml';
+import { convert, createElement } from './xml';
 
 type Frequency =
   | 'always'
@@ -46,20 +45,12 @@ export const createEntry = ({
 };
 
 export const createSitemap = (entries: Entry[]) =>
-  js2xml({
-    declaration: {
-      attributes: {
-        version: '1.0',
-        encoding: 'utf-8',
+  convert([
+    createElement(
+      'urlset',
+      entries.map((entry) => createEntry(entry)),
+      {
+        xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
       },
-    },
-    elements: [
-      createElement(
-        'urlset',
-        entries.map((entry) => createEntry(entry)),
-        {
-          xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
-        },
-      ),
-    ],
-  });
+    ),
+  ]);
