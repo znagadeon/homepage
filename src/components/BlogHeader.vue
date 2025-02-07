@@ -4,16 +4,7 @@
 		<h1 class="title__blog-name">
 			<a href="/">{{ config.blogName }}</a>
 		</h1>
-		<div class="title__search search">
-			<label>
-				<span class="sr-only">Search</span>
-				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
-			</label>
-			<button @click="search">
-				<icon name="search" size="20"></icon>
-        <span class="sr-only">Search</span>
-			</button>
-		</div>
+    <div class="title__search" ref="search"></div>
 	</div>
 	<section class="header__profile profile">
 		<img :src="profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
@@ -35,22 +26,17 @@
 </template>
 
 <script lang="jsx">
-import {config} from '@src/config';
-import { Social } from './Social';
 import {createRoot} from 'react-dom/client';
+import { Social } from './Social';
+import { Search } from './Search';
 
-import Icon from './Icon.vue';
+import {config} from '@src/config';
 
 export default {
-	components: {
-		Icon,
-	},
-
 	data() {
 		return {
 			size: 300,
 			config,
-			query: '',
 		};
 	},
 
@@ -60,26 +46,14 @@ export default {
     },
 	},
 
-	methods: {
-		async search() {
-			if (!this.query) {
-				alert('검색어를 입력하세요');
-				return;
-			}
-
-			location.href = `/search/index.html?q=${this.query}`;
-		},
-	},
-
   mounted() {
     const social = createRoot(this.$refs.social);
     const socialLinks = this.config.social;
     social.render(<Social links={socialLinks} />)
-  },
 
-	created() {
-		this.query = this.$route.query.q || '';
-	},
+    const search = createRoot(this.$refs.search);
+    search.render(<Search />);
+  },
 };
 </script>
 
@@ -113,39 +87,6 @@ export default {
 	&__blog-name {
 		@apply text-2xl;
 		@apply font-bold;
-	}
-}
-
-.search {
-	@media (max-width: 600px) {
-		& {
-			@apply hidden;
-		}
-	}
-	@media (min-width: 600px) {
-		& {
-			@apply flex;
-			@apply flex-row;
-			@apply items-center;
-		}
-	}
-
-	&__input {
-		@apply border-0;
-		@apply border-b;
-		@apply border-gray-400;
-		@apply w-40;
-		@apply h-8;
-		@apply mr-3;
-
-		@apply bg-transparent;
-	}
-
-	&__submit {
-		@apply p-2;
-		@apply border-0;
-
-		@apply bg-transparent;
 	}
 }
 
