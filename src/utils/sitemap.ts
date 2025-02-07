@@ -37,11 +37,7 @@ export const createEntry = ({
     elements.push(createElement('priority', [priority]));
   }
 
-  return {
-    type: 'element',
-    name: 'url',
-    elements,
-  };
+  return createElement('url', elements);
 };
 
 export const createSitemap = (entries: Entry[]) =>
