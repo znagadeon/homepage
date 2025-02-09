@@ -27,7 +27,7 @@ export default () => {
           );
           const repository = new PostRepository(`${process.cwd()}/posts`);
           state.posts = repository
-            .getPosts({ limit: params.length })
+            .getPosts({ limit: params?.length, tag: params?.tag })
             .map((post) => {
               return {
                 ...post,
