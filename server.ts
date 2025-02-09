@@ -41,7 +41,7 @@ const createServer = async () => {
     const url = req.originalUrl;
 
     const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
-    const { ssr, state, manifest } = await render();
+    const { ssr, state, manifest } = await render(url);
 
     const rawHtml = (
       await fs.readFile(`${process.cwd()}/index.html`)
