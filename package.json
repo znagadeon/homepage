@@ -38,6 +38,7 @@
   "dependencies": {
     "@types/express": "^5.0.0",
     "@types/feather-icons": "^4.29.4",
+    "@types/katex": "^0.16.7",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "axios": "^1.6.0",
