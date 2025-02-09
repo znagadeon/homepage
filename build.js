@@ -8,6 +8,7 @@ import { getMeta } from './src/lib/getMeta';
 import { getPosts } from './src/lib/getPosts';
 import { PostRepository } from './src/repositories/PostRepository';
 import { createRss } from './src/utils/rss';
+import { createSitemap } from './src/utils/sitemap';
 import { wait } from './src/utils/time';
 
 const POST_ROOT = path.join(process.cwd(), 'posts');
@@ -137,7 +138,33 @@ const dest = './public';
   await capture(`${host}/search/index.html`, `${dest}/search/index.html`);
 
   // sitemap, rss
-  await capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`);
+  fs.writeFileSync(
+    `${dest}/sitemap.xml`,
+    createSitemap([
+      {
+        url: config.host,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      ...posts.map((post) => ({
+        url: `${config.host}${post.url}`,
+        modifiedAt: post.meta.updated,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      })),
+      ...tags.map((tag) => ({
+        url: `${config.host}/tag/${tag}`,
+        changeFrequency: 'weekly',
+        priority: 0.3,
+      })),
+      {
+        url: `${config.host}/archive`,
+        changeFrequency: 'weekly',
+        priority: 0.1,
+      },
+    ]),
+  );
+  console.log('Sitemap creation complete');
 
   fs.writeFileSync(
     `${dest}/rss.xml`,
