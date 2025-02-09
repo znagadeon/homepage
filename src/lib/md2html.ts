@@ -2,7 +2,8 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 
 const { marked } = require('marked');
-const katex = require('katex');
+
+import katex from 'katex';
 
 import { code, codespan, image, link } from './ConvertRules';
 

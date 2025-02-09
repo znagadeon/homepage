@@ -8,7 +8,7 @@ const repository = new PostRepository(POST_ROOT);
 
 api.get('/posts', (req, res) => {
   const posts = repository
-    .getAllPosts()
+    .getPosts()
     .filter((post) => {
       if (!req.query.tag) return true;
       if (post.meta.tags?.indexOf(req.query.tag) === -1) return false;

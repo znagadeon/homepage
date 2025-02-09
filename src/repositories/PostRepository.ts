@@ -13,16 +13,22 @@ export class PostRepository {
     return this.getMeta(found);
   }
 
-  getAllPosts() {
-    const posts = getPosts(this.root);
-    return posts
+  getPosts({ limit, tag }: { limit?: number; tag?: string } = {}) {
+    const posts = getPosts(this.root)
       .map((post) => this.getMeta(post))
-      .filter((post) => !post.meta.draft)
+      .filter((post) => {
+        if (post.meta.draft) return false;
+        if (!tag) return true;
+        return post.meta.tags?.includes(tag);
+      })
       .sort((a, b) => {
         if (a.meta.updated < b.meta.updated) return 1;
         if (a.meta.updated > b.meta.updated) return -1;
         return 0;
       });
+
+    if (typeof limit !== 'number') return posts;
+    return posts.slice(0, limit);
   }
 
   private getMeta(filename: string) {

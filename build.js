@@ -79,7 +79,7 @@ const dest = './public';
   fs.mkdirSync(dest);
   console.log('Start build');
 
-  const posts = repository.getAllPosts();
+  const posts = repository.getPosts();
   const _posts = getPosts(POST_ROOT);
   const postNames = _posts
     .filter((post) => !getMeta(post).meta.draft)

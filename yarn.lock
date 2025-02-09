@@ -1427,6 +1427,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/katex@npm:^0.16.7":
+  version: 0.16.7
+  resolution: "@types/katex@npm:0.16.7"
+  checksum: 4fd15d93553be97c02c064e16be18d7ccbabf66ec72a9dc7fd5bfa47f0c7581da2f942f693c7cb59499de4c843c2189796e49c9647d336cbd52b777b6722a95a
+  languageName: node
+  linkType: hard
+
 "@types/keyv@npm:^3.1.1":
   version: 3.1.3
   resolution: "@types/keyv@npm:3.1.3"
@@ -3857,6 +3864,7 @@ __metadata:
     "@biomejs/biome": ^1.9.4
     "@types/express": ^5.0.0
     "@types/feather-icons": ^4.29.4
+    "@types/katex": ^0.16.7
     "@types/mock-fs": ^4.13.4
     "@types/react": ^19.0.8
     "@types/react-dom": ^19.0.3
