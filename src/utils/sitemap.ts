@@ -1,5 +1,5 @@
-import { type Element as XmlElement, js2xml } from 'xml-js';
 import { formatDate } from './format';
+import { convert, createElement } from './xml';
 
 type Frequency =
   | 'always'
@@ -17,63 +17,36 @@ type Entry = {
   priority?: number;
 };
 
-const createText = (text: string | number) => ({ type: 'text', text });
-
-const createElement = (
-  name: string,
-  elements: XmlElement[],
-  attributes?: Record<string, string | number>,
-) => ({
-  type: 'element',
-  name,
-  elements,
-  attributes,
-});
-
 export const createEntry = ({
   url,
   modifiedAt,
   changeFrequency,
   priority,
 }: Entry) => {
-  const elements = [createElement('loc', [createText(url)])];
+  const elements = [createElement('loc', [url])];
 
   if (modifiedAt) {
-    elements.push(
-      createElement('lastmod', [createText(formatDate(modifiedAt))]),
-    );
+    elements.push(createElement('lastmod', [formatDate(modifiedAt)]));
   }
 
   if (changeFrequency) {
-    elements.push(createElement('changefreq', [createText(changeFrequency)]));
+    elements.push(createElement('changefreq', [changeFrequency]));
   }
 
   if (priority) {
-    elements.push(createElement('priority', [createText(priority)]));
+    elements.push(createElement('priority', [priority]));
   }
 
-  return {
-    type: 'element',
-    name: 'url',
-    elements,
-  };
+  return createElement('url', elements);
 };
 
 export const createSitemap = (entries: Entry[]) =>
-  js2xml({
-    declaration: {
-      attributes: {
-        version: '1.0',
-        encoding: 'utf-8',
+  convert([
+    createElement(
+      'urlset',
+      entries.map((entry) => createEntry(entry)),
+      {
+        xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
       },
-    },
-    elements: [
-      createElement(
-        'urlset',
-        entries.map((entry) => createEntry(entry)),
-        {
-          xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
-        },
-      ),
-    ],
-  });
+    ),
+  ]);

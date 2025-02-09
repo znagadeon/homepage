@@ -4,42 +4,13 @@
 		<h1 class="title__blog-name">
 			<a href="/">{{ config.blogName }}</a>
 		</h1>
-		<div class="title__search search">
-			<label>
-				<span class="sr-only">Search</span>
-				<input type="text" class="search__input" v-model="query" @keyup.enter="search">
-			</label>
-			<button @click="search" aria-label="Search">
-				<icon name="search" size="20"></icon>
-			</button>
-		</div>
+    <div class="title__search" ref="search"></div>
 	</div>
 	<section class="header__profile profile">
-		<img :src="links.profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
+		<img :src="profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
-        <ul class="profile__links">
-			<li>
-				<a :href="links.github" target="_blank" rel="noopener" aria-label="GitHub">
-					<icon name="github" size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
-					<icon name="linkedin" size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.twitter" target="_blank" rel="noopener" aria-label="Twitter">
-					<icon name="twitter" size="20"></icon>
-				</a>
-			</li>
-			<li>
-				<a :href="links.rss" target="_blank" rel="noopener" aria-label="RSS">
-					<icon name="rss" size="20"></icon>
-				</a>
-			</li>
-		</ul>
+    <div ref="social" class="profile__social"></div>
         <nav class="profile__menu menu">
 			<ul>
 				<li class="menu__menu-item">
@@ -54,50 +25,35 @@
 </header>
 </template>
 
-<script>
+<script lang="jsx">
+import {createRoot} from 'react-dom/client';
+import { Social } from './Social';
+import { Search } from './Search';
+
 import {config} from '@src/config';
 
-import Icon from './Icon.vue';
-
 export default {
-	components: {
-		Icon,
-	},
-
 	data() {
 		return {
 			size: 300,
 			config,
-			query: '',
 		};
 	},
 
 	computed: {
-		links() {
-			return {
-				profileImage: `https://www.gravatar.com/avatar/${this.config.links.gravatar}?s=${this.size}`,
-				github: `https://github.com/${config.links.github}`,
-				linkedin: `https://linkedin.com/in/${config.links.linkedin}`,
-				twitter: `https://twitter.com/${config.links.twitter}`,
-				rss: config.links.rss,
-			};
-		},
+    profileImage() {
+      return `https://www.gravatar.com/avatar/${this.config.gravatar}?s=${this.size}`;
+    },
 	},
 
-	methods: {
-		async search() {
-			if (!this.query) {
-				alert('검색어를 입력하세요');
-				return;
-			}
+  mounted() {
+    const social = createRoot(this.$refs.social);
+    const socialLinks = this.config.social;
+    social.render(<Social links={socialLinks} />)
 
-			location.href = `/search/index.html?q=${this.query}`;
-		},
-	},
-
-	created() {
-		this.query = this.$route.query.q || '';
-	},
+    const search = createRoot(this.$refs.search);
+    search.render(<Search />);
+  },
 };
 </script>
 
@@ -134,39 +90,6 @@ export default {
 	}
 }
 
-.search {
-	@media (max-width: 600px) {
-		& {
-			@apply hidden;
-		}
-	}
-	@media (min-width: 600px) {
-		& {
-			@apply flex;
-			@apply flex-row;
-			@apply items-center;
-		}
-	}
-
-	&__input {
-		@apply border-0;
-		@apply border-b;
-		@apply border-gray-400;
-		@apply w-40;
-		@apply h-8;
-		@apply mr-3;
-
-		@apply bg-transparent;
-	}
-
-	&__submit {
-		@apply p-2;
-		@apply border-0;
-
-		@apply bg-transparent;
-	}
-}
-
 .profile {
 	@apply relative;
 	@apply w-full;
@@ -191,20 +114,9 @@ export default {
 		@apply font-light;
 	}
 
-	&__links {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-		@apply mt-5;
-
-		li {
-			@apply mr-4;
-
-			&:last-child {
-				@apply mr-0;
-			}
-		}
-	}
+  &__social {
+    @apply mt-5;
+  }
 
 	&__menu {
 		@apply mt-1;

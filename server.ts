@@ -10,8 +10,6 @@ import sitemap from './src/routers/sitemap';
 
 const PORT = 1337;
 
-const isProduction = process.env.PHASE === 'production';
-
 const createServer = async () => {
   const app = express();
   const vite = await createViteServer({
@@ -40,39 +38,22 @@ const createServer = async () => {
   app.use('/api', api);
 
   app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
-    if (isProduction) {
-      const { render } = await import('./dist/server/entry-server.js');
-      const _manifest = JSON.parse(
-        (await fs.readFile('./dist/client/.vite/ssr-manifest.json')).toString(),
-      );
-      const { ssr, state, manifest } = await render(req.originalUrl, _manifest);
+    const url = req.originalUrl;
 
-      const template = (
-        await fs.readFile('./dist/client/index.html')
-      ).toString();
-      const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+    const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
+    const { ssr, state, manifest } = await render();
 
-      const html = template
-        .replace('<!--app-body-->', `${ssr}${hydration}`)
-        .replace('<!--app-head-->', manifest.teleports.head ?? '');
+    const rawHtml = (
+      await fs.readFile(`${process.cwd()}/index.html`)
+    ).toString();
+    const template = await vite.transformIndexHtml(url, rawHtml);
 
-      res.contentType('text/html').status(200).end(html);
-    } else {
-      const { render } = await vite.ssrLoadModule('./src/entry-server.ts');
-      const { ssr, state, manifest } = await render(req.originalUrl);
+    const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+    const html = template
+      .replace('<!--app-body-->', `${ssr}${hydration}`)
+      .replace('<!--app-head-->', manifest.teleports.head ?? '');
 
-      const rawHtml = (
-        await fs.readFile(`${process.cwd()}/index.html`)
-      ).toString();
-      const template = await vite.transformIndexHtml(req.originalUrl, rawHtml);
-      const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
-
-      const html = template
-        .replace('<!--app-body-->', `${ssr}${hydration}`)
-        .replace('<!--app-head-->', manifest.teleports.head ?? '');
-
-      res.contentType('text/html').status(200).end(html);
-    }
+    res.contentType('text/html').status(200).end(html);
   });
 
   app.use('/', express.static(path.join(process.cwd(), 'dist/client')));

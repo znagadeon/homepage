@@ -1,0 +1,30 @@
+.search {
+	@media (max-width: 600px) {
+		& {
+			@apply hidden;
+		}
+	}
+	@media (min-width: 600px) {
+		& {
+			@apply flex;
+			@apply flex-row;
+			@apply items-center;
+		}
+	}
+
+	&__input {
+		@apply border-0;
+		@apply border-b;
+		@apply border-gray-400;
+		@apply w-40;
+		@apply h-8;
+		@apply mr-3;
+
+		@apply bg-transparent;
+	}
+
+	&__submit {
+		@apply border-0;
+		@apply bg-transparent;
+	}
+}

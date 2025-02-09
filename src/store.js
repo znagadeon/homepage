@@ -21,10 +21,35 @@ export default () => {
 
     actions: {
       async loadPosts({ state }, params) {
+        if (import.meta.env.SSR) {
+          const { PostRepository } = await import(
+            '@src/repositories/PostRepository'
+          );
+          const repository = new PostRepository(`${process.cwd()}/posts`);
+          state.posts = repository.getAllPosts().map((post) => {
+            return {
+              ...post,
+              content: post.content
+                .replace(/<pre class="hljs">.+?<\/pre>/g, '')
+                .replace(/<.+?>/g, ''),
+            };
+          });
+          return;
+        }
+
         state.posts = (await axios.get(`${host}/api/posts`, { params })).data;
       },
 
       async loadPost({ state }, title) {
+        if (import.meta.env.SSR) {
+          const { PostRepository } = await import(
+            '@src/repositories/PostRepository'
+          );
+          const repository = new PostRepository(`${process.cwd()}/posts`);
+          state.post = repository.getPostById(title);
+          return;
+        }
+
         const { data } = await axios.get(`${host}/api/post/${title}`);
         state.post = {
           content: data.content,

@@ -37,7 +37,7 @@ export default {
 			tag: this.tag,
 		});
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: `#${this.tag} - ${config.blogName}`,
 			author: config.name,
@@ -46,14 +46,6 @@ export default {
 			opengraph: {
 				type: 'website',
 				url: config.host,
-				title: config.blogName,
-				description: config.description,
-				image: gravatar,
-			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${config.links.twitter}`,
 				title: config.blogName,
 				description: config.description,
 				image: gravatar,

@@ -1,26 +1,15 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const _getPosts = (contentDir: string) => {
-  const root = fs.readdirSync(contentDir, { withFileTypes: true });
-  let results: string[] = [];
+export const getPosts = (root: string) => {
+  const dirents = fs.readdirSync(root, { withFileTypes: true });
 
-  root.forEach((dirent) => {
-    if (dirent.isFile()) {
-      if (!['.DS_Store'].some((v) => dirent.name.includes(v))) {
-        results.push(path.join(contentDir, dirent.name));
-      }
-    } else {
-      results = [
-        ...results,
-        ..._getPosts(path.join(contentDir, dirent.name)),
-      ];
-    }
-  });
-
-  return results;
+  return dirents
+    .filter((dirent) => {
+      return !(dirent.isFile() && dirent.name === '.DS_Store');
+    })
+    .map((dirent) => {
+      if (dirent.isFile()) return path.join(root, dirent.name);
+      return path.join(root, dirent.name, 'index.md');
+    });
 };
-
-const isPage = (path: string) => Boolean(path.match(/\.md$/));
-
-export const getPosts = (contentDir: string) => _getPosts(contentDir).filter(v => isPage(v));

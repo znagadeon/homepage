@@ -33,7 +33,7 @@ export default {
 			length: 5,
 		});
 
-		const gravatar = `https://www.gravatar.com/avatar/${config.links.gravatar}`;
+		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: config.blogName,
 			author: config.name,
@@ -42,14 +42,6 @@ export default {
 			opengraph: {
 				type: 'website',
 				url: config.host,
-				title: config.blogName,
-				description: config.description,
-				image: gravatar,
-			},
-
-			twitter: {
-				card: 'summary',
-				site: `@${config.links.twitter}`,
 				title: config.blogName,
 				description: config.description,
 				image: gravatar,
