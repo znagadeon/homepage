@@ -7,6 +7,8 @@ import { getMeta } from './src/lib/getMeta';
 import { getPosts } from './src/lib/getPosts';
 import { wait } from './src/utils/time';
 
+const POST_ROOT = path.join(process.cwd(), 'posts');
+
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
 
@@ -84,11 +86,10 @@ const dest = './public';
   }
   console.log('Server is running');
 
-  const postsPath = './posts';
-  const posts = getPosts(postsPath);
+  const posts = getPosts(POST_ROOT);
   const postNames = posts
     .filter((post) => !getMeta(post).meta.draft)
-    .map((post) => post.replace(/^posts\/(.+)\/index.md$/, '$1'));
+    .map((post) => post.match(/posts\/(.+)\/index.md$/)?.[1]);
   const tags = Array.from(
     new Set(
       posts
@@ -103,7 +104,7 @@ const dest = './public';
   // static files & assets
   copyRecursively('./dist/client', dest);
   for (const post of postNames) {
-    const src = `${postsPath}/${post}/assets`;
+    const src = path.join(POST_ROOT, post, 'assets');
     if (fs.existsSync(src)) {
       copyRecursively(src, `${dest}/post/${post}/assets`);
     }
