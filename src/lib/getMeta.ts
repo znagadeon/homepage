@@ -1,10 +1,7 @@
 import fs from 'node:fs';
 import fm from 'front-matter';
-
-import { createRequire } from 'node:module';
 import { getModifiedAt } from '../utils/getModifiedAt';
-const require = createRequire(import.meta.url);
-const { md2html } = require('./md-converter.cjs');
+import { md2html } from './md2html';
 
 export const getMeta = (path: string) => {
   const file = fs.readFileSync(path).toString();
