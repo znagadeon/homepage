@@ -26,14 +26,16 @@ export default () => {
             '@src/repositories/PostRepository'
           );
           const repository = new PostRepository(`${process.cwd()}/posts`);
-          state.posts = repository.getAllPosts().map((post) => {
-            return {
-              ...post,
-              content: post.content
-                .replace(/<pre class="hljs">.+?<\/pre>/g, '')
-                .replace(/<.+?>/g, ''),
-            };
-          });
+          state.posts = repository
+            .getPosts({ limit: params.length })
+            .map((post) => {
+              return {
+                ...post,
+                content: post.content
+                  .replace(/<pre class="hljs">.+?<\/pre>/g, '')
+                  .replace(/<.+?>/g, ''),
+              };
+            });
           return;
         }
 

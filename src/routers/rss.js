@@ -9,7 +9,7 @@ const POST_PATH = `${process.cwd()}/posts`;
 const repository = new PostRepository(POST_PATH);
 
 rss.get('/rss.xml', (req, res) => {
-  const posts = repository.getAllPosts();
+  const posts = repository.getPosts();
 
   res.set('content-type', 'Application/xml').end(
     createRss({

@@ -9,7 +9,7 @@ const POST_PATH = `${process.cwd()}/posts`;
 const repository = new PostRepository(POST_PATH);
 
 sitemap.get('/sitemap.xml', (req, res) => {
-  const posts = repository.getAllPosts();
+  const posts = repository.getPosts();
   const tags = Array.from(
     new Set(
       posts

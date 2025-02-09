@@ -13,9 +13,8 @@ export class PostRepository {
     return this.getMeta(found);
   }
 
-  getAllPosts() {
-    const posts = getPosts(this.root);
-    return posts
+  getPosts({ limit }: { limit?: number } = {}) {
+    const posts = getPosts(this.root)
       .map((post) => this.getMeta(post))
       .filter((post) => !post.meta.draft)
       .sort((a, b) => {
@@ -23,6 +22,9 @@ export class PostRepository {
         if (a.meta.updated > b.meta.updated) return -1;
         return 0;
       });
+
+    if (typeof limit !== 'number') return posts;
+    return posts.slice(0, limit);
   }
 
   private getMeta(filename: string) {
