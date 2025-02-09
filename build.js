@@ -29,16 +29,6 @@ const removeRecursively = (directory) => {
   fs.rmdirSync(directory);
 };
 
-const captureWithApi = async (url, filename) => {
-  const { data } = await axios.get(url);
-  const dir = path.dirname(filename);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  fs.writeFileSync(filename, data);
-  console.log(`Capture ${url} -> ${filename} complete`);
-};
-
 const capture = async (url, filename) => {
   const dir = path.dirname(filename);
   if (!fs.existsSync(dir)) {
@@ -141,13 +131,10 @@ const dest = './public';
   }
 
   // home
-  await captureWithApi(host, `${dest}/index.html`);
+  await capture('/', `${dest}/index.html`);
 
   // posts
-  await captureWithApi(
-    `${host}/archive/index.html`,
-    `${dest}/archive/index.html`,
-  );
+  await capture('/archive/index.html', `${dest}/archive/index.html`);
   for (const post of postNames) {
     await capture(
       `/post/${post}/index.html`,
@@ -155,17 +142,11 @@ const dest = './public';
     );
   }
   for (const tag of tags) {
-    await captureWithApi(
-      `${host}/tag/${tag}/index.html`,
-      `${dest}/tag/${tag}/index.html`,
-    );
+    await capture(`/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
   }
 
   // search page
-  await captureWithApi(
-    `${host}/search/index.html`,
-    `${dest}/search/index.html`,
-  );
+  await capture('/search/index.html', `${dest}/search/index.html`);
 
   // sitemap, rss
   fs.writeFileSync(
