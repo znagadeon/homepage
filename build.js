@@ -29,13 +29,37 @@ const removeRecursively = (directory) => {
   fs.rmdirSync(directory);
 };
 
-const capture = async (url, filename) => {
+const captureWithApi = async (url, filename) => {
   const { data } = await axios.get(url);
   const dir = path.dirname(filename);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
   fs.writeFileSync(filename, data);
+  console.log(`Capture ${url} -> ${filename} complete`);
+};
+
+const capture = async (url, filename) => {
+  const dir = path.dirname(filename);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  const { render } = await import('./dist/server/entry-server.js');
+  const _manifest = JSON.parse(
+    fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
+  );
+
+  const { ssr, state, manifest } = await render(url, _manifest);
+
+  const template = fs.readFileSync('./dist/client/index.html').toString();
+
+  const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+  const html = template
+    .replace('<!--app-body-->', `${ssr}${hydration}`)
+    .replace('<!--app-head-->', manifest.teleports.head ?? '');
+
+  fs.writeFileSync(filename, html);
   console.log(`Capture ${url} -> ${filename} complete`);
 };
 
@@ -117,25 +141,31 @@ const dest = './public';
   }
 
   // home
-  await capture(host, `${dest}/index.html`);
+  await captureWithApi(host, `${dest}/index.html`);
 
   // posts
-  await capture(`${host}/archive/index.html`, `${dest}/archive/index.html`);
+  await captureWithApi(
+    `${host}/archive/index.html`,
+    `${dest}/archive/index.html`,
+  );
   for (const post of postNames) {
     await capture(
-      `${host}/post/${post}/index.html`,
+      `/post/${post}/index.html`,
       `${dest}/post/${post}/index.html`,
     );
   }
   for (const tag of tags) {
-    await capture(
+    await captureWithApi(
       `${host}/tag/${tag}/index.html`,
       `${dest}/tag/${tag}/index.html`,
     );
   }
 
   // search page
-  await capture(`${host}/search/index.html`, `${dest}/search/index.html`);
+  await captureWithApi(
+    `${host}/search/index.html`,
+    `${dest}/search/index.html`,
+  );
 
   // sitemap, rss
   fs.writeFileSync(
