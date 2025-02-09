@@ -3,11 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import axios from 'axios';
 import pids from 'port-pid';
+import { config } from './src/config';
 import { getMeta } from './src/lib/getMeta';
 import { getPosts } from './src/lib/getPosts';
+import { PostRepository } from './src/repositories/PostRepository';
+import { createRss } from './src/utils/rss';
 import { wait } from './src/utils/time';
 
 const POST_ROOT = path.join(process.cwd(), 'posts');
+const repository = new PostRepository(POST_ROOT);
 
 const removeRecursively = (directory) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
@@ -86,13 +90,14 @@ const dest = './public';
   }
   console.log('Server is running');
 
-  const posts = getPosts(POST_ROOT);
-  const postNames = posts
+  const posts = repository.getAllPosts();
+  const _posts = getPosts(POST_ROOT);
+  const postNames = _posts
     .filter((post) => !getMeta(post).meta.draft)
     .map((post) => post.match(/posts\/(.+)\/index.md$/)?.[1]);
   const tags = Array.from(
     new Set(
-      posts
+      _posts
         .map((post) => getMeta(post).meta.tags)
         .reduce((acc, cur) => {
           if (!cur) return acc;
@@ -133,7 +138,23 @@ const dest = './public';
 
   // sitemap, rss
   await capture(`${host}/sitemap.xml`, `${dest}/sitemap.xml`);
-  await capture(`${host}/rss.xml`, `${dest}/rss.xml`);
+
+  fs.writeFileSync(
+    `${dest}/rss.xml`,
+    createRss({
+      title: config.blogName,
+      link: config.host,
+      description: config.description,
+      items: posts.map((post) => ({
+        title: post.meta.title,
+        link: `${config.host}${post.url}`,
+        description: post.content,
+        author: config.name,
+        published: post.meta.updated,
+      })),
+    }),
+  );
+  console.log('RSS creation complete');
 
   console.log('Build complete');
 
