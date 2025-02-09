@@ -1,15 +1,11 @@
-import { execSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import axios from 'axios';
-import pids from 'port-pid';
 import { config } from './src/config';
 import { getMeta } from './src/lib/getMeta';
 import { getPosts } from './src/lib/getPosts';
 import { PostRepository } from './src/repositories/PostRepository';
 import { createRss } from './src/utils/rss';
 import { createSitemap } from './src/utils/sitemap';
-import { wait } from './src/utils/time';
 
 const POST_ROOT = path.join(process.cwd(), 'posts');
 const repository = new PostRepository(POST_ROOT);
@@ -74,16 +70,6 @@ const copyRecursively = (src, dest) => {
   }
 };
 
-const kill = async (port) => {
-  const pid = await pids(port);
-
-  for (const id of pid.all.reverse()) {
-    execSync(`kill -9 ${id}`);
-  }
-};
-
-const port = 1337;
-const host = `http://localhost:${port}`;
 const dest = './public';
 
 (async () => {
@@ -92,18 +78,6 @@ const dest = './public';
   }
   fs.mkdirSync(dest);
   console.log('Start build');
-
-  await kill(port);
-  const server = spawn('yarn', ['serve']);
-  for (;;) {
-    try {
-      await axios.get(`${host}/health`);
-      break;
-    } catch {
-      await wait(100);
-    }
-  }
-  console.log('Server is running');
 
   const posts = repository.getAllPosts();
   const _posts = getPosts(POST_ROOT);
@@ -195,8 +169,4 @@ const dest = './public';
   console.log('RSS creation complete');
 
   console.log('Build complete');
-
-  server.kill();
-  await kill(port);
-  process.exit();
 })();
