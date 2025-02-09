@@ -23,6 +23,9 @@
       "recommended": true,
       "performance": {
         "noAccumulatingSpread": "off"
+      },
+      "style": {
+        "useNumberNamespace": "off"
       }
     }
   },

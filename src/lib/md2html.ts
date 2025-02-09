@@ -4,7 +4,7 @@ const require = createRequire(import.meta.url);
 const { marked } = require('marked');
 const katex = require('katex');
 
-const { link, image, code, codespan } = require('./convert-rules.cjs');
+import { code, codespan, image, link } from './ConvertRules';
 
 const renderer = new marked.Renderer();
 renderer.link = link;
