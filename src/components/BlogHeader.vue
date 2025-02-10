@@ -8,7 +8,7 @@
 	</div>
 	<section class="header__profile profile">
 		<img :src="profileImage" :width="size/2" :height="size/2" alt="Profile image" class="profile__image">
-		<h2 class="profile__title">{{ config.name }}</h2>
+		<h2 class="profile__author">{{ config.author }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
     <div ref="social" class="profile__social"></div>
     <div ref="menu" class="profile__menu"></div>
@@ -94,7 +94,7 @@ export default {
 		@apply mx-auto;
 	}
 
-	&__title {
+	&__author {
 		@apply mt-5;
 		@apply text-2xl;
 		@apply text-center;

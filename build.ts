@@ -167,7 +167,7 @@ const dest = './public';
         title: post.meta.title,
         link: `${config.host}${post.url}`,
         description: post.content,
-        author: config.name,
+        author: config.author,
         published: post.meta.updated,
       })),
     }),

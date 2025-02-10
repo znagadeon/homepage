@@ -1,6 +1,6 @@
 export const config = {
   blogName: '지나가던 개발자',
-  name: 'Kim Songhyun',
+  author: 'Kim Songhyun',
   description: '카카오 프론트엔드 개발자 since 2018. 01.',
   host: 'https://znagadeon.dev',
   googleSearch: '981b407e9acf0f1f0',

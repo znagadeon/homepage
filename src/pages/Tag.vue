@@ -40,7 +40,7 @@ export default {
 		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
 		this.setMeta({
 			title: `#${this.tag} - ${config.blogName}`,
-			author: config.name,
+			author: config.author,
 			description: config.description,
 
 			opengraph: {

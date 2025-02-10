@@ -59,7 +59,7 @@ export default {
 		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
 		this.setMeta({
 			title: `${title} - ${config.blogName}`,
-			author: config.name,
+			author: config.author,
 			description: config.description,
 
 			opengraph: {
