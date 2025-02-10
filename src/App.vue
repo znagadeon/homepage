@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <blog-header></blog-header>
+  <div ref="header"></div>
   <main>
     <router-view></router-view>
   </main>
@@ -8,13 +8,15 @@
 </div>
 </template>
 
-<script>
-import BlogHeader from './components/BlogHeader.vue';
+<script lang="jsx">
+import {createRoot} from 'react-dom/client';
+import { Header } from './components/Header';
 
 export default {
-	components: {
-		BlogHeader,
-	},
+  mounted() {
+    const header = createRoot(this.$refs.header);
+    header.render(<Header />);
+  },
 };
 </script>
 
