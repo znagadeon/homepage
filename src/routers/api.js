@@ -8,13 +8,7 @@ const repository = new PostRepository(POST_ROOT);
 
 api.get('/posts', (req, res) => {
   const posts = repository
-    .getPosts()
-    .filter((post) => {
-      if (!req.query.tag) return true;
-      if (post.meta.tags?.indexOf(req.query.tag) === -1) return false;
-
-      return true;
-    })
+    .getPosts({ tag: req.query.tag, limit: req.query.length })
     .map((post) => {
       return {
         ...post,
@@ -24,8 +18,7 @@ api.get('/posts', (req, res) => {
       };
     });
 
-  res.send(req.query.length ? posts.slice(0, req.query.length) : posts);
-  res.end();
+  res.send(posts);
 });
 
 api.get('/post/:title', (req, res) => {
