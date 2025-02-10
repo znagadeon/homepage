@@ -15,10 +15,14 @@ export const config = {
     { name: 'Wiki', url: 'https://wiki.znagadeon.dev' },
     { name: 'Archive', url: '/archive' },
   ],
-  comment: {
+  giscus: {
     repository: 'znagadeon/homepage',
     repoId: 'MDEwOlJlcG9zaXRvcnkyMzc0ODA5OTk=',
     category: 'General',
     categoryId: 'MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzIwODgy',
+  },
+  history: {
+    org: 'znagadeon',
+    repo: 'homepage',
   },
 };

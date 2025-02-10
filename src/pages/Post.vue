@@ -42,7 +42,7 @@ export default {
 			return this.$route.params.title;
 		},
 		commitLog() {
-			return `https://github.com/${config.comment.repository}/commits/develop/posts/${this.title}`;
+			return `https://github.com/${config.history.org}/${config.history.repo}/commits/develop/posts/${this.title}`;
 		},
 	},
 
