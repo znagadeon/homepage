@@ -1,4 +1,3 @@
-import type { FeatherIconNames } from 'feather-icons';
 import { type HTMLAttributes, useMemo } from 'react';
 import { Icon } from './Icon';
 
@@ -20,8 +19,8 @@ export const Social = ({
         return {
           link,
           name: 'RSS',
-          icon: 'rss' as FeatherIconNames,
-        };
+          icon: 'rss',
+        } as const;
       }
 
       switch (url.origin) {
@@ -29,20 +28,20 @@ export const Social = ({
           return {
             link,
             name: 'GitHub',
-            icon: 'github' as FeatherIconNames,
-          };
+            icon: 'github',
+          } as const;
         case 'https://linkedin.com':
           return {
             link,
             name: 'LinkedIn',
-            icon: 'linkedin' as FeatherIconNames,
-          };
+            icon: 'linkedin',
+          } as const;
         case 'https://twitter.com':
           return {
             link,
             name: 'Twitter',
-            icon: 'twitter' as FeatherIconNames,
-          };
+            icon: 'twitter',
+          } as const;
         default:
           throw new Error('Not Implemented');
       }
