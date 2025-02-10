@@ -11,6 +11,10 @@ export const config = {
     'https://linkedin.com/in/kim-songhyun',
     '/rss.xml',
   ],
+  menu: [
+    { name: 'Wiki', url: 'https://wiki.znagadeon.dev' },
+    { name: 'Archive', url: '/archive' },
+  ],
   comment: {
     repository: 'znagadeon/homepage',
     repoId: 'MDEwOlJlcG9zaXRvcnkyMzc0ODA5OTk=',

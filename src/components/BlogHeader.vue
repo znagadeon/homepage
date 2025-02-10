@@ -11,16 +11,7 @@
 		<h2 class="profile__title">{{ config.name }}</h2>
 		<p class="profile__description">{{ config.description }}</p>
     <div ref="social" class="profile__social"></div>
-        <nav class="profile__menu menu">
-			<ul>
-				<li class="menu__menu-item">
-					<a href="https://wiki.znagadeon.dev" target="_blank" rel="noopener">Wiki</a>
-				</li>
-				<li class="menu__menu-item">
-					<a href="/archive">Archive</a>
-				</li>
-			</ul>
-		</nav>
+    <div ref="menu" class="profile__menu"></div>
 	</section>
 </header>
 </template>
@@ -28,6 +19,7 @@
 <script lang="jsx">
 import {createRoot} from 'react-dom/client';
 import { Social } from './Social';
+import { Menu } from './Menu';
 import { Search } from './Search';
 
 import {config} from '@src/config';
@@ -48,8 +40,10 @@ export default {
 
   mounted() {
     const social = createRoot(this.$refs.social);
-    const socialLinks = this.config.social;
-    social.render(<Social links={socialLinks} />)
+    social.render(<Social links={this.config.social} />)
+
+    const menu = createRoot(this.$refs.menu);
+    menu.render(<Menu links={this.config.menu} />);
 
     const search = createRoot(this.$refs.search);
     search.render(<Search />);
@@ -120,23 +114,6 @@ export default {
 
 	&__menu {
 		@apply mt-1;
-	}
-}
-
-.menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
-
-	&__menu-item {
-		@apply mr-5;
-		@apply text-lg;
-
-		&:last-child {
-			@apply mr-0;
-		}
 	}
 }
 </style>
