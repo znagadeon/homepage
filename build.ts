@@ -10,7 +10,7 @@ import { createSitemap } from './src/utils/sitemap';
 const POST_ROOT = path.join(process.cwd(), 'posts');
 const repository = new PostRepository(POST_ROOT);
 
-const removeRecursively = (directory) => {
+const removeRecursively = (directory: string) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
 
   for (const file of files) {
@@ -25,7 +25,7 @@ const removeRecursively = (directory) => {
   fs.rmdirSync(directory);
 };
 
-const capture = async (url, filename) => {
+const capture = async (url: string, filename: string) => {
   const dir = path.dirname(filename);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -49,7 +49,7 @@ const capture = async (url, filename) => {
   console.log(`Capture ${url} -> ${filename} complete`);
 };
 
-const copyRecursively = (src, dest) => {
+const copyRecursively = (src: string, dest: string) => {
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true });
   }
@@ -83,7 +83,7 @@ const dest = './public';
   const _posts = getPosts(POST_ROOT);
   const postNames = _posts
     .filter((post) => !getMeta(post).meta.draft)
-    .map((post) => post.match(/posts\/(.+)\/index.md$/)?.[1]);
+    .map((post) => post.replace(/.+\/posts\/(.+)\/index.md$/, '$1'));
   const tags = Array.from(
     new Set(
       _posts
@@ -131,17 +131,23 @@ const dest = './public';
         changeFrequency: 'weekly',
         priority: 0.9,
       },
-      ...posts.map((post) => ({
-        url: `${config.host}${post.url}`,
-        modifiedAt: post.meta.updated,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      })),
-      ...tags.map((tag) => ({
-        url: `${config.host}/tag/${tag}`,
-        changeFrequency: 'weekly',
-        priority: 0.3,
-      })),
+      ...posts.map(
+        (post) =>
+          ({
+            url: `${config.host}${post.url}`,
+            modifiedAt: post.meta.updated,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          }) as const,
+      ),
+      ...tags.map(
+        (tag) =>
+          ({
+            url: `${config.host}/tag/${tag}`,
+            changeFrequency: 'weekly',
+            priority: 0.3,
+          }) as const,
+      ),
       {
         url: `${config.host}/archive`,
         changeFrequency: 'weekly',
