@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { type HTMLAttributes, useMemo } from 'react';
 import style from './Menu.module.scss';
 
 type Link = {
@@ -10,7 +10,10 @@ type Props = {
   links: Link[];
 };
 
-export const Menu = ({ links }: Props) => {
+export const Menu = ({
+  links,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & Props) => {
   const parsedLinks = useMemo(() => {
     return links.map((link) => {
       const url = new URL(link.url, location.origin);
@@ -23,7 +26,7 @@ export const Menu = ({ links }: Props) => {
   }, [links]);
 
   return (
-    <nav className={style.menu}>
+    <nav {...props} className={`${style.menu} ${props.className}`}>
       <ul>
         {parsedLinks.map(({ isInnerLink, name, url }) => (
           <li key={name} className={style['menu__menu-item']}>

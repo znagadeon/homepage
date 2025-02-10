@@ -1,5 +1,5 @@
 import type { FeatherIconNames } from 'feather-icons';
-import { useMemo } from 'react';
+import { type HTMLAttributes, useMemo } from 'react';
 import { Icon } from './Icon';
 
 import style from './Social.module.scss';
@@ -8,7 +8,10 @@ type Props = {
   links: string[];
 };
 
-export const Social = ({ links }: Props) => {
+export const Social = ({
+  links,
+  ...props
+}: HTMLAttributes<HTMLUListElement> & Props) => {
   const parsedLinks = useMemo(() => {
     return links.map((link) => {
       const url = new URL(link, location.origin);
@@ -47,7 +50,7 @@ export const Social = ({ links }: Props) => {
   }, [links]);
 
   return (
-    <ul className={style.social}>
+    <ul {...props} className={`${style.social} ${props.className}`}>
       {parsedLinks.map(({ link, name, icon }) => (
         <li key={link}>
           <a href={link} target="_blank" rel="noreferrer">
