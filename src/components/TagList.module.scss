@@ -1,0 +1,13 @@
+.tags {
+	@apply inline-block;
+
+	&__tag {
+		@apply inline-block;
+		@apply mr-2;
+		@apply text-blue-800;
+
+		&:last-child {
+			@apply mr-0;
+		}
+	}
+}

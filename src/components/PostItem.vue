@@ -7,18 +7,17 @@
 	<dl v-if="post.meta.tags?.length > 0" class="post-item__meta-info">
 		<dt class="sr-only">tags</dt>
 		<dd class="post-item__tags">
-			<tags :tags="post.meta.tags"></tags>
+      <span ref="tags"></span>
 		</dd>
 	</dl>
 </li>
 </template>
 
-<script>
-import Tags from './Tags.vue';
+<script lang="jsx">
+import { createRoot } from 'react-dom/client';
+import { TagList } from './TagList';
 
 export default {
-	components: { Tags },
-
 	props: ['post'],
 
 	computed: {
@@ -29,6 +28,11 @@ export default {
 			return desc.length > maxLength ? `${desc.slice(0, maxLength)}...` : desc;
 		},
 	},
+
+  mounted() {
+    const tags = createRoot(this.$refs.tags);
+    tags.render(<TagList tags={this.post.meta.tags || []} />)
+  },
 }
 </script>
 

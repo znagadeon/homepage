@@ -4,7 +4,7 @@
 		<h1 class="post__title">{{post.meta?.title}}</h1>
 		<div class="post__tags">
 			<span class="sr-only">tags</span>
-			<tags :tags="post.meta?.tags"></tags>
+      <span ref="tags"></span>
 		</div>
 		<div class="post__updated">
 			<span>Last Updated: </span>
@@ -19,10 +19,12 @@
 </teleport>
 </template>
 
-<script>
+<script lang="jsx">
 import {config} from '@src/config';
 
-import Tags from '@src/components/Tags.vue';
+import { createRoot } from 'react-dom/client';
+import { TagList } from '../components/TagList';
+
 import Comment from '@src/components/Comment.vue';
 import PageMeta from '@src/components/PageMeta.vue';
 
@@ -30,7 +32,6 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
 	components: {
-		Tags,
 		Comment,
 		PageMeta,
 	},
@@ -70,6 +71,11 @@ export default {
 			},
 		});
 	},
+
+  mounted() {
+    const tags = createRoot(this.$refs.tags);
+    tags.render(<TagList tags={this.post.meta?.tags || []} />)
+  },
 };
 </script>
 
