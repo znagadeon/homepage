@@ -1,5 +1,5 @@
 <template>
-<post-list :posts="posts">Archive</post-list>
+<post-list :posts="posts" title="Archive"></post-list>
 <teleport to="head">
 	<page-meta :meta="meta"></page-meta>
 </teleport>

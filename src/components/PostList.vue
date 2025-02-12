@@ -1,40 +1,17 @@
 <template>
-<article class="posts">
-	<h2 class="posts__title"><slot></slot></h2>
-	<ol class="posts__list">
-		<post-item v-for="post in posts" :post="post" :key="post.url"></post-item>
-	</ol>
-</article>
+<div ref="postList"></div>
 </template>
 
-<script>
-import PostItem from './PostItem.vue';
+<script lang="jsx">
+import { createRoot } from 'react-dom/client';
+import { PostList } from './PostList';
 
 export default {
-	components: {
-		PostItem,
-	},
+	props: ['posts', 'title'],
 
-	props: ['posts'],
+  mounted() {
+    const root = createRoot(this.$refs.postList);
+    root.render(<PostList posts={this.posts}>{this.title}</PostList>)
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-.posts {
-	@apply max-w-6xl;
-	@apply mx-auto;
-	@apply mb-6;
-
-	&__title {
-		@apply mt-8;
-		@apply text-2xl;
-		@apply font-bold;
-	}
-
-	&__list {
-		@apply flex;
-		@apply flex-col;
-		@apply mt-1;
-	}
-}
-</style>

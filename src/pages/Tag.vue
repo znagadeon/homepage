@@ -1,5 +1,5 @@
 <template>
-<post-list :posts="posts">#{{tag}}</post-list>
+<post-list :posts="posts" :title="`#${tag}`"></post-list>
 <teleport to="head">
 	<page-meta :meta="meta"></page-meta>
 </teleport>

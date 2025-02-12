@@ -1,5 +1,5 @@
 <template>
-<post-list :posts="posts">Recent Posts</post-list>
+<post-list :posts="posts" title="Recent Posts"></post-list>
 <teleport to="head">
 	<page-meta :meta="meta"></page-meta>
 </teleport>
