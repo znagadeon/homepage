@@ -36,14 +36,14 @@ const capture = async (url: string, filename: string) => {
     fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
   );
 
-  const { ssr, state, manifest } = await render(url, _manifest);
+  const { vueSsr, state, manifest } = await render(url, _manifest);
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
   const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
   const html = template
-    .replace('<!--app-body-->', `${ssr}${hydration}`)
-    .replace('<!--app-head-->', manifest.teleports.head ?? '');
+    .replace('<!--vue-body-->', `${vueSsr}${hydration}`)
+    .replace('<!--vue-head-->', manifest.teleports.head ?? '');
 
   fs.writeFileSync(filename, html);
   console.log(`Capture ${url} -> ${filename} complete`);

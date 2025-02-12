@@ -30,6 +30,7 @@ export default {
 	},
 
   mounted() {
+    if (!this.$refs.tags) return;
     const tags = createRoot(this.$refs.tags);
     tags.render(<TagList tags={this.post.meta.tags || []} />)
   },

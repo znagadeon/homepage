@@ -1,7 +1,7 @@
 import { renderToString } from 'vue/server-renderer';
-import createApp from './app';
+import createApp from './vue-app';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// biome-ignore lint/suspicious/noExplicitAny:
 export const render = async (url: string, manifest: any = {}) => {
   const { app, router, store } = createApp();
 
@@ -9,7 +9,7 @@ export const render = async (url: string, manifest: any = {}) => {
   await router.isReady();
 
   return {
-    ssr: await renderToString(app, manifest),
+    vueSsr: await renderToString(app, manifest),
     manifest,
     state: store.state,
   };
