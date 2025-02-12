@@ -12,7 +12,7 @@ export const Header = () => {
 
   return (
     <header className={style.header}>
-      <div className={`${style.header__title} ${style.title}`}>
+      <div className={style.title}>
         <h1 className={style['title__blog-name']}>
           <a href="/">{config.blogName}</a>
         </h1>

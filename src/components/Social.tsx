@@ -1,4 +1,5 @@
 import { type HTMLAttributes, useMemo } from 'react';
+import { config } from '../config';
 import { Icon } from './Icon';
 
 import style from './Social.module.scss';
@@ -13,7 +14,10 @@ export const Social = ({
 }: HTMLAttributes<HTMLUListElement> & Props) => {
   const parsedLinks = useMemo(() => {
     return links.map((link) => {
-      const url = new URL(link, location.origin);
+      // FIXME: SSR
+      const url = import.meta.env.SSR
+        ? new URL(link, config.host)
+        : new URL(link, location.origin);
 
       if (url.pathname.includes('rss.xml')) {
         return {

@@ -1,25 +1,16 @@
 <template>
 <div class="container">
-  <div ref="header"></div>
   <main>
     <router-view></router-view>
   </main>
 </div>
 </template>
 
-<script lang="jsx">
-import {createRoot} from 'react-dom/client';
-import { Header } from './components/Header';
-
-export default {
-  mounted() {
-    const header = createRoot(this.$refs.header);
-    header.render(<Header />);
-  },
-};
+<script>
+export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
 
 .container {

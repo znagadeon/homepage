@@ -7,7 +7,7 @@
     "dev:server": "PHASE=dev nodemon --ext \"ts,js\" --ignore \"src/**/*.spec.ts\" --exec tsx server.ts",
     "dev": "npm-run-all -p 'dev:*'",
     "build:client": "vite build --outDir dist/client --ssrManifest",
-    "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "build": "yarn build:client && yarn build:server && tsx build.ts",
     "test": "vitest"
   },
