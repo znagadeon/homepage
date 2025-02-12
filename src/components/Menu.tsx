@@ -1,5 +1,6 @@
 import { type HTMLAttributes, useMemo } from 'react';
 import { config } from '../config';
+import { getOrigin } from '../utils/getOrigin';
 import style from './Menu.module.scss';
 
 type Link = {
@@ -17,16 +18,12 @@ export const Menu = ({
 }: HTMLAttributes<HTMLDivElement> & Props) => {
   const parsedLinks = useMemo(() => {
     return links.map((link) => {
-      // FIXME: SSR
-      const url = import.meta.env.SSR
-        ? new URL(link.url, config.host)
-        : new URL(link.url, location.origin);
+      const origin = getOrigin();
+      const url = new URL(link.url, origin);
 
       return {
         ...link,
-        isInnerLink: import.meta.env.SSR
-          ? url.origin === config.host
-          : url.origin === location.origin,
+        isInnerLink: url.origin === origin,
       };
     });
   }, [links]);
