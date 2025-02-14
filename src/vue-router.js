@@ -16,7 +16,7 @@ export default () => {
   return createRouter({
     history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
     routes: [
-      { path: '/', component: Home, alias: '/' },
+      { path: '/', component: Home },
 
       {
         path: '/post/:title/',
