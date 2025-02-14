@@ -1,8 +1,8 @@
 import { createSSRApp } from 'vue';
 
 import VueApp from './VueApp.vue';
-import createRouter from './router';
 import createStore from './store';
+import createRouter from './vue-router';
 
 import '../styles/master.scss';
 
