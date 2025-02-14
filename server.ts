@@ -37,7 +37,7 @@ const createServer = async () => {
 
   app.use('/api', api);
 
-  app.get(/\/($|post|tag|search|archive)/, async (req, res) => {
+  app.get(/\/($|post(?!\/assets)|tag|search|archive)/, async (req, res) => {
     const url = req.originalUrl;
 
     const { render } = await vite.ssrLoadModule('./src/entry-server.tsx');

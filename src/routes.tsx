@@ -10,17 +10,11 @@ export const routes = [
     path: '/',
     element: <App />,
     children: [
-      { path: '', element: <Home /> },
+      { index: true, element: <Home /> },
       { path: 'post/:title', element: <Post /> },
       { path: 'archive', element: <Archive /> },
       { path: 'tag/:tag', element: <Tag /> },
       { path: 'search', element: <Search /> },
-
-      { path: 'index.html', element: <Home /> },
-      { path: 'post/:title/index.html', element: <Post /> },
-      { path: 'archive/index.html', element: <Archive /> },
-      { path: 'tag/:tag/index.html', element: <Tag /> },
-      { path: 'search/index.html', element: <Search /> },
     ],
   },
 ];

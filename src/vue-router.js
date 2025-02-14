@@ -16,18 +16,17 @@ export default () => {
   return createRouter({
     history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
     routes: [
-      { path: '/index.html', component: Home, alias: '/' },
+      { path: '/', component: Home, alias: '/' },
 
       {
-        path: '/post/:title/index.html',
+        path: '/post/:title',
         component: Post,
-        alais: '/post/:title',
       },
-      { path: '/archive/index.html', component: Archive, alias: '/archive' },
-      { path: '/tag/:tag/index.html', component: Tag, alias: '/tag/:tag' },
+      { path: '/archive', component: Archive },
+      { path: '/tag/:tag', component: Tag },
 
       {
-        path: '/search/index.html',
+        path: '/search',
         component: Search,
         props: (route) => ({ query: route.query.q }),
       },

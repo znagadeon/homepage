@@ -64,7 +64,7 @@ export default {
 
 			opengraph: {
 				type: 'article',
-				url: `${config.host}/post/${this.title}/index.html`,
+				url: `${config.host}/post/${this.title}`,
 				title,
 				description: desc,
 				image: gravatar,

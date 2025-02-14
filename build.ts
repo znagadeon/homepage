@@ -109,19 +109,16 @@ const dest = './public';
   await capture('/', `${dest}/index.html`);
 
   // posts
-  await capture('/archive/index.html', `${dest}/archive/index.html`);
+  await capture('/archive', `${dest}/archive/index.html`);
   for (const post of postNames) {
-    await capture(
-      `/post/${post}/index.html`,
-      `${dest}/post/${post}/index.html`,
-    );
+    await capture(`/post/${post}`, `${dest}/post/${post}/index.html`);
   }
   for (const tag of tags) {
-    await capture(`/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
+    await capture(`/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
   }
 
   // search page
-  await capture('/search/index.html', `${dest}/search/index.html`);
+  await capture('/search', `${dest}/search/index.html`);
 
   // sitemap, rss
   fs.writeFileSync(

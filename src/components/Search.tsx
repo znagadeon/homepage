@@ -17,7 +17,7 @@ export const Search = (props: HTMLAttributes<HTMLDivElement>) => {
       return;
     }
 
-    location.href = `/search/index.html?q=${query}`;
+    location.href = `/search?q=${query}`;
   };
 
   const onKeyup: KeyboardEventHandler<HTMLInputElement> = (e) => {
