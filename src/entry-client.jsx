@@ -1,10 +1,11 @@
 import { hydrateRoot } from 'react-dom/client';
-import { App } from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import {routes} from './routes';
 import createApp from './vue-app';
 
-const { app: vueApp, store, router } = createApp();
+const { app: vueApp, store, router: vueRouter } = createApp();
 
-router.isReady().then(() => {
+vueRouter.isReady().then(() => {
   if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
   }
@@ -13,5 +14,7 @@ router.isReady().then(() => {
 
 const app = document.getElementById('app');
 if (app) {
-  hydrateRoot(app, <App />);
+  hydrateRoot(app, (
+    <RouterProvider router={createBrowserRouter(routes)} />
+  ));
 }
