@@ -1,4 +1,4 @@
 {
   "ext": "ts,js",
-  "ignore": ["src/**/*.spec.ts", "public", "dist"]
+  "ignore": ["src/**/*.spec.ts", "public", "dist", "build.ts"]
 }
