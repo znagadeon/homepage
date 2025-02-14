@@ -111,7 +111,7 @@ const dest = './public';
   // posts
   await capture('/archive', `${dest}/archive/index.html`);
   for (const post of postNames) {
-    await capture(`/post/${post}`, `${dest}/post/${post}/index.html`);
+    await capture(`/post/${post}/`, `${dest}/post/${post}/index.html`);
   }
   for (const tag of tags) {
     await capture(`/tag/${tag}`, `${dest}/tag/${tag}/index.html`);

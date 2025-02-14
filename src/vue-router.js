@@ -19,7 +19,7 @@ export default () => {
       { path: '/', component: Home, alias: '/' },
 
       {
-        path: '/post/:title',
+        path: '/post/:title/',
         component: Post,
       },
       { path: '/archive', component: Archive },

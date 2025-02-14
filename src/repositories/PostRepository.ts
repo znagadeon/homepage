@@ -34,7 +34,7 @@ export class PostRepository {
   private getMeta(filename: string) {
     return {
       ...getMeta(filename),
-      url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)?.[1]}`,
+      url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)?.[1]}/`,
     };
   }
 }
