@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev:client": "vite build --mode=development --watch --outDir dist/client",
-    "dev:server": "PHASE=dev nodemon --ext \"ts,js\" --ignore \"src/**/*.spec.ts\" --exec tsx server.ts",
+    "dev:server": "PHASE=dev nodemon --exec tsx server.ts",
     "dev": "npm-run-all -p 'dev:*'",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
