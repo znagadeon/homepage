@@ -1,9 +1,7 @@
 <template>
-<div class="container">
-  <main>
-    <router-view></router-view>
-  </main>
-</div>
+<main>
+  <router-view></router-view>
+</main>
 </template>
 
 <script>
@@ -13,16 +11,14 @@ export default {};
 <style lang="scss">
 @import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
 
-.container {
-	max-width: none;
-
+body {
 	font-family: 'Spoqa Han Sans Neo', sans-serif;
+}
 
-	main {
-		max-width: 1000px;
-		min-height: 500px;
-		@apply px-6;
-		@apply mx-auto;
-	}
+main {
+  max-width: 1000px;
+  min-height: 500px;
+  @apply px-6;
+  @apply mx-auto;
 }
 </style>
