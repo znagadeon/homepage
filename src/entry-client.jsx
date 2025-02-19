@@ -1,4 +1,5 @@
 import { hydrateRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import {routes} from './routes';
 import createApp from './vue-app';
@@ -15,6 +16,8 @@ vueRouter.isReady().then(() => {
 const app = document.getElementById('app');
 if (app) {
   hydrateRoot(app, (
-    <RouterProvider router={createBrowserRouter(routes)} />
+    <HelmetProvider>
+      <RouterProvider router={createBrowserRouter(routes)} />
+    </HelmetProvider>
   ));
 }

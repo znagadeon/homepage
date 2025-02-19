@@ -41,7 +41,7 @@ const createServer = async () => {
     const url = req.originalUrl;
 
     const { render } = await vite.ssrLoadModule('./src/entry-server.tsx');
-    const { vueSsr, ssr, state, manifest } = await render(url);
+    const { vueSsr, ssr, state, helmet, manifest } = await render(url);
 
     const rawHtml = (
       await fs.readFile(`${process.cwd()}/index.html`)
@@ -51,6 +51,10 @@ const createServer = async () => {
     const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
     const html = template
       .replace('<!--vue-body-->', `${vueSsr}${hydration}`)
+      .replace(
+        '<!--app-head-->',
+        `${helmet.title.toString()}${helmet.meta.toString()}`,
+      )
       .replace('<!--app-body-->', ssr)
       .replace('<!--vue-head-->', manifest.teleports.head ?? '');
 
