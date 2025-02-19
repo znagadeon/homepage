@@ -36,7 +36,7 @@ const capture = async (url: string, filename: string) => {
     fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
   );
 
-  const { vueSsr, ssr, state, manifest } = await render(url, _manifest);
+  const { vueSsr, ssr, state, helmet, manifest } = await render(url, _manifest);
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
@@ -44,6 +44,10 @@ const capture = async (url: string, filename: string) => {
   const html = template
     .replace('<!--vue-body-->', `${vueSsr}${hydration}`)
     .replace('<!--app-body-->', ssr)
+    .replace(
+      '<!--app-head-->',
+      `${helmet.title.toString()}${helmet.meta.toString()}`,
+    )
     .replace('<!--vue-head-->', manifest.teleports.head ?? '');
 
   fs.writeFileSync(filename, html);
