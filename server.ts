@@ -56,7 +56,7 @@ const createServer = async () => {
         `${helmet.title.toString()}${helmet.meta.toString()}`,
       )
       .replace('<!--app-body-->', ssr)
-      .replace('<!--vue-head-->', manifest.teleports.head ?? '');
+      .replace('<!--vue-head-->', manifest.teleports?.head ?? '');
 
     res.contentType('text/html').status(200).end(html);
   });

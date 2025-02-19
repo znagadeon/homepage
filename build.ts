@@ -48,7 +48,7 @@ const capture = async (url: string, filename: string) => {
       '<!--app-head-->',
       `${helmet.title.toString()}${helmet.meta.toString()}`,
     )
-    .replace('<!--vue-head-->', manifest.teleports.head ?? '');
+    .replace('<!--vue-head-->', manifest.teleports?.head ?? '');
 
   fs.writeFileSync(filename, html);
   console.log(`Capture ${url} -> ${filename} complete`);
