@@ -3892,6 +3892,7 @@ __metadata:
     front-matter: ^3.1.0
     highlight.js: ^10.4.1
     husky: ^4.3.5
+    jotai: ^2.12.1
     katex: ^0.16.10
     lint-staged: ^10.5.3
     marked: ^4.0.10
@@ -4395,6 +4396,21 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: 9ea4a70a7bb950794824683ed1c632e2ede26949fbd348e2ba5ec8dc5efa54dc42022d85ae229cadaa60d4b95012e80ea07d625797199b688cc22ab0e8891d32
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^2.12.1":
+  version: 2.12.1
+  resolution: "jotai@npm:2.12.1"
+  peerDependencies:
+    "@types/react": ">=17.0.0"
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 30e019c2694b654cf4158d64a6d5372a6a24ff646d74b2000f816473ac5ab6f7e550b9180b9b33cd56544ab8b482aa0e589a770fcf1f8009b3500ce31d400fd5
   languageName: node
   linkType: hard
 
