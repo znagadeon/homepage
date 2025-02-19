@@ -40,9 +40,9 @@ const capture = async (url: string, filename: string) => {
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
-  const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+  const vueHydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
   const html = template
-    .replace('<!--vue-body-->', `${vueSsr}${hydration}`)
+    .replace('<!--vue-body-->', `${vueSsr}${vueHydration}`)
     .replace('<!--app-body-->', ssr)
     .replace(
       '<!--app-head-->',
