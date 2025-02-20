@@ -17,7 +17,8 @@ body {
 
 main {
   max-width: 1000px;
-  min-height: 500px;
+  // TODO: Turn on when SSR migration is complete
+  // min-height: 500px;
   @apply px-6;
   @apply mx-auto;
 }
