@@ -21,7 +21,7 @@ export const Tag = () => {
 
         <meta property="og:site_name" content={config.blogName} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={config.host} />
+        <meta property="og:url" content={`${config.host}/tag/${tag}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={config.description} />
         <meta property="og:image" content={gravatar} />
