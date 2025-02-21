@@ -13,6 +13,10 @@ export const dehydrate = async (url: string) => {
     state.set('postsAtom', await loadPosts());
   }
 
+  if (/\/$/.test(url)) {
+    state.set('postsAtom', await loadPosts({ limit: 5 }));
+  }
+
   return state;
 };
 
