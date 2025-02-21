@@ -41,7 +41,7 @@ const createServer = async () => {
     const url = req.originalUrl;
 
     const { render } = await vite.ssrLoadModule('./src/entry-server.tsx');
-    const { vueSsr, ssr, vueState, helmet, store, manifest } =
+    const { vueSsr, ssr, vueState, helmet, state, manifest } =
       await render(url);
 
     const rawHtml = (
@@ -51,7 +51,7 @@ const createServer = async () => {
 
     const vueHydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(vueState)}</script>`;
     const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(
-      Array.from(store.entries()),
+      Array.from(state.entries()),
     )});</script>`;
 
     const html = template

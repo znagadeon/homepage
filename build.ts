@@ -36,7 +36,7 @@ const capture = async (url: string, filename: string) => {
     fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
   );
 
-  const { vueSsr, ssr, vueState, helmet, store, manifest } = await render(
+  const { vueSsr, ssr, vueState, helmet, state, manifest } = await render(
     url,
     _manifest,
   );
@@ -45,7 +45,7 @@ const capture = async (url: string, filename: string) => {
 
   const vueHydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(vueState)}</script>`;
   const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(
-    Array.from(store.entries()),
+    Array.from(state.entries()),
   )});</script>`;
   const html = template
     .replace('<!--vue-body-->', `${vueSsr}${vueHydration}`)

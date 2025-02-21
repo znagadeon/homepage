@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Provider as JotaiProvider } from 'jotai';
 import {routes} from './routes';
-import { Hydrate } from './components/Hydrate';
+import { HydrationWrapper } from './components/HydrationWrapper';
 import createApp from './vue-app';
 
 const { app: vueApp, store, router: vueRouter } = createApp();
@@ -21,7 +21,7 @@ if (app) {
 
   hydrateRoot(app, (
     <JotaiProvider>
-      <Hydrate serverState={initialState} />
+      <HydrationWrapper serverState={initialState} />
       <HelmetProvider>
         <RouterProvider router={createBrowserRouter(routes)} />
       </HelmetProvider>

@@ -3,8 +3,8 @@ import { renderToString } from 'react-dom/server';
 import { HelmetProvider, type HelmetServerState } from 'react-helmet-async';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { renderToString as renderVue } from 'vue/server-renderer';
-import { loadPosts } from './apis/loadPosts';
-import { Hydrate } from './components/Hydrate';
+import { HydrationWrapper } from './components/HydrationWrapper';
+import { dehydrate } from './hydration';
 import { routes } from './routes';
 import createVueApp from './vue-app';
 
@@ -15,11 +15,7 @@ export const render = async (url: string, manifest: any = {}) => {
   await vueRouter.push(url);
   await vueRouter.isReady();
 
-  const store = new Map();
-
-  if (/\/archive$/.test(url)) {
-    store.set('postsAtom', await loadPosts());
-  }
+  const state = await dehydrate(url);
 
   const context = {} as { helmet: HelmetServerState };
   const memoryRouter = createMemoryRouter(routes, {
@@ -30,13 +26,13 @@ export const render = async (url: string, manifest: any = {}) => {
     vueSsr: await renderVue(app, manifest),
     ssr: renderToString(
       <JotaiProvider>
-        <Hydrate serverState={store} />
+        <HydrationWrapper serverState={state} />
         <HelmetProvider context={context}>
           <RouterProvider router={memoryRouter} />
         </HelmetProvider>
       </JotaiProvider>,
     ),
-    store,
+    state,
     manifest,
     helmet: context.helmet,
     vueState: vueStore.state,
