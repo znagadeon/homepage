@@ -9,12 +9,17 @@ export type ServerState = Map<Key, unknown>;
 export const dehydrate = async (url: string) => {
   const state: ServerState = new Map();
 
-  if (/\/archive$/.test(url)) {
-    state.set('postsAtom', await loadPosts());
-  }
-
   if (/\/$/.test(url)) {
     state.set('postsAtom', await loadPosts({ limit: 5 }));
+  }
+
+  const tag = url.match(/\/tag\/(.+)$/);
+  if (tag) {
+    state.set('postsAtom', await loadPosts({ tag: tag[1] }));
+  }
+
+  if (/\/archive$/.test(url)) {
+    state.set('postsAtom', await loadPosts());
   }
 
   return state;
