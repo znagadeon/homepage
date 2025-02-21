@@ -36,19 +36,25 @@ const capture = async (url: string, filename: string) => {
     fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
   );
 
-  const { vueSsr, ssr, state, helmet, manifest } = await render(url, _manifest);
+  const { vueSsr, ssr, vueState, helmet, store, manifest } = await render(
+    url,
+    _manifest,
+  );
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
-  const vueHydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+  const vueHydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(vueState)}</script>`;
+  const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(
+    Array.from(store.entries()),
+  )});</script>`;
   const html = template
     .replace('<!--vue-body-->', `${vueSsr}${vueHydration}`)
-    .replace('<!--app-body-->', ssr)
+    .replace('<!--app-body-->', `${ssr}${hydration}`)
+    .replace('<!--vue-head-->', manifest.teleports?.head ?? '')
     .replace(
       '<!--app-head-->',
       `${helmet.title.toString()}${helmet.meta.toString()}`,
-    )
-    .replace('<!--vue-head-->', manifest.teleports?.head ?? '');
+    );
 
   fs.writeFileSync(filename, html);
   console.log(`Capture ${url} -> ${filename} complete`);
