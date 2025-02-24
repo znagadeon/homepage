@@ -17,7 +17,7 @@ vueRouter.isReady().then(() => {
 
 const app = document.getElementById('app');
 if (app) {
-  const initialState = window.__JOTAI_STATE__ || new Map();
+  const initialState = new Map();
 
   hydrateRoot(app, (
     <JotaiProvider>
