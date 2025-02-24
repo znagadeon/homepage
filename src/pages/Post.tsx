@@ -7,6 +7,8 @@ import { config } from '../config';
 import { postAtom } from '../stores';
 import { formatDate } from '../utils/format';
 
+import style from './Post.module.scss';
+
 export const Post = () => {
   const { title } = useParams();
   const post = useAtomValue(postAtom);
@@ -33,15 +35,15 @@ export const Post = () => {
         <meta property="og:description" content={desc} />
         <meta property="og:image" content={gravatar} />
       </Helmet>
-      <div className="post">
+      <div className={style.post}>
         <SSROnly>
-          <div className="post__meta">
-            <h1 className="post__title">{post.meta.title}</h1>
-            <div className="post__tags">
+          <div className={style.post__meta}>
+            <h1 className={style.post__title}>{post.meta.title}</h1>
+            <div className={style.post__tags}>
               <span className="sr-only">tags</span>
               <TagList tags={post.meta.tags || []} />
             </div>
-            <div className="post__updated">
+            <div className={style.post__updated}>
               <span>Last Updated: </span>
               <a target="_blank" rel="noreferrer" href={commitLog}>
                 <time>{formatDate(post.meta.updated)}</time>
@@ -49,7 +51,7 @@ export const Post = () => {
             </div>
           </div>
           <article
-            className="post__article"
+            className={style.post__article}
             // biome-ignore lint/security/noDangerouslySetInnerHtml:
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
