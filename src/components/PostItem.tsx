@@ -5,6 +5,7 @@ export type Post = {
   meta: {
     title: string;
     tags?: string[];
+    updated: Date;
   };
   content: string;
   url: string;

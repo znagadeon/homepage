@@ -1,17 +1,5 @@
 <template>
 <div class="post">
-	<div class="post__meta">
-		<h1 class="post__title">{{post.meta?.title}}</h1>
-		<div class="post__tags">
-			<span class="sr-only">tags</span>
-      <span ref="tags"></span>
-		</div>
-		<div class="post__updated">
-			<span>Last Updated: </span>
-			<a target="_blank" :href="commitLog"><time>{{ post.meta?.updated }}</time></a>
-		</div>
-	</div>
-	<article class="post__article" v-html="post.content"></article>
 	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
 <teleport to="head">
@@ -21,9 +9,6 @@
 
 <script lang="jsx">
 import {config} from '@src/config';
-
-import { createRoot } from 'react-dom/client';
-import { TagList } from '../components/TagList';
 
 import Comment from '@src/components/Comment.vue';
 import PageMeta from '@src/components/PageMeta.vue';
@@ -40,9 +25,6 @@ export default {
 		...mapState(['post', 'meta']),
 		title() {
 			return this.$route.params.title;
-		},
-		commitLog() {
-			return `https://github.com/${config.history.org}/${config.history.repo}/commits/develop/posts/${this.title}`;
 		},
 	},
 
@@ -71,11 +53,6 @@ export default {
 			},
 		});
 	},
-
-  mounted() {
-    const tags = createRoot(this.$refs.tags);
-    tags.render(<TagList tags={this.post.meta?.tags || []} />)
-  },
 };
 </script>
 
