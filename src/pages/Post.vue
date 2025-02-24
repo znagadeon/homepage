@@ -2,56 +2,31 @@
 <div class="post">
 	<comment class="post__comment" v-if="post.meta?.title" :title="post.meta?.title"></comment>
 </div>
-<teleport to="head">
-	<page-meta :meta="meta"></page-meta>
-</teleport>
 </template>
 
 <script lang="jsx">
-import {config} from '@src/config';
-
 import Comment from '@src/components/Comment.vue';
-import PageMeta from '@src/components/PageMeta.vue';
 
-import { mapActions, mapMutations, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
 	components: {
 		Comment,
-		PageMeta,
 	},
 
 	computed: {
-		...mapState(['post', 'meta']),
+		...mapState(['post']),
 		title() {
 			return this.$route.params.title;
 		},
 	},
 
 	methods: {
-		...mapMutations(['setMeta']),
 		...mapActions(['loadPost']),
 	},
 
 	async serverPrefetch() {
 		await this.loadPost(this.title);
-
-		const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
-		const title = this.post.meta.title;
-		const desc = this.post.content.replace(/(<([^>]+)>)/gi, '').slice(0, 55);
-		this.setMeta({
-			title: `${title} - ${config.blogName}`,
-			author: config.author,
-			description: config.description,
-
-			opengraph: {
-				type: 'article',
-				url: `${config.host}/post/${this.title}`,
-				title,
-				description: desc,
-				image: gravatar,
-			},
-		});
 	},
 };
 </script>
