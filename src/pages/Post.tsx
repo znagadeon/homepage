@@ -13,6 +13,7 @@ export const Post = () => {
   const { title } = useParams();
   const post = useAtomValue(postAtom);
 
+  if (!title) throw new Error('Impossible');
   if (!post) return null;
 
   const commitLog = `https://github.com/${config.history.org}/${config.history.repo}/commits/develop/posts/${title}`;
