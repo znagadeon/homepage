@@ -12,14 +12,15 @@ import style from './Post.module.scss';
 export const Post = () => {
   const { title } = useParams();
   const post = useAtomValue(postAtom);
+
+  if (!post) return null;
+
   const commitLog = `https://github.com/${config.history.org}/${config.history.repo}/commits/develop/posts/${title}`;
   const gravatar = `https://www.gravatar.com/avatar/${config.gravatar}`;
   const desc = post.content
     .replace(/(<([^>]+)>)/gi, '')
     .slice(0, 55)
     .trim();
-
-  if (!post) return null;
 
   return (
     <>
