@@ -33,6 +33,7 @@ export const render = async (url: string, manifest: any = {}) => {
       </JotaiProvider>,
     ),
     manifest,
+    state,
     helmet: context.helmet,
     vueState: vueStore.state,
   };

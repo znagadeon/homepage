@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router';
-import { SSROnly } from '../components/SSROnly';
+import { Comment } from '../components/Comment';
 import { TagList } from '../components/TagList';
 import { config } from '../config';
 import { postAtom } from '../stores';
@@ -18,6 +18,8 @@ export const Post = () => {
     .replace(/(<([^>]+)>)/gi, '')
     .slice(0, 55)
     .trim();
+
+  if (!post) return null;
 
   return (
     <>
@@ -36,26 +38,25 @@ export const Post = () => {
         <meta property="og:image" content={gravatar} />
       </Helmet>
       <div className={style.post}>
-        <SSROnly>
-          <div className={style.post__meta}>
-            <h1 className={style.post__title}>{post.meta.title}</h1>
-            <div className={style.post__tags}>
-              <span className="sr-only">tags</span>
-              <TagList tags={post.meta.tags || []} />
-            </div>
-            <div className={style.post__updated}>
-              <span>Last Updated: </span>
-              <a target="_blank" rel="noreferrer" href={commitLog}>
-                <time>{formatDate(post.meta.updated)}</time>
-              </a>
-            </div>
+        <div className={style.post__meta}>
+          <h1 className={style.post__title}>{post.meta.title}</h1>
+          <div className={style.post__tags}>
+            <span className="sr-only">tags</span>
+            <TagList tags={post.meta.tags || []} />
           </div>
-          <article
-            className={style.post__article}
-            // biome-ignore lint/security/noDangerouslySetInnerHtml:
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </SSROnly>
+          <div className={style.post__updated}>
+            <span>Last Updated: </span>
+            <a target="_blank" rel="noreferrer" href={commitLog}>
+              <time>{formatDate(new Date(post.meta.updated))}</time>
+            </a>
+          </div>
+        </div>
+        <article
+          className={style.post__article}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml:
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+        <Comment title={post.meta.title} />
       </div>
     </>
   );
