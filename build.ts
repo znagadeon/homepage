@@ -10,7 +10,7 @@ import { createSitemap } from './src/utils/sitemap';
 const POST_ROOT = path.join(process.cwd(), 'posts');
 const repository = new PostRepository(POST_ROOT);
 
-const removeRecursively = (directory) => {
+const removeRecursively = (directory: string) => {
   const files = fs.readdirSync(directory, { withFileTypes: true });
 
   for (const file of files) {
@@ -25,31 +25,31 @@ const removeRecursively = (directory) => {
   fs.rmdirSync(directory);
 };
 
-const capture = async (url, filename) => {
+const capture = async (url: string, filename: string) => {
   const dir = path.dirname(filename);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
   const { render } = await import('./dist/server/entry-server.js');
-  const _manifest = JSON.parse(
-    fs.readFileSync('./dist/client/.vite/ssr-manifest.json').toString(),
-  );
-
-  const { ssr, state, manifest } = await render(url, _manifest);
+  const { ssr, helmet, state } = await render(url);
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
-  const hydration = `<script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>`;
+  const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(Array.from(state.entries()))})</script>`;
+
   const html = template
     .replace('<!--app-body-->', `${ssr}${hydration}`)
-    .replace('<!--app-head-->', manifest.teleports.head ?? '');
+    .replace(
+      '<!--app-head-->',
+      `${helmet.title.toString()}${helmet.meta.toString()}`,
+    );
 
   fs.writeFileSync(filename, html);
   console.log(`Capture ${url} -> ${filename} complete`);
 };
 
-const copyRecursively = (src, dest) => {
+const copyRecursively = (src: string, dest: string) => {
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true });
   }
@@ -83,7 +83,7 @@ const dest = './public';
   const _posts = getPosts(POST_ROOT);
   const postNames = _posts
     .filter((post) => !getMeta(post).meta.draft)
-    .map((post) => post.match(/posts\/(.+)\/index.md$/)?.[1]);
+    .map((post) => post.replace(/.+\/posts\/(.+)\/index.md$/, '$1'));
   const tags = Array.from(
     new Set(
       _posts
@@ -108,19 +108,16 @@ const dest = './public';
   await capture('/', `${dest}/index.html`);
 
   // posts
-  await capture('/archive/index.html', `${dest}/archive/index.html`);
+  await capture('/archive', `${dest}/archive/index.html`);
   for (const post of postNames) {
-    await capture(
-      `/post/${post}/index.html`,
-      `${dest}/post/${post}/index.html`,
-    );
+    await capture(`/post/${post}/`, `${dest}/post/${post}/index.html`);
   }
   for (const tag of tags) {
-    await capture(`/tag/${tag}/index.html`, `${dest}/tag/${tag}/index.html`);
+    await capture(`/tag/${tag}`, `${dest}/tag/${tag}/index.html`);
   }
 
   // search page
-  await capture('/search/index.html', `${dest}/search/index.html`);
+  await capture('/search', `${dest}/search/index.html`);
 
   // sitemap, rss
   fs.writeFileSync(
@@ -131,17 +128,23 @@ const dest = './public';
         changeFrequency: 'weekly',
         priority: 0.9,
       },
-      ...posts.map((post) => ({
-        url: `${config.host}${post.url}`,
-        modifiedAt: post.meta.updated,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      })),
-      ...tags.map((tag) => ({
-        url: `${config.host}/tag/${tag}`,
-        changeFrequency: 'weekly',
-        priority: 0.3,
-      })),
+      ...posts.map(
+        (post) =>
+          ({
+            url: `${config.host}${post.url}`,
+            modifiedAt: post.meta.updated,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          }) as const,
+      ),
+      ...tags.map(
+        (tag) =>
+          ({
+            url: `${config.host}/tag/${tag}`,
+            changeFrequency: 'weekly',
+            priority: 0.3,
+          }) as const,
+      ),
       {
         url: `${config.host}/archive`,
         changeFrequency: 'weekly',
@@ -161,7 +164,7 @@ const dest = './public';
         title: post.meta.title,
         link: `${config.host}${post.url}`,
         description: post.content,
-        author: config.name,
+        author: config.author,
         published: post.meta.updated,
       })),
     }),

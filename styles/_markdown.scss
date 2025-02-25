@@ -1,6 +1,3 @@
-@import 'highlight.js/styles/atom-one-dark.css';
-@import 'katex/dist/katex.css';
-
 @mixin list {
 	@apply ml-6;
 	@apply mt-3;
@@ -102,45 +99,47 @@
 		}
 	}
 
-	.short-code {
-		@apply px-1;
-		@apply rounded;
-		@apply bg-gray-200;
-		@apply text-blue-500;
-	}
+  :global {
+    .short-code {
+      @apply px-1;
+      @apply rounded;
+      @apply bg-gray-200;
+      @apply text-blue-500;
+    }
 
-	.hljs {
-		@apply w-full;
-		@apply px-0;
-		@apply py-3;
-		@apply mt-2;
-		@apply rounded-lg;
-		@apply whitespace-nowrap;
-		@apply break-all;
+    .hljs {
+      @apply w-full;
+      @apply px-0;
+      @apply py-3;
+      @apply mt-2;
+      @apply rounded-lg;
+      @apply whitespace-nowrap;
+      @apply break-all;
 
-		div {
-			@apply flex;
+      div {
+        @apply flex;
 
-			&.highlighted {
-				@apply bg-gray-900;
-			}
+        &.highlighted {
+          @apply bg-gray-900;
+        }
 
-			.line-number {
-				@include code;
-				@apply px-3;
-				@apply mr-3;
-				@apply border-r;
-				@apply border-gray-700;
-				@apply text-right;
+        .line-number {
+          @include code;
+          @apply px-3;
+          @apply mr-3;
+          @apply border-r;
+          @apply border-gray-700;
+          @apply text-right;
 
-				user-select: none;
-			}
-			.code {
-				@include code;
-				@apply flex-1;
-			}
-		}
-	}
+          user-select: none;
+        }
+        .code {
+          @include code;
+          @apply flex-1;
+        }
+      }
+    }
+  }
 
 	blockquote {
 		@apply relative;

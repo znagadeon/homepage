@@ -1,5 +1,6 @@
-import type { FeatherIconNames } from 'feather-icons';
-import { useMemo } from 'react';
+import { type HTMLAttributes, useMemo } from 'react';
+import { config } from '../config';
+import { getOrigin } from '../utils/getOrigin';
 import { Icon } from './Icon';
 
 import style from './Social.module.scss';
@@ -8,17 +9,20 @@ type Props = {
   links: string[];
 };
 
-export const Social = ({ links }: Props) => {
+export const Social = ({
+  links,
+  ...props
+}: HTMLAttributes<HTMLUListElement> & Props) => {
   const parsedLinks = useMemo(() => {
     return links.map((link) => {
-      const url = new URL(link, location.origin);
+      const url = new URL(link, getOrigin());
 
       if (url.pathname.includes('rss.xml')) {
         return {
           link,
           name: 'RSS',
-          icon: 'rss' as FeatherIconNames,
-        };
+          icon: 'rss',
+        } as const;
       }
 
       switch (url.origin) {
@@ -26,20 +30,20 @@ export const Social = ({ links }: Props) => {
           return {
             link,
             name: 'GitHub',
-            icon: 'github' as FeatherIconNames,
-          };
+            icon: 'github',
+          } as const;
         case 'https://linkedin.com':
           return {
             link,
             name: 'LinkedIn',
-            icon: 'linkedin' as FeatherIconNames,
-          };
+            icon: 'linkedin',
+          } as const;
         case 'https://twitter.com':
           return {
             link,
             name: 'Twitter',
-            icon: 'twitter' as FeatherIconNames,
-          };
+            icon: 'twitter',
+          } as const;
         default:
           throw new Error('Not Implemented');
       }
@@ -47,7 +51,7 @@ export const Social = ({ links }: Props) => {
   }, [links]);
 
   return (
-    <ul className={style.social}>
+    <ul {...props} className={`${style.social} ${props.className}`}>
       {parsedLinks.map(({ link, name, icon }) => (
         <li key={link}>
           <a href={link} target="_blank" rel="noreferrer">

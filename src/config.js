@@ -1,6 +1,6 @@
 export const config = {
   blogName: '지나가던 개발자',
-  name: 'Kim Songhyun',
+  author: 'Kim Songhyun',
   description: '카카오 프론트엔드 개발자 since 2018. 01.',
   host: 'https://znagadeon.dev',
   googleSearch: '981b407e9acf0f1f0',
@@ -11,10 +11,18 @@ export const config = {
     'https://linkedin.com/in/kim-songhyun',
     '/rss.xml',
   ],
-  comment: {
+  menu: [
+    { name: 'Wiki', url: 'https://wiki.znagadeon.dev' },
+    { name: 'Archive', url: '/archive' },
+  ],
+  giscus: {
     repository: 'znagadeon/homepage',
     repoId: 'MDEwOlJlcG9zaXRvcnkyMzc0ODA5OTk=',
     category: 'General',
     categoryId: 'MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzIwODgy',
+  },
+  history: {
+    org: 'znagadeon',
+    repo: 'homepage',
   },
 };

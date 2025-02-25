@@ -1,9 +1,14 @@
-import { type KeyboardEventHandler, useEffect, useState } from 'react';
+import {
+  type HTMLAttributes,
+  type KeyboardEventHandler,
+  useEffect,
+  useState,
+} from 'react';
 import { Icon } from './Icon';
 
 import style from './Search.module.scss';
 
-export const Search = () => {
+export const Search = (props: HTMLAttributes<HTMLDivElement>) => {
   const [query, setQuery] = useState('');
 
   const search = () => {
@@ -12,7 +17,7 @@ export const Search = () => {
       return;
     }
 
-    location.href = `/search/index.html?q=${query}`;
+    location.href = `/search?q=${query}`;
   };
 
   const onKeyup: KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -26,7 +31,7 @@ export const Search = () => {
   }, []);
 
   return (
-    <div className={style.search}>
+    <div {...props} className={`${style.search} ${props.className}`}>
       <label>
         <span className="sr-only">Search</span>
         <input
