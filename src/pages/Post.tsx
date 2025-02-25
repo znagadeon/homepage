@@ -56,8 +56,8 @@ export const Post = () => {
           // biome-ignore lint/security/noDangerouslySetInnerHtml:
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
-        <Comment title={post.meta.title} />
       </div>
+      <Comment title={post.meta.title} />
     </>
   );
 };
