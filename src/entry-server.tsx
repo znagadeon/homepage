@@ -6,6 +6,8 @@ import { HydrationWrapper } from './components/HydrationWrapper';
 import { dehydrate } from './hydration';
 import { routes } from './routes';
 
+import '../styles/master.scss';
+
 export const render = async (url: string) => {
   const state = await dehydrate(url);
 
