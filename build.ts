@@ -32,14 +32,12 @@ const capture = async (url: string, filename: string) => {
   }
 
   const { render } = await import('./dist/server/entry-server.js');
-  const { ssr, helmet, state } = await render(url);
+  const { ssr, helmet } = await render(url);
 
   const template = fs.readFileSync('./dist/client/index.html').toString();
 
-  const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(Array.from(state.entries()))})</script>`;
-
   const html = template
-    .replace('<!--app-body-->', `${ssr}${hydration}`)
+    .replace('<!--app-body-->', ssr)
     .replace(
       '<!--app-head-->',
       `${helmet.title.toString()}${helmet.meta.toString()}`,
