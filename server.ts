@@ -48,8 +48,6 @@ const createServer = async () => {
     ).toString();
     const template = await vite.transformIndexHtml(url, rawHtml);
 
-    // const hydration = `<script>window.__JOTAI_STATE__ = new Map(${JSON.stringify(Array.from(state.entries()))})</script>`;
-
     const html = template
       .replace(
         '<!--app-head-->',
