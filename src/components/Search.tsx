@@ -21,7 +21,7 @@ export const Search = (props: HTMLAttributes<HTMLDivElement>) => {
   };
 
   const onKeyup: KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key !== 'enter') return;
+    if (e.key !== 'Enter') return;
     search();
   };
 
