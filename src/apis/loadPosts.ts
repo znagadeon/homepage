@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const loadPosts = async ({
   limit,
   tag,
@@ -17,8 +15,5 @@ export const loadPosts = async ({
     });
   }
 
-  const response = await axios.get('/api/posts', {
-    params: { length: limit, tag },
-  });
-  return response.data;
+  throw new Error('Impossible');
 };

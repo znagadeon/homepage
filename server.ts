@@ -4,7 +4,6 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import { getPosts } from './src/lib/getPosts';
 
-import api from './src/routers/api';
 import rss from './src/routers/rss';
 import sitemap from './src/routers/sitemap';
 
@@ -34,8 +33,6 @@ const createServer = async () => {
       express.static(`${process.cwd()}/posts/${title}/assets`),
     );
   }
-
-  app.use('/api', api);
 
   app.get(/\/($|post(?!\/assets)|tag|search|archive)/, async (req, res) => {
     const url = req.originalUrl;
