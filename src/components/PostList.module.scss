@@ -1,15 +1,14 @@
 .posts {
-	@apply mx-auto;
-	@apply mb-6;
+  margin-bottom: 6rem;
 
-	&__title {
-		@apply text-2xl;
-		@apply font-bold;
-	}
+  &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-	&__list {
-		@apply flex;
-		@apply flex-col;
-		@apply mt-1;
-	}
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
 }

@@ -1,6 +1,9 @@
+html {
+  font-size: 14px;
+}
+
 body {
   font-family: "Noto Serif KR", serif;
-  font-size: 14px;
 }
 
 .container {
@@ -16,5 +19,5 @@ body {
 
 main {
   flex: 1;
-  margin: 1rem 2rem;
+  margin: 2rem;
 }
