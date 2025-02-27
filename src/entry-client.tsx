@@ -9,7 +9,7 @@ import '../styles/master.scss';
 
 const app = document.getElementById('app');
 if (app) {
-  const initialState = new Map();
+  const initialState = window.__JOTAI_STATE__ || new Map();
 
   hydrateRoot(
     app,
