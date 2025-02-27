@@ -1,22 +1,10 @@
 .header {
-  background-color: white;
-}
-
-.title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-	justify-content: space-between;
   width: 100%;
-	@apply h-20;
-	@apply p-6;
-	@apply z-10;
+  padding: 1.5rem 2rem 1rem;
+  margin-bottom: 1rem;
 
-	@apply leading-tight;
-	@apply align-middle;
-
-	&__blog-name {
-		@apply text-2xl;
-		@apply font-bold;
-	}
+  &__blog-name {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }
