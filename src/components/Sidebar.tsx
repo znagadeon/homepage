@@ -26,7 +26,7 @@ export const Sidebar = () => {
           <Menu className={style.profile__menu} links={config.menu} />
         </div>
       </section>
-      <Search />
+      <Search className={style.sidebar__search} />
     </section>
   );
 };

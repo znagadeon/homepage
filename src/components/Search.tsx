@@ -32,7 +32,7 @@ export const Search = (props: HTMLAttributes<HTMLDivElement>) => {
 
   return (
     <div {...props} className={`${style.search} ${props.className}`}>
-      <label>
+      <label className={style.search__label}>
         <span className="sr-only">Search</span>
         <input
           type="search"
