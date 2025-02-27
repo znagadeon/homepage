@@ -56,7 +56,7 @@ export const Social = ({
       {parsedLinks.map(({ link, name, icon }) => (
         <li key={link}>
           <a href={link} target="_blank" rel="noreferrer">
-            <Icon name={icon} size={20} />
+            <Icon name={icon} size={15} />
             <span className={style.social__text}>{name}</span>
           </a>
         </li>

@@ -5,14 +5,14 @@ import { Social } from './Social';
 import { Search } from './Search';
 import style from './Sidebar.module.scss';
 
-const SIZE = 300;
+const SIZE = 200;
 
 export const Sidebar = () => {
   const profileImage = `https://www.gravatar.com/avatar/${config.gravatar}?s=${SIZE}`;
 
   return (
     <section className={style.sidebar}>
-      <section className={`${style.header__profile} ${style.profile}`}>
+      <section className={style.profile}>
         <img
           src={profileImage}
           width={SIZE / 2}
@@ -20,12 +20,13 @@ export const Sidebar = () => {
           alt="Profile"
           className={style.profile__image}
         />
-        <h2 className={style.profile__author}>{config.author}</h2>
-        <p className={style.profile__description}>{config.description}</p>
-        <Social className={style.profile__social} links={config.social} />
-        <Menu className={style.profile__menu} links={config.menu} />
-        <Search />
+        <div className={style.profile__info}>
+          <h2 className={style.profile__author}>{config.author}</h2>
+          <Social className={style.profile__social} links={config.social} />
+          <Menu className={style.profile__menu} links={config.menu} />
+        </div>
       </section>
+      <Search />
     </section>
   );
 };

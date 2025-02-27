@@ -1,33 +1,33 @@
 .sidebar {
-  padding: 2rem 1rem;
-  @apply border-r;
-  @apply border-r-gray-300;
+  min-width: 270px;
+  margin: 1rem 2rem;
 }
 
 .profile {
   position: relative;
-	width: 100%;
+  display: flex;
+  align-items: flex-start;
   min-width: 250px;
+  font-weight: lighter;
 
-	&__image {
-		@apply rounded-full;
-	}
-
-	&__author {
-		@apply mt-5;
-		@apply text-2xl;
-		@apply font-bold;
-	}
-
-	&__description {
-		@apply font-light;
-	}
-
-  &__social {
-    @apply mt-5;
+  &__image {
+    border-radius: 50%;
   }
 
-	&__menu {
-		@apply mt-1;
-	}
+  &__info {
+    margin-left: 1.5rem;
+  }
+
+  &__author {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__social {
+    margin-top: 0.5rem;
+  }
+
+  &__menu {
+    margin-top: 0.5rem;
+  }
 }

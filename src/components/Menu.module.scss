@@ -1,15 +1,7 @@
 .menu {
-	&__menu-item {
-    list-style: "―" inside;
-		// @apply mr-5;
-		@apply text-lg;
+  font-size: 1rem;
 
-    ::marker {
-      margin-right: 5px;
-    }
-
-		&:last-child {
-			@apply mr-0;
-		}
-	}
+  &__menu-item {
+    list-style: "― " inside;
+  }
 }
