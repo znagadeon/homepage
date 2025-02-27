@@ -1,0 +1,18 @@
+body {
+	font-family: "Noto Serif KR", serif;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+}
+
+main {
+  padding: 2rem 3rem;
+}

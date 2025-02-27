@@ -1,0 +1,33 @@
+.sidebar {
+  padding: 2rem 1rem;
+  @apply border-r;
+  @apply border-r-gray-300;
+}
+
+.profile {
+  position: relative;
+	width: 100%;
+  min-width: 250px;
+
+	&__image {
+		@apply rounded-full;
+	}
+
+	&__author {
+		@apply mt-5;
+		@apply text-2xl;
+		@apply font-bold;
+	}
+
+	&__description {
+		@apply font-light;
+	}
+
+  &__social {
+    @apply mt-5;
+  }
+
+	&__menu {
+		@apply mt-1;
+	}
+}

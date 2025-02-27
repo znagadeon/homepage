@@ -1,15 +1,19 @@
 import { Outlet } from 'react-router';
 import { Header } from './components/Header';
 
-import '../styles/App.scss';
+import style from '../styles/App.module.scss';
+import { Sidebar } from './components/Sidebar';
 
 export const App = () => {
   return (
-    <>
+    <div className={style.container}>
       <Header />
-      <main>
-        <Outlet />
-      </main>
-    </>
+      <div className={style.body}>
+        <Sidebar />
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 };

@@ -1,13 +1,12 @@
 .menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
-
 	&__menu-item {
-		@apply mr-5;
+    list-style: "―" inside;
+		// @apply mr-5;
 		@apply text-lg;
+
+    ::marker {
+      margin-right: 5px;
+    }
 
 		&:last-child {
 			@apply mr-0;
