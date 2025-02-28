@@ -1,30 +1,25 @@
 @import '/styles/_markdown.scss';
 
 .post {
-	@apply mt-6;
+  &__meta {
+    margin-bottom: 2rem;
+  }
 
-	&__meta {
-		@apply border-b;
-		@apply border-gray-300;
-		@apply pb-2;
-		@apply mb-6;
-	}
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
-	&__updated a {
-		@apply underline;
-	}
+  &__updated a {
+    text-decoration: underline;
+  }
 
-	&__title {
-		@apply text-3xl;
-		@apply font-bold;
-	}
+  &__tags {
+    margin-top: 0.5rem;
+  }
 
-	&__tags {
-		@apply mt-1;
-	}
-
-	&__article {
-		@apply mb-6;
+  &__article {
+    margin-bottom: 2rem;
     @include markdown;
   }
 }
