@@ -46,10 +46,12 @@ export const Post = () => {
           <div className={style.post}>
             <div className={style.post__meta}>
               <h1 className={style.post__title}>{post.meta.title}</h1>
-              <div className={style.post__tags}>
-                <span className="sr-only">tags</span>
-                <TagList tags={post.meta.tags || []} />
-              </div>
+              {post.meta.tags && (
+                <div className={style.post__tags}>
+                  <span className="sr-only">tags</span>
+                  <TagList tags={post.meta.tags || []} />
+                </div>
+              )}
               <div className={style.post__updated}>
                 <span>Last Updated: </span>
                 <a target="_blank" rel="noreferrer" href={commitLog}>
