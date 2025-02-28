@@ -83,6 +83,7 @@
 
   del {
     color: #6b7280;
+    text-decoration: line-through;
   }
 
   hr {
@@ -101,6 +102,7 @@
     }
 
     img {
+      max-width: 100%;
       margin: 0 auto;
       border: 1px solid #eeeeee;
       border-radius: 1rem;
