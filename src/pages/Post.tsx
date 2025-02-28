@@ -6,7 +6,7 @@ import { SSROnly } from '../components/SSROnly';
 import { TagList } from '../components/TagList';
 import { config } from '../config';
 import { postAtom } from '../stores';
-import { formatDate } from '../utils/format';
+import { formatDate, formatTime } from '../utils/format';
 
 import style from './Post.module.scss';
 
@@ -53,7 +53,10 @@ export const Post = () => {
               <div className={style.post__updated}>
                 <span>Last Updated: </span>
                 <a target="_blank" rel="noreferrer" href={commitLog}>
-                  <time>{formatDate(new Date(post.meta.updated))}</time>
+                  <time>
+                    {formatDate(new Date(post.meta.updated))}{' '}
+                    {formatTime(new Date(post.meta.updated))}
+                  </time>
                 </a>
               </div>
             </div>
