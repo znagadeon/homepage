@@ -23,3 +23,13 @@ main {
   margin: 2.5rem;
   box-sizing: border-box;
 }
+
+@media (max-width: 600px) {
+  .body {
+    flex-direction: column;
+  }
+
+  main {
+    max-width: inherit;
+  }
+}
