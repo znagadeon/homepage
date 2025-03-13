@@ -11,7 +11,7 @@ export type Post = {
   url: string;
 };
 
-const MAX_LENGTH = 100;
+const MAX_LENGTH = 150;
 
 export const PostItem = ({ post }: { post: Post }) => {
   const desc =

@@ -1,13 +1,7 @@
 .social {
-  @apply flex;
-  @apply flex-row;
-  @apply justify-center;
+  font-size: 1rem;
 
-  li {
-    @apply mr-4;
-
-    &:last-child {
-      @apply mr-0;
-    }
+  &__text {
+    margin-left: 5px;
   }
 }

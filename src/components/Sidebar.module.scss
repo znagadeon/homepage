@@ -1,0 +1,37 @@
+.sidebar {
+  margin: 2rem;
+
+  &__search {
+    margin-top: 2rem;
+  }
+}
+
+.profile {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-width: 250px;
+
+  font-weight: lighter;
+
+  &__image {
+    border-radius: 50%;
+  }
+
+  &__info {
+    margin-left: 1.5rem;
+  }
+
+  &__author {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__social {
+    margin-top: 0.5rem;
+  }
+
+  &__menu {
+    margin-top: 0.5rem;
+  }
+}

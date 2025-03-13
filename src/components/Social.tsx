@@ -1,5 +1,4 @@
 import { type HTMLAttributes, useMemo } from 'react';
-import { config } from '../config';
 import { getOrigin } from '../utils/getOrigin';
 import { Icon } from './Icon';
 
@@ -20,28 +19,30 @@ export const Social = ({
       if (url.pathname.includes('rss.xml')) {
         return {
           link,
-          name: 'RSS',
+          name: '/rss.xml',
           icon: 'rss',
         } as const;
       }
+
+      const name = link.split('/').at(-1);
 
       switch (url.origin) {
         case 'https://github.com':
           return {
             link,
-            name: 'GitHub',
+            name,
             icon: 'github',
           } as const;
         case 'https://linkedin.com':
           return {
             link,
-            name: 'LinkedIn',
+            name,
             icon: 'linkedin',
           } as const;
         case 'https://twitter.com':
           return {
             link,
-            name: 'Twitter',
+            name,
             icon: 'twitter',
           } as const;
         default:
@@ -55,8 +56,8 @@ export const Social = ({
       {parsedLinks.map(({ link, name, icon }) => (
         <li key={link}>
           <a href={link} target="_blank" rel="noreferrer">
-            <Icon name={icon} size={20} />
-            <span className="sr-only">{name}</span>
+            <Icon name={icon} size={15} />
+            <span className={style.social__text}>{name}</span>
           </a>
         </li>
       ))}

@@ -6,7 +6,7 @@ export class PostRepository {
 
   getPostById(id: string) {
     const posts = getPosts(this.root);
-    const found = posts.find((filename) => filename.includes(id));
+    const found = posts.find((filename) => filename.includes(id.slice(0, -1)));
 
     if (!found) throw new Error('Post not found');
 
@@ -34,7 +34,7 @@ export class PostRepository {
   private getMeta(filename: string) {
     return {
       ...getMeta(filename),
-      url: `/post/${filename.match(/posts\/(.+)\/index\.md$/)?.[1]}/`,
+      url: `/post/${filename.match(/posts\/(.+?)(?:\/index\.md|\.md)$/)?.[1]}/`,
     };
   }
 }

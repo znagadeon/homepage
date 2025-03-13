@@ -1,0 +1,35 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: "Noto Serif KR", serif;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+}
+
+main {
+  flex: 1;
+  max-width: calc(100vw - 250px - 8rem);
+  margin: 2.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .body {
+    flex-direction: column;
+  }
+
+  main {
+    max-width: inherit;
+  }
+}

@@ -8,5 +8,15 @@ export default defineConfig({
       '@root': '/',
     },
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'md-hmr',
+      handleHotUpdate({ file, server }) {
+        if (file.endsWith('.md')) {
+          server.ws.send({ type: 'full-reload' });
+        }
+      },
+    },
+  ],
 });

@@ -1,16 +1,7 @@
 .menu {
-	ul {
-		@apply flex;
-		@apply flex-row;
-		@apply justify-center;
-	}
+  font-size: 1rem;
 
-	&__menu-item {
-		@apply mr-5;
-		@apply text-lg;
-
-		&:last-child {
-			@apply mr-0;
-		}
-	}
+  &__menu-item {
+    list-style: "― " inside;
+  }
 }

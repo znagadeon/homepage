@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const loadPost = async ({ title }: { title: string }) => {
   if (import.meta.env.SSR) {
     const { PostRepository } = await import('../repositories/PostRepository');
@@ -7,13 +5,5 @@ export const loadPost = async ({ title }: { title: string }) => {
     return repository.getPostById(title);
   }
 
-  const { data } = await axios.get(`/api/post/${title}`);
-
-  return {
-    content: data.content,
-    meta: {
-      ...data.meta,
-      updated: new Date(data.meta.updated),
-    },
-  };
+  throw new Error('Impossible');
 };

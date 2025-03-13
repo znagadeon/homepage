@@ -25,6 +25,7 @@ export const render = async (url: string) => {
         </HelmetProvider>
       </JotaiProvider>,
     ),
+    state,
     helmet: context.helmet,
   };
 };
