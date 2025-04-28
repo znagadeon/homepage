@@ -1268,13 +1268,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cookie@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@types/cookie@npm:0.6.0"
-  checksum: 5edce7995775b0b196b142883e4d4f71fd93c294eaec973670f1fa2540b70ea7390408ed513ddefef5fcb12a578100c76596e8f2a714b0c2ae9f70ee773f4510
-  languageName: node
-  linkType: hard
-
 "@types/estree@npm:1.0.6, @types/estree@npm:^1.0.0":
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
@@ -5012,10 +5005,9 @@ __metadata:
   linkType: hard
 
 "react-router@npm:^7.1.5":
-  version: 7.1.5
-  resolution: "react-router@npm:7.1.5"
+  version: 7.5.2
+  resolution: "react-router@npm:7.5.2"
   dependencies:
-    "@types/cookie": ^0.6.0
     cookie: ^1.0.1
     set-cookie-parser: ^2.6.0
     turbo-stream: 2.4.0
@@ -5025,7 +5017,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 9126f579fcbe772c8314027572f91375195af42a7dd9b8f867a762efc18cf4c003b2981b67bd4c7b6f12b2ec09fff94eee322769a23f80e0d641606b9ebfb5aa
+  checksum: cc8c9729c4adc79c82ab9435594dffcdf0659d555d5da0f6f530d4e8d19f1c0bcd08f1b4fc8df8ca6ce021b6fa3da87f01498f55b36b1821a5c8da3bb69955a0
   languageName: node
   linkType: hard
 
